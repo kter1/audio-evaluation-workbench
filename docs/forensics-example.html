@@ -1,0 +1,104 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Audio Forensics Report</title>
+<style>body{font:14px system-ui;max-width:1020px;margin:48px auto;color:#19283c;padding:20px;line-height:1.6}.eyebrow{color:#a0553c;letter-spacing:2px;font:11px monospace}h1{font-size:32px;letter-spacing:-1px}h2{margin-top:36px;font-size:21px}h3{font-size:15px}.hero{background:#182b43;color:white;padding:26px;border-radius:16px}.hero h1{margin:0}.hero p{color:#c9d7e6}.cards{display:flex;gap:16px;margin:20px 0}.card{flex:1;border:1px solid #dce3eb;padding:18px;border-radius:12px}.number{font:26px monospace;font-weight:bold}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f2f5f9;padding:18px;border-radius:12px;font-size:11px}table{border-collapse:collapse;width:100%;font-size:12px}th,td{text-align:left;border-bottom:1px solid #e2e8ee;padding:10px}th{background:#f0f4f8}.table{overflow:auto}.notes{background:#fff4e8;padding:16px 32px;border-radius:12px}.muted{color:#61758c;font-size:12px}@media print{body{margin:0;font-size:11px}.hero{color:#19283c;background:#eef2f7}.hero p{color:#52677f}h2,h3{break-after:avoid}tr,.cards,svg{break-inside:avoid}pre{font-size:9px}}</style></head><body>
+<p class="eyebrow">AUDIO FORENSICS LAB / TECHNICAL ANALYSIS</p>
+<div class="hero"><h1>Synthetic speech indicated</h1><p>Fresh local neural inference · 2026-10-19T13:05:43.947774+00:00</p></div>
+<div class="cards"><div class="card">Synthetic-class score<div class="number">0.864065</div></div><div class="card">Duration<div class="number">4.74 s</div></div><div class="card">Windows<div class="number">1</div></div></div>
+<p>Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified.</p>
+<p class="muted">SHA-256: b07d0d23311286abd22c4aaf2fef67053dd7a008f263eb24d4d8eaad34ffbcd7<br>Checkpoint: garystafford/wav2vec2-deepfake-voice-detector / c66306024a7ede0be291e9c4558b37634782dc4e</p>
+<h2>01 / Reliability observations</h2><ul class="notes"><li>Model score changed by more than 0.20 under a tested perturbation. Stability is limited.</li></ul>
+<h2>02 / Temporal detector evidence</h2><svg viewBox="0 0 800 210" role="img" aria-label="Synthetic class score over time"><rect x="40" y="30" width="720" height="140" fill="#f1f4f8"/><rect x="40" y="79" width="720" height="42" fill="#d8e0ea"/><line x1="40.00" x2="760.00" y1="49.03" y2="49.03" stroke="#b9563e" stroke-width="4"/><line x1="40" x2="760" y1="100" y2="100" stroke="#8795a7" stroke-dasharray="4 4"/><g fill="#536980" font-family="monospace" font-size="12"><text x="14" y="35">1</text><text x="14" y="173">0</text><text x="40" y="195">0 s</text><text x="700" y="195">4.74 s</text></g></svg><div class="table"><table><thead><tr><th>Start s</th><th>End s</th><th>Synthetic score</th><th>Human score</th><th>Human logit</th><th>Synthetic logit</th></tr></thead><tbody><tr><td>0.000</td><td>4.739</td><td>0.864065</td><td>0.135935</td><td>-0.913613</td><td>0.935859</td></tr></tbody></table></div>
+<p class="muted">duration-weighted mean of non-overlapping window softmax scores. Grey band: engineering abstention interval [0.35, 0.65]; dotted line: raw binary threshold 0.5. Neither is a calibrated confidence interval.</p>
+<h2>03 / Controlled sensitivity probes</h2><div class="table"><table><thead><tr><th>Perturbation</th><th>Interval s</th><th>Baseline</th><th>Changed score</th><th>Change</th></tr></thead><tbody><tr><td>Gain −6.02 dB</td><td>0.00–4.74</td><td>0.864065</td><td>0.864066</td><td>+0.000001</td></tr><tr><td>Low-pass 3.4 kHz / Butterworth order 6 / zero phase</td><td>0.00–4.74</td><td>0.864065</td><td>0.822044</td><td>-0.042021</td></tr><tr><td>Gaussian noise / 30 dB SNR / seed 20261019</td><td>0.00–4.74</td><td>0.864065</td><td>0.173936</td><td>-0.690129</td></tr></tbody></table></div><p class="muted">Shared most energetic window; three separate transformations. These tests measure sensitivity, not accuracy.</p>
+<h2>04 / Scope and interpretation</h2><ul><li>English speech detector. Music, silence, other languages, mixed audio, unseen generators and codecs are outside established validation here.</li><li>No local accuracy or probability calibration has been established. Model-card metrics are not results on your file.</li><li>The model classifies acoustic patterns; it cannot establish authorship, intent, generator identity, or prove authenticity.</li><li>Spectral and signal-quality descriptors are not model explanations or independent evidence of AI origin.</li><li>Window scores do not establish exact edited boundaries; perturbation tests are sensitivity probes, not a second detector.</li></ul>
+<h2>05 / Reproduction record and signal measurements</h2><h3>Source</h3><pre>{
+  &quot;format&quot;: &quot;FLAC&quot;,
+  &quot;subtype&quot;: &quot;PCM_16&quot;,
+  &quot;original_rate&quot;: 16000,
+  &quot;channels&quot;: 1,
+  &quot;frames&quot;: 75830,
+  &quot;duration_seconds&quot;: 4.739375,
+  &quot;bytes&quot;: 47092,
+  &quot;sha256&quot;: &quot;b07d0d23311286abd22c4aaf2fef67053dd7a008f263eb24d4d8eaad34ffbcd7&quot;
+}</pre><h3>Diagnostics</h3><pre>{
+  &quot;rms_dbfs&quot;: -19.598094599074585,
+  &quot;peak_dbfs&quot;: -0.00026507636037961915,
+  &quot;crest_factor_db&quot;: 19.597829522714207,
+  &quot;dc_offset&quot;: -8.473890193272382e-05,
+  &quot;clipped_sample_fraction&quot;: 1.3187392852433074e-05,
+  &quot;active_frame_fraction&quot;: 0.2076271186440678,
+  &quot;activity_definition&quot;: &quot;20 ms frame RMS &gt; -50 dBFS; energy activity, not speech detection&quot;,
+  &quot;channel_rms_dbfs&quot;: [
+    -19.598094599074585
+  ],
+  &quot;stereo_correlation&quot;: null,
+  &quot;spectral_centroid_hz&quot;: 409.8448387733829,
+  &quot;rolloff_95_hz&quot;: 843.75,
+  &quot;spectral_flatness&quot;: 4.5655709982383996e-05,
+  &quot;zero_crossing_rate&quot;: 0.14100146381991058,
+  &quot;band_power_fractions&quot;: {
+    &quot;0\u2013300 Hz&quot;: 0.38524147868156433,
+    &quot;300\u20133400 Hz&quot;: 0.6139072179794312,
+    &quot;3400\u20138000 Hz&quot;: 0.0008512827917002141
+  }
+}</pre><h3>Model</h3><pre>{
+  &quot;repository&quot;: &quot;garystafford/wav2vec2-deepfake-voice-detector&quot;,
+  &quot;revision&quot;: &quot;c66306024a7ede0be291e9c4558b37634782dc4e&quot;,
+  &quot;files&quot;: {
+    &quot;config.json&quot;: {
+      &quot;sha256&quot;: &quot;c5791d2fc2e5506b228fa99387c2b2619c7836ad7e244699f8e5e8510b8f2574&quot;,
+      &quot;bytes&quot;: 2271
+    },
+    &quot;preprocessor_config.json&quot;: {
+      &quot;sha256&quot;: &quot;35818933f1836450939a59d1f0ae7e4386d0d64d1560ce60a65001af62ac3f71&quot;,
+      &quot;bytes&quot;: 221
+    },
+    &quot;README.md&quot;: {
+      &quot;sha256&quot;: &quot;066e8ca93bae18ab2ece911f95d3bad640f4516c43f924aeda66ba6352c2bc64&quot;,
+      &quot;bytes&quot;: 11173
+    },
+    &quot;model.safetensors&quot;: {
+      &quot;sha256&quot;: &quot;905e330265c40a76955911ce86691fb4c8f2ed9c8085f4f046cac1383592a0ac&quot;,
+      &quot;bytes&quot;: 1262859296
+    }
+  },
+  &quot;parameters&quot;: 315701634,
+  &quot;class_mapping&quot;: {
+    &quot;0&quot;: &quot;human / real&quot;,
+    &quot;1&quot;: &quot;synthetic / fake&quot;
+  },
+  &quot;device&quot;: &quot;cpu&quot;,
+  &quot;dtype&quot;: &quot;float32&quot;
+}</pre><h3>Preprocessing</h3><pre>{
+  &quot;mono&quot;: &quot;arithmetic channel mean&quot;,
+  &quot;sample_rate&quot;: 16000,
+  &quot;resampling&quot;: &quot;scipy.signal.resample_poly, reduced rational factors, default Kaiser filter&quot;,
+  &quot;normalization&quot;: &quot;pinned feature extractor, separately per inference window&quot;,
+  &quot;padding&quot;: &quot;none&quot;,
+  &quot;window_tail&quot;: &quot;tails &lt;2.5 s merged into preceding window&quot;
+}</pre><h3>Policy</h3><pre>{
+  &quot;version&quot;: &quot;1.0&quot;,
+  &quot;binary_threshold&quot;: 0.5,
+  &quot;human_below&quot;: 0.35,
+  &quot;synthetic_above&quot;: 0.65,
+  &quot;window_seconds&quot;: 6,
+  &quot;minimum_duration_seconds&quot;: 2.5,
+  &quot;minimum_rms_dbfs&quot;: -50,
+  &quot;minimum_active_fraction&quot;: 0.1,
+  &quot;maximum_clipped_fraction&quot;: 0.01,
+  &quot;status&quot;: &quot;engineering abstention policy; not calibrated on a validation set&quot;
+}</pre><h3>Environment</h3><pre>{
+  &quot;python&quot;: &quot;3.13.7&quot;,
+  &quot;platform&quot;: &quot;macOS-26.6.2-arm64-arm-64bit-Mach-O&quot;,
+  &quot;packages&quot;: {
+    &quot;numpy&quot;: &quot;2.3.3&quot;,
+    &quot;scipy&quot;: &quot;1.16.3&quot;,
+    &quot;soundfile&quot;: &quot;0.13.1&quot;,
+    &quot;torch&quot;: &quot;2.9.1&quot;,
+    &quot;transformers&quot;: &quot;4.57.3&quot;,
+    &quot;safetensors&quot;: &quot;0.7.0&quot;
+  }
+}</pre><h3>Sources</h3><pre>[
+  &quot;https://huggingface.co/garystafford/wav2vec2-deepfake-voice-detector/tree/c66306024a7ede0be291e9c4558b37634782dc4e&quot;,
+  &quot;https://huggingface.co/docs/transformers/model_doc/wav2vec2&quot;
+]</pre>
+<p class="muted">Schema forensics-1.0 · Computation 1.776 s · Audio retained by user; this report contains measurements and provenance.</p></body></html>

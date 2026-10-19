@@ -1,0 +1,15 @@
+pellav2
+https://huggingface.co/Sadanie/pellav2-audio-deepfake-detector/tree/a4c68a3d4afc7f5d9450c94f5d0652aaa208d40a
+
+The architecture in pellav2_model.py is adapted from pellav2_infer.py at the
+revision above (MIT, see PELLAV2-LICENSE). The checkpoint is downloaded by
+scripts/setup_pellav2.py, verified against pinned SHA-256 hashes, and loaded
+with PyTorch's restricted weights_only loader.
+
+The backbone architecture follows facebook/wav2vec2-xls-r-300m
+(https://huggingface.co/facebook/wav2vec2-xls-r-300m, Apache-2.0), whose
+config.json is pinned at revision 1a640f32ac3e39899438a2931f9924c02f080a54.
+Its pretrained weights are not downloaded; the pellav2 checkpoint replaces them.
+
+Training data: a curated private dataset of real speech and modern TTS output,
+per the model card. It is unpublished and has not been audited here.

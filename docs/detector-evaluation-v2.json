@@ -1,0 +1,1806 @@
+{
+  "version": "2.0",
+  "created_at": "2026-10-19T13:29:36.960530+00:00",
+  "manifest_sha256": "970d22877e9fdfbed3edb678a4d3c49eb51f991478870d4dc74f79bfaa7fffc0",
+  "selection_rule": "Choose highest raw binary balanced accuracy on selection; tie favors existing wav2vec2. Freeze choice before evaluating test. Threshold 0.5, no tuning.",
+  "policy": {
+    "version": "1.0",
+    "binary_threshold": 0.5,
+    "human_below": 0.35,
+    "synthetic_above": 0.65,
+    "window_seconds": 6,
+    "minimum_duration_seconds": 2.5,
+    "minimum_rms_dbfs": -50,
+    "minimum_active_fraction": 0.1,
+    "maximum_clipped_fraction": 0.01,
+    "status": "engineering abstention policy; not calibrated on a validation set"
+  },
+  "models": {
+    "wav2vec2": {
+      "repository": "garystafford/wav2vec2-deepfake-voice-detector",
+      "revision": "c66306024a7ede0be291e9c4558b37634782dc4e",
+      "files": {
+        "config.json": {
+          "sha256": "c5791d2fc2e5506b228fa99387c2b2619c7836ad7e244699f8e5e8510b8f2574",
+          "bytes": 2271
+        },
+        "preprocessor_config.json": {
+          "sha256": "35818933f1836450939a59d1f0ae7e4386d0d64d1560ce60a65001af62ac3f71",
+          "bytes": 221
+        },
+        "README.md": {
+          "sha256": "066e8ca93bae18ab2ece911f95d3bad640f4516c43f924aeda66ba6352c2bc64",
+          "bytes": 11173
+        },
+        "model.safetensors": {
+          "sha256": "905e330265c40a76955911ce86691fb4c8f2ed9c8085f4f046cac1383592a0ac",
+          "bytes": 1262859296
+        }
+      },
+      "parameters": 315701634,
+      "name": "Wav2Vec2-XLSR"
+    },
+    "aasist": {
+      "repository": "clovaai/aasist",
+      "revision": "a04c9863f63d44471dde8a6abcb3b082b07cd1d1",
+      "files": {
+        "lab/vendor/aasist_model.py": {
+          "sha256": "9e0d3e80937dd0577beea7883098465a479da23a198ebc0d712abcc59b0bec50",
+          "bytes": 18960
+        },
+        "data/models/aasist/config.json": {
+          "sha256": "c25023331685027cce90e1b9a0d2df10aa04b2a27d9b27d5afa36e6815b0fe76",
+          "bytes": 997
+        },
+        "data/models/aasist/model.pth": {
+          "sha256": "51d2d9cf0738172f61e2a384ec50a54a55363240f67c971ed55a92435bc1a1c0",
+          "bytes": 1281532
+        }
+      },
+      "parameters": 297866,
+      "name": "AASIST"
+    }
+  },
+  "selection": {
+    "wav2vec2": {
+      "summary": {
+        "n": 40,
+        "human": 20,
+        "synthetic": 20,
+        "correct": 27,
+        "false_positive": 13,
+        "false_negative": 0,
+        "accuracy": 0.675,
+        "accuracy_wilson95": [
+          0.5201774618987768,
+          0.799154977682173
+        ],
+        "balanced_accuracy": 0.675,
+        "roc_auc": 0.985,
+        "abstained": 18,
+        "decided": 22,
+        "correct_among_decided": 17,
+        "accuracy_among_decided": 0.7727272727272727
+      },
+      "rows": [
+        {
+          "id": "22d73541fdb647069b6362966eeecb31",
+          "trial_id": "LA_E_9083094",
+          "source_group": "vctk:p239_376",
+          "label": "human",
+          "codec": "g722",
+          "attack": "bonafide",
+          "duration": 2.9,
+          "sha256": "b99ddba56016a90cb79e5f2754a1c05017b3ea6ddff7b44498deaa1a16ca8c86",
+          "score": 0.26481470465660095,
+          "assessment": "Human speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "427c28ef97bd4171938e16cd61fa5084",
+          "trial_id": "LA_E_2006543",
+          "source_group": "vctk:p363_393",
+          "label": "synthetic",
+          "codec": "ulaw",
+          "attack": "A18",
+          "duration": 2.38,
+          "sha256": "b7ee19868513942ed73fe666cb3df058a876978cdbd90fa657ebec40757e7d38",
+          "score": 0.9655435085296631,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Input is shorter than 2.5 seconds."
+          ]
+        },
+        {
+          "id": "6c3d1ef1790e43d4b990b64a86e0d248",
+          "trial_id": "LA_E_7648230",
+          "source_group": "vctk:p249_288",
+          "label": "synthetic",
+          "codec": "ulaw",
+          "attack": "A18",
+          "duration": 4.04,
+          "sha256": "173c724d9dc62e5c8aa6b1c12f434bf052e3e5a02793dcec9ee01dc82596378e",
+          "score": 0.9817799925804138,
+          "assessment": "Synthetic speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "a9a70467f55443ddacd50730273959d1",
+          "trial_id": "LA_E_2242616",
+          "source_group": "tts-text:d13e0f5634f53de234a39071f026803bc6ea50a16d989474ae3f0069c811c4d6",
+          "label": "synthetic",
+          "codec": "none",
+          "attack": "A09",
+          "duration": 4.166125,
+          "sha256": "701c562c4e76e9359c58d32484d266b9480a2081d0abd2cf5409bd3c0adadfaa",
+          "score": 0.9936814308166504,
+          "assessment": "Synthetic speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "f4bbaf940eba47a78aa64819da82fb96",
+          "trial_id": "LA_E_7096692",
+          "source_group": "tts-text:5dfe0c2d922fd0950825f406eeff403b8d20d5d086dee510ff876413fc32c483",
+          "label": "synthetic",
+          "codec": "ulaw",
+          "attack": "A11",
+          "duration": 2.96,
+          "sha256": "b62dc723224e9d9476f30af67f14aa34e2de68854a7ff76b9592e07ed701484b",
+          "score": 0.9956894516944885,
+          "assessment": "Synthetic speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "1b89803aefe14f27926ee378564f2c99",
+          "trial_id": "LA_E_8456257",
+          "source_group": "tts-text:9aa77c6bdb32c0cf2d9b76b145ddef79c66e5f0cc00143663c25d29214644631",
+          "label": "synthetic",
+          "codec": "none",
+          "attack": "A15",
+          "duration": 2.3416875,
+          "sha256": "86101d8a541f6413f15545bf8dbada4f5676750116b81397e85153f891a771b5",
+          "score": 0.9931922554969788,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Input is shorter than 2.5 seconds."
+          ]
+        },
+        {
+          "id": "21e25de4175f436cb90f2b8301c53153",
+          "trial_id": "LA_E_8475775",
+          "source_group": "vctk:p288_404",
+          "label": "human",
+          "codec": "opus",
+          "attack": "bonafide",
+          "duration": 4.46,
+          "sha256": "ed59103828773b5912d498c17851b99d587ca74e14931b2ce77b596a4592fd24",
+          "score": 0.23413147032260898,
+          "assessment": "Human speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "dd5884fd6be6448a80dfaecdde2dd321",
+          "trial_id": "LA_E_4258933",
+          "source_group": "tts-text:d8f6f9b4d0ab7fe0a8894f97eedfc3bbc0601912d98c8fed791d50c640ccdc79",
+          "label": "synthetic",
+          "codec": "ulaw",
+          "attack": "A12",
+          "duration": 1.92,
+          "sha256": "c933b3f7bc5c947f70d831f3e11c2df0bcf639f98a5c32e5fbf9d291c8b29036",
+          "score": 0.994674563407898,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Input is shorter than 2.5 seconds."
+          ]
+        },
+        {
+          "id": "d3ce428b10ee476dbcceb91031f63d63",
+          "trial_id": "LA_E_2385312",
+          "source_group": "vctk:p274_320",
+          "label": "human",
+          "codec": "alaw",
+          "attack": "bonafide",
+          "duration": 2.34,
+          "sha256": "305727a1956757501206f1679ea66c71a942b761188938e0a0aeb09c7294daad",
+          "score": 0.8309094309806824,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Input is shorter than 2.5 seconds."
+          ]
+        },
+        {
+          "id": "31760cd6748b48939f47081ef76a9e33",
+          "trial_id": "LA_E_7365117",
+          "source_group": "vctk:p228_313",
+          "label": "synthetic",
+          "codec": "gsm",
+          "attack": "A17",
+          "duration": 4.6,
+          "sha256": "0c401965fbb2855c65e41ba9fb23ca0908b97f0457aac2bbf61273ab62778c4e",
+          "score": 0.7464544177055359,
+          "assessment": "Synthetic speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "5667182c48a34c038d93399d0f603aca",
+          "trial_id": "LA_E_5370513",
+          "source_group": "tts-text:7ef2deca52c37e2c6c926778ca0ccbf02526edbff21b660840dfadb1ddc048c4",
+          "label": "synthetic",
+          "codec": "gsm",
+          "attack": "A12",
+          "duration": 6.12,
+          "sha256": "06d433da4e06b68795d1c2f5edb2308193797062cccf7a45cf491491049ea8ca",
+          "score": 0.9966836571693419,
+          "assessment": "Synthetic speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "f8cac42b19364f1faef36794ab55685c",
+          "trial_id": "LA_E_8865017",
+          "source_group": "tts-text:7b8964725d339708b5af21d363a05c9ade130c0f6e60c71105fbd0ae41136e9a",
+          "label": "synthetic",
+          "codec": "gsm",
+          "attack": "A08",
+          "duration": 2.4,
+          "sha256": "e7696f5ed7f92d6ccc48221fb22d72275754e4573455bd6284ee48c83debab43",
+          "score": 0.9933346509933472,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Input is shorter than 2.5 seconds."
+          ]
+        },
+        {
+          "id": "1fc236a9e4c74ace94a97ee25e59c5a2",
+          "trial_id": "LA_E_8980826",
+          "source_group": "vctk:p299_256",
+          "label": "human",
+          "codec": "none",
+          "attack": "bonafide",
+          "duration": 3.1188125,
+          "sha256": "36163c058df79f0371d743c93c82e870d515d0e95a59e80dca06b2a3c6c68f95",
+          "score": 0.5335209965705872,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Aggregate score falls in the abstention interval."
+          ]
+        },
+        {
+          "id": "09d0752c4cd245a5a3e74f529fc33bf8",
+          "trial_id": "LA_E_8149609",
+          "source_group": "tts-text:ee86bd54878e952090a4d7f4f117e94bf202fbcc5ee85d12962993d7c313c259",
+          "label": "synthetic",
+          "codec": "alaw",
+          "attack": "A14",
+          "duration": 5.0,
+          "sha256": "33bd9041bd31a2618d2ea5796bdfa768f5dcf064e1aaf85e3b788a28f45b6036",
+          "score": 0.9884987473487854,
+          "assessment": "Synthetic speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "879700082a6045f4b3f9a378e18b4b7f",
+          "trial_id": "LA_E_9029812",
+          "source_group": "tts-text:e9b57986644ba4b8dd57f6084c549f4a26105ea60e30f1a1bfc88c560111e76d",
+          "label": "synthetic",
+          "codec": "opus",
+          "attack": "A08",
+          "duration": 1.32,
+          "sha256": "2c6b070a4d52837e7b1a6c5242fee1f21779cad1c557672688c3d5c55ea4cb1f",
+          "score": 0.9929808378219604,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Input is shorter than 2.5 seconds."
+          ]
+        },
+        {
+          "id": "712091ba7a474ac88b502a18f66ee39c",
+          "trial_id": "LA_E_5507690",
+          "source_group": "vctk:p318_284",
+          "label": "human",
+          "codec": "none",
+          "attack": "bonafide",
+          "duration": 3.071,
+          "sha256": "fbadc1553a8e20338950357ec623309f02ce0e82bf4480db2f668c81c9c10ba8",
+          "score": 0.3285613059997559,
+          "assessment": "Human speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "a30eadf5ba834e61835453b17d7c0212",
+          "trial_id": "LA_E_7716169",
+          "source_group": "vctk:p283_421",
+          "label": "human",
+          "codec": "opus",
+          "attack": "bonafide",
+          "duration": 2.16,
+          "sha256": "ca8db2e8c488431a5183677977b00cc07f0a06c6efa8d7447fea120230154136",
+          "score": 0.5715072154998779,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Input is shorter than 2.5 seconds.",
+            "Aggregate score falls in the abstention interval."
+          ]
+        },
+        {
+          "id": "75ecf6bf1c8d47bc9a0641c7838433bb",
+          "trial_id": "LA_E_5609987",
+          "source_group": "tts-text:55ec202e5a66ea0c20b18011823796eddde3d4fdc005e442a43bac24dadbd5ad",
+          "label": "synthetic",
+          "codec": "gsm",
+          "attack": "A08",
+          "duration": 1.96,
+          "sha256": "4b4706a913404b113cf576398196ee74313c846193346f27066db00bc689a69c",
+          "score": 0.9754036664962769,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Input is shorter than 2.5 seconds."
+          ]
+        },
+        {
+          "id": "425143dc37194017ad0df55588181b82",
+          "trial_id": "LA_E_9095017",
+          "source_group": "vctk:p271_230",
+          "label": "human",
+          "codec": "pstn",
+          "attack": "bonafide",
+          "duration": 2.5180625,
+          "sha256": "903f6f6842ef2b490533683f2d17d97daa819b8d802fe45965a908f7b54087ff",
+          "score": 0.7929871082305908,
+          "assessment": "Synthetic speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "aaf3742968104381809d3a0265071fe3",
+          "trial_id": "LA_E_1484335",
+          "source_group": "vctk:p237_276",
+          "label": "human",
+          "codec": "alaw",
+          "attack": "bonafide",
+          "duration": 2.88,
+          "sha256": "bcc763c0f58ff30d3290bc6bb7b7b4dbde90b5b4d98c05009ca1b92e7a0f831c",
+          "score": 0.7414491772651672,
+          "assessment": "Synthetic speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "c67d517a4f764e4db99f9dce7f154ce1",
+          "trial_id": "LA_E_7347625",
+          "source_group": "vctk:p299_382",
+          "label": "human",
+          "codec": "alaw",
+          "attack": "bonafide",
+          "duration": 3.26,
+          "sha256": "171e15991e59b8177bd4347394c1f388199c0a920ccfd92bb7ce6e2a6651812f",
+          "score": 0.1921357214450836,
+          "assessment": "Human speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "7fc7ed01a5fb44aa81873c0a72eb5cb4",
+          "trial_id": "LA_E_3690137",
+          "source_group": "tts-text:e65ee2575a1ea78459cfa4a68a8a2b2d1032255457f9ddd9ce70ae947e784b38",
+          "label": "synthetic",
+          "codec": "g722",
+          "attack": "A11",
+          "duration": 1.63,
+          "sha256": "79b547e914029e844a1837a62017c1325a7364fafc84fe2355f4a3324f11cd21",
+          "score": 0.9943187832832336,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Input is shorter than 2.5 seconds."
+          ]
+        },
+        {
+          "id": "22d8ac65e8d24f65931f7419812aa38c",
+          "trial_id": "LA_E_2882759",
+          "source_group": "tts-text:40a9595de8ecf529418bd497fafed8ff4c0442b2b48255964bd7b9b960524e19",
+          "label": "synthetic",
+          "codec": "ulaw",
+          "attack": "A13",
+          "duration": 2.26,
+          "sha256": "1d4fd853d6effd4db9e21653ef48daeb9d8cdd1c772eccc6d417ae99df594924",
+          "score": 0.9943823814392091,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Input is shorter than 2.5 seconds."
+          ]
+        },
+        {
+          "id": "5c4c7ab2cf434f188630bd80a758a6aa",
+          "trial_id": "LA_E_5534663",
+          "source_group": "tts-text:457ae1f1a5a7ff39e7ebc8ff983d6476435f6b4522ae26307ef9eaf09ce56281",
+          "label": "synthetic",
+          "codec": "g722",
+          "attack": "A12",
+          "duration": 5.11,
+          "sha256": "97648434e1d8c5c3fd876653cfbb78b5e78de2b6637d0e867c4d45d64186544b",
+          "score": 0.9957414865493774,
+          "assessment": "Synthetic speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "5ef7d8bde0ae4529bde67710bb417f9d",
+          "trial_id": "LA_E_7606130",
+          "source_group": "tts-text:61d373783ac804d175cad8a68e556287fb03f9a195b8202e9f4583f636b6142a",
+          "label": "synthetic",
+          "codec": "none",
+          "attack": "A15",
+          "duration": 3.7070625,
+          "sha256": "005eddd5d470b44b59f92d15703925b9ad3ead3a52f5d43e488df7112c6e48da",
+          "score": 0.9950942993164062,
+          "assessment": "Synthetic speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "7dc14964faae44dcae0119930c0ee354",
+          "trial_id": "LA_E_4139921",
+          "source_group": "vctk:p248_336",
+          "label": "human",
+          "codec": "pstn",
+          "attack": "bonafide",
+          "duration": 5.92775,
+          "sha256": "52ca614aa46fa001f54386ffb504b9243779a72528255c8eef77f01dcabb117d",
+          "score": 0.1265229880809784,
+          "assessment": "Human speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "b44fce6464c34ae2b9f89698acf59556",
+          "trial_id": "LA_E_1268715",
+          "source_group": "tts-text:b113161bb9ab2826aa3386856e21ff5a8014040c3c304c75dc47c4bafca6a19c",
+          "label": "synthetic",
+          "codec": "none",
+          "attack": "A10",
+          "duration": 3.441,
+          "sha256": "81a8733667e351bdc480069728264f47c84a1f4ada148e2ad9b98d3a00a7c651",
+          "score": 0.9963854551315308,
+          "assessment": "Synthetic speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "1b8289bb07ac46aeb895a8cb8fa4955d",
+          "trial_id": "LA_E_4122313",
+          "source_group": "tts-text:808722e264d79f54f6df0a3b8504000fbeb10a54bc3faf732e41c4902d0a6d27",
+          "label": "synthetic",
+          "codec": "gsm",
+          "attack": "A14",
+          "duration": 1.9,
+          "sha256": "cee5df048bcd1ec7644edf784d807d4030465e576f044a9632300cb2c84281a0",
+          "score": 0.9915682673454285,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Input is shorter than 2.5 seconds."
+          ]
+        },
+        {
+          "id": "bfee08fe79784ae0accf35710b624880",
+          "trial_id": "LA_E_5790375",
+          "source_group": "tts-text:7be605b48f2f96588789b5d3722ce4661222f2f65e6aa08adffc3248b05977f7",
+          "label": "synthetic",
+          "codec": "opus",
+          "attack": "A14",
+          "duration": 2.98,
+          "sha256": "3a0654c6a82323fde8ba786dd365d7abbb0b622b24d3208c152509bb0460c821",
+          "score": 0.9925944209098816,
+          "assessment": "Synthetic speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "902e3de59c9540b5a76e2b2b457a4fce",
+          "trial_id": "LA_E_1917983",
+          "source_group": "tts-text:87d0d3d2d4e26f1ef85d35c1ed842c24d83e2ffcf9f0b4ba4d28ac44818bd780",
+          "label": "synthetic",
+          "codec": "ulaw",
+          "attack": "A14",
+          "duration": 1.28,
+          "sha256": "7c1f47af76fe1f95d18d45ee26ca02a99a63012ff4570744936c41fadc040ba5",
+          "score": 0.9920350909233093,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Input is shorter than 2.5 seconds."
+          ]
+        },
+        {
+          "id": "6ec77f7081974ec58e8bf22aeaf3b6cb",
+          "trial_id": "LA_E_2105995",
+          "source_group": "vctk:p278_382",
+          "label": "human",
+          "codec": "ulaw",
+          "attack": "bonafide",
+          "duration": 2.64,
+          "sha256": "c85c1a48e2fc55ac114907d8b57f2f3e4a7e6a472552dd2a73e781231b67d3fa",
+          "score": 0.8180344104766846,
+          "assessment": "Synthetic speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "5073758de48b483da578f3fc29d4f796",
+          "trial_id": "LA_E_2570609",
+          "source_group": "vctk:p287_404",
+          "label": "human",
+          "codec": "opus",
+          "attack": "bonafide",
+          "duration": 3.36,
+          "sha256": "71dc4129c07a091bd7f58f73e9a44a697d8c1a5d9c37788713cf360164f31066",
+          "score": 0.8352592587471008,
+          "assessment": "Synthetic speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "6cab5e0426dd4113862619e1f0b93786",
+          "trial_id": "LA_E_2418339",
+          "source_group": "vctk:p340_367",
+          "label": "human",
+          "codec": "ulaw",
+          "attack": "bonafide",
+          "duration": 1.9,
+          "sha256": "1ff1a4f718dae1634ec5a3be07729d8de1bb61ced44aa2fdd3a8c6cadedf5fee",
+          "score": 0.6707783341407776,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Input is shorter than 2.5 seconds."
+          ]
+        },
+        {
+          "id": "fa59539acc2e47378ff785d933edf0ee",
+          "trial_id": "LA_E_6963017",
+          "source_group": "vctk:p301_279",
+          "label": "human",
+          "codec": "alaw",
+          "attack": "bonafide",
+          "duration": 4.5,
+          "sha256": "eefbb0fb003bd8f3e8667428e74525ed10de7892236ea87652fb9e84d6e3a62d",
+          "score": 0.5970475077629089,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Aggregate score falls in the abstention interval."
+          ]
+        },
+        {
+          "id": "e1474260938a4de098b2a53c95808eff",
+          "trial_id": "LA_E_3803157",
+          "source_group": "vctk:p233_303",
+          "label": "human",
+          "codec": "opus",
+          "attack": "bonafide",
+          "duration": 3.02,
+          "sha256": "7e0895979400d3211ec53784e4608eba136288d25178ee92ab74c7f8951eadc5",
+          "score": 0.631758451461792,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Aggregate score falls in the abstention interval."
+          ]
+        },
+        {
+          "id": "77f3c8023b0c403aa7d19f7b855eea81",
+          "trial_id": "LA_E_1229869",
+          "source_group": "vctk:p245_326",
+          "label": "human",
+          "codec": "opus",
+          "attack": "bonafide",
+          "duration": 4.9,
+          "sha256": "45f5728cb9c069b28fcaa35d4f49e65332a0e05b5191268970d3c1aad671cc4b",
+          "score": 0.8117987513542175,
+          "assessment": "Synthetic speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "59e668e322104d0ba21607f9cbb7372e",
+          "trial_id": "LA_E_4165343",
+          "source_group": "vctk:p333_248",
+          "label": "human",
+          "codec": "gsm",
+          "attack": "bonafide",
+          "duration": 2.6,
+          "sha256": "7a902e9ea95c0ecfeaf9396ff9377fcb978bee0914b12f2cda48a47d1c0e59bf",
+          "score": 0.04766722023487091,
+          "assessment": "Human speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "3cca026aba2d4750b405a78a79103369",
+          "trial_id": "LA_E_3584864",
+          "source_group": "vctk:p299_372",
+          "label": "human",
+          "codec": "opus",
+          "attack": "bonafide",
+          "duration": 3.36,
+          "sha256": "ee4a741031dedd54b7bf65d31e1266256d30b1c99bb280eda144768206832dc0",
+          "score": 0.5173832178115845,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Aggregate score falls in the abstention interval."
+          ]
+        },
+        {
+          "id": "82a80b1b061e4af485d1cb5e82546aa7",
+          "trial_id": "LA_E_4957888",
+          "source_group": "vctk:p286_392",
+          "label": "human",
+          "codec": "pstn",
+          "attack": "bonafide",
+          "duration": 2.384,
+          "sha256": "755d641b3673dfbd50af038dd179de60a6d971d6b3fbefbd59323fa4475d9c48",
+          "score": 0.8333222270011902,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Input is shorter than 2.5 seconds."
+          ]
+        },
+        {
+          "id": "dc84f430f5824ae78731f51d34794605",
+          "trial_id": "LA_E_1129061",
+          "source_group": "vctk:p295_386",
+          "label": "human",
+          "codec": "alaw",
+          "attack": "bonafide",
+          "duration": 2.92,
+          "sha256": "04117d7cf1d866e765c8489db1464c53fccde006eca121fb70cc3866597efab3",
+          "score": 0.3295518457889557,
+          "assessment": "Human speech indicated",
+          "reasons": []
+        }
+      ]
+    },
+    "aasist": {
+      "summary": {
+        "n": 40,
+        "human": 20,
+        "synthetic": 20,
+        "correct": 36,
+        "false_positive": 4,
+        "false_negative": 0,
+        "accuracy": 0.9,
+        "accuracy_wilson95": [
+          0.7694822477247771,
+          0.9604204713173936
+        ],
+        "balanced_accuracy": 0.9,
+        "roc_auc": 0.97,
+        "abstained": 15,
+        "decided": 25,
+        "correct_among_decided": 23,
+        "accuracy_among_decided": 0.92
+      },
+      "rows": [
+        {
+          "id": "22d73541fdb647069b6362966eeecb31",
+          "trial_id": "LA_E_9083094",
+          "source_group": "vctk:p239_376",
+          "label": "human",
+          "codec": "g722",
+          "attack": "bonafide",
+          "duration": 2.9,
+          "sha256": "b99ddba56016a90cb79e5f2754a1c05017b3ea6ddff7b44498deaa1a16ca8c86",
+          "score": 1.7456068235333078e-05,
+          "assessment": "Human speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "427c28ef97bd4171938e16cd61fa5084",
+          "trial_id": "LA_E_2006543",
+          "source_group": "vctk:p363_393",
+          "label": "synthetic",
+          "codec": "ulaw",
+          "attack": "A18",
+          "duration": 2.38,
+          "sha256": "b7ee19868513942ed73fe666cb3df058a876978cdbd90fa657ebec40757e7d38",
+          "score": 0.9999595880508423,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Input is shorter than 2.5 seconds."
+          ]
+        },
+        {
+          "id": "6c3d1ef1790e43d4b990b64a86e0d248",
+          "trial_id": "LA_E_7648230",
+          "source_group": "vctk:p249_288",
+          "label": "synthetic",
+          "codec": "ulaw",
+          "attack": "A18",
+          "duration": 4.04,
+          "sha256": "173c724d9dc62e5c8aa6b1c12f434bf052e3e5a02793dcec9ee01dc82596378e",
+          "score": 1.0,
+          "assessment": "Synthetic speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "a9a70467f55443ddacd50730273959d1",
+          "trial_id": "LA_E_2242616",
+          "source_group": "tts-text:d13e0f5634f53de234a39071f026803bc6ea50a16d989474ae3f0069c811c4d6",
+          "label": "synthetic",
+          "codec": "none",
+          "attack": "A09",
+          "duration": 4.166125,
+          "sha256": "701c562c4e76e9359c58d32484d266b9480a2081d0abd2cf5409bd3c0adadfaa",
+          "score": 1.0,
+          "assessment": "Synthetic speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "f4bbaf940eba47a78aa64819da82fb96",
+          "trial_id": "LA_E_7096692",
+          "source_group": "tts-text:5dfe0c2d922fd0950825f406eeff403b8d20d5d086dee510ff876413fc32c483",
+          "label": "synthetic",
+          "codec": "ulaw",
+          "attack": "A11",
+          "duration": 2.96,
+          "sha256": "b62dc723224e9d9476f30af67f14aa34e2de68854a7ff76b9592e07ed701484b",
+          "score": 0.9999860525131226,
+          "assessment": "Synthetic speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "1b89803aefe14f27926ee378564f2c99",
+          "trial_id": "LA_E_8456257",
+          "source_group": "tts-text:9aa77c6bdb32c0cf2d9b76b145ddef79c66e5f0cc00143663c25d29214644631",
+          "label": "synthetic",
+          "codec": "none",
+          "attack": "A15",
+          "duration": 2.3416875,
+          "sha256": "86101d8a541f6413f15545bf8dbada4f5676750116b81397e85153f891a771b5",
+          "score": 0.6985140442848206,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Input is shorter than 2.5 seconds."
+          ]
+        },
+        {
+          "id": "21e25de4175f436cb90f2b8301c53153",
+          "trial_id": "LA_E_8475775",
+          "source_group": "vctk:p288_404",
+          "label": "human",
+          "codec": "opus",
+          "attack": "bonafide",
+          "duration": 4.46,
+          "sha256": "ed59103828773b5912d498c17851b99d587ca74e14931b2ce77b596a4592fd24",
+          "score": 5.0629307224880904e-05,
+          "assessment": "Human speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "dd5884fd6be6448a80dfaecdde2dd321",
+          "trial_id": "LA_E_4258933",
+          "source_group": "tts-text:d8f6f9b4d0ab7fe0a8894f97eedfc3bbc0601912d98c8fed791d50c640ccdc79",
+          "label": "synthetic",
+          "codec": "ulaw",
+          "attack": "A12",
+          "duration": 1.92,
+          "sha256": "c933b3f7bc5c947f70d831f3e11c2df0bcf639f98a5c32e5fbf9d291c8b29036",
+          "score": 0.9995995163917542,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Input is shorter than 2.5 seconds."
+          ]
+        },
+        {
+          "id": "d3ce428b10ee476dbcceb91031f63d63",
+          "trial_id": "LA_E_2385312",
+          "source_group": "vctk:p274_320",
+          "label": "human",
+          "codec": "alaw",
+          "attack": "bonafide",
+          "duration": 2.34,
+          "sha256": "305727a1956757501206f1679ea66c71a942b761188938e0a0aeb09c7294daad",
+          "score": 1.1812053344328888e-05,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Input is shorter than 2.5 seconds."
+          ]
+        },
+        {
+          "id": "31760cd6748b48939f47081ef76a9e33",
+          "trial_id": "LA_E_7365117",
+          "source_group": "vctk:p228_313",
+          "label": "synthetic",
+          "codec": "gsm",
+          "attack": "A17",
+          "duration": 4.6,
+          "sha256": "0c401965fbb2855c65e41ba9fb23ca0908b97f0457aac2bbf61273ab62778c4e",
+          "score": 0.9999989867210388,
+          "assessment": "Synthetic speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "5667182c48a34c038d93399d0f603aca",
+          "trial_id": "LA_E_5370513",
+          "source_group": "tts-text:7ef2deca52c37e2c6c926778ca0ccbf02526edbff21b660840dfadb1ddc048c4",
+          "label": "synthetic",
+          "codec": "gsm",
+          "attack": "A12",
+          "duration": 6.12,
+          "sha256": "06d433da4e06b68795d1c2f5edb2308193797062cccf7a45cf491491049ea8ca",
+          "score": 0.9996358454227448,
+          "assessment": "Synthetic speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "f8cac42b19364f1faef36794ab55685c",
+          "trial_id": "LA_E_8865017",
+          "source_group": "tts-text:7b8964725d339708b5af21d363a05c9ade130c0f6e60c71105fbd0ae41136e9a",
+          "label": "synthetic",
+          "codec": "gsm",
+          "attack": "A08",
+          "duration": 2.4,
+          "sha256": "e7696f5ed7f92d6ccc48221fb22d72275754e4573455bd6284ee48c83debab43",
+          "score": 1.0,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Input is shorter than 2.5 seconds."
+          ]
+        },
+        {
+          "id": "1fc236a9e4c74ace94a97ee25e59c5a2",
+          "trial_id": "LA_E_8980826",
+          "source_group": "vctk:p299_256",
+          "label": "human",
+          "codec": "none",
+          "attack": "bonafide",
+          "duration": 3.1188125,
+          "sha256": "36163c058df79f0371d743c93c82e870d515d0e95a59e80dca06b2a3c6c68f95",
+          "score": 2.428162815704127e-06,
+          "assessment": "Human speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "09d0752c4cd245a5a3e74f529fc33bf8",
+          "trial_id": "LA_E_8149609",
+          "source_group": "tts-text:ee86bd54878e952090a4d7f4f117e94bf202fbcc5ee85d12962993d7c313c259",
+          "label": "synthetic",
+          "codec": "alaw",
+          "attack": "A14",
+          "duration": 5.0,
+          "sha256": "33bd9041bd31a2618d2ea5796bdfa768f5dcf064e1aaf85e3b788a28f45b6036",
+          "score": 1.0,
+          "assessment": "Synthetic speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "879700082a6045f4b3f9a378e18b4b7f",
+          "trial_id": "LA_E_9029812",
+          "source_group": "tts-text:e9b57986644ba4b8dd57f6084c549f4a26105ea60e30f1a1bfc88c560111e76d",
+          "label": "synthetic",
+          "codec": "opus",
+          "attack": "A08",
+          "duration": 1.32,
+          "sha256": "2c6b070a4d52837e7b1a6c5242fee1f21779cad1c557672688c3d5c55ea4cb1f",
+          "score": 1.0,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Input is shorter than 2.5 seconds."
+          ]
+        },
+        {
+          "id": "712091ba7a474ac88b502a18f66ee39c",
+          "trial_id": "LA_E_5507690",
+          "source_group": "vctk:p318_284",
+          "label": "human",
+          "codec": "none",
+          "attack": "bonafide",
+          "duration": 3.071,
+          "sha256": "fbadc1553a8e20338950357ec623309f02ce0e82bf4480db2f668c81c9c10ba8",
+          "score": 1.953812613919581e-07,
+          "assessment": "Human speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "a30eadf5ba834e61835453b17d7c0212",
+          "trial_id": "LA_E_7716169",
+          "source_group": "vctk:p283_421",
+          "label": "human",
+          "codec": "opus",
+          "attack": "bonafide",
+          "duration": 2.16,
+          "sha256": "ca8db2e8c488431a5183677977b00cc07f0a06c6efa8d7447fea120230154136",
+          "score": 0.00011400274524930865,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Input is shorter than 2.5 seconds."
+          ]
+        },
+        {
+          "id": "75ecf6bf1c8d47bc9a0641c7838433bb",
+          "trial_id": "LA_E_5609987",
+          "source_group": "tts-text:55ec202e5a66ea0c20b18011823796eddde3d4fdc005e442a43bac24dadbd5ad",
+          "label": "synthetic",
+          "codec": "gsm",
+          "attack": "A08",
+          "duration": 1.96,
+          "sha256": "4b4706a913404b113cf576398196ee74313c846193346f27066db00bc689a69c",
+          "score": 0.9999971389770508,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Input is shorter than 2.5 seconds."
+          ]
+        },
+        {
+          "id": "425143dc37194017ad0df55588181b82",
+          "trial_id": "LA_E_9095017",
+          "source_group": "vctk:p271_230",
+          "label": "human",
+          "codec": "pstn",
+          "attack": "bonafide",
+          "duration": 2.5180625,
+          "sha256": "903f6f6842ef2b490533683f2d17d97daa819b8d802fe45965a908f7b54087ff",
+          "score": 0.9987164735794067,
+          "assessment": "Synthetic speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "aaf3742968104381809d3a0265071fe3",
+          "trial_id": "LA_E_1484335",
+          "source_group": "vctk:p237_276",
+          "label": "human",
+          "codec": "alaw",
+          "attack": "bonafide",
+          "duration": 2.88,
+          "sha256": "bcc763c0f58ff30d3290bc6bb7b7b4dbde90b5b4d98c05009ca1b92e7a0f831c",
+          "score": 2.5713490686030127e-05,
+          "assessment": "Human speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "c67d517a4f764e4db99f9dce7f154ce1",
+          "trial_id": "LA_E_7347625",
+          "source_group": "vctk:p299_382",
+          "label": "human",
+          "codec": "alaw",
+          "attack": "bonafide",
+          "duration": 3.26,
+          "sha256": "171e15991e59b8177bd4347394c1f388199c0a920ccfd92bb7ce6e2a6651812f",
+          "score": 0.0023188386112451553,
+          "assessment": "Human speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "7fc7ed01a5fb44aa81873c0a72eb5cb4",
+          "trial_id": "LA_E_3690137",
+          "source_group": "tts-text:e65ee2575a1ea78459cfa4a68a8a2b2d1032255457f9ddd9ce70ae947e784b38",
+          "label": "synthetic",
+          "codec": "g722",
+          "attack": "A11",
+          "duration": 1.63,
+          "sha256": "79b547e914029e844a1837a62017c1325a7364fafc84fe2355f4a3324f11cd21",
+          "score": 0.999997615814209,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Input is shorter than 2.5 seconds."
+          ]
+        },
+        {
+          "id": "22d8ac65e8d24f65931f7419812aa38c",
+          "trial_id": "LA_E_2882759",
+          "source_group": "tts-text:40a9595de8ecf529418bd497fafed8ff4c0442b2b48255964bd7b9b960524e19",
+          "label": "synthetic",
+          "codec": "ulaw",
+          "attack": "A13",
+          "duration": 2.26,
+          "sha256": "1d4fd853d6effd4db9e21653ef48daeb9d8cdd1c772eccc6d417ae99df594924",
+          "score": 0.9997690320014954,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Input is shorter than 2.5 seconds."
+          ]
+        },
+        {
+          "id": "5c4c7ab2cf434f188630bd80a758a6aa",
+          "trial_id": "LA_E_5534663",
+          "source_group": "tts-text:457ae1f1a5a7ff39e7ebc8ff983d6476435f6b4522ae26307ef9eaf09ce56281",
+          "label": "synthetic",
+          "codec": "g722",
+          "attack": "A12",
+          "duration": 5.11,
+          "sha256": "97648434e1d8c5c3fd876653cfbb78b5e78de2b6637d0e867c4d45d64186544b",
+          "score": 0.8695608079433441,
+          "assessment": "Synthetic speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "5ef7d8bde0ae4529bde67710bb417f9d",
+          "trial_id": "LA_E_7606130",
+          "source_group": "tts-text:61d373783ac804d175cad8a68e556287fb03f9a195b8202e9f4583f636b6142a",
+          "label": "synthetic",
+          "codec": "none",
+          "attack": "A15",
+          "duration": 3.7070625,
+          "sha256": "005eddd5d470b44b59f92d15703925b9ad3ead3a52f5d43e488df7112c6e48da",
+          "score": 0.9990270137786865,
+          "assessment": "Synthetic speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "7dc14964faae44dcae0119930c0ee354",
+          "trial_id": "LA_E_4139921",
+          "source_group": "vctk:p248_336",
+          "label": "human",
+          "codec": "pstn",
+          "attack": "bonafide",
+          "duration": 5.92775,
+          "sha256": "52ca614aa46fa001f54386ffb504b9243779a72528255c8eef77f01dcabb117d",
+          "score": 0.5660974830389023,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Windows disagree; inspect temporal scores.",
+            "Aggregate score falls in the abstention interval."
+          ]
+        },
+        {
+          "id": "b44fce6464c34ae2b9f89698acf59556",
+          "trial_id": "LA_E_1268715",
+          "source_group": "tts-text:b113161bb9ab2826aa3386856e21ff5a8014040c3c304c75dc47c4bafca6a19c",
+          "label": "synthetic",
+          "codec": "none",
+          "attack": "A10",
+          "duration": 3.441,
+          "sha256": "81a8733667e351bdc480069728264f47c84a1f4ada148e2ad9b98d3a00a7c651",
+          "score": 0.9686470031738281,
+          "assessment": "Synthetic speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "1b8289bb07ac46aeb895a8cb8fa4955d",
+          "trial_id": "LA_E_4122313",
+          "source_group": "tts-text:808722e264d79f54f6df0a3b8504000fbeb10a54bc3faf732e41c4902d0a6d27",
+          "label": "synthetic",
+          "codec": "gsm",
+          "attack": "A14",
+          "duration": 1.9,
+          "sha256": "cee5df048bcd1ec7644edf784d807d4030465e576f044a9632300cb2c84281a0",
+          "score": 0.9999949932098389,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Input is shorter than 2.5 seconds."
+          ]
+        },
+        {
+          "id": "bfee08fe79784ae0accf35710b624880",
+          "trial_id": "LA_E_5790375",
+          "source_group": "tts-text:7be605b48f2f96588789b5d3722ce4661222f2f65e6aa08adffc3248b05977f7",
+          "label": "synthetic",
+          "codec": "opus",
+          "attack": "A14",
+          "duration": 2.98,
+          "sha256": "3a0654c6a82323fde8ba786dd365d7abbb0b622b24d3208c152509bb0460c821",
+          "score": 0.9999963045120239,
+          "assessment": "Synthetic speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "902e3de59c9540b5a76e2b2b457a4fce",
+          "trial_id": "LA_E_1917983",
+          "source_group": "tts-text:87d0d3d2d4e26f1ef85d35c1ed842c24d83e2ffcf9f0b4ba4d28ac44818bd780",
+          "label": "synthetic",
+          "codec": "ulaw",
+          "attack": "A14",
+          "duration": 1.28,
+          "sha256": "7c1f47af76fe1f95d18d45ee26ca02a99a63012ff4570744936c41fadc040ba5",
+          "score": 0.9999963045120239,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Input is shorter than 2.5 seconds."
+          ]
+        },
+        {
+          "id": "6ec77f7081974ec58e8bf22aeaf3b6cb",
+          "trial_id": "LA_E_2105995",
+          "source_group": "vctk:p278_382",
+          "label": "human",
+          "codec": "ulaw",
+          "attack": "bonafide",
+          "duration": 2.64,
+          "sha256": "c85c1a48e2fc55ac114907d8b57f2f3e4a7e6a472552dd2a73e781231b67d3fa",
+          "score": 6.012656285747653e-06,
+          "assessment": "Human speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "5073758de48b483da578f3fc29d4f796",
+          "trial_id": "LA_E_2570609",
+          "source_group": "vctk:p287_404",
+          "label": "human",
+          "codec": "opus",
+          "attack": "bonafide",
+          "duration": 3.36,
+          "sha256": "71dc4129c07a091bd7f58f73e9a44a697d8c1a5d9c37788713cf360164f31066",
+          "score": 0.0006041353335604072,
+          "assessment": "Human speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "6cab5e0426dd4113862619e1f0b93786",
+          "trial_id": "LA_E_2418339",
+          "source_group": "vctk:p340_367",
+          "label": "human",
+          "codec": "ulaw",
+          "attack": "bonafide",
+          "duration": 1.9,
+          "sha256": "1ff1a4f718dae1634ec5a3be07729d8de1bb61ced44aa2fdd3a8c6cadedf5fee",
+          "score": 0.0002242375776404515,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Input is shorter than 2.5 seconds."
+          ]
+        },
+        {
+          "id": "fa59539acc2e47378ff785d933edf0ee",
+          "trial_id": "LA_E_6963017",
+          "source_group": "vctk:p301_279",
+          "label": "human",
+          "codec": "alaw",
+          "attack": "bonafide",
+          "duration": 4.5,
+          "sha256": "eefbb0fb003bd8f3e8667428e74525ed10de7892236ea87652fb9e84d6e3a62d",
+          "score": 1.0211647122559953e-05,
+          "assessment": "Human speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "e1474260938a4de098b2a53c95808eff",
+          "trial_id": "LA_E_3803157",
+          "source_group": "vctk:p233_303",
+          "label": "human",
+          "codec": "opus",
+          "attack": "bonafide",
+          "duration": 3.02,
+          "sha256": "7e0895979400d3211ec53784e4608eba136288d25178ee92ab74c7f8951eadc5",
+          "score": 2.7408992536948062e-05,
+          "assessment": "Human speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "77f3c8023b0c403aa7d19f7b855eea81",
+          "trial_id": "LA_E_1229869",
+          "source_group": "vctk:p245_326",
+          "label": "human",
+          "codec": "opus",
+          "attack": "bonafide",
+          "duration": 4.9,
+          "sha256": "45f5728cb9c069b28fcaa35d4f49e65332a0e05b5191268970d3c1aad671cc4b",
+          "score": 2.013750804508163e-05,
+          "assessment": "Human speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "59e668e322104d0ba21607f9cbb7372e",
+          "trial_id": "LA_E_4165343",
+          "source_group": "vctk:p333_248",
+          "label": "human",
+          "codec": "gsm",
+          "attack": "bonafide",
+          "duration": 2.6,
+          "sha256": "7a902e9ea95c0ecfeaf9396ff9377fcb978bee0914b12f2cda48a47d1c0e59bf",
+          "score": 0.9351878762245178,
+          "assessment": "Synthetic speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "3cca026aba2d4750b405a78a79103369",
+          "trial_id": "LA_E_3584864",
+          "source_group": "vctk:p299_372",
+          "label": "human",
+          "codec": "opus",
+          "attack": "bonafide",
+          "duration": 3.36,
+          "sha256": "ee4a741031dedd54b7bf65d31e1266256d30b1c99bb280eda144768206832dc0",
+          "score": 2.304017243659473e-06,
+          "assessment": "Human speech indicated",
+          "reasons": []
+        },
+        {
+          "id": "82a80b1b061e4af485d1cb5e82546aa7",
+          "trial_id": "LA_E_4957888",
+          "source_group": "vctk:p286_392",
+          "label": "human",
+          "codec": "pstn",
+          "attack": "bonafide",
+          "duration": 2.384,
+          "sha256": "755d641b3673dfbd50af038dd179de60a6d971d6b3fbefbd59323fa4475d9c48",
+          "score": 0.9998562335968018,
+          "assessment": "Inconclusive",
+          "reasons": [
+            "Input is shorter than 2.5 seconds."
+          ]
+        },
+        {
+          "id": "dc84f430f5824ae78731f51d34794605",
+          "trial_id": "LA_E_1129061",
+          "source_group": "vctk:p295_386",
+          "label": "human",
+          "codec": "alaw",
+          "attack": "bonafide",
+          "duration": 2.92,
+          "sha256": "04117d7cf1d866e765c8489db1464c53fccde006eca121fb70cc3866597efab3",
+          "score": 0.0002369689755141735,
+          "assessment": "Human speech indicated",
+          "reasons": []
+        }
+      ]
+    }
+  },
+  "test": {
+    "summary": {
+      "n": 40,
+      "human": 20,
+      "synthetic": 20,
+      "correct": 38,
+      "false_positive": 1,
+      "false_negative": 1,
+      "accuracy": 0.95,
+      "accuracy_wilson95": [
+        0.8349612263085903,
+        0.9861793326138516
+      ],
+      "balanced_accuracy": 0.95,
+      "roc_auc": 0.9925,
+      "abstained": 15,
+      "decided": 25,
+      "correct_among_decided": 24,
+      "accuracy_among_decided": 0.96
+    },
+    "rows": [
+      {
+        "id": "d288843f27de4397a0e848f192130327",
+        "trial_id": "LA_E_4095818",
+        "source_group": "tts-text:13d5948ddee87b5176466a51969a6c095f961617d3e8a771109b99dcd6e6840d",
+        "label": "synthetic",
+        "codec": "gsm",
+        "attack": "A14",
+        "duration": 1.82,
+        "sha256": "f0d4768a941b07dbe6286b67946adedb099f27f968f3393a548721e78523c964",
+        "score": 0.9999997615814209,
+        "assessment": "Inconclusive",
+        "reasons": [
+          "Input is shorter than 2.5 seconds."
+        ]
+      },
+      {
+        "id": "d42f0b7ac3f24bedb7e45a6fb810b9bc",
+        "trial_id": "LA_E_1963392",
+        "source_group": "vctk:p228_305",
+        "label": "synthetic",
+        "codec": "pstn",
+        "attack": "A17",
+        "duration": 2.97875,
+        "sha256": "6ace9d5276739c64ca9cb44631270cecf5b2b038d0a4980689bb3d98fc706247",
+        "score": 0.9996817111968994,
+        "assessment": "Synthetic speech indicated",
+        "reasons": []
+      },
+      {
+        "id": "47a7faaef0ef4337afeb6ffef2015664",
+        "trial_id": "LA_E_2978437",
+        "source_group": "tts-text:1d5d0cb422c466678f6b6c6aa8226e6f628984abd55bcfbfe13d4cebff07a86b",
+        "label": "synthetic",
+        "codec": "none",
+        "attack": "A10",
+        "duration": 2.0638125,
+        "sha256": "b1c516f4ae3e53426fc2c708596e6791b333b1a7234d2d7055ea856c74626ada",
+        "score": 0.9975919723510742,
+        "assessment": "Inconclusive",
+        "reasons": [
+          "Input is shorter than 2.5 seconds."
+        ]
+      },
+      {
+        "id": "d776416c1b7e4998bb6ce02bbba40519",
+        "trial_id": "LA_E_1122989",
+        "source_group": "vctk:p228_339",
+        "label": "synthetic",
+        "codec": "opus",
+        "attack": "A19",
+        "duration": 5.36,
+        "sha256": "8aa4032fb0a887eac59ceaa83a2b84182e48426005dd50b28e2bd620d24beda4",
+        "score": 0.999976396560669,
+        "assessment": "Synthetic speech indicated",
+        "reasons": []
+      },
+      {
+        "id": "e83c728eabc84cd0a7f4423cd74bc818",
+        "trial_id": "LA_E_9938222",
+        "source_group": "tts-text:45cd51c30b8ec63837e7a4e100c44f0305010046c12e3fd62d7743e228183abd",
+        "label": "synthetic",
+        "codec": "ulaw",
+        "attack": "A13",
+        "duration": 2.18,
+        "sha256": "bf13455def0b08d4c78932566790752d942c036910ae6c7d9160b443edc705fd",
+        "score": 0.9999955892562866,
+        "assessment": "Inconclusive",
+        "reasons": [
+          "Input is shorter than 2.5 seconds."
+        ]
+      },
+      {
+        "id": "d9fafdb1c16f41eb92d5b44c4296c2bd",
+        "trial_id": "LA_E_8560856",
+        "source_group": "tts-text:2753a75f84bde3779215eed4960bfb39510c4818c6292f032151ea6e458d67ae",
+        "label": "synthetic",
+        "codec": "g722",
+        "attack": "A12",
+        "duration": 1.82,
+        "sha256": "515a39fc74ee1580a03cdfac1c6f49a482980e488a5e19456f5980dd8167d578",
+        "score": 0.9999884366989136,
+        "assessment": "Inconclusive",
+        "reasons": [
+          "Input is shorter than 2.5 seconds."
+        ]
+      },
+      {
+        "id": "7c8ebe6db20d430bb7fdad5780497c1d",
+        "trial_id": "LA_E_3747340",
+        "source_group": "tts-text:bfb943271f09f1f7e9c05f70b575a8daf34d7de52ba0dbaad78edc1cbd3de88d",
+        "label": "synthetic",
+        "codec": "g722",
+        "attack": "A07",
+        "duration": 2.75,
+        "sha256": "76c82580ab0381eb6f5b8d76dd67faf3ec241ad5ab817d8aefe6206e7eea7f84",
+        "score": 0.9984773993492126,
+        "assessment": "Synthetic speech indicated",
+        "reasons": []
+      },
+      {
+        "id": "e0410f536199477c8a6572687512c305",
+        "trial_id": "LA_E_6371252",
+        "source_group": "tts-text:2206c85ca491a743f8ddebe9753f86ca7cb2b4024d7e7940fb8a020c476d6fc5",
+        "label": "synthetic",
+        "codec": "gsm",
+        "attack": "A16",
+        "duration": 2.06,
+        "sha256": "64be8e4ee09a01546cf3361735fbe69f190b9043c9f6bfcfc1288f4aa28cf515",
+        "score": 0.999955415725708,
+        "assessment": "Inconclusive",
+        "reasons": [
+          "Input is shorter than 2.5 seconds."
+        ]
+      },
+      {
+        "id": "c4f1e261326246d39c8c072af1356adf",
+        "trial_id": "LA_E_4889699",
+        "source_group": "tts-text:ac0611e7688aae327cada479927742943080d370385971870cd29fc81c156aac",
+        "label": "synthetic",
+        "codec": "g722",
+        "attack": "A09",
+        "duration": 2.15,
+        "sha256": "42bec976cb4e57e897f0ac55022181e8ff401b933b655c75f0d5d98d134a2856",
+        "score": 1.0,
+        "assessment": "Inconclusive",
+        "reasons": [
+          "Input is shorter than 2.5 seconds."
+        ]
+      },
+      {
+        "id": "2190d14e552e48d4a9affbf5e0c9c25e",
+        "trial_id": "LA_E_2377831",
+        "source_group": "tts-text:cf794a7ede1398a0b0569d9a2f3404e7620b1b65f05ff928a756bd58a247ef04",
+        "label": "synthetic",
+        "codec": "gsm",
+        "attack": "A09",
+        "duration": 3.52,
+        "sha256": "48d01f72b4b6f86b7f2ee1f4535058f3cb4a70027709be578c567c5ddb33203f",
+        "score": 0.9999998807907104,
+        "assessment": "Synthetic speech indicated",
+        "reasons": []
+      },
+      {
+        "id": "567140b883b0458dbff786ed84540812",
+        "trial_id": "LA_E_7890869",
+        "source_group": "tts-text:f761ea7b12698145080329d74e4bb55b0aadba1bafd3d30554c1db9399b7bfca",
+        "label": "synthetic",
+        "codec": "opus",
+        "attack": "A15",
+        "duration": 2.5,
+        "sha256": "b4d70af13a610c657a17a3132413ef5999fda0fe501dc8877f17d1e71ab7017e",
+        "score": 0.9983097314834595,
+        "assessment": "Synthetic speech indicated",
+        "reasons": []
+      },
+      {
+        "id": "8c5fe2f3dc7d414bbb5972b592ccf23c",
+        "trial_id": "LA_E_5297450",
+        "source_group": "tts-text:54df93ffd86163ace8e61ea00d9db324980fd00fbf841fd6bb8d381ea534f0b7",
+        "label": "synthetic",
+        "codec": "pstn",
+        "attack": "A16",
+        "duration": 2.6606875,
+        "sha256": "7faac85a4c47481cb863c3698575e02631970ff75ffdca8715b2f08e844c6ebe",
+        "score": 0.9999998807907104,
+        "assessment": "Synthetic speech indicated",
+        "reasons": []
+      },
+      {
+        "id": "924a82950cdc4e3d8ce46b416a29d351",
+        "trial_id": "LA_E_7563262",
+        "source_group": "vctk:p234_322",
+        "label": "synthetic",
+        "codec": "g722",
+        "attack": "A19",
+        "duration": 3.7,
+        "sha256": "c3776c1ca6038d6df2d4a6af5c97ded4c0287cb0b9ae3a02e48f4a21fe0b5c08",
+        "score": 0.9999988079071045,
+        "assessment": "Synthetic speech indicated",
+        "reasons": []
+      },
+      {
+        "id": "400bee5b11834c74a72b50a171a1fe2d",
+        "trial_id": "LA_E_4184088",
+        "source_group": "tts-text:81a85a423432ec2b868bda2fd58a4e5db94ed1f8e79a0ff0d1a50bf0b5486a96",
+        "label": "synthetic",
+        "codec": "opus",
+        "attack": "A07",
+        "duration": 2.42,
+        "sha256": "d80d22fb719568c9c8866448a36ff992321da76c99a3d52c6a49715dd39dbe53",
+        "score": 0.9942482709884644,
+        "assessment": "Inconclusive",
+        "reasons": [
+          "Input is shorter than 2.5 seconds."
+        ]
+      },
+      {
+        "id": "77a8630746b6442383596191057182a0",
+        "trial_id": "LA_E_5250679",
+        "source_group": "vctk:p292_409",
+        "label": "synthetic",
+        "codec": "gsm",
+        "attack": "A18",
+        "duration": 2.2,
+        "sha256": "f8364951b3706550a3b7942bbb15a3f782f56d238a2aa7af0a4c81fc0ea4bed4",
+        "score": 0.9999995231628418,
+        "assessment": "Inconclusive",
+        "reasons": [
+          "Input is shorter than 2.5 seconds."
+        ]
+      },
+      {
+        "id": "9404d4be3ce94a45a890ea69a8e7c455",
+        "trial_id": "LA_E_1714739",
+        "source_group": "tts-text:759e0b2a468107812356f6a1be6181439e2918c1112830ce544c072ff01cf7b1",
+        "label": "synthetic",
+        "codec": "none",
+        "attack": "A15",
+        "duration": 4.102625,
+        "sha256": "0dbb992629c37be9f06e039a409464044949834dd61c0f7de1cb676612b8664b",
+        "score": 0.986970454454422,
+        "assessment": "Synthetic speech indicated",
+        "reasons": []
+      },
+      {
+        "id": "147c5aee9387409d8d02f08448490a20",
+        "trial_id": "LA_E_4873750",
+        "source_group": "tts-text:cb0e205edc48707995c76148481945dfa854ea0742fe5751de05919fca1cfc29",
+        "label": "synthetic",
+        "codec": "opus",
+        "attack": "A08",
+        "duration": 3.98,
+        "sha256": "2511dacc414f4d07a2c8071c5d5ce8c9fbe02b96b1785608bd2733e82bab8f72",
+        "score": 0.999995231628418,
+        "assessment": "Synthetic speech indicated",
+        "reasons": []
+      },
+      {
+        "id": "80849ab9cfd84dc98ac60df317229dcd",
+        "trial_id": "LA_E_7046184",
+        "source_group": "vctk:p275_264",
+        "label": "synthetic",
+        "codec": "alaw",
+        "attack": "A17",
+        "duration": 4.04,
+        "sha256": "1e251268c50da7e191a76db60bbd1efb925ab551953747dba82b813a258d2c1f",
+        "score": 0.9999730587005615,
+        "assessment": "Synthetic speech indicated",
+        "reasons": []
+      },
+      {
+        "id": "dda06bf8f9b74e7497bc73c5c20ff6e9",
+        "trial_id": "LA_E_8349356",
+        "source_group": "tts-text:33ccee91dafb190daa2ca9109581182522c24d2d5e56d21f59985fe73ef2286d",
+        "label": "synthetic",
+        "codec": "ulaw",
+        "attack": "A08",
+        "duration": 5.92,
+        "sha256": "2fa6b199ce97446df6c0a738845e26053dddf21e9b3611e89dc6924786f440a4",
+        "score": 1.0,
+        "assessment": "Synthetic speech indicated",
+        "reasons": []
+      },
+      {
+        "id": "f58c562ff2034149aac5fb92607ce128",
+        "trial_id": "LA_E_5096712",
+        "source_group": "tts-text:ff1d92c0fb94d6d5a8cf3d997a3369c0f9a13052ff084be5bf08e617f8aa4515",
+        "label": "synthetic",
+        "codec": "none",
+        "attack": "A12",
+        "duration": 2.1129375,
+        "sha256": "1a6f81874e903e449aa0ce8269bdb0dd5d037ec5cc0b4add7689e477f05b31da",
+        "score": 0.24783779680728912,
+        "assessment": "Inconclusive",
+        "reasons": [
+          "Input is shorter than 2.5 seconds."
+        ]
+      },
+      {
+        "id": "bb84ce550db84064a7094c3bd86d9a65",
+        "trial_id": "LA_E_9572485",
+        "source_group": "vctk:p283_244",
+        "label": "human",
+        "codec": "gsm",
+        "attack": "bonafide",
+        "duration": 2.9,
+        "sha256": "fe9ba5d515c05efb028cec0b7fc5079bb7584a68f60c59bdc5ad595eb71cecd5",
+        "score": 0.1091662272810936,
+        "assessment": "Human speech indicated",
+        "reasons": []
+      },
+      {
+        "id": "2f4ea4607dd44e158ba8b60714435e47",
+        "trial_id": "LA_E_8154142",
+        "source_group": "vctk:p299_240",
+        "label": "human",
+        "codec": "pstn",
+        "attack": "bonafide",
+        "duration": 2.3899375,
+        "sha256": "276f58a1a083d0fbab4269d3ec0738779bbac08738af3115189ba66caacbb27b",
+        "score": 0.346716970205307,
+        "assessment": "Inconclusive",
+        "reasons": [
+          "Input is shorter than 2.5 seconds."
+        ]
+      },
+      {
+        "id": "d05c05b18b5f404e9973f6616676e702",
+        "trial_id": "LA_E_3025873",
+        "source_group": "vctk:p284_266",
+        "label": "human",
+        "codec": "ulaw",
+        "attack": "bonafide",
+        "duration": 1.86,
+        "sha256": "da59f8c11f1d3f1b948f06f0370231ec0bec9ada3b169b845d8ce49c3cd303d8",
+        "score": 3.3640106266830117e-05,
+        "assessment": "Inconclusive",
+        "reasons": [
+          "Input is shorter than 2.5 seconds."
+        ]
+      },
+      {
+        "id": "c5bb06ed541f4a67a28432e89ed84f91",
+        "trial_id": "LA_E_1761531",
+        "source_group": "vctk:p341_242",
+        "label": "human",
+        "codec": "none",
+        "attack": "bonafide",
+        "duration": 4.3531875,
+        "sha256": "4e4f8ca320a3de0316bcb9e47cf3a5f961be4730e39d2bfe53d19e23dd67e1d3",
+        "score": 1.2458296794193302e-07,
+        "assessment": "Human speech indicated",
+        "reasons": []
+      },
+      {
+        "id": "9b87d7cf29e644e599b5a9ead81cb6c1",
+        "trial_id": "LA_E_6482333",
+        "source_group": "vctk:p227_322",
+        "label": "human",
+        "codec": "ulaw",
+        "attack": "bonafide",
+        "duration": 2.32,
+        "sha256": "dd333b418e9423367854fd11070fbf05ee145f76daf4e6a970645191770bdf3e",
+        "score": 9.495373888057657e-06,
+        "assessment": "Inconclusive",
+        "reasons": [
+          "Input is shorter than 2.5 seconds."
+        ]
+      },
+      {
+        "id": "5c74e58a97e84de09d5b961f6a52d9b8",
+        "trial_id": "LA_E_7107242",
+        "source_group": "vctk:p284_248",
+        "label": "human",
+        "codec": "opus",
+        "attack": "bonafide",
+        "duration": 4.04,
+        "sha256": "87c3f2b0d5b96281caa638eeb0bf98bd3db3daac4628a64631aa64a84a4306f0",
+        "score": 2.643619495756866e-06,
+        "assessment": "Human speech indicated",
+        "reasons": []
+      },
+      {
+        "id": "371928909c944e75bda152ef03fc9f91",
+        "trial_id": "LA_E_5260542",
+        "source_group": "vctk:p304_357",
+        "label": "human",
+        "codec": "pstn",
+        "attack": "bonafide",
+        "duration": 4.0555625,
+        "sha256": "dcc008307957f384912abc21b962ad90b5e1ce9afb14dd65f73b8d0943a83bf6",
+        "score": 0.3507799804210663,
+        "assessment": "Inconclusive",
+        "reasons": [
+          "Aggregate score falls in the abstention interval."
+        ]
+      },
+      {
+        "id": "d2947ebce9a448c2b694be07ffc411f9",
+        "trial_id": "LA_E_3031416",
+        "source_group": "vctk:p317_273",
+        "label": "human",
+        "codec": "gsm",
+        "attack": "bonafide",
+        "duration": 3.32,
+        "sha256": "81ad3a116d5bbd7fddb5287d4e6c0b8fa896db789762e15fb29dc7558124ceae",
+        "score": 0.032925453037023544,
+        "assessment": "Human speech indicated",
+        "reasons": []
+      },
+      {
+        "id": "27ccdcf69a064f12b30e312de78bd146",
+        "trial_id": "LA_E_6374107",
+        "source_group": "vctk:p334_408",
+        "label": "human",
+        "codec": "none",
+        "attack": "bonafide",
+        "duration": 2.9055625,
+        "sha256": "4c23a1aa4b4418cad4638ae9cc8fa5acd42fc2f30650a120ccc56f8a9f7f4105",
+        "score": 1.0268095138599165e-06,
+        "assessment": "Human speech indicated",
+        "reasons": []
+      },
+      {
+        "id": "25baf3da58964eadbd59002673c2c85c",
+        "trial_id": "LA_E_1576220",
+        "source_group": "vctk:p294_375",
+        "label": "human",
+        "codec": "g722",
+        "attack": "bonafide",
+        "duration": 3.92,
+        "sha256": "176f63c5625269255874a6464829ebe37ee035d1a0f0c01eca433304b121c97c",
+        "score": 8.464331040158868e-05,
+        "assessment": "Human speech indicated",
+        "reasons": []
+      },
+      {
+        "id": "a8e76a2d718846479cb12291fc646eb1",
+        "trial_id": "LA_E_6621318",
+        "source_group": "vctk:p318_232",
+        "label": "human",
+        "codec": "none",
+        "attack": "bonafide",
+        "duration": 2.692375,
+        "sha256": "49a2d2c738ea2de5b7a8a4843c530f60b1254be332ba5ca438beb73dec621dcc",
+        "score": 3.652183124813746e-07,
+        "assessment": "Human speech indicated",
+        "reasons": []
+      },
+      {
+        "id": "b09b156511cd4aec9a4ede8f21b5441a",
+        "trial_id": "LA_E_4702205",
+        "source_group": "vctk:p252_269",
+        "label": "human",
+        "codec": "g722",
+        "attack": "bonafide",
+        "duration": 5.67,
+        "sha256": "fd1b46804ab1cc76c2d0086e71e47dc0d852f3290ca02f0e4de2037ab96453f0",
+        "score": 7.294244824151974e-06,
+        "assessment": "Human speech indicated",
+        "reasons": []
+      },
+      {
+        "id": "7e8759ef73fc410db98a6a73205603b6",
+        "trial_id": "LA_E_6266623",
+        "source_group": "vctk:p301_311",
+        "label": "human",
+        "codec": "gsm",
+        "attack": "bonafide",
+        "duration": 4.52,
+        "sha256": "d906f4808dc1c9fc5a5cddfb1d1154a5dfafbe6e331d8c9f9a4e3ca0b68788e5",
+        "score": 0.8018269240856171,
+        "assessment": "Synthetic speech indicated",
+        "reasons": []
+      },
+      {
+        "id": "d0f3f82400e74ac4a5430bce71bce7f4",
+        "trial_id": "LA_E_1455301",
+        "source_group": "vctk:p287_267",
+        "label": "human",
+        "codec": "none",
+        "attack": "bonafide",
+        "duration": 3.075625,
+        "sha256": "a9b971f67dc1e220544896c899118bb99be0ec3fd430f8d5691239bad87fe496",
+        "score": 6.837460375663795e-08,
+        "assessment": "Human speech indicated",
+        "reasons": []
+      },
+      {
+        "id": "46bb78e6bf3c425bb6e7ee7a298047b8",
+        "trial_id": "LA_E_2361432",
+        "source_group": "vctk:p340_351",
+        "label": "human",
+        "codec": "gsm",
+        "attack": "bonafide",
+        "duration": 2.36,
+        "sha256": "6b448d94e8b15e0985c3a8ab5671d31d3d84788322a760b534e025a5525433e2",
+        "score": 0.029019279405474663,
+        "assessment": "Inconclusive",
+        "reasons": [
+          "Input is shorter than 2.5 seconds."
+        ]
+      },
+      {
+        "id": "e2e0703f347f4fa799055a4d96db87f8",
+        "trial_id": "LA_E_8795308",
+        "source_group": "vctk:p259_305",
+        "label": "human",
+        "codec": "ulaw",
+        "attack": "bonafide",
+        "duration": 2.98,
+        "sha256": "0f32b6888fc94f0e62f95b10d380bd9d042f2bf626631a303a95913c2ae096f8",
+        "score": 1.2175676147307968e-06,
+        "assessment": "Human speech indicated",
+        "reasons": []
+      },
+      {
+        "id": "dd7194eb74ef4ed0ad8abccee0cb678c",
+        "trial_id": "LA_E_6017825",
+        "source_group": "vctk:p264_369",
+        "label": "human",
+        "codec": "pstn",
+        "attack": "bonafide",
+        "duration": 3.2829375,
+        "sha256": "edf204f11b1f57d2c50c242e407e276b43c425494edc11f8a5be3d000345053f",
+        "score": 0.0005936974193900824,
+        "assessment": "Human speech indicated",
+        "reasons": []
+      },
+      {
+        "id": "f9de84314cb644b7aa96a884f2f9a5c2",
+        "trial_id": "LA_E_7292381",
+        "source_group": "vctk:p317_410",
+        "label": "human",
+        "codec": "none",
+        "attack": "bonafide",
+        "duration": 2.435375,
+        "sha256": "88be2a791765e34fc65900d97a864a337dda0f767461693826fe79fed238ece1",
+        "score": 1.623335265321657e-06,
+        "assessment": "Inconclusive",
+        "reasons": [
+          "Input is shorter than 2.5 seconds."
+        ]
+      },
+      {
+        "id": "1f33e3824e8c4200bcbd9cb0b8ce5f35",
+        "trial_id": "LA_E_9242023",
+        "source_group": "vctk:p245_356",
+        "label": "human",
+        "codec": "none",
+        "attack": "bonafide",
+        "duration": 4.0885,
+        "sha256": "8da127b899d65b015d7c49b60515ca8a73821feea7ec7cdad195d104b9f3a77e",
+        "score": 4.534229674391099e-06,
+        "assessment": "Human speech indicated",
+        "reasons": []
+      },
+      {
+        "id": "4900f51d4a334a94a1732b8744a656d4",
+        "trial_id": "LA_E_7732495",
+        "source_group": "vctk:p316_403",
+        "label": "human",
+        "codec": "ulaw",
+        "attack": "bonafide",
+        "duration": 4.3,
+        "sha256": "afebe2b67013ba3804b9a6dcb6cf9209ddf94b8f81932ca0b4b0712cafb1bb12",
+        "score": 0.24363159388303757,
+        "assessment": "Human speech indicated",
+        "reasons": []
+      }
+    ]
+  },
+  "demo_ids": [
+    "22d73541fdb647069b6362966eeecb31",
+    "21e25de4175f436cb90f2b8301c53153",
+    "6c3d1ef1790e43d4b990b64a86e0d248",
+    "a9a70467f55443ddacd50730273959d1"
+  ],
+  "selected_model": "aasist",
+  "limitations": [
+    "40 local test cases; uncertainty is large. Wilson interval assumes independent cases; speaker and codec correlations may remain.",
+    "Sources are separated between selection, test, progress, and the annotation study. Complete training overlap has not been audited.",
+    "ASVspoof 2021 LA includes 2019-era spoof attacks and channel conditions. These results do not establish performance on modern generators or arbitrary uploads.",
+    "No thresholds, preprocessing, or abstention rules were fitted to the test set. Only the selected model was tested on it."
+  ]
+}
