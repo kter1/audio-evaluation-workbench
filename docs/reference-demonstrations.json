@@ -1,0 +1,55 @@
+{
+  "note": "Four source-disjoint reference demonstrations; diagnostic only, training overlap unknown, not a generalization estimate.",
+  "model": {
+    "repository": "clovaai/aasist",
+    "revision": "a04c9863f63d44471dde8a6abcb3b082b07cd1d1",
+    "files": {
+      "lab/vendor/aasist_model.py": {
+        "sha256": "9e0d3e80937dd0577beea7883098465a479da23a198ebc0d712abcc59b0bec50",
+        "bytes": 18960
+      },
+      "data/models/aasist/config.json": {
+        "sha256": "c25023331685027cce90e1b9a0d2df10aa04b2a27d9b27d5afa36e6815b0fe76",
+        "bytes": 997
+      },
+      "data/models/aasist/model.pth": {
+        "sha256": "51d2d9cf0738172f61e2a384ec50a54a55363240f67c971ed55a92435bc1a1c0",
+        "bytes": 1281532
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "22d73541fdb647069b6362966eeecb31",
+      "reference": "human",
+      "score": 1.7456068235333078e-05,
+      "assessment": "Human speech indicated",
+      "seconds": 1.465948125347495,
+      "robustness_max_delta": 0.00015317817633331288
+    },
+    {
+      "id": "21e25de4175f436cb90f2b8301c53153",
+      "reference": "human",
+      "score": 5.0629307224880904e-05,
+      "assessment": "Human speech indicated",
+      "seconds": 0.9748934172093868,
+      "robustness_max_delta": 0.002471249787049601
+    },
+    {
+      "id": "6c3d1ef1790e43d4b990b64a86e0d248",
+      "reference": "synthetic",
+      "score": 1.0,
+      "assessment": "Synthetic speech indicated",
+      "seconds": 0.9213132499717176,
+      "robustness_max_delta": 5.936622619628906e-05
+    },
+    {
+      "id": "a9a70467f55443ddacd50730273959d1",
+      "reference": "synthetic",
+      "score": 1.0,
+      "assessment": "Synthetic speech indicated",
+      "seconds": 0.8777626669034362,
+      "robustness_max_delta": 0.0
+    }
+  ]
+}

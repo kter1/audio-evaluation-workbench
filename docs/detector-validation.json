@@ -1,0 +1,59 @@
+{
+  "note": "Four source-disjoint reference demonstrations; diagnostic only, training overlap unknown, not a generalization estimate.",
+  "model": {
+    "repository": "garystafford/wav2vec2-deepfake-voice-detector",
+    "revision": "c66306024a7ede0be291e9c4558b37634782dc4e",
+    "files": {
+      "config.json": {
+        "sha256": "c5791d2fc2e5506b228fa99387c2b2619c7836ad7e244699f8e5e8510b8f2574",
+        "bytes": 2271
+      },
+      "preprocessor_config.json": {
+        "sha256": "35818933f1836450939a59d1f0ae7e4386d0d64d1560ce60a65001af62ac3f71",
+        "bytes": 221
+      },
+      "README.md": {
+        "sha256": "066e8ca93bae18ab2ece911f95d3bad640f4516c43f924aeda66ba6352c2bc64",
+        "bytes": 11173
+      },
+      "model.safetensors": {
+        "sha256": "905e330265c40a76955911ce86691fb4c8f2ed9c8085f4f046cac1383592a0ac",
+        "bytes": 1262859296
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "9dab4b2b2d034d3cbbf55bf1bd2fffbe",
+      "reference": "synthetic",
+      "score": 0.9959110021591187,
+      "assessment": "Inconclusive",
+      "seconds": 1.338614874985069,
+      "robustness_max_delta": 0.9776530526578426
+    },
+    {
+      "id": "33c2e43900014d5b87efdac8d2e317dd",
+      "reference": "human",
+      "score": 0.48361369967460627,
+      "assessment": "Inconclusive",
+      "seconds": 2.2221326660364866,
+      "robustness_max_delta": 0.4526590183377266
+    },
+    {
+      "id": "ad327e11ee494d219b742fe96828726a",
+      "reference": "synthetic",
+      "score": 0.9962434768676758,
+      "assessment": "Inconclusive",
+      "seconds": 0.8209481248632073,
+      "robustness_max_delta": 0.991974972654134
+    },
+    {
+      "id": "7e340b20f54542058e1877391c741309",
+      "reference": "human",
+      "score": 0.8640651702880858,
+      "assessment": "Synthetic speech indicated",
+      "seconds": 1.9543904587626457,
+      "robustness_max_delta": 0.6901292353868484
+    }
+  ]
+}

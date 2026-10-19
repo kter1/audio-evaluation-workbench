@@ -1,0 +1,901 @@
+{
+  "version": "4.0",
+  "beta": [
+    2.042467395010542,
+    0.3068929095804427,
+    0.9339778205195687
+  ],
+  "threshold": 0.20960105988114733,
+  "threshold_logit": -1.3273317963710465,
+  "models": {
+    "pellav2": {
+      "repository": "Sadanie/pellav2-audio-deepfake-detector",
+      "revision": "a4c68a3d4afc7f5d9450c94f5d0652aaa208d40a",
+      "backbone": "facebook/wav2vec2-xls-r-300m",
+      "backbone_revision": "1a640f32ac3e39899438a2931f9924c02f080a54",
+      "files": {
+        "pellav2_detector.pt": {
+          "sha256": "8214705ad784f66bca0736300e3432d5bfc325f1fc211a3aea5f9a13c790b023",
+          "bytes": 1261935478
+        },
+        "pellav2_infer.py": {
+          "sha256": "2ebee7a028a64ed0bf263ec282ad45d8bde84044293394aafb6b0c26fb0f31e6",
+          "bytes": 2665
+        },
+        "config.json": {
+          "sha256": "5a0fe2addbd42f4964d8e4fc4f2c8e70f817db84992094fff926ee1e6933e4a5",
+          "bytes": 24
+        },
+        "xls-r-300m-config.json": {
+          "sha256": "0bffa0d0e98153e883b828d86491f3c6062cb563dc9d7a9cfd1790da30c286ac",
+          "bytes": 1568
+        }
+      }
+    },
+    "antideepfake": {
+      "repository": "nii-yamagishilab/mms-300m-anti-deepfake",
+      "revision": "7928e119e09f616b2ce698892e00ca22dbaa40bf",
+      "files": {
+        "model.safetensors": {
+          "sha256": "9bd5d9785bf72f91dfca8508651354946c4b307921cb358505e1b94035102224",
+          "bytes": 1269622944
+        },
+        "config.json": {
+          "sha256": "be5a16e7bf332832f0a5583357ed37dd67cc4a39abd24832cf6a74a8217b046c",
+          "bytes": 2046
+        },
+        "README.md": {
+          "sha256": "d7139a3c76480f0167f2e768b7af833659541453d7b45f277e3774e98ad1493f",
+          "bytes": 13522
+        }
+      }
+    }
+  },
+  "l2": 1.0,
+  "features": [
+    "pellav2 logit",
+    "AntiDeepfake logit (fake - real)"
+  ],
+  "clip": 30.0,
+  "protocol": "4.0",
+  "kind": "base",
+  "attempt": "attempt 1 (base)",
+  "rule": "1. Features per 4 s window: pellav2 logit and AntiDeepfake (fake - real) logit; 3-parameter logistic\n     model, L2 = 1, each clip version weighted equally and the two classes weighted equally.\n  2. Five-fold cross-validation grouped by speaker; out-of-fold file scores = mean window probability.\n  3. Threshold = highest value that still flags >= 98% of out-of-fold development fakes, all channels pooled.\n  4. Bar on out-of-fold scores: >= 95% of fakes caught per generator in every channel; false alarms\n     <= 2% clean and <= 5% MP3, telephone, and 20 dB noise.\n  5. If the bar is missed: stop, write data/evaluation/v4-fusion-failed.json, freeze nothing.\n     If met: refit on all development data and write lab/fusion-v4.json once.\nThe same rule is applied to each model alone for comparison.\n\nAttempt 1 (base, above) missed the bar only on 20 dB noise (11/180 real flagged). Attempt 2, fixed before\nrunning: add a per-window noise index n = clip((40 - D) / 20, 0, 2), where D is the 95th minus 10th\npercentile of 20 ms frame levels in dB (lab.fusion.noise_index), plus interactions a\u00b7n and b\u00b7n\n(6 parameters). Everything else in steps 1-5 is unchanged. If attempt 2 also misses the bar, the owner\nchose to freeze the base fusion anyway (--model base --accept-miss) and report the miss on the fresh test.",
+  "bar": {
+    "min_fake_detection_each_channel": 0.95,
+    "min_heldout_generator_detection": 0.9,
+    "max_false_alarms": {
+      "clean": 0.02,
+      "mp3": 0.05,
+      "phone": 0.05,
+      "noise20": 0.05
+    },
+    "summary": "\u226595% of fakes caught per generator in every channel (\u226590% for the held-out XTTS-v2 on the test); false alarms \u22642% on clean speech and \u22645% on MP3, telephone, and noisy speech"
+  },
+  "development": {
+    "features_sha256": "020378deb1a25361b7fb0f4a8fd14d7add53da373f6c5f6d2c6d446cd1f9ee0e",
+    "v3_manifest_sha256": "a464e96a45342e69916b2fd830f38bd59aede4f3c5ff9bbcddcc51875b245834",
+    "clip_versions": 1440,
+    "channels": [
+      "clean",
+      "mp3",
+      "phone",
+      "noise20"
+    ]
+  },
+  "cross_validation": {
+    "fusion": {
+      "threshold": 0.20960105988114733,
+      "threshold_logit": -1.3273317963710465,
+      "report": {
+        "clean": {
+          "fakes": {
+            "n": 180,
+            "flagged_synthetic": 177,
+            "rate": 0.9833333333333333,
+            "wilson95": [
+              0.952151771962928,
+              0.9943159133795125
+            ]
+          },
+          "reals": {
+            "n": 180,
+            "flagged_synthetic": 1,
+            "rate": 0.005555555555555556,
+            "wilson95": [
+              0.0009813660672160114,
+              0.030793070766379115
+            ]
+          },
+          "by_generator": {
+            "chatterbox": {
+              "n": 90,
+              "flagged_synthetic": 88,
+              "rate": 0.9777777777777777,
+              "wilson95": [
+                0.9225547331137463,
+                0.9938845580136748
+              ]
+            },
+            "f5": {
+              "n": 90,
+              "flagged_synthetic": 89,
+              "rate": 0.9888888888888889,
+              "wilson95": [
+                0.9397159168824657,
+                0.9980359158990818
+              ]
+            }
+          },
+          "by_source": {
+            "test-clean": {
+              "n": 120,
+              "flagged_synthetic": 1,
+              "rate": 0.008333333333333333,
+              "wilson95": [
+                0.0014725557333420923,
+                0.045696291245049675
+              ]
+            },
+            "test-other": {
+              "n": 60,
+              "flagged_synthetic": 0,
+              "rate": 0.0,
+              "wilson95": [
+                0.0,
+                0.06017185214208986
+              ]
+            }
+          }
+        },
+        "mp3": {
+          "fakes": {
+            "n": 180,
+            "flagged_synthetic": 178,
+            "rate": 0.9888888888888889,
+            "wilson95": [
+              0.9603989991004155,
+              0.9969476251540074
+            ]
+          },
+          "reals": {
+            "n": 180,
+            "flagged_synthetic": 5,
+            "rate": 0.027777777777777776,
+            "wilson95": [
+              0.011922122033089549,
+              0.06336807044843389
+            ]
+          },
+          "by_generator": {
+            "chatterbox": {
+              "n": 90,
+              "flagged_synthetic": 89,
+              "rate": 0.9888888888888889,
+              "wilson95": [
+                0.9397159168824657,
+                0.9980359158990818
+              ]
+            },
+            "f5": {
+              "n": 90,
+              "flagged_synthetic": 89,
+              "rate": 0.9888888888888889,
+              "wilson95": [
+                0.9397159168824657,
+                0.9980359158990818
+              ]
+            }
+          },
+          "by_source": {
+            "test-clean": {
+              "n": 120,
+              "flagged_synthetic": 4,
+              "rate": 0.03333333333333333,
+              "wilson95": [
+                0.0130375510983506,
+                0.082580337559106
+              ]
+            },
+            "test-other": {
+              "n": 60,
+              "flagged_synthetic": 1,
+              "rate": 0.016666666666666666,
+              "wilson95": [
+                0.0029481597947862495,
+                0.08855129727590061
+              ]
+            }
+          }
+        },
+        "phone": {
+          "fakes": {
+            "n": 180,
+            "flagged_synthetic": 177,
+            "rate": 0.9833333333333333,
+            "wilson95": [
+              0.952151771962928,
+              0.9943159133795125
+            ]
+          },
+          "reals": {
+            "n": 180,
+            "flagged_synthetic": 7,
+            "rate": 0.03888888888888889,
+            "wilson95": [
+              0.018963292190413962,
+              0.07808477811507364
+            ]
+          },
+          "by_generator": {
+            "chatterbox": {
+              "n": 90,
+              "flagged_synthetic": 90,
+              "rate": 1.0,
+              "wilson95": [
+                0.9590643744356734,
+                1.0
+              ]
+            },
+            "f5": {
+              "n": 90,
+              "flagged_synthetic": 87,
+              "rate": 0.9666666666666667,
+              "wilson95": [
+                0.9065271396961013,
+                0.9885996097771937
+              ]
+            }
+          },
+          "by_source": {
+            "test-clean": {
+              "n": 120,
+              "flagged_synthetic": 5,
+              "rate": 0.041666666666666664,
+              "wilson95": [
+                0.017926716880109515,
+                0.09384085233703535
+              ]
+            },
+            "test-other": {
+              "n": 60,
+              "flagged_synthetic": 2,
+              "rate": 0.03333333333333333,
+              "wilson95": [
+                0.009189319256197877,
+                0.113637742743086
+              ]
+            }
+          }
+        },
+        "noise20": {
+          "fakes": {
+            "n": 180,
+            "flagged_synthetic": 174,
+            "rate": 0.9666666666666667,
+            "wilson95": [
+              0.9291956595913273,
+              0.9846352090151671
+            ]
+          },
+          "reals": {
+            "n": 180,
+            "flagged_synthetic": 11,
+            "rate": 0.06111111111111111,
+            "wilson95": [
+              0.03446271356843876,
+              0.10610111238497712
+            ]
+          },
+          "by_generator": {
+            "chatterbox": {
+              "n": 90,
+              "flagged_synthetic": 88,
+              "rate": 0.9777777777777777,
+              "wilson95": [
+                0.9225547331137463,
+                0.9938845580136748
+              ]
+            },
+            "f5": {
+              "n": 90,
+              "flagged_synthetic": 86,
+              "rate": 0.9555555555555556,
+              "wilson95": [
+                0.8912314496718777,
+                0.9825827581472913
+              ]
+            }
+          },
+          "by_source": {
+            "test-clean": {
+              "n": 120,
+              "flagged_synthetic": 6,
+              "rate": 0.05,
+              "wilson95": [
+                0.023114364414465793,
+                0.10480288536236734
+              ]
+            },
+            "test-other": {
+              "n": 60,
+              "flagged_synthetic": 5,
+              "rate": 0.08333333333333333,
+              "wilson95": [
+                0.03612045660173077,
+                0.1806894201833441
+              ]
+            }
+          }
+        }
+      },
+      "failures": [
+        "noise20: 11/180 real flagged > 5%"
+      ],
+      "summary_pooled": {
+        "n": 1440,
+        "human": 720,
+        "synthetic": 720,
+        "correct": 1402,
+        "false_positive": 24,
+        "false_negative": 14,
+        "accuracy": 0.9736111111111111,
+        "accuracy_wilson95": [
+          0.9639877258939914,
+          0.9807143337865033
+        ],
+        "balanced_accuracy": 0.9736111111111111,
+        "roc_auc": 0.9976909722222222,
+        "abstained": 0,
+        "decided": 1440,
+        "correct_among_decided": 1402,
+        "accuracy_among_decided": 0.9736111111111111
+      }
+    },
+    "pellav2 alone": {
+      "threshold": 0.9591234302560001,
+      "threshold_logit": 3.1554627418518053,
+      "report": {
+        "clean": {
+          "fakes": {
+            "n": 180,
+            "flagged_synthetic": 178,
+            "rate": 0.9888888888888889,
+            "wilson95": [
+              0.9603989991004155,
+              0.9969476251540074
+            ]
+          },
+          "reals": {
+            "n": 180,
+            "flagged_synthetic": 5,
+            "rate": 0.027777777777777776,
+            "wilson95": [
+              0.011922122033089549,
+              0.06336807044843389
+            ]
+          },
+          "by_generator": {
+            "chatterbox": {
+              "n": 90,
+              "flagged_synthetic": 89,
+              "rate": 0.9888888888888889,
+              "wilson95": [
+                0.9397159168824657,
+                0.9980359158990818
+              ]
+            },
+            "f5": {
+              "n": 90,
+              "flagged_synthetic": 89,
+              "rate": 0.9888888888888889,
+              "wilson95": [
+                0.9397159168824657,
+                0.9980359158990818
+              ]
+            }
+          },
+          "by_source": {
+            "test-clean": {
+              "n": 120,
+              "flagged_synthetic": 2,
+              "rate": 0.016666666666666666,
+              "wilson95": [
+                0.004582564565921141,
+                0.0587359629721589
+              ]
+            },
+            "test-other": {
+              "n": 60,
+              "flagged_synthetic": 3,
+              "rate": 0.05,
+              "wilson95": [
+                0.01714950216439568,
+                0.1370051647634852
+              ]
+            }
+          }
+        },
+        "mp3": {
+          "fakes": {
+            "n": 180,
+            "flagged_synthetic": 178,
+            "rate": 0.9888888888888889,
+            "wilson95": [
+              0.9603989991004155,
+              0.9969476251540074
+            ]
+          },
+          "reals": {
+            "n": 180,
+            "flagged_synthetic": 30,
+            "rate": 0.16666666666666666,
+            "wilson95": [
+              0.11931179926281874,
+              0.22795186601825654
+            ]
+          },
+          "by_generator": {
+            "chatterbox": {
+              "n": 90,
+              "flagged_synthetic": 89,
+              "rate": 0.9888888888888889,
+              "wilson95": [
+                0.9397159168824657,
+                0.9980359158990818
+              ]
+            },
+            "f5": {
+              "n": 90,
+              "flagged_synthetic": 89,
+              "rate": 0.9888888888888889,
+              "wilson95": [
+                0.9397159168824657,
+                0.9980359158990818
+              ]
+            }
+          },
+          "by_source": {
+            "test-clean": {
+              "n": 120,
+              "flagged_synthetic": 18,
+              "rate": 0.15,
+              "wilson95": [
+                0.09703812292584739,
+                0.22467529356724508
+              ]
+            },
+            "test-other": {
+              "n": 60,
+              "flagged_synthetic": 12,
+              "rate": 0.2,
+              "wilson95": [
+                0.11828505322897494,
+                0.317818058056279
+              ]
+            }
+          }
+        },
+        "phone": {
+          "fakes": {
+            "n": 180,
+            "flagged_synthetic": 180,
+            "rate": 1.0,
+            "wilson95": [
+              0.9791045020783868,
+              1.0
+            ]
+          },
+          "reals": {
+            "n": 180,
+            "flagged_synthetic": 26,
+            "rate": 0.14444444444444443,
+            "wilson95": [
+              0.10051766584526328,
+              0.20323024378788368
+            ]
+          },
+          "by_generator": {
+            "chatterbox": {
+              "n": 90,
+              "flagged_synthetic": 90,
+              "rate": 1.0,
+              "wilson95": [
+                0.9590643744356734,
+                1.0
+              ]
+            },
+            "f5": {
+              "n": 90,
+              "flagged_synthetic": 90,
+              "rate": 1.0,
+              "wilson95": [
+                0.9590643744356734,
+                1.0
+              ]
+            }
+          },
+          "by_source": {
+            "test-clean": {
+              "n": 120,
+              "flagged_synthetic": 14,
+              "rate": 0.11666666666666667,
+              "wilson95": [
+                0.0707811780783005,
+                0.18633351617603885
+              ]
+            },
+            "test-other": {
+              "n": 60,
+              "flagged_synthetic": 12,
+              "rate": 0.2,
+              "wilson95": [
+                0.11828505322897494,
+                0.317818058056279
+              ]
+            }
+          }
+        },
+        "noise20": {
+          "fakes": {
+            "n": 180,
+            "flagged_synthetic": 170,
+            "rate": 0.9444444444444444,
+            "wilson95": [
+              0.9007683865825439,
+              0.9695467263760221
+            ]
+          },
+          "reals": {
+            "n": 180,
+            "flagged_synthetic": 24,
+            "rate": 0.13333333333333333,
+            "wilson95": [
+              0.09126281053659399,
+              0.19072722127258887
+            ]
+          },
+          "by_generator": {
+            "chatterbox": {
+              "n": 90,
+              "flagged_synthetic": 88,
+              "rate": 0.9777777777777777,
+              "wilson95": [
+                0.9225547331137463,
+                0.9938845580136748
+              ]
+            },
+            "f5": {
+              "n": 90,
+              "flagged_synthetic": 82,
+              "rate": 0.9111111111111111,
+              "wilson95": [
+                0.8342945337394592,
+                0.9542695074632055
+              ]
+            }
+          },
+          "by_source": {
+            "test-clean": {
+              "n": 120,
+              "flagged_synthetic": 18,
+              "rate": 0.15,
+              "wilson95": [
+                0.09703812292584739,
+                0.22467529356724508
+              ]
+            },
+            "test-other": {
+              "n": 60,
+              "flagged_synthetic": 6,
+              "rate": 0.1,
+              "wilson95": [
+                0.04664283447388416,
+                0.20149464723978772
+              ]
+            }
+          }
+        }
+      },
+      "failures": [
+        "clean: 5/180 real flagged > 2%",
+        "mp3: 30/180 real flagged > 5%",
+        "phone: 26/180 real flagged > 5%",
+        "noise20/f5: 82/90 fakes caught < 95%",
+        "noise20: 24/180 real flagged > 5%"
+      ],
+      "summary_pooled": {
+        "n": 1440,
+        "human": 720,
+        "synthetic": 720,
+        "correct": 1341,
+        "false_positive": 85,
+        "false_negative": 14,
+        "accuracy": 0.93125,
+        "accuracy_wilson95": [
+          0.9170008650117693,
+          0.9432043828791211
+        ],
+        "balanced_accuracy": 0.93125,
+        "roc_auc": 0.9861149691358024,
+        "abstained": 0,
+        "decided": 1440,
+        "correct_among_decided": 1341,
+        "accuracy_among_decided": 0.93125
+      }
+    },
+    "AntiDeepfake alone": {
+      "threshold": 0.011034094896124015,
+      "threshold_logit": -4.495669841766357,
+      "report": {
+        "clean": {
+          "fakes": {
+            "n": 180,
+            "flagged_synthetic": 177,
+            "rate": 0.9833333333333333,
+            "wilson95": [
+              0.952151771962928,
+              0.9943159133795125
+            ]
+          },
+          "reals": {
+            "n": 180,
+            "flagged_synthetic": 4,
+            "rate": 0.022222222222222223,
+            "wilson95": [
+              0.008674923426990527,
+              0.05573633014255083
+            ]
+          },
+          "by_generator": {
+            "chatterbox": {
+              "n": 90,
+              "flagged_synthetic": 89,
+              "rate": 0.9888888888888889,
+              "wilson95": [
+                0.9397159168824657,
+                0.9980359158990818
+              ]
+            },
+            "f5": {
+              "n": 90,
+              "flagged_synthetic": 88,
+              "rate": 0.9777777777777777,
+              "wilson95": [
+                0.9225547331137463,
+                0.9938845580136748
+              ]
+            }
+          },
+          "by_source": {
+            "test-clean": {
+              "n": 120,
+              "flagged_synthetic": 2,
+              "rate": 0.016666666666666666,
+              "wilson95": [
+                0.004582564565921141,
+                0.0587359629721589
+              ]
+            },
+            "test-other": {
+              "n": 60,
+              "flagged_synthetic": 2,
+              "rate": 0.03333333333333333,
+              "wilson95": [
+                0.009189319256197877,
+                0.113637742743086
+              ]
+            }
+          }
+        },
+        "mp3": {
+          "fakes": {
+            "n": 180,
+            "flagged_synthetic": 177,
+            "rate": 0.9833333333333333,
+            "wilson95": [
+              0.952151771962928,
+              0.9943159133795125
+            ]
+          },
+          "reals": {
+            "n": 180,
+            "flagged_synthetic": 1,
+            "rate": 0.005555555555555556,
+            "wilson95": [
+              0.0009813660672160114,
+              0.030793070766379115
+            ]
+          },
+          "by_generator": {
+            "chatterbox": {
+              "n": 90,
+              "flagged_synthetic": 89,
+              "rate": 0.9888888888888889,
+              "wilson95": [
+                0.9397159168824657,
+                0.9980359158990818
+              ]
+            },
+            "f5": {
+              "n": 90,
+              "flagged_synthetic": 88,
+              "rate": 0.9777777777777777,
+              "wilson95": [
+                0.9225547331137463,
+                0.9938845580136748
+              ]
+            }
+          },
+          "by_source": {
+            "test-clean": {
+              "n": 120,
+              "flagged_synthetic": 1,
+              "rate": 0.008333333333333333,
+              "wilson95": [
+                0.0014725557333420923,
+                0.045696291245049675
+              ]
+            },
+            "test-other": {
+              "n": 60,
+              "flagged_synthetic": 0,
+              "rate": 0.0,
+              "wilson95": [
+                0.0,
+                0.06017185214208986
+              ]
+            }
+          }
+        },
+        "phone": {
+          "fakes": {
+            "n": 180,
+            "flagged_synthetic": 176,
+            "rate": 0.9777777777777777,
+            "wilson95": [
+              0.944263669857449,
+              0.9913250765730094
+            ]
+          },
+          "reals": {
+            "n": 180,
+            "flagged_synthetic": 3,
+            "rate": 0.016666666666666666,
+            "wilson95": [
+              0.005684086620487437,
+              0.04784822803707184
+            ]
+          },
+          "by_generator": {
+            "chatterbox": {
+              "n": 90,
+              "flagged_synthetic": 89,
+              "rate": 0.9888888888888889,
+              "wilson95": [
+                0.9397159168824657,
+                0.9980359158990818
+              ]
+            },
+            "f5": {
+              "n": 90,
+              "flagged_synthetic": 87,
+              "rate": 0.9666666666666667,
+              "wilson95": [
+                0.9065271396961013,
+                0.9885996097771937
+              ]
+            }
+          },
+          "by_source": {
+            "test-clean": {
+              "n": 120,
+              "flagged_synthetic": 1,
+              "rate": 0.008333333333333333,
+              "wilson95": [
+                0.0014725557333420923,
+                0.045696291245049675
+              ]
+            },
+            "test-other": {
+              "n": 60,
+              "flagged_synthetic": 2,
+              "rate": 0.03333333333333333,
+              "wilson95": [
+                0.009189319256197877,
+                0.113637742743086
+              ]
+            }
+          }
+        },
+        "noise20": {
+          "fakes": {
+            "n": 180,
+            "flagged_synthetic": 176,
+            "rate": 0.9777777777777777,
+            "wilson95": [
+              0.944263669857449,
+              0.9913250765730094
+            ]
+          },
+          "reals": {
+            "n": 180,
+            "flagged_synthetic": 10,
+            "rate": 0.05555555555555555,
+            "wilson95": [
+              0.030453273623977817,
+              0.09923161341745598
+            ]
+          },
+          "by_generator": {
+            "chatterbox": {
+              "n": 90,
+              "flagged_synthetic": 88,
+              "rate": 0.9777777777777777,
+              "wilson95": [
+                0.9225547331137463,
+                0.9938845580136748
+              ]
+            },
+            "f5": {
+              "n": 90,
+              "flagged_synthetic": 88,
+              "rate": 0.9777777777777777,
+              "wilson95": [
+                0.9225547331137463,
+                0.9938845580136748
+              ]
+            }
+          },
+          "by_source": {
+            "test-clean": {
+              "n": 120,
+              "flagged_synthetic": 4,
+              "rate": 0.03333333333333333,
+              "wilson95": [
+                0.0130375510983506,
+                0.082580337559106
+              ]
+            },
+            "test-other": {
+              "n": 60,
+              "flagged_synthetic": 6,
+              "rate": 0.1,
+              "wilson95": [
+                0.04664283447388416,
+                0.20149464723978772
+              ]
+            }
+          }
+        }
+      },
+      "failures": [
+        "clean: 4/180 real flagged > 2%",
+        "noise20: 10/180 real flagged > 5%"
+      ],
+      "summary_pooled": {
+        "n": 1440,
+        "human": 720,
+        "synthetic": 720,
+        "correct": 1408,
+        "false_positive": 18,
+        "false_negative": 14,
+        "accuracy": 0.9777777777777777,
+        "accuracy_wilson95": [
+          0.9687977816678179,
+          0.9842154398280476
+        ],
+        "balanced_accuracy": 0.9777777777777777,
+        "roc_auc": 0.9977835648148148,
+        "abstained": 0,
+        "decided": 1440,
+        "correct_among_decided": 1408,
+        "accuracy_among_decided": 0.9777777777777777
+      }
+    }
+  },
+  "created_at": "2026-10-19T21:27:29.521321+00:00",
+  "development_bar_failures": [
+    "noise20: 11/180 real flagged > 5%"
+  ]
+}

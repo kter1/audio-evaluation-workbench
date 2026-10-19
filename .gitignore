@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+.pytest_cache/
+data/
+exports/
+*.sqlite*
+.DS_Store
+*.flac
+*.wav
+*.zip
+*.tar.gz
+
+# Personal notes and local tooling, never published
+private/
+.cl*/
