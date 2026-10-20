@@ -6,7 +6,9 @@ if [ ! -x .venv/bin/python ]; then
   .venv/bin/python -m pip install -r requirements.lock
 fi
 if [ -z "${AUDIO_LAB_DB:-}" ]; then
-  if [ -f data/study.sqlite ]; then
+  if [ -f data/challenge-v4.sqlite ]; then
+    export AUDIO_LAB_DB=data/challenge-v4.sqlite
+  elif [ -f data/study.sqlite ]; then
     export AUDIO_LAB_DB=data/study.sqlite
   else
     export AUDIO_LAB_DB=data/demo.sqlite

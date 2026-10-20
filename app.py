@@ -24,11 +24,16 @@ st.set_page_config(page_title="Audio Review Lab", page_icon="◉", layout="wide"
 st.markdown("<style>" + (Path(__file__).parent / "assets/style.css").read_text() + "</style>", unsafe_allow_html=True)
 
 
-WORKSPACES = {"data/study.sqlite": "Research study", "data/challenge-v4.sqlite": "Listening challenge", "data/demo.sqlite": "Practice demo"}
+WORKSPACES = {"data/challenge-v4.sqlite": "Listening challenge · real voices vs. AI clones",
+              "data/study.sqlite": "Research study · ASVspoof voices",
+              "data/demo.sqlite": "Software test · beeps only, no voices"}
 
 
 def default_workspace():
-    return os.environ.get("AUDIO_LAB_DB", "data/demo.sqlite")
+    """Open real voices first; the beep fixtures are only for testing the software."""
+    if os.environ.get("AUDIO_LAB_DB"):
+        return os.environ["AUDIO_LAB_DB"]
+    return next((p for p in WORKSPACES if p != "data/demo.sqlite" and Path(p).exists()), "data/demo.sqlite")
 
 
 def store():
@@ -572,7 +577,8 @@ def main():
         if screen == "Detector Lab":
             st.markdown('<div class="workspace-badge">AFTER-REVIEW COMPARISON / LOCAL INFERENCE</div>', unsafe_allow_html=True)
         elif kind == "demo":
-            st.warning("Practice workspace · generated tones and arbitrary test labels. Results are software demonstrations, not study evidence.")
+            st.warning("Software test workspace: these clips are generated beeps, not voices. Switch the Workspace menu "
+                       "in the sidebar to **Listening challenge** for real voices and AI voice clones.")
         else:
             label = ("INDEPENDENT REVIEW" if db.setting("reviewer_mode") else
                      "LISTENING CHALLENGE / MODERN VOICES" if kind == "challenge" else "ASVSPOOF 2021 / PERSONAL STUDY")
