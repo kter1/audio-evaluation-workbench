@@ -3,18 +3,8 @@ set -eu
 cd "$(dirname "$0")"
 if [ ! -x .venv/bin/python ]; then
   python3 -m venv .venv
-  .venv/bin/python -m pip install -r requirements.lock
 fi
-if [ -z "${AUDIO_LAB_DB:-}" ]; then
-  if [ -f data/challenge-v4.sqlite ]; then
-    export AUDIO_LAB_DB=data/challenge-v4.sqlite
-  elif [ -f data/study.sqlite ]; then
-    export AUDIO_LAB_DB=data/study.sqlite
-  else
-    export AUDIO_LAB_DB=data/demo.sqlite
-    if [ ! -f "$AUDIO_LAB_DB" ]; then
-      .venv/bin/python -m lab --db "$AUDIO_LAB_DB" demo
-    fi
-  fi
+if ! .venv/bin/python -c "import uvicorn, starlette, numpy, scipy, soundfile, multipart" >/dev/null 2>&1; then
+  .venv/bin/python -m pip install -r requirements-signaltrace.txt
 fi
-exec .venv/bin/python -m streamlit run app.py "$@"
+exec .venv/bin/python -m uvicorn signaltrace_server:app --host 127.0.0.1 --port "${PORT:-8501}"
