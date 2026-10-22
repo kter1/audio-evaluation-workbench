@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parent
 DIST = ROOT / "studio" / "dist"
 RECEIPT = ROOT / "docs" / "detector-evaluation.json"
 ANALYSES = ROOT / "data" / "analyses"
-MAX_BYTES = 50 * 1024 * 1024
+MAX_BYTES = 256 * 1024 * 1024
 MODEL_LOCK = asyncio.Lock()
 
 
@@ -68,7 +68,7 @@ def benchmark_data():
     }
 
 
-def waveform_peaks(samples, max_bins=1500):
+def waveform_peaks(samples, max_bins=4000):
     x = np.asarray(samples, dtype=np.float32)
     stride = max(1, int(np.ceil(len(x) / max_bins)))
     peaks = []
@@ -149,7 +149,7 @@ async def upload_bytes(request):
         except ValueError as exc:
             raise ValueError("Invalid request size.") from exc
         if size > MAX_BYTES + 16384:
-            raise ValueError("Upload exceeds the 50 MB audio limit.")
+            raise ValueError("Upload exceeds the 256 MB audio limit.")
     form = await request.form(max_files=1, max_fields=1)
     file = form.get("file")
     if not hasattr(file, "read"):
@@ -157,7 +157,7 @@ async def upload_bytes(request):
     raw = await file.read(MAX_BYTES+1)
     await file.close()
     if not raw or len(raw) > MAX_BYTES:
-        raise ValueError("Select an audio file no larger than 50 MB.")
+        raise ValueError("Select an audio file no larger than 256 MB.")
     return raw
 
 
@@ -179,6 +179,30 @@ async def benchmark(request):
         return JSONResponse(benchmark_data())
     except (ValueError, OSError, KeyError) as exc:
         return JSONResponse({"error": str(exc)}, status_code=503)
+
+
+async def samples(request):
+    from lab.sample_catalog import catalog
+    return JSONResponse({"samples": catalog()})
+
+
+async def random_sample(request):
+    from lab.sample_catalog import choose
+    entry = choose()
+    return JSONResponse({k: v for k, v in entry.items() if k != "_path"})
+
+
+async def sample_file(request):
+    from lab.sample_catalog import load, resolve
+    entry = resolve(request.path_params["identifier"])
+    if entry is None:
+        return JSONResponse({"error": "Sample unavailable."}, status_code=404)
+    try:
+        raw = await run_in_threadpool(load, entry)
+        return Response(raw, media_type="application/octet-stream",
+                        headers={"Cache-Control": "no-store", "X-Content-Type-Options": "nosniff"})
+    except (OSError, ValueError):
+        return JSONResponse({"error": "Sample file no longer available."}, status_code=404)
 
 
 async def demo(request):
@@ -232,6 +256,9 @@ app = Starlette(routes=[
     Route("/api/status", status),
     Route("/api/benchmark", benchmark),
     Route("/api/demo", demo),
+    Route("/api/samples", samples),
+    Route("/api/samples/random", random_sample),
+    Route("/api/samples/{identifier:str}/audio", sample_file),
     Route("/api/inspect", inspect, methods=["POST"]),
     Route("/api/infer", infer, methods=["POST"]),
     Route("/api/reports/{token:str}/{kind:str}", download),
