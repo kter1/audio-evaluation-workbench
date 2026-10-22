@@ -105,6 +105,6 @@ def test_missing_reference_not_model_proof(db, demo, tmp_path):
     db.import_manifest(demo)
     db.audit(demo["dataset_id"], tmp_path)
     review = [r for r in db.issues(demo["dataset_id"]) if r["rule_id"] == "CONFLICTING_LABELS"]
-    assert len(review) == 1
+    assert len(review) == 2  # Two distinct recordings contain incompatible source labels
     assert review[0]["severity"] == "review"
     assert "model" not in review[0]["next_check"].lower()
