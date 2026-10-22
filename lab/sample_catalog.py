@@ -57,13 +57,6 @@ def ensure_sample_library():
                          (f"signal-{i+1}", title, (16,23,31,42)[i], ".wav", str(sample)))
 
 
-def _unused_generated_entries():
-    return [{"id": f"signal-{i+1}", "label": (
-        "Changing frequencies", "Level and silence", "Spectral transitions", "Extended signal check"
-    )[i], "source": "generated_signal", "speech": False, "seconds": (16, 23, 31, 42)[i], "extension": ".wav"}
-            for i in range(4)]
-
-
 def local_recordings():
     # Databases catalog file paths; audio bytes aren't stored in SQLite.
     # Never auto-create the old demo database or download external media.
