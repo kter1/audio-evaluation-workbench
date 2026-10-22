@@ -31,6 +31,33 @@ def _generated(index):
 
 
 def generated_entries():
+    ensure_sample_library()
+    with sqlite3.connect(ROOT / "data" / "signaltrace-library.sqlite") as conn:
+        rows = conn.execute("SELECT sample_id, title, duration, extension FROM sample_audio ORDER BY sample_id").fetchall()
+    return [{"id": rid, "label": title, "source": "generated_signal",
+             "speech": False, "seconds": duration, "extension": ext}
+            for rid, title, duration, ext in rows]
+
+
+def ensure_sample_library():
+    """Persistent local SQLite index of four reproducible, clearly labeled fixtures."""
+    data = ROOT / "data"
+    data.mkdir(parents=True, exist_ok=True)
+    folder = data / "signaltrace-samples"
+    folder.mkdir(parents=True, exist_ok=True)
+    db = data / "signaltrace-library.sqlite"
+    with sqlite3.connect(db) as conn:
+        conn.execute("CREATE TABLE IF NOT EXISTS sample_audio (sample_id TEXT PRIMARY KEY, title TEXT NOT NULL, duration REAL NOT NULL, extension TEXT NOT NULL, path TEXT NOT NULL)")
+        for i, title in enumerate(("Changing frequencies", "Level and silence",
+                                   "Spectral transitions", "Extended signal check")):
+            sample = folder / f"signal-{i+1}.wav"
+            if not sample.is_file():
+                sample.write_bytes(_generated(i))
+            conn.execute("INSERT OR IGNORE INTO sample_audio VALUES (?,?,?,?,?)",
+                         (f"signal-{i+1}", title, (16,23,31,42)[i], ".wav", str(sample)))
+
+
+def _unused_generated_entries():
     return [{"id": f"signal-{i+1}", "label": (
         "Changing frequencies", "Level and silence", "Spectral transitions", "Extended signal check"
     )[i], "source": "generated_signal", "speech": False, "seconds": (16, 23, 31, 42)[i], "extension": ".wav"}
@@ -88,10 +115,16 @@ def choose():
 
 def load(entry):
     if entry["source"] == "generated_signal":
-        index = int(entry["id"].split("-")[1])-1
-        if not 0 <= index < 4:
+        ensure_sample_library()
+        with sqlite3.connect(ROOT / "data" / "signaltrace-library.sqlite") as conn:
+            row = conn.execute("SELECT path FROM sample_audio WHERE sample_id=?", (entry["id"],)).fetchone()
+        if row is None:
             raise ValueError("Unknown sample")
-        return _generated(index)
+        resolved = Path(row[0]).resolve()
+        allowed = (ROOT / "data" / "signaltrace-samples").resolve()
+        if not resolved.is_relative_to(allowed):
+            raise ValueError("Sample path outside catalog")
+        return resolved.read_bytes()
     if entry["source"] == "existing_catalog":
         return Path(entry["_path"]).read_bytes()
     raise ValueError("Unknown sample source")
