@@ -1,0 +1,132 @@
+{
+  "dataset_id": "demonstration-v1",
+  "name": "Research QA demonstration — constructed examples",
+  "kind": "synthetic_metadata_fixture",
+  "origin": "Locally constructed metadata and mock annotations. Not actual people, calls, Pindrop data or completed human reviews.",
+  "recordings": [
+    {
+      "recording_id": "sample-001",
+      "duration_seconds": 8,
+      "codec": "wav",
+      "channel": "telephone",
+      "reference_label": "human"
+    },
+    {
+      "recording_id": "sample-002",
+      "duration_seconds": 7,
+      "codec": "wav",
+      "channel": "web",
+      "reference_label": "synthetic"
+    },
+    {
+      "recording_id": "sample-003",
+      "duration_seconds": 4,
+      "codec": "wav",
+      "channel": "web",
+      "reference_label": null
+    },
+    {
+      "recording_id": "sample-004",
+      "duration_seconds": null,
+      "codec": "wav",
+      "channel": "telephone"
+    },
+    {
+      "recording_id": "sample-002",
+      "duration_seconds": 7,
+      "codec": "wav",
+      "channel": "web",
+      "note": "intentional duplicate ID"
+    },
+    {
+      "recording_id": "sample-006",
+      "duration_seconds": 3,
+      "codec": "wav",
+      "media_path": "not-provided.wav",
+      "sha256": "bad-hash"
+    },
+    {
+      "recording_id": "sample-007",
+      "duration_seconds": 5,
+      "codec": "mp3",
+      "media_path": "not-provided.wav"
+    }
+  ],
+  "annotations": [
+    {
+      "annotation_id": "ann-001",
+      "recording_id": "sample-001",
+      "source": "mock-reviewer-A",
+      "label": "human",
+      "guideline_version": "1.1",
+      "start_seconds": 0,
+      "end_seconds": 3
+    },
+    {
+      "annotation_id": "ann-002",
+      "recording_id": "sample-002",
+      "source": "mock-reviewer-A",
+      "label": "synthetic",
+      "guideline_version": "1.1"
+    },
+    {
+      "annotation_id": "ann-003",
+      "recording_id": "sample-003",
+      "source": "mock-reviewer-A",
+      "label": "robot",
+      "guideline_version": "1.1"
+    },
+    {
+      "annotation_id": "ann-004",
+      "recording_id": "sample-001",
+      "source": "mock-reviewer-B",
+      "label": "synthetic",
+      "guideline_version": "1.1"
+    },
+    {
+      "annotation_id": "ann-005",
+      "recording_id": "sample-003",
+      "source": "mock-reviewer-B",
+      "label": "human",
+      "guideline_version": "1.1",
+      "start_seconds": -1,
+      "end_seconds": 1
+    },
+    {
+      "annotation_id": "ann-006",
+      "recording_id": "sample-004",
+      "source": "mock-reviewer-A",
+      "label": "uncertain",
+      "guideline_version": "1.1",
+      "escalated": true,
+      "escalation_reason": ""
+    },
+    {
+      "annotation_id": "ann-007",
+      "recording_id": "nonexistent-099",
+      "source": "mock-reviewer-A",
+      "label": "human",
+      "guideline_version": "1.1"
+    },
+    {
+      "annotation_id": "ann-008",
+      "recording_id": "sample-001",
+      "source": "mock-reviewer-C",
+      "label": "human"
+    },
+    {
+      "annotation_id": "ann-009",
+      "recording_id": "sample-002",
+      "source": "",
+      "label": "synthetic",
+      "guideline_version": "1.1"
+    },
+    {
+      "annotation_id": "ann-002",
+      "recording_id": "sample-003",
+      "source": "mock-reviewer-D",
+      "label": "synthetic",
+      "guideline_version": "1.1"
+    }
+  ]
+}
