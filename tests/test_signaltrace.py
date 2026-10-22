@@ -115,3 +115,47 @@ def test_missing_model_returns_explanation(monkeypatch):
 def test_report_rejects_invalid_token():
     assert client.get("/api/reports/../../json").status_code in (404, 400)
     assert client.get("/api/reports/" + "0"*64 + "/json").status_code == 404
+
+
+def test_sample_catalog_random_endpoint_and_playable_media():
+    catalog = client.get("/api/samples")
+    assert catalog.status_code == 200
+    items = catalog.json()["samples"]
+    assert len(items) >= 4
+    assert all("extension" in item for item in items)
+    chosen = client.get("/api/samples/random")
+    assert chosen.status_code == 200
+    entry = chosen.json()
+    assert entry["id"] in {item["id"] for item in items}
+    recording = client.get(f"/api/samples/{entry['id']}/audio")
+    assert recording.status_code == 200
+    assert len(recording.content) > 100
+    result = client.post("/api/inspect",
+        files={"file": ("startup" + entry["extension"], recording.content)})
+    assert result.status_code == 200, result.text
+    assert result.json()["duration"] >= 0.5
+
+
+def test_long_recordings_support_ten_minutes_and_reject_over_limit():
+    from lab.forensics import read_audio, MAX_SECONDS, MAX_BYTES
+    assert MAX_SECONDS == 600
+    assert MAX_BYTES >= 100 * 1024 * 1024
+    # Do not perform 10 minutes of neural inference in the regression test.
+    one = audio_blob(np.zeros(600 * 16000, dtype=np.float32))
+    decoded, rate, metadata = read_audio(one)
+    assert rate == 16000
+    assert metadata["duration_seconds"] == 600
+    assert decoded.shape[0] == 600 * 16000
+    too_long = audio_blob(np.zeros(601 * 16000, dtype=np.float32))
+    with pytest.raises(ValueError, match="600"):
+        read_audio(too_long)
+
+
+def test_generated_fallback_has_no_arbitrary_human_synthetic_label():
+    from lab.sample_catalog import generated_entries, load, resolve
+    choices = generated_entries()
+    assert len(choices) >= 4
+    for entry in choices:
+        assert entry["speech"] is False
+        assert entry["source"] == "generated_signal"
+        assert len(load(resolve(entry["id"]))) > 100
