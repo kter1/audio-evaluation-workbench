@@ -30,8 +30,8 @@ MODEL_FILES = {
     "model.safetensors": "905e330265c40a76955911ce86691fb4c8f2ed9c8085f4f046cac1383592a0ac",
 }
 RATE = 16000
-MAX_SECONDS = 120
-MAX_BYTES = 50 * 1024 * 1024
+MAX_SECONDS = 600
+MAX_BYTES = 256 * 1024 * 1024
 POLICY = {"version": "1.0", "binary_threshold": 0.5, "human_below": 0.35,
           "synthetic_above": 0.65, "window_seconds": 6,
           "minimum_duration_seconds": 2.5, "minimum_rms_dbfs": -50,
@@ -68,10 +68,10 @@ def read_audio(blob):
         if info.channels > 8 or not 8000 <= info.samplerate <= 192000:
             raise ValueError("Supported input: 1–8 channels and 8–192 kHz sample rate.")
         if not 0.5 <= info.duration <= MAX_SECONDS:
-            raise ValueError("Choose a recording between 0.5 and 120 seconds.")
+            raise ValueError("Choose a recording between 0.5 and 600 seconds.")
         # Limit allocation even for malformed headers.
-        if info.frames * info.channels > 24_000_000:
-            raise ValueError("Decoded audio exceeds the 24-million-sample limit.")
+        if info.frames * info.channels > 60_000_000:
+            raise ValueError("Decoded audio exceeds the 60-million-sample limit.")
         audio, rate = decode(BytesIO(blob))
         if len(audio) != info.frames or rate != info.samplerate or audio.shape[1] != info.channels:
             raise ValueError("Decoded audio differs from its declared format.")
