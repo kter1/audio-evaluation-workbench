@@ -159,3 +159,39 @@ def test_generated_fallback_has_no_arbitrary_human_synthetic_label():
         assert entry["speech"] is False
         assert entry["source"] == "generated_signal"
         assert len(load(resolve(entry["id"]))) > 100
+
+
+def test_extended_quality_detectors_on_controlled_audio():
+    from lab.signal_intelligence import extra_acoustic_markers, stereo_markers
+    rate = 16000
+    t = np.arange(rate * 7)/rate
+    audio = (.15*np.sin(2*np.pi*250*t)).astype(np.float32)
+    audio[rate*2:rate*2+3200] = 0
+    results = extra_acoustic_markers(audio, "f"*64)
+    assert "signal_gap" in {x["kind"] for x in results}
+    for entry in results:
+        assert 0 <= entry["start"] < entry["end"] <= 7
+        assert entry["method"] and entry["threshold"] and entry["limitations"]
+
+
+def test_stereo_quality_controls_are_distinct():
+    from lab.signal_intelligence import stereo_markers
+    rate = 16000
+    t = np.arange(rate*3)/rate
+    left = (.20*np.sin(2*np.pi*430*t)).astype(np.float32)
+    inverted = np.stack([left, -left], axis=1)
+    assert "phase_inversion" in {x["kind"] for x in stereo_markers(inverted,rate,"b"*64)}
+    imbalanced = np.stack([left,left*.04],axis=1)
+    assert "channel_imbalance" in {x["kind"] for x in stereo_markers(imbalanced,rate,"c"*64)}
+    assert stereo_markers(left[:,None],rate,"d"*64) == []
+
+
+def test_distinct_svg_glyphs_are_registered():
+    script = client.get("/app.js").text
+    names = ["clipping","level_change","spectral_change","low_energy",
+             "signal_gap","impulse","dc_offset","bandwidth_limit",
+             "phase_inversion","channel_imbalance",
+             "synthetic_score","component_separation","sensitivity"]
+    for name in names:
+        assert name + ":" in script
+    assert "evidenceIcon(m.kind)" in script
