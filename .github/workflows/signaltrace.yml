@@ -1,0 +1,28 @@
+name: SignalTrace Studio
+on:
+  push:
+    branches: [feature/signaltrace-studio]
+  pull_request:
+    paths:
+      - "signaltrace_server.py"
+      - "lab/signal_events.py"
+      - "studio/**"
+      - "tests/test_signaltrace.py"
+      - "requirements-signaltrace.txt"
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install local studio dependencies
+        run: python -m pip install -r requirements-signaltrace.txt pytest httpx
+      - name: Compile Python
+        run: python -m compileall -q lab/signal_events.py signaltrace_server.py
+      - name: Validate APIs and acoustic markers
+        run: python -m pytest -q tests/test_signaltrace.py
+      - name: Validate static JavaScript syntax
+        run: node --check studio/dist/app.js
