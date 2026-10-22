@@ -33,7 +33,7 @@ def _generated(index):
 def generated_entries():
     return [{"id": f"signal-{i+1}", "label": (
         "Changing frequencies", "Level and silence", "Spectral transitions", "Extended signal check"
-    )[i], "source": "generated_signal", "speech": False, "seconds": (16, 23, 31, 42)[i]}
+    )[i], "source": "generated_signal", "speech": False, "seconds": (16, 23, 31, 42)[i], "extension": ".wav"}
             for i in range(4)]
 
 
@@ -66,7 +66,7 @@ def local_recordings():
                     continue
                 result.append({"id": f"{db.stem}:{rid}", "label": f"Catalog clip {len(result)+1:03d}",
                                "source": "existing_catalog", "speech": None,
-                               "seconds": duration, "_path": p})
+                               "seconds": duration, "extension": p.suffix.lower(), "_path": p})
                 if len(result) >= 120:
                     return result
         except (sqlite3.Error, OSError, ValueError):
