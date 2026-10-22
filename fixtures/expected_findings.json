@@ -1,0 +1,24 @@
+{
+  "note": "Intentional QA findings in a metadata-only demonstration; these are NOT measured errors from real annotations.",
+  "rules": [
+    "DUPLICATE_ID",
+    "BAD_DURATION",
+    "MISSING_MEDIA",
+    "BAD_SHA256",
+    "CODEC_MISMATCH",
+    "UNKNOWN_LABEL",
+    "CONFLICTING_LABELS",
+    "BAD_TIMESPAN",
+    "MISSING_ESCALATION_REASON",
+    "UNKNOWN_RECORDING",
+    "MISSING_GUIDELINE",
+    "MISSING_SOURCE",
+    "DUPLICATE_ANNOTATION_ID"
+  ],
+  "clean_recordings": [
+    "sample-001",
+    "sample-002",
+    "sample-003"
+  ],
+  "minimum_flags": 13
+}
