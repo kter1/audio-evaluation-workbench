@@ -52,8 +52,8 @@ async function loadCatalogSample(entry){
   const response=await fetch("/api/samples/"+encodeURIComponent(entry.id)+"/audio");
   if(!response.ok)throw Error("Selected sample is no longer available");
   const blob=await response.blob();
-  const ext=entry.source==="generated_signal"?"wav":((blob.type.includes("flac"))?"flac":"wav");
-  const sample=new File([blob],entry.label+"."+ext,{type:blob.type||"application/octet-stream"});
+  const ext=(entry.extension||".wav").replace(/^\./,"");
+  const sample=new File([blob],entry.label+"."+ext,{type:blob.type==="application/octet-stream"?"":blob.type});
   await loadFile(sample,entry.source==="generated_signal");
   if(state.data){$("source-status").textContent=(entry.source==="generated_signal"?"GENERATED NON-SPEECH SIGNAL · ":"LOCAL RECORDING DATABASE · ")+"Measured evidence · "+state.data.duration.toFixed(1)+" seconds";state.sampleSource=entry.source;}
 }
