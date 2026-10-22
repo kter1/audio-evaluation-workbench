@@ -10,7 +10,7 @@ def test_overview_and_demo_import(monkeypatch, tmp_path):
     app = AppTest.from_file(APP, default_timeout=20).run()
     assert not app.exception
     assert "Research quality" in app.title[0].value
-    next(x for x in app.button if x.label == "Load demonstration dataset").click().run()
+    next(x for x in app.button if x.label == "Explore sample dataset").click().run()
     assert not app.exception
 
 def test_audited_dataset_renders_investigation(monkeypatch, tmp_path):
@@ -28,4 +28,4 @@ def test_audited_dataset_renders_investigation(monkeypatch, tmp_path):
     # Select Investigations using the sidebar radio widget
     next(r for r in app.sidebar.radio if r.label == "Section").set_value("Investigations").run()
     assert not app.exception
-    assert "Evidence-oriented investigations" in [x.value for x in app.title]
+    assert "Investigate flagged issues" in [x.value for x in app.title]
