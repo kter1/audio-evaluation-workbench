@@ -8,13 +8,13 @@ evaluation receipts are retained; the personal listening challenge is not requir
 
 ## Quickstart
 
-Run \`./run.sh\` and select **Load demonstration dataset**. The app will
-create a local SQLite database in the git-ignored \`data/\` directory, import
+Run `./run.sh` and select **Load demonstration dataset**. The app will
+create a local SQLite database in the git-ignored `data/` directory, import
 constructed metadata/annotation examples, and run deterministic checks.
 Explore the **Investigations** queue and export the report under **Reports**.
 
 For the original human annotation study and optional full local detector
-inference, run \`./run-legacy.sh\`. Large model checkpoints are not required for
+inference, run `./run-legacy.sh`. Large model checkpoints are not required for
 the new app. Do not treat the sample fixture as genuine research evidence.
 
 ## Workflow
@@ -48,9 +48,9 @@ or claim commercial deployment rights without reviewing source licenses.
 ## Verification
 
 Lightweight QA:
-\`\`\`sh
+```sh
 python -m pytest -q tests/test_research.py tests/test_research_ui.py
-\`\`\`
+```
 A CI workflow runs the new research suite without downloading model weights.
 The original full suite remains runnable with the locked requirements.
 
