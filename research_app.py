@@ -163,6 +163,11 @@ def main():
                     audio, rate, details = read_audio(blob)
                     st.audio(blob)
                     st.json({k: v for k,v in details.items() if k != "sha256"})
+                    _, metrics, warnings = diagnostics(audio, rate)
+                    st.subheader("Measured signal properties")
+                    st.json(metrics)
+                    for warning in warnings:
+                        st.warning(warning)
                     st.caption("Descriptive signal measurements are not a speech-origin classification.")
                     # The legacy forensics module exports rich signal and detector workflows;
                     # use only validated media here, without installing inference checkpoints.
