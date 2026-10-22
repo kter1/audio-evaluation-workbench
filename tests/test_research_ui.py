@@ -6,7 +6,7 @@ import research_app
 APP = str(Path(__file__).resolve().parents[1] / "research_app.py")
 
 def test_overview_and_demo_import(monkeypatch, tmp_path):
-    monkeypatch.setattr(research_app, "DB", tmp_path / "research.sqlite")
+    monkeypatch.setenv("INTERACTION_LAB_DB", str(tmp_path / "research.sqlite"))
     app = AppTest.from_file(APP, default_timeout=20).run()
     assert not app.exception
     assert "Research quality" in app.title[0].value
@@ -15,7 +15,7 @@ def test_overview_and_demo_import(monkeypatch, tmp_path):
 
 def test_audited_dataset_renders_investigation(monkeypatch, tmp_path):
     target = tmp_path / "research.sqlite"
-    monkeypatch.setattr(research_app, "DB", target)
+    monkeypatch.setenv("INTERACTION_LAB_DB", str(target))
     from json import loads
     from pathlib import Path
     store = ResearchDB(target)

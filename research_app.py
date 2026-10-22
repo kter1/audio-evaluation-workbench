@@ -1,12 +1,13 @@
 """Interaction Research Lab — local-first dataset QA and investigation interface."""
 import json
+import os
 from pathlib import Path
 
 import streamlit as st
 from lab.research import ResearchDB, RULES, RULESET
 
 ROOT = Path(__file__).resolve().parent
-DB = ROOT / "data" / "research.sqlite"
+DB = Path(os.environ.get("INTERACTION_LAB_DB", str(ROOT / "data" / "research.sqlite")))
 DEMO = ROOT / "fixtures" / "demo_research.json"
 EVAL = ROOT / "docs" / "detector-evaluation.json"
 
