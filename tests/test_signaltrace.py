@@ -1,0 +1,117 @@
+import asyncio
+from hashlib import sha256
+from io import BytesIO
+import json
+from pathlib import Path
+
+import numpy as np
+import pytest
+import soundfile as sf
+from starlette.testclient import TestClient
+
+import signaltrace_server as server
+from lab.signal_events import acoustic_markers, model_markers
+
+client = TestClient(server.app)
+
+
+def audio_blob(audio, rate=16000):
+    stream = BytesIO()
+    sf.write(stream, audio, rate, format="WAV", subtype="PCM_16")
+    return stream.getvalue()
+
+
+def test_homepage_and_assets():
+    home = client.get("/")
+    assert home.status_code == 200
+    assert "SignalTrace" in home.text
+    assert client.get("/app.js").status_code == 200
+    assert client.get("/styles.css").status_code == 200
+    assert "data-page" in home.text
+
+
+def test_signal_demo_is_explicitly_non_speech_and_reproducible():
+    resp = client.get("/api/demo")
+    assert resp.status_code == 200
+    assert resp.headers["content-type"].startswith("audio/wav")
+    raw = resp.content
+    a = client.post("/api/inspect", files={"file": ("demo.wav", raw, "audio/wav")})
+    assert a.status_code == 200, a.text
+    result = a.json()
+    assert result["duration"] == pytest.approx(12, abs=.01)
+    assert result["sha256"] == sha256(raw).hexdigest()
+    assert result["peaks"]
+    assert 0 < len(result["markers"]) <= 40
+    assert {"clipping", "low_energy", "spectral_change"} & {
+        m["kind"] for m in result["markers"]
+    }
+    b = client.post("/api/inspect", files={"file": ("demo.wav", raw, "audio/wav")})
+    assert [m["id"] for m in result["markers"]] == [m["id"] for m in b.json()["markers"]]
+    for m in result["markers"]:
+        assert 0 <= m["start"] < m["end"] <= result["duration"]
+        assert m["method"] and m["threshold"] and m["limitations"] and m["next_check"]
+
+
+def test_corrupt_audio_and_missing_file_fail_closed():
+    assert client.post("/api/inspect", files={"file": ("broken.wav", b"garbage", "audio/wav")}).status_code == 400
+    assert client.post("/api/inspect", data={}).status_code == 400
+    assert client.post("/api/inspect", files={"file": ("huge.wav", b"a"*(server.MAX_BYTES+1))}).status_code == 400
+
+
+def test_origin_restriction():
+    demo = client.get("/api/demo").content
+    request = client.post("/api/inspect", files={"file": ("t.wav", demo)},
+                          headers={"Origin": "https://attacker.example"})
+    assert request.status_code == 400
+
+
+def test_known_acoustic_intervals_are_not_verdicts():
+    rate = 16000
+    x = np.zeros(5*rate, dtype=np.float32)
+    x[rate:2*rate] = 1.0
+    flags = acoustic_markers(x, rate, "0"*64)
+    assert any(f["kind"] == "clipping" for f in flags)
+    assert any(f["kind"] == "low_energy" for f in flags)
+    assert all("synthetic" not in f["title"].lower() for f in flags)
+    with pytest.raises(ValueError):
+        acoustic_markers(np.array([np.nan]*rate), rate, "x"*64)
+
+
+def test_model_window_boundaries_are_preserved():
+    report = {
+        "source": {"sha256":"a"*64},
+        "policy":{"binary_threshold":0.6},
+        "windows":[{"start":4.0,"end":8.0,"synthetic_score":0.91,
+                    "components":{"pellav2":0.1,"antideepfake":0.92}}],
+        "robustness":[],
+    }
+    flags = model_markers(report)
+    assert len(flags) == 2
+    assert all(flag["start"] == 4 and flag["end"] == 8 for flag in flags)
+    assert {f["kind"] for f in flags} == {"synthetic_score","component_separation"}
+
+
+def test_benchmark_receipt_is_not_fresh_inference():
+    r = client.get("/api/benchmark")
+    assert r.status_code == 200
+    data = r.json()
+    assert data["base_clips"] == 320
+    assert data["human_clips"] == 200
+    assert data["synthetic_clips"] == 120
+    assert len(data["conditions"]) == 4
+    for condition in data["conditions"].values():
+        assert condition["fusion"]["synthetic_total"] == 120
+        assert condition["fusion"]["human_total"] == 200
+    assert len(data["rows"]) == 1280
+
+
+def test_missing_model_returns_explanation(monkeypatch):
+    monkeypatch.setattr(server, "detectors_available", lambda: False)
+    r = client.post("/api/infer", files={"file": ("clip.wav", client.get("/api/demo").content)})
+    assert r.status_code == 409
+    assert "checkpoints" in r.json()["error"].lower()
+
+
+def test_report_rejects_invalid_token():
+    assert client.get("/api/reports/../../json").status_code in (404, 400)
+    assert client.get("/api/reports/" + "0"*64 + "/json").status_code == 404
