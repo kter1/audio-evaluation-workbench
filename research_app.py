@@ -146,7 +146,7 @@ def main():
                 try:
                     report = json.loads(EVAL.read_text())
                     st.caption(f"Recorded evaluation version: {report.get('version', 'unknown')}. See docs/model-evaluation.md for sampling methodology and limitations.")
-                    st.dataframe([{"Condition": {"clean":"Clean audio","mp3":"MP3 compression","phone":"Telephone audio","noise20":"Background noise"}.get(k,k), "Synthetic detected": f"{v[\'fakes\'][\'flagged_synthetic\']}/{v[\'fakes\'][\'n\']}", "Human falsely flagged": f"{v[\'reals\'][\'flagged_synthetic\']}/{v[\'reals\'][\'n\']}"} for k,v in report.get("test",{}).get("by_channel",{}).items()], hide_index=True, use_container_width=True)
+                    st.dataframe([{"Condition": {"clean":"Clean audio","mp3":"MP3 compression","phone":"Telephone audio","noise20":"Background noise"}.get(k,k), "Synthetic detected": f"{v['fakes']['flagged_synthetic']}/{v['fakes']['n']}", "Human falsely flagged": f"{v['reals']['flagged_synthetic']}/{v['reals']['n']}"} for k,v in report.get("test",{}).get("by_channel",{}).items()], hide_index=True, use_container_width=True)
                     st.download_button("Download archived evaluation receipt", EVAL.read_bytes(), "archived-detector-evaluation.json", "application/json")
                 except (ValueError, OSError) as error:
                     st.error(str(error))
@@ -159,7 +159,7 @@ def main():
                     blob = file.getvalue()
                     audio, rate, details = read_audio(blob)
                     st.audio(blob)
-                    st.metric("Length", f"{details[\'duration_seconds\']:.1f} s")
+                    st.metric("Length", f"{details['duration_seconds']:.1f} s")
                     _, metrics, warnings = diagnostics(audio, rate)
                     st.subheader("Measured signal properties")
                     st.dataframe([{"Measurement": k.replace("_", " ").title(), "Value": str(v)} for k,v in metrics.items()], hide_index=True, use_container_width=True)
