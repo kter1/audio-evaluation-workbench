@@ -1,0 +1,37 @@
+/* Purpose-built presentation for Interaction Research Lab */
+:root { --ink:#162438; --muted:#65758a; --line:#e2e8f0; --accent:#176c74; }
+.stApp { background:#f5f7fa; color:var(--ink); }
+[data-testid="stHeader"] { background:transparent; }
+.block-container { max-width:1200px; padding:2.4rem 3rem 4rem; }
+h1,h2,h3 { font-family:system-ui,-apple-system,"Segoe UI",sans-serif; letter-spacing:-.035em; color:var(--ink); }
+h1 { font-size:2.15rem!important; font-weight:720!important; margin:0 0 .3rem!important; padding:0!important; }
+h2 { font-size:1.3rem!important; font-weight:680!important; }
+h3 { font-size:1.1rem!important; font-weight:650!important; }
+[data-testid="stSidebar"] { background:#172438; border-right:1px solid #2f4055; }
+.research-brand { font-size:1.35rem; font-weight:740; color:#6ce0d4; padding:.45rem 0 .1rem; letter-spacing:-.04em; }
+.research-brand span { color:#fff; margin-left:8px; }
+[data-testid="stSidebar"] p, [data-testid="stSidebar"] label,
+[data-testid="stSidebar"] .stMarkdown, [data-testid="stSidebar"] h2 { color:#f2f7fa!important; }
+[data-testid="stSidebar"] [data-testid="stCaptionContainer"] p { color:#a8b8cb!important; }
+[data-testid="stSidebar"] hr { border-color:#33485d!important; }
+[data-testid="stSidebar"] [data-baseweb="radio"] { padding:8px 10px; border-radius:9px; }
+[data-testid="stSidebar"] [data-baseweb="radio"]:has(input:checked) { background:#294558; }
+[data-testid="stSidebar"] [data-baseweb="radio"]:hover { background:#22364c; }
+[data-testid="stSidebar"] [data-baseweb="select"]>div { background:#23384d; border-color:#3e5266; color:#fff; }
+[data-testid="stCaptionContainer"] p { color:var(--muted); font-size:.87rem; }
+[data-testid="stVerticalBlockBorderWrapper"] { background:#fff; border:1px solid var(--line)!important; border-radius:14px!important; }
+[data-testid="stMetric"] { border:1px solid var(--line); background:#fff; border-radius:13px; padding:16px; }
+[data-testid="stMetricValue"] { font-size:1.85rem; font-weight:700; letter-spacing:-.04em; }
+[data-testid="stMetricLabel"] { font-size:.82rem; color:var(--muted); }
+[data-testid="stForm"] { border:1px solid var(--line); border-radius:12px; background:#fff; padding:16px; }
+[data-testid="stExpander"] { background:white; border-color:var(--line); border-radius:11px; }
+[data-testid="stButton"] button, [data-testid="stDownloadButton"] button,
+[data-testid="stFormSubmitButton"] button { border-radius:9px!important; min-height:42px; font-weight:650; }
+[data-testid="stButton"] button[kind="primary"],
+[data-testid="stDownloadButton"] button[kind="primary"],
+[data-testid="stFormSubmitButton"] button[kind="primary"] { background:var(--accent)!important; border-color:var(--accent)!important; color:#fff!important; }
+[data-baseweb="select"]>div, [data-testid="stTextInput"] input, [data-testid="stTextArea"] textarea { border-radius:9px; }
+[data-testid="stDataFrame"] { border-radius:10px; overflow:hidden; }
+[data-testid="stAlert"] { border-radius:10px; }
+a { color:var(--accent); }
+@media(max-width:850px) { .block-container { padding:1.2rem 1rem 2rem; } h1 { font-size:1.7rem!important; } [data-testid="stMetric"] { padding:10px; } }
