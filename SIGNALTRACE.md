@@ -19,12 +19,14 @@ sh run.sh
 Open **http://127.0.0.1:8501**. Stop with Ctrl+C.
 The first launch installs a few lightweight dependencies if needed.
 
+At startup, SignalTrace opens a randomly selected audio clip from the local recording catalog. If a research database has no playable media, a separate local SQLite sample library is automatically created under `data/` with four reproducible **non-speech** WAV samples. Use **Random sample** to choose another clip; the sample source is always labeled.
+
 Click **Try signal demo** for a generated, **non-speech** audio fixture containing
 known quiet, frequency-change and saturated intervals. The demo proves only
 that the acoustic visualization and detection rules work, not that any voice
 is synthetic. Upload your own audio to investigate a recording. Accepted source
 formats depend on the local decoder, typically WAV, FLAC, MP3, OGG and AIFF.
-Limits: 50 MiB, 0.5–120 seconds, up to 8 channels at 8–192 kHz.
+Limits: 256 MiB, 0.5–600 seconds (10 minutes), up to 8 channels at 8–192 kHz, and 60 million decoded samples per source. Very high-rate multichannel files may reach the sample cap earlier.
 
 ### Optional synthetic-speech inference
 
@@ -59,6 +61,7 @@ preserved.
   no external JS CDN or Node build required.
 - `signaltrace_server.py` — localhost-only Starlette API and audio analyzer.
 - `lab/signal_events.py` — versioned deterministic acoustic and model markers.
+- `lab/sample_catalog.py` — random local SQLite-backed sample selection with a transparent generated fallback.
 - `lab/forensics.py`, `lab/detectors.py`, `lab/fusion.py` — existing research engine.
 - `tests/test_signaltrace.py` — API, marker and benchmark regression tests.
 
