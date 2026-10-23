@@ -74,3 +74,27 @@ The current [core-detector progress report](docs/core-detector-progress.md)
 records direct testing on five newer TTS systems and a reliability correction:
 a human indication requires corroboration from both component detectors.
 Conflicting evidence is inconclusive; raw fused scores remain available in details.
+
+
+## Acoustic evidence instruments
+
+The main SignalTrace view uses distinct SVG glyphs and marker treatments for
+clipping/saturation, low-energy spans, sharp level changes, spectral-band shifts,
+short signal gaps, impulse-like discontinuities, baseline/DC offsets, limited
+high-frequency energy, stereo channel imbalance and phase inversion. Optional
+model instruments distinguish fusion threshold crossings, component score
+separation and sensitivity to controlled signal transformations.
+
+Every marker is an **observation with a rule, numeric measurement, timestamps,
+limitations and a next check**. These rules do not prove manipulation, identify
+a speaker, or supply causal explanations for the neural network. In particular,
+a naturally low-pitched tone may have limited high-band energy, a conversational
+pause may resemble a gap, and regular speech can produce abrupt transitions.
+Findings can overlap because the detectors describe independent signal properties.
+The waveform always links to the original media; no speculative labels are
+silently added.
+
+The original acoustic rule set is in `lab/signal_events.py`; additional local
+quality detectors live in `lab/signal_intelligence.py`. Regression fixtures
+exercise short gaps, stereo polarity and channel imbalance. This is engineering
+screening, not independently validated anomaly classification.
