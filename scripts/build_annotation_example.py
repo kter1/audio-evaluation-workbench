@@ -5,6 +5,8 @@ from io import StringIO
 import csv
 import html
 import json
+import re
+from difflib import SequenceMatcher
 import sys
 
 import numpy as np
@@ -16,6 +18,44 @@ from lab.source_measurements import measure_source
 
 EXPECTED = '299c3e4a38abd3e74c61b39ec52824f406f75c62673b0220db5167b3aaabb640'
 DIRECTORY = ROOT/'studio/dist/samples'
+REFERENCE_TEXT = "HETTY SORREL OFTEN TOOK THE OPPORTUNITY WHEN HER AUNT'S BACK WAS TURNED OF LOOKING AT THE PLEASING REFLECTION OF HERSELF IN THOSE POLISHED SURFACES FOR THE OAK TABLE WAS USUALLY TURNED UP LIKE A SCREEN AND WAS MORE FOR ORNAMENT THAN FOR USE AND SHE COULD SEE HERSELF SOMETIMES IN THE GREAT ROUND PEWTER DISHES THAT WERE RANGED ON THE SHELVES ABOVE THE LONG DEAL DINNER TABLE OR IN THE HOBS OF THE GRATE WHICH ALWAYS SHONE LIKE JASPER"
+
+
+def transcript_review(record, sample_sha256):
+    if record['sample_sha256'] != sample_sha256:
+        raise ValueError('Transcript belongs to a different recording')
+    words = record['words']
+    hypothesis, indexed = [], []
+    previous_start = 0
+    for word in words:
+        start, end = word['start'], word['end']
+        if (not isinstance(start, (int, float)) or not isinstance(end, (int, float))
+                or not np.isfinite([start, end]).all() or not 0 <= start <= end <= 30
+                or start < previous_start):
+            raise ValueError('Invalid model-estimated word timestamps')
+        previous_start = start
+        for token in re.findall(r"[a-z0-9']+", word['text'].lower()):
+            hypothesis.append(token)
+            indexed.append(word)
+    if not hypothesis:
+        raise ValueError('Transcript has no words')
+    reference = re.findall(r"[a-z0-9']+", REFERENCE_TEXT.lower())
+    differences = []
+    for kind, a, b, c, d in SequenceMatcher(None, reference, hypothesis, autojunk=False).get_opcodes():
+        if kind == 'equal':
+            continue
+        first, last = indexed[min(c, len(indexed)-1)], indexed[min(max(c, d-1), len(indexed)-1)]
+        differences.append({'start': first['start'], 'end': last['end'],
+                            'kind': 'transcript_difference', 'status': 'review_required',
+                            'model_text': ' '.join(hypothesis[c:d]) or '[omitted]',
+                            'reference_text': ' '.join(reference[a:b]) or '[not in source text]',
+                            'basis': 'Word-sequence comparison against full-source corpus text. Timing is model-estimated; confirm the cropped audio by listening.'})
+    phrases = []
+    for i in range(0, len(words), 12):
+        group = words[i:i+12]
+        phrases.append({'start': group[0]['start'], 'end': group[-1]['end'],
+                        'text': ' '.join(w['text'] for w in group)})
+    return differences, phrases
 
 
 def level(x):
@@ -37,7 +77,7 @@ def annotations(audio, rate):
                      'rms_dbfs': rms, 'peak_dbfs': float(20*np.log10(peak)),
                      'near_full_scale_samples': near,
                      'interpretation': 'Amplitude measurements only; no listening or authenticity judgment.',
-                     'review_status': 'listening_pending'})
+                     'review_status': 'measured'})
     # Nonoverlapping 20 ms frames. This rule measures quiet, not speech activity.
     frame = int(.02*rate)
     quiet = [level(audio[i:i+frame]) for i in range(0, len(audio), frame)]
@@ -53,7 +93,7 @@ def annotations(audio, rate):
                              'observation': 'Consecutive 20 ms frames below -40 dBFS RMS for at least 200 ms.',
                              'rms_dbfs': None, 'peak_dbfs': None, 'near_full_scale_samples': None,
                              'interpretation': 'Possible pause or quiet passage. Not classified as a dropout, breath, or absence of speech.',
-                             'review_status': 'listening_pending'})
+                             'review_status': 'context_review'})
             start = None
     return sorted(rows, key=lambda row: (row['start'], row['kind']))
 
@@ -67,12 +107,18 @@ def main():
     if rate != 16000 or audio.ndim != 1 or len(audio) != 480000 or not np.isfinite(audio).all():
         raise ValueError('Require exactly 30 seconds of finite mono 16 kHz audio')
     rows = annotations(audio, rate)
+    transcription = json.loads((DIRECTORY/'annotation-transcript.json').read_text())
+    differences, phrases = transcript_review(transcription, EXPECTED)
     result = {
-        'schema_version': 'annotation-example-1.0', 'sample': path.name,
+        'schema_version': 'annotation-example-1.1', 'sample': path.name,
         'sample_sha256': EXPECTED, 'duration_seconds': 30, 'sample_rate_hz': rate,
         'scope': 'Reference-informed automated signal annotation demonstration. Not a blind listening submission.',
         'guideline': 'Speech annotation guide 1.1; perceptual fields require listening.',
-        'review_status': 'Automated measurements complete; listening review pending',
+        'review_status': 'Measurements and local transcription complete; targeted review items identified',
+        'transcription': transcription, 'transcript_review': differences,
+        'review_summary': {'transcript_differences': len(differences),
+                           'quiet_spans': sum(r['kind'] == 'low_energy' for r in rows),
+                           'perceptual_review': 'not_run'},
         'listening_review_completed': False, 'detector_inference_run': False,
         'perceptual_annotation': {
             'intelligibility': 'not_assessed',
@@ -98,14 +144,35 @@ def main():
     }
     (DIRECTORY/'annotation-demo.json').write_text(json.dumps(result, indent=2, allow_nan=False)+'\n')
     stream = StringIO(newline='')
-    writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
+    writer = csv.DictWriter(stream, fieldnames=list(rows[0]), lineterminator='\n')
     writer.writeheader()
     writer.writerows(rows)
     (DIRECTORY/'annotation-demo.csv').write_text(stream.getvalue())
-    body = ''.join('<tr><td><button class="seek" data-start="'+str(r['start'])+'" data-end="'+str(r['end'])+'">'+f"{r['start']:.2f}–{r['end']:.2f} s"+'</button></td><td>'+html.escape(r['kind'].replace('_', ' '))+'</td><td>'+html.escape(r['observation'])+'</td><td>'+html.escape(r['interpretation'])+'</td></tr>' for r in rows)
-    template = '''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>30-second annotation example · SignalTrace</title><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/samples/annotation-example.css"></head><body><main class="sample-page"><a href="/">← Back to voice check</a><section class="intro"><div><span class="kicker">ANNOTATION EXAMPLE · 30 SECONDS</span><h1>Observe first. Explain precisely.</h1><p>Automated signal annotations of an English audiobook excerpt. Listening review is pending; these are not personal listening judgments.</p></div></section><section class="workspace"><h2>Original-speed recording</h2><audio id="sample-audio" controls preload="metadata" src="/samples/annotation-demo.wav"></audio><p>30.00 seconds · Mono · 16,000 Hz · Unmodified samples from a longer source.</p><p><a href="/samples/annotation-demo.csv" download>Download interval annotations (CSV)</a> · <a href="/samples/annotation-demo.json" download>Download complete record (JSON)</a> · <a href="/samples/annotation-demo.wav" download>Download recording</a></p></section><section class="workspace"><h2>Recording-level annotation</h2><dl><dt>Measured level</dt><dd>RMS -22.01 dBFS; sample peak -3.70 dBFS. Zero samples at or above 0.999 full scale. This does not establish the absence of audible distortion.</dd><dt>Intelligibility and interference</dt><dd>Not assessed by listening. Noise, compression artifacts, reverb, music, audible clipping, dropouts, distortion, and overlapping voices remain pending.</dd><dt>Perceptual cues and origin</dt><dd>Human and synthetic cues not assessed. Perceived origin: uncertain; confidence: unassigned. No detector inference was used.</dd><dt>Escalation / next review</dt><dd>Listen at original speed, inspect the quiet intervals, and check the cropped endpoint for an interrupted word. Distinguish ordinary pauses from dropouts. Add perceptual labels only after listening.</dd><dt>Reference disclosure</dt><dd>Source corpus identifies genuine audiobook speech. This example is reference-informed and must not count toward blind-review accuracy or independent agreement.</dd></dl></section><section class="workspace"><h2>Timestamped observations</h2><p>Every five-second interval is measured. Additional quiet spans use a fixed -40 dBFS RMS rule over 20 ms frames, for at least 200 ms. Click an interval to play it; ordinary playback remains available above.</p><div class="table-scroll"><table><thead><tr><th>Interval</th><th>Type</th><th>Observation / rule</th><th>Interpretation limit</th></tr></thead><tbody>ROWS</tbody></table></div></section><footer>Source: <a href="https://www.openslr.org/12/">LibriSpeech</a>, Panayotov et al. · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> · source 2094-142345-0010 · first 30 seconds of a 30.615-second recording. No processing besides cropping and lossless WAV encoding. Public audiobook text may contain fictional names. This example is excluded from research evaluation and human annotation metrics.</footer></main><script src="/samples/annotation-example.js"></script></body></html>'''
-    (DIRECTORY/'annotation-example.html').write_text(template.replace('ROWS', body))
-    print(f'Built {len(rows)} timestamped observations; six five-second intervals; listening pending.')
+    with (DIRECTORY/'annotation-review.csv').open('w', newline='') as stream:
+        writer = csv.DictWriter(stream, fieldnames=list(differences[0]) if differences else ['start', 'end', 'kind', 'status', 'model_text', 'reference_text', 'basis'], lineterminator='\n')
+        writer.writeheader()
+        writer.writerows(differences)
+    def replay(start, end, label, context=False):
+        if context:
+            start, end = max(0, start-.3), min(30, end+.3)
+        return f'<button class="seek" data-start="{start}" data-end="{end}">{html.escape(label)}</button>'
+    template = (ROOT/'scripts/templates/annotation-example.html').read_text()
+    intervals = [r for r in rows if r['kind'] == 'interval_review']
+    quiet = [r for r in rows if r['kind'] == 'low_energy']
+    values = {
+        'DIFFCOUNT': str(len(differences)), 'QUIETCOUNT': str(len(quiet)),
+        'WORDCOUNT': str(len(transcription['words'])),
+        'MODELNAME': html.escape(transcription['model']), 'MODELREV': html.escape(transcription['revision']),
+        'PHRASES': ''.join(replay(p['start'], p['end'], p['text']) for p in phrases),
+        'DIFFERENCES': ''.join('<tr><td>'+replay(d['start'], d['end'], f"{d['start']:.2f}–{d['end']:.2f} s", True)+'</td><td>'+html.escape(d['model_text'])+'</td><td>'+html.escape(d['reference_text'])+'</td></tr>' for d in differences),
+        'QUIETBUTTONS': ''.join(replay(r['start'], r['end'], f"{r['start']:.2f}–{r['end']:.2f} s", True) for r in quiet),
+        'MEASUREMENTS': ''.join('<tr><td>'+replay(r['start'], r['end'], f"{r['start']:.0f}–{r['end']:.0f} s")+f"</td><td>{r['rms_dbfs']:.2f}</td><td>{r['peak_dbfs']:.2f}</td><td>{r['near_full_scale_samples']}</td></tr>" for r in intervals),
+    }
+    for key, value in values.items():
+        template = template.replace(key, value)
+    (DIRECTORY/'annotation-example.html').write_text(template)
+    print(f'Built {len(differences)} targeted transcript checks; {len(quiet)} grouped quiet spans; {len(phrases)} playback passages.')
+
 
 
 if __name__ == '__main__':

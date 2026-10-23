@@ -18,7 +18,7 @@ Upload a recording to get **AI voice indicated**, **No clear AI signal**, or **I
 
 ## Annotated sample
 
-Open **http://127.0.0.1:8501/samples/annotation-example.html** after starting the app, or follow the sample link on the main screen. The bundled 30-second LibriSpeech excerpt includes timestamped signal measurements, interval playback, and CSV/JSON exports. Perceptual annotations are explicitly pending listening review; this is a reference-informed demonstration, excluded from personal review and model evaluation metrics. See [sample provenance and measurements](studio/dist/samples/annotation-demo.json).
+Open **http://127.0.0.1:8501/samples/annotation-example.html** after starting the app, or follow the sample link on the main screen. The bundled 30-second LibriSpeech excerpt includes local speech-model transcription with 79 estimated word timestamps, six specific source-text differences, grouped quiet intervals, and CSV/JSON exports. Repeated interval measurements are collapsed. Human listening is recorded as a separate review step; this reference-informed demonstration is excluded from personal review and model evaluation metrics. The precomputed example works without model downloads. To reproduce transcription with the existing pinned local checkpoint, run `.venv/bin/python scripts/transcribe_annotation_example.py`, then `.venv/bin/python scripts/build_annotation_example.py`; missing checkpoint files fail without downloading. See [sample provenance and measurements](studio/dist/samples/annotation-demo.json).
 
 ## What the project demonstrates
 
@@ -50,7 +50,7 @@ node --check studio/dist/app.js
 node --test tests/frontend-evidence.test.cjs
 ```
 
-Publication checks: **379 Python tests and 6 frontend tests passed**. Full model inference additionally requires separately acquired checkpoints and data.
+Publication checks: **382 Python tests and 6 frontend tests passed**. Full model inference additionally requires separately acquired checkpoints and data.
 
 ## Privacy, licensing, and authorship
 

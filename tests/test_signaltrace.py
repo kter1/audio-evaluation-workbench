@@ -43,7 +43,9 @@ def test_foreign_origin_cannot_upload():
 def test_annotation_example_has_exact_audio_coverage_and_honest_review_status():
     page = client.get('/samples/annotation-example.html')
     assert page.status_code == 200
-    assert 'Listening review is pending' in page.text
+    assert 'Listening review has not been performed' in page.text
+    assert 'Transcript with playback' in page.text
+    assert 'Perceived origin: uncertain' not in page.text
     assert '/samples/annotation-example.html' in client.get('/').text
     raw = client.get('/samples/annotation-demo.wav').content
     audio, rate = sf.read(BytesIO(raw))
@@ -55,13 +57,19 @@ def test_annotation_example_has_exact_audio_coverage_and_honest_review_status():
     assert result['perceptual_annotation']['perceived_origin'] == 'uncertain'
     assert result['perceptual_annotation']['confidence'] is None
     assert result['reference']['license'] == 'CC BY 4.0'
+    assert result['transcription']['sample_sha256'] == result['sample_sha256']
+    assert len(result['transcription']['words']) == 79
+    assert len(result['transcript_review']) == 6
+    assert result['transcript_review'][0]['model_text'] == 'heddy surl'
+    assert result['transcript_review'][0]['reference_text'] == 'hetty sorrel'
     intervals = [r for r in result['annotations'] if r['kind'] == 'interval_review']
     assert [(r['start'], r['end']) for r in intervals] == [(s, s+5) for s in range(0, 30, 5)]
     for row in result['annotations']:
         assert 0 <= row['start'] < row['end'] <= 30
-        assert row['review_status'] == 'listening_pending'
+        assert row['review_status'] in {'measured', 'context_review'}
     assert 'start,end,kind,observation' in client.get('/samples/annotation-demo.csv').text
     assert client.get('/samples/annotation-example.js').status_code == 200
+    assert 'model_text,reference_text' in client.get('/samples/annotation-review.csv').text
 
 
 def audio_blob(audio, rate=16000):
