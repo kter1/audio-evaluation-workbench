@@ -19,6 +19,7 @@ on:
       - "scripts/audit_asvspoof5_pilot.py"
       - "scripts/expand_asvspoof5_corpus.py"
       - "scripts/audit_asvspoof5_expansion.py"
+      - "scripts/build_annotation_example.py"
       - "scripts/setup_research_vad.py"
       - "scripts/prepare_speech_review.py"
       - "scripts/compare_speech_reviews.py"
@@ -85,6 +86,8 @@ jobs:
           python scripts/validate_source_measurements.py
           python scripts/benchmark_methods.py --fixtures
       - name: Validate static JavaScript syntax
-        run: node --check studio/dist/app.js
+        run: |
+          node --check studio/dist/app.js
+          node --check studio/dist/samples/annotation-example.js
       - name: Validate evidence rendering and exports
         run: node --test tests/frontend-evidence.test.cjs

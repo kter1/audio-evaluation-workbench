@@ -40,6 +40,30 @@ def test_foreign_origin_cannot_upload():
     assert response.status_code == 400
 
 
+def test_annotation_example_has_exact_audio_coverage_and_honest_review_status():
+    page = client.get('/samples/annotation-example.html')
+    assert page.status_code == 200
+    assert 'Listening review is pending' in page.text
+    assert '/samples/annotation-example.html' in client.get('/').text
+    raw = client.get('/samples/annotation-demo.wav').content
+    audio, rate = sf.read(BytesIO(raw))
+    assert rate == 16000 and audio.shape == (480000,)
+    result = client.get('/samples/annotation-demo.json').json()
+    assert sha256(raw).hexdigest() == result['sample_sha256']
+    assert result['listening_review_completed'] is False
+    assert result['detector_inference_run'] is False
+    assert result['perceptual_annotation']['perceived_origin'] == 'uncertain'
+    assert result['perceptual_annotation']['confidence'] is None
+    assert result['reference']['license'] == 'CC BY 4.0'
+    intervals = [r for r in result['annotations'] if r['kind'] == 'interval_review']
+    assert [(r['start'], r['end']) for r in intervals] == [(s, s+5) for s in range(0, 30, 5)]
+    for row in result['annotations']:
+        assert 0 <= row['start'] < row['end'] <= 30
+        assert row['review_status'] == 'listening_pending'
+    assert 'start,end,kind,observation' in client.get('/samples/annotation-demo.csv').text
+    assert client.get('/samples/annotation-example.js').status_code == 200
+
+
 def audio_blob(audio, rate=16000):
     stream = BytesIO()
     sf.write(stream, audio, rate, format="WAV", subtype="PCM_16")
