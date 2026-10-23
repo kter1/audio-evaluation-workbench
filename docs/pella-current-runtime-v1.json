@@ -1,0 +1,14 @@
+{
+  "package": "pyloudnorm",
+  "version": "0.2.0",
+  "file": {
+    "url": "https://files.pythonhosted.org/packages/aa/b6/65a49a05614b2548edbba3aab118f2ebe7441dfd778accdcdce9f6567f20/pyloudnorm-0.2.0-py3-none-any.whl",
+    "path": "data/research-tools/pella-current/runtime-wheels/pyloudnorm-0.2.0-py3-none-any.whl",
+    "bytes": 10879,
+    "sha256": "9bb69afb904f59d007a7f9ba3d75d16fb8aeef35c44d6df822a9f192d69cf13f",
+    "git_blob_sha1": null,
+    "publisher_md5": null
+  },
+  "installation": "isolated data/research-tools/pella-current/runtime; no dependencies installed",
+  "purpose": "Match updated Pella intended loudness preprocessing; app environment unchanged"
+}

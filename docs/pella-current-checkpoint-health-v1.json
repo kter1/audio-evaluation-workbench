@@ -1,0 +1,45 @@
+{
+  "schema_version": "research-checkpoint-health-1.0",
+  "repository": "Sadanie/pellav2-audio-deepfake-detector",
+  "revision": "808e16a49526178f8e1e6276725dfd14f218ec82",
+  "checkpoint": {
+    "name": "pellav2_detector.pt",
+    "bytes": 2322248702,
+    "sha256": "2279c24f6e4b672c85eb2593f93cbbad83a7c1e9486fe3bcdc246c13fcca80e6"
+  },
+  "loading": "torch.load(map_location=cpu,weights_only=True,mmap=True), direct checkpoint tensors before construction or inference",
+  "torch": "2.14.1",
+  "python": "3.13.7",
+  "tensor_count": 776,
+  "element_count": 580494170,
+  "nonfinite_tensor_count": 1,
+  "nonfinite_tensors": [
+    {
+      "name": "backbone.encoder.layers.14.ffn1.intermediate_dense.weight",
+      "shape": [
+        4096,
+        1024
+      ],
+      "dtype": "torch.float32",
+      "elements": 4194304,
+      "nan_count": 12154,
+      "positive_infinity_count": 0,
+      "negative_infinity_count": 0,
+      "first_nonfinite_flat_indices": [
+        1118506,
+        1119128,
+        1119322,
+        1119642,
+        1119938,
+        1120111,
+        1120198,
+        1120560,
+        1121077,
+        1121201
+      ]
+    }
+  ],
+  "passes_finite_parameter_gate": false,
+  "decision": "Reject upstream checkpoint: nonfinite saved weights; no weight repair, replacement, or product integration. This is a file-health failure, not a measured detection-accuracy result.",
+  "elapsed_seconds": 2.2298745838925242
+}

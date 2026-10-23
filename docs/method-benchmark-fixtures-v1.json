@@ -1,0 +1,1842 @@
+{
+  "schema_version": "method-benchmark-result-1.0",
+  "config": {
+    "version": "analysis-research-1.0",
+    "rate_hz": 16000,
+    "frame_seconds": 0.02,
+    "energy_threshold_dbfs": -50.0,
+    "noise_quantile": 0.1,
+    "rolling_noise_block_seconds": 2.0,
+    "change_side_seconds": 0.12,
+    "change_context_seconds": 2.0,
+    "change_minimum_db": 6.0,
+    "change_mad_multiplier": 6.0,
+    "change_minimum_side_dbfs": -50.0,
+    "change_separation_seconds": 0.3,
+    "webrtc_mode": 2,
+    "promotion_status": "experimental; no production integration",
+    "gaussian_noise_correction": "divide frame-power q10 by chi2.ppf(0.1, 320)/320; assumes iid zero-mean Gaussian noise"
+  },
+  "environment": {
+    "python": "3.13.7",
+    "numpy": "2.3.3",
+    "scipy": "1.16.3"
+  },
+  "code_sha256": {
+    "lab/research_analysis.py": "14941e78b1ff6c9e345bb0a99dde583aa052b2b0140eb369ab26731120d5b4e4",
+    "lab/research_metrics.py": "6e33445ee2119317b5c9fe0578ff74d8c4a04a510b891c68dca548e87460c83c",
+    "lab/research_benchmark.py": "d0ad13a5d9c195023c4332ddc576bb19f470d920e268c6b8e8d8ebd67fc07591",
+    "lab/signal_events.py": "2a344a22851f28779cb5e95e5a73d48bd4820cb09ad89c0309a6aab091a9e305"
+  },
+  "case_count": 22,
+  "source_groups": 6,
+  "input_identities": [],
+  "annotated_event_cases": 22,
+  "negative_event_seconds": 60.0,
+  "event_aggregate": {
+    "frozen_level_rule": {
+      "true_positive": 8,
+      "false_positive": 0,
+      "false_negative": 4,
+      "precision": 1.0,
+      "recall": 0.6666666666666666,
+      "f1": 0.8,
+      "false_events_per_negative_hour": 0.0
+    },
+    "adaptive_level_rule": {
+      "true_positive": 12,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "false_events_per_negative_hour": 0.0
+    }
+  },
+  "paired_event_f1_gain": {
+    "groups": 6,
+    "repetitions": 10000,
+    "seed": 20261022,
+    "valid_draws": 9984,
+    "gain_percentile95": [
+      0.19999999999999996,
+      0.19999999999999996
+    ],
+    "method": "paired source-group percentile bootstrap of micro event F1 difference"
+  },
+  "results": [
+    {
+      "id": "stationary-noise-0",
+      "source_group": "analytic:noise:0",
+      "evidence_type": "analytic_fixture",
+      "duration_seconds": 6.0,
+      "analyzed_duration_seconds": 6.0,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "2ad12e0b3cb37af5fad0cd5319e264f569a41db9f67c330e25267e4ac5033d4a",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -34.414020468929316,
+        "blockwise_lower_decile_median": -34.404355950622794,
+        "iid_gaussian_corrected_decile": -33.95700912370751
+      },
+      "noise_reference_dbfs": -33.97685327793512,
+      "noise_absolute_error_db": {
+        "global_lower_decile": 0.4371671909941952,
+        "blockwise_lower_decile_median": 0.42750267268767317,
+        "iid_gaussian_corrected_decile": 0.019844154227612876
+      },
+      "level_changes": {
+        "frozen_level_rule": {
+          "predicted_intervals": [],
+          "metrics": {
+            "true_positive": 0,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "matches": [],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": null,
+            "matched_boundary_error_p95_seconds": null,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        },
+        "adaptive_level_rule": {
+          "predicted_intervals": [],
+          "metrics": {
+            "true_positive": 0,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "matches": [],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": null,
+            "matched_boundary_error_p95_seconds": null,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        }
+      },
+      "speech_methods": {
+        "webrtc": {
+          "status": "unavailable",
+          "reason": "webrtcvad is not installed; no speech scores fabricated"
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 0,
+          "false_positive": 300,
+          "false_negative": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0,
+          "frames": 300,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "213e3c309845a068"
+    },
+    {
+      "id": "gain-6db-0",
+      "source_group": "analytic:noise:0",
+      "evidence_type": "analytic_fixture",
+      "duration_seconds": 6.0,
+      "analyzed_duration_seconds": 6.0,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "177bede6c59b3b21b9ba4d8404815cd1da967674b0838e4007feeea255798529",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -34.23367768813116,
+        "blockwise_lower_decile_median": -34.129371269176055,
+        "iid_gaussian_corrected_decile": -33.77666634290935
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": {
+        "frozen_level_rule": {
+          "predicted_intervals": [],
+          "metrics": {
+            "true_positive": 0,
+            "false_positive": 0,
+            "false_negative": 1,
+            "precision": null,
+            "recall": 0.0,
+            "f1": 0.0,
+            "matches": [],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": null,
+            "matched_boundary_error_p95_seconds": null,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        },
+        "adaptive_level_rule": {
+          "predicted_intervals": [
+            {
+              "start": 2.88,
+              "end": 3.12
+            }
+          ],
+          "metrics": {
+            "true_positive": 1,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "matches": [
+              {
+                "prediction": 0,
+                "reference": 0,
+                "iou": 1.0
+              }
+            ],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": 0.0,
+            "matched_boundary_error_p95_seconds": 0.0,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        }
+      },
+      "speech_methods": {
+        "webrtc": {
+          "status": "unavailable",
+          "reason": "webrtcvad is not installed; no speech scores fabricated"
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 0,
+          "false_positive": 300,
+          "false_negative": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0,
+          "frames": 300,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "213e3c309845a068"
+    },
+    {
+      "id": "gain-12db-0",
+      "source_group": "analytic:noise:0",
+      "evidence_type": "analytic_fixture",
+      "duration_seconds": 6.0,
+      "analyzed_duration_seconds": 6.0,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "229d08167afbb94587c4b517a7988ab0532ec867bb8dc6ef20092dc928d8b96e",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -34.23367768813116,
+        "blockwise_lower_decile_median": -34.129371269176055,
+        "iid_gaussian_corrected_decile": -33.77666634290935
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": {
+        "frozen_level_rule": {
+          "predicted_intervals": [
+            {
+              "start": 2.88,
+              "end": 3.12
+            }
+          ],
+          "metrics": {
+            "true_positive": 1,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "matches": [
+              {
+                "prediction": 0,
+                "reference": 0,
+                "iou": 1.0
+              }
+            ],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": 0.0,
+            "matched_boundary_error_p95_seconds": 0.0,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        },
+        "adaptive_level_rule": {
+          "predicted_intervals": [
+            {
+              "start": 2.88,
+              "end": 3.12
+            }
+          ],
+          "metrics": {
+            "true_positive": 1,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "matches": [
+              {
+                "prediction": 0,
+                "reference": 0,
+                "iou": 1.0
+              }
+            ],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": 0.0,
+            "matched_boundary_error_p95_seconds": 0.0,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        }
+      },
+      "speech_methods": {
+        "webrtc": {
+          "status": "unavailable",
+          "reason": "webrtcvad is not installed; no speech scores fabricated"
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 0,
+          "false_positive": 300,
+          "false_negative": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0,
+          "frames": 300,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "213e3c309845a068"
+    },
+    {
+      "id": "gain-18db-0",
+      "source_group": "analytic:noise:0",
+      "evidence_type": "analytic_fixture",
+      "duration_seconds": 6.0,
+      "analyzed_duration_seconds": 6.0,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "ac055134efdfc05c77b27fd918a8cc15bc8fbf74a0845958520219391b3f8109",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -34.23367768813116,
+        "blockwise_lower_decile_median": -34.129371269176055,
+        "iid_gaussian_corrected_decile": -33.77666634290935
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": {
+        "frozen_level_rule": {
+          "predicted_intervals": [
+            {
+              "start": 2.88,
+              "end": 3.12
+            }
+          ],
+          "metrics": {
+            "true_positive": 1,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "matches": [
+              {
+                "prediction": 0,
+                "reference": 0,
+                "iou": 1.0
+              }
+            ],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": 0.0,
+            "matched_boundary_error_p95_seconds": 0.0,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        },
+        "adaptive_level_rule": {
+          "predicted_intervals": [
+            {
+              "start": 2.88,
+              "end": 3.12
+            }
+          ],
+          "metrics": {
+            "true_positive": 1,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "matches": [
+              {
+                "prediction": 0,
+                "reference": 0,
+                "iou": 1.0
+              }
+            ],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": 0.0,
+            "matched_boundary_error_p95_seconds": 0.0,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        }
+      },
+      "speech_methods": {
+        "webrtc": {
+          "status": "unavailable",
+          "reason": "webrtcvad is not installed; no speech scores fabricated"
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 0,
+          "false_positive": 300,
+          "false_negative": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0,
+          "frames": 300,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "213e3c309845a068"
+    },
+    {
+      "id": "gradual-gain-0",
+      "source_group": "analytic:noise:0",
+      "evidence_type": "analytic_fixture",
+      "duration_seconds": 6.0,
+      "analyzed_duration_seconds": 6.0,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "860de2bd45da6a40f746b6901e5e0d66f6b9429552688314dbcb2d1a2bee28c4",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -28.46241329447729,
+        "blockwise_lower_decile_median": -21.208565853614534,
+        "iid_gaussian_corrected_decile": -28.00540194925549
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": {
+        "frozen_level_rule": {
+          "predicted_intervals": [],
+          "metrics": {
+            "true_positive": 0,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "matches": [],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": null,
+            "matched_boundary_error_p95_seconds": null,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        },
+        "adaptive_level_rule": {
+          "predicted_intervals": [],
+          "metrics": {
+            "true_positive": 0,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "matches": [],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": null,
+            "matched_boundary_error_p95_seconds": null,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        }
+      },
+      "speech_methods": {
+        "webrtc": {
+          "status": "unavailable",
+          "reason": "webrtcvad is not installed; no speech scores fabricated"
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 0,
+          "false_positive": 300,
+          "false_negative": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0,
+          "frames": 300,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "213e3c309845a068"
+    },
+    {
+      "id": "stationary-noise-1",
+      "source_group": "analytic:noise:1",
+      "evidence_type": "analytic_fixture",
+      "duration_seconds": 6.0,
+      "analyzed_duration_seconds": 6.0,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "1d58239478475524217d6ea5753ebdbbd5fd9e2b5fa5158be5962dd688592665",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -34.49273553937626,
+        "blockwise_lower_decile_median": -34.46042880964813,
+        "iid_gaussian_corrected_decile": -34.03572419415446
+      },
+      "noise_reference_dbfs": -34.00691960611958,
+      "noise_absolute_error_db": {
+        "global_lower_decile": 0.4858159332566814,
+        "blockwise_lower_decile_median": 0.4535092035285473,
+        "iid_gaussian_corrected_decile": 0.028804588034880396
+      },
+      "level_changes": {
+        "frozen_level_rule": {
+          "predicted_intervals": [],
+          "metrics": {
+            "true_positive": 0,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "matches": [],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": null,
+            "matched_boundary_error_p95_seconds": null,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        },
+        "adaptive_level_rule": {
+          "predicted_intervals": [],
+          "metrics": {
+            "true_positive": 0,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "matches": [],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": null,
+            "matched_boundary_error_p95_seconds": null,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        }
+      },
+      "speech_methods": {
+        "webrtc": {
+          "status": "unavailable",
+          "reason": "webrtcvad is not installed; no speech scores fabricated"
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 0,
+          "false_positive": 300,
+          "false_negative": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0,
+          "frames": 300,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "20520e0e5770ca3e"
+    },
+    {
+      "id": "gain-6db-1",
+      "source_group": "analytic:noise:1",
+      "evidence_type": "analytic_fixture",
+      "duration_seconds": 6.0,
+      "analyzed_duration_seconds": 6.0,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "d481d1ff739aff3c1030896e2457c12d393ab764349ff64031afe6d7ad64f268",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -34.33888105274861,
+        "blockwise_lower_decile_median": -34.25530447416372,
+        "iid_gaussian_corrected_decile": -33.88186970752681
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": {
+        "frozen_level_rule": {
+          "predicted_intervals": [],
+          "metrics": {
+            "true_positive": 0,
+            "false_positive": 0,
+            "false_negative": 1,
+            "precision": null,
+            "recall": 0.0,
+            "f1": 0.0,
+            "matches": [],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": null,
+            "matched_boundary_error_p95_seconds": null,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        },
+        "adaptive_level_rule": {
+          "predicted_intervals": [
+            {
+              "start": 2.88,
+              "end": 3.12
+            }
+          ],
+          "metrics": {
+            "true_positive": 1,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "matches": [
+              {
+                "prediction": 0,
+                "reference": 0,
+                "iou": 1.0
+              }
+            ],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": 0.0,
+            "matched_boundary_error_p95_seconds": 0.0,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        }
+      },
+      "speech_methods": {
+        "webrtc": {
+          "status": "unavailable",
+          "reason": "webrtcvad is not installed; no speech scores fabricated"
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 0,
+          "false_positive": 300,
+          "false_negative": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0,
+          "frames": 300,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "20520e0e5770ca3e"
+    },
+    {
+      "id": "gain-12db-1",
+      "source_group": "analytic:noise:1",
+      "evidence_type": "analytic_fixture",
+      "duration_seconds": 6.0,
+      "analyzed_duration_seconds": 6.0,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "6f9deb250a851ccf4184e22331d5a1b062774c3fa01d950b595fb4a950cb3ff8",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -34.33888105274861,
+        "blockwise_lower_decile_median": -34.25530447416372,
+        "iid_gaussian_corrected_decile": -33.88186970752681
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": {
+        "frozen_level_rule": {
+          "predicted_intervals": [
+            {
+              "start": 2.88,
+              "end": 3.12
+            }
+          ],
+          "metrics": {
+            "true_positive": 1,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "matches": [
+              {
+                "prediction": 0,
+                "reference": 0,
+                "iou": 1.0
+              }
+            ],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": 0.0,
+            "matched_boundary_error_p95_seconds": 0.0,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        },
+        "adaptive_level_rule": {
+          "predicted_intervals": [
+            {
+              "start": 2.88,
+              "end": 3.12
+            }
+          ],
+          "metrics": {
+            "true_positive": 1,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "matches": [
+              {
+                "prediction": 0,
+                "reference": 0,
+                "iou": 1.0
+              }
+            ],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": 0.0,
+            "matched_boundary_error_p95_seconds": 0.0,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        }
+      },
+      "speech_methods": {
+        "webrtc": {
+          "status": "unavailable",
+          "reason": "webrtcvad is not installed; no speech scores fabricated"
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 0,
+          "false_positive": 300,
+          "false_negative": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0,
+          "frames": 300,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "20520e0e5770ca3e"
+    },
+    {
+      "id": "gain-18db-1",
+      "source_group": "analytic:noise:1",
+      "evidence_type": "analytic_fixture",
+      "duration_seconds": 6.0,
+      "analyzed_duration_seconds": 6.0,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "2cbe59a605bc589f6670412c2183fadd4d6178fccb2b4edd1df35f4d25b1e83f",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -34.33888105274861,
+        "blockwise_lower_decile_median": -34.25530447416372,
+        "iid_gaussian_corrected_decile": -33.88186970752681
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": {
+        "frozen_level_rule": {
+          "predicted_intervals": [
+            {
+              "start": 2.88,
+              "end": 3.12
+            }
+          ],
+          "metrics": {
+            "true_positive": 1,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "matches": [
+              {
+                "prediction": 0,
+                "reference": 0,
+                "iou": 1.0
+              }
+            ],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": 0.0,
+            "matched_boundary_error_p95_seconds": 0.0,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        },
+        "adaptive_level_rule": {
+          "predicted_intervals": [
+            {
+              "start": 2.88,
+              "end": 3.12
+            }
+          ],
+          "metrics": {
+            "true_positive": 1,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "matches": [
+              {
+                "prediction": 0,
+                "reference": 0,
+                "iou": 1.0
+              }
+            ],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": 0.0,
+            "matched_boundary_error_p95_seconds": 0.0,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        }
+      },
+      "speech_methods": {
+        "webrtc": {
+          "status": "unavailable",
+          "reason": "webrtcvad is not installed; no speech scores fabricated"
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 0,
+          "false_positive": 300,
+          "false_negative": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0,
+          "frames": 300,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "20520e0e5770ca3e"
+    },
+    {
+      "id": "gradual-gain-1",
+      "source_group": "analytic:noise:1",
+      "evidence_type": "analytic_fixture",
+      "duration_seconds": 6.0,
+      "analyzed_duration_seconds": 6.0,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "e8328506784e5f8833585a9a9563f069979bf7d8409ec25987404a5994c64b57",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -28.365500502119122,
+        "blockwise_lower_decile_median": -21.215284645202832,
+        "iid_gaussian_corrected_decile": -27.90848915689732
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": {
+        "frozen_level_rule": {
+          "predicted_intervals": [],
+          "metrics": {
+            "true_positive": 0,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "matches": [],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": null,
+            "matched_boundary_error_p95_seconds": null,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        },
+        "adaptive_level_rule": {
+          "predicted_intervals": [],
+          "metrics": {
+            "true_positive": 0,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "matches": [],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": null,
+            "matched_boundary_error_p95_seconds": null,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        }
+      },
+      "speech_methods": {
+        "webrtc": {
+          "status": "unavailable",
+          "reason": "webrtcvad is not installed; no speech scores fabricated"
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 0,
+          "false_positive": 300,
+          "false_negative": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0,
+          "frames": 300,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "20520e0e5770ca3e"
+    },
+    {
+      "id": "stationary-noise-2",
+      "source_group": "analytic:noise:2",
+      "evidence_type": "analytic_fixture",
+      "duration_seconds": 6.0,
+      "analyzed_duration_seconds": 6.0,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "2b60165ceaf656ab7e51aa04981a441b4f5646af50244cf7d8804c2baa89dda1",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -34.430618725307625,
+        "blockwise_lower_decile_median": -34.42109339747987,
+        "iid_gaussian_corrected_decile": -33.973607380085824
+      },
+      "noise_reference_dbfs": -33.982988211432854,
+      "noise_absolute_error_db": {
+        "global_lower_decile": 0.4476305138747705,
+        "blockwise_lower_decile_median": 0.438105186047018,
+        "iid_gaussian_corrected_decile": 0.009380831347030494
+      },
+      "level_changes": {
+        "frozen_level_rule": {
+          "predicted_intervals": [],
+          "metrics": {
+            "true_positive": 0,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "matches": [],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": null,
+            "matched_boundary_error_p95_seconds": null,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        },
+        "adaptive_level_rule": {
+          "predicted_intervals": [],
+          "metrics": {
+            "true_positive": 0,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "matches": [],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": null,
+            "matched_boundary_error_p95_seconds": null,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        }
+      },
+      "speech_methods": {
+        "webrtc": {
+          "status": "unavailable",
+          "reason": "webrtcvad is not installed; no speech scores fabricated"
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 0,
+          "false_positive": 300,
+          "false_negative": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0,
+          "frames": 300,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "fb91985679f9a1bd"
+    },
+    {
+      "id": "gain-6db-2",
+      "source_group": "analytic:noise:2",
+      "evidence_type": "analytic_fixture",
+      "duration_seconds": 6.0,
+      "analyzed_duration_seconds": 6.0,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "b7de0449e4d188e2970f4705db22d808b5cd7b1eca6fe05b6455c06e2f82f53c",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -34.280696563314756,
+        "blockwise_lower_decile_median": -34.375495948777065,
+        "iid_gaussian_corrected_decile": -33.823685218092955
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": {
+        "frozen_level_rule": {
+          "predicted_intervals": [],
+          "metrics": {
+            "true_positive": 0,
+            "false_positive": 0,
+            "false_negative": 1,
+            "precision": null,
+            "recall": 0.0,
+            "f1": 0.0,
+            "matches": [],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": null,
+            "matched_boundary_error_p95_seconds": null,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        },
+        "adaptive_level_rule": {
+          "predicted_intervals": [
+            {
+              "start": 2.88,
+              "end": 3.12
+            }
+          ],
+          "metrics": {
+            "true_positive": 1,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "matches": [
+              {
+                "prediction": 0,
+                "reference": 0,
+                "iou": 1.0
+              }
+            ],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": 0.0,
+            "matched_boundary_error_p95_seconds": 0.0,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        }
+      },
+      "speech_methods": {
+        "webrtc": {
+          "status": "unavailable",
+          "reason": "webrtcvad is not installed; no speech scores fabricated"
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 0,
+          "false_positive": 300,
+          "false_negative": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0,
+          "frames": 300,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "fb91985679f9a1bd"
+    },
+    {
+      "id": "gain-12db-2",
+      "source_group": "analytic:noise:2",
+      "evidence_type": "analytic_fixture",
+      "duration_seconds": 6.0,
+      "analyzed_duration_seconds": 6.0,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "49ec376f95f677ee22087257ebf57222caf33645b3b2cafdcb1a35a391788762",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -34.280696563314756,
+        "blockwise_lower_decile_median": -34.375495948777065,
+        "iid_gaussian_corrected_decile": -33.823685218092955
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": {
+        "frozen_level_rule": {
+          "predicted_intervals": [
+            {
+              "start": 2.88,
+              "end": 3.12
+            }
+          ],
+          "metrics": {
+            "true_positive": 1,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "matches": [
+              {
+                "prediction": 0,
+                "reference": 0,
+                "iou": 1.0
+              }
+            ],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": 0.0,
+            "matched_boundary_error_p95_seconds": 0.0,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        },
+        "adaptive_level_rule": {
+          "predicted_intervals": [
+            {
+              "start": 2.88,
+              "end": 3.12
+            }
+          ],
+          "metrics": {
+            "true_positive": 1,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "matches": [
+              {
+                "prediction": 0,
+                "reference": 0,
+                "iou": 1.0
+              }
+            ],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": 0.0,
+            "matched_boundary_error_p95_seconds": 0.0,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        }
+      },
+      "speech_methods": {
+        "webrtc": {
+          "status": "unavailable",
+          "reason": "webrtcvad is not installed; no speech scores fabricated"
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 0,
+          "false_positive": 300,
+          "false_negative": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0,
+          "frames": 300,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "fb91985679f9a1bd"
+    },
+    {
+      "id": "gain-18db-2",
+      "source_group": "analytic:noise:2",
+      "evidence_type": "analytic_fixture",
+      "duration_seconds": 6.0,
+      "analyzed_duration_seconds": 6.0,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "9abbdc485b2672559228647ee6a9155273362c01696fd9cec25a573889fa69dd",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -34.280696563314756,
+        "blockwise_lower_decile_median": -34.375495948777065,
+        "iid_gaussian_corrected_decile": -33.823685218092955
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": {
+        "frozen_level_rule": {
+          "predicted_intervals": [
+            {
+              "start": 2.88,
+              "end": 3.12
+            }
+          ],
+          "metrics": {
+            "true_positive": 1,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "matches": [
+              {
+                "prediction": 0,
+                "reference": 0,
+                "iou": 1.0
+              }
+            ],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": 0.0,
+            "matched_boundary_error_p95_seconds": 0.0,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        },
+        "adaptive_level_rule": {
+          "predicted_intervals": [
+            {
+              "start": 2.88,
+              "end": 3.12
+            }
+          ],
+          "metrics": {
+            "true_positive": 1,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "matches": [
+              {
+                "prediction": 0,
+                "reference": 0,
+                "iou": 1.0
+              }
+            ],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": 0.0,
+            "matched_boundary_error_p95_seconds": 0.0,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        }
+      },
+      "speech_methods": {
+        "webrtc": {
+          "status": "unavailable",
+          "reason": "webrtcvad is not installed; no speech scores fabricated"
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 0,
+          "false_positive": 300,
+          "false_negative": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0,
+          "frames": 300,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "fb91985679f9a1bd"
+    },
+    {
+      "id": "gradual-gain-2",
+      "source_group": "analytic:noise:2",
+      "evidence_type": "analytic_fixture",
+      "duration_seconds": 6.0,
+      "analyzed_duration_seconds": 6.0,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "43a8ee230264561461bd628b0e936a95110385d52bba0786a99f562e14ba5836",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -28.166492770393234,
+        "blockwise_lower_decile_median": -21.34661776589047,
+        "iid_gaussian_corrected_decile": -27.709481425171433
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": {
+        "frozen_level_rule": {
+          "predicted_intervals": [],
+          "metrics": {
+            "true_positive": 0,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "matches": [],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": null,
+            "matched_boundary_error_p95_seconds": null,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        },
+        "adaptive_level_rule": {
+          "predicted_intervals": [],
+          "metrics": {
+            "true_positive": 0,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "matches": [],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": null,
+            "matched_boundary_error_p95_seconds": null,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        }
+      },
+      "speech_methods": {
+        "webrtc": {
+          "status": "unavailable",
+          "reason": "webrtcvad is not installed; no speech scores fabricated"
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 0,
+          "false_positive": 300,
+          "false_negative": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0,
+          "frames": 300,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "fb91985679f9a1bd"
+    },
+    {
+      "id": "stationary-noise-3",
+      "source_group": "analytic:noise:3",
+      "evidence_type": "analytic_fixture",
+      "duration_seconds": 6.0,
+      "analyzed_duration_seconds": 6.0,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "7d8fc43ae7e4023498ef09f934f83d9b4043eb6be3a849c7c7162b66a311193d",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -34.436775700526084,
+        "blockwise_lower_decile_median": -34.42271213019476,
+        "iid_gaussian_corrected_decile": -33.97976435530428
+      },
+      "noise_reference_dbfs": -33.983724823212256,
+      "noise_absolute_error_db": {
+        "global_lower_decile": 0.453050877313828,
+        "blockwise_lower_decile_median": 0.4389873069825043,
+        "iid_gaussian_corrected_decile": 0.003960467907972998
+      },
+      "level_changes": {
+        "frozen_level_rule": {
+          "predicted_intervals": [],
+          "metrics": {
+            "true_positive": 0,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "matches": [],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": null,
+            "matched_boundary_error_p95_seconds": null,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        },
+        "adaptive_level_rule": {
+          "predicted_intervals": [],
+          "metrics": {
+            "true_positive": 0,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "matches": [],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": null,
+            "matched_boundary_error_p95_seconds": null,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        }
+      },
+      "speech_methods": {
+        "webrtc": {
+          "status": "unavailable",
+          "reason": "webrtcvad is not installed; no speech scores fabricated"
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 0,
+          "false_positive": 300,
+          "false_negative": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0,
+          "frames": 300,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "24aae976dd9e098c"
+    },
+    {
+      "id": "gain-6db-3",
+      "source_group": "analytic:noise:3",
+      "evidence_type": "analytic_fixture",
+      "duration_seconds": 6.0,
+      "analyzed_duration_seconds": 6.0,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "c76b9d3e74db89943db767f7120bec78ec9a23120cb76009985be3005d49014a",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -34.31530481132484,
+        "blockwise_lower_decile_median": -34.31530481132484,
+        "iid_gaussian_corrected_decile": -33.85829346610305
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": {
+        "frozen_level_rule": {
+          "predicted_intervals": [],
+          "metrics": {
+            "true_positive": 0,
+            "false_positive": 0,
+            "false_negative": 1,
+            "precision": null,
+            "recall": 0.0,
+            "f1": 0.0,
+            "matches": [],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": null,
+            "matched_boundary_error_p95_seconds": null,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        },
+        "adaptive_level_rule": {
+          "predicted_intervals": [
+            {
+              "start": 2.88,
+              "end": 3.12
+            }
+          ],
+          "metrics": {
+            "true_positive": 1,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "matches": [
+              {
+                "prediction": 0,
+                "reference": 0,
+                "iou": 1.0
+              }
+            ],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": 0.0,
+            "matched_boundary_error_p95_seconds": 0.0,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        }
+      },
+      "speech_methods": {
+        "webrtc": {
+          "status": "unavailable",
+          "reason": "webrtcvad is not installed; no speech scores fabricated"
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 0,
+          "false_positive": 300,
+          "false_negative": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0,
+          "frames": 300,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "24aae976dd9e098c"
+    },
+    {
+      "id": "gain-12db-3",
+      "source_group": "analytic:noise:3",
+      "evidence_type": "analytic_fixture",
+      "duration_seconds": 6.0,
+      "analyzed_duration_seconds": 6.0,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "74fe4d1990c3d8552e3634d149e5b6e8fb18b4be12b2bc97288cf28f20e3c962",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -34.31530481132484,
+        "blockwise_lower_decile_median": -34.31530481132484,
+        "iid_gaussian_corrected_decile": -33.85829346610305
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": {
+        "frozen_level_rule": {
+          "predicted_intervals": [
+            {
+              "start": 2.88,
+              "end": 3.12
+            }
+          ],
+          "metrics": {
+            "true_positive": 1,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "matches": [
+              {
+                "prediction": 0,
+                "reference": 0,
+                "iou": 1.0
+              }
+            ],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": 0.0,
+            "matched_boundary_error_p95_seconds": 0.0,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        },
+        "adaptive_level_rule": {
+          "predicted_intervals": [
+            {
+              "start": 2.88,
+              "end": 3.12
+            }
+          ],
+          "metrics": {
+            "true_positive": 1,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "matches": [
+              {
+                "prediction": 0,
+                "reference": 0,
+                "iou": 1.0
+              }
+            ],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": 0.0,
+            "matched_boundary_error_p95_seconds": 0.0,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        }
+      },
+      "speech_methods": {
+        "webrtc": {
+          "status": "unavailable",
+          "reason": "webrtcvad is not installed; no speech scores fabricated"
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 0,
+          "false_positive": 300,
+          "false_negative": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0,
+          "frames": 300,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "24aae976dd9e098c"
+    },
+    {
+      "id": "gain-18db-3",
+      "source_group": "analytic:noise:3",
+      "evidence_type": "analytic_fixture",
+      "duration_seconds": 6.0,
+      "analyzed_duration_seconds": 6.0,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "bc204789910a501a73313d0beb32bcfd3edd89e5b6f534cab34f34ba820587f3",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -34.31530481132484,
+        "blockwise_lower_decile_median": -34.31530481132484,
+        "iid_gaussian_corrected_decile": -33.85829346610305
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": {
+        "frozen_level_rule": {
+          "predicted_intervals": [
+            {
+              "start": 2.88,
+              "end": 3.12
+            }
+          ],
+          "metrics": {
+            "true_positive": 1,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "matches": [
+              {
+                "prediction": 0,
+                "reference": 0,
+                "iou": 1.0
+              }
+            ],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": 0.0,
+            "matched_boundary_error_p95_seconds": 0.0,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        },
+        "adaptive_level_rule": {
+          "predicted_intervals": [
+            {
+              "start": 2.88,
+              "end": 3.12
+            }
+          ],
+          "metrics": {
+            "true_positive": 1,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "matches": [
+              {
+                "prediction": 0,
+                "reference": 0,
+                "iou": 1.0
+              }
+            ],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": 0.0,
+            "matched_boundary_error_p95_seconds": 0.0,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        }
+      },
+      "speech_methods": {
+        "webrtc": {
+          "status": "unavailable",
+          "reason": "webrtcvad is not installed; no speech scores fabricated"
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 0,
+          "false_positive": 300,
+          "false_negative": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0,
+          "frames": 300,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "24aae976dd9e098c"
+    },
+    {
+      "id": "gradual-gain-3",
+      "source_group": "analytic:noise:3",
+      "evidence_type": "analytic_fixture",
+      "duration_seconds": 6.0,
+      "analyzed_duration_seconds": 6.0,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "b9e5e2c0a7eb7d47816f98cf08ad91840feb17a8aab95a78f12ffb47a332d30a",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -28.370589444511246,
+        "blockwise_lower_decile_median": -21.28255154904188,
+        "iid_gaussian_corrected_decile": -27.913578099289445
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": {
+        "frozen_level_rule": {
+          "predicted_intervals": [],
+          "metrics": {
+            "true_positive": 0,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "matches": [],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": null,
+            "matched_boundary_error_p95_seconds": null,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        },
+        "adaptive_level_rule": {
+          "predicted_intervals": [],
+          "metrics": {
+            "true_positive": 0,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "matches": [],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": null,
+            "matched_boundary_error_p95_seconds": null,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        }
+      },
+      "speech_methods": {
+        "webrtc": {
+          "status": "unavailable",
+          "reason": "webrtcvad is not installed; no speech scores fabricated"
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 0,
+          "false_positive": 300,
+          "false_negative": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0,
+          "frames": 300,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "24aae976dd9e098c"
+    },
+    {
+      "id": "silence",
+      "source_group": "analytic:silence",
+      "evidence_type": "analytic_fixture",
+      "duration_seconds": 6.0,
+      "analyzed_duration_seconds": 6.0,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "fec9afb531a8e036eba1d81651896e1b2c1f78b0234dbadc8e7549563f09407b",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": null,
+        "blockwise_lower_decile_median": null,
+        "iid_gaussian_corrected_decile": null
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": {
+        "frozen_level_rule": {
+          "predicted_intervals": [],
+          "metrics": {
+            "true_positive": 0,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "matches": [],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": null,
+            "matched_boundary_error_p95_seconds": null,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        },
+        "adaptive_level_rule": {
+          "predicted_intervals": [],
+          "metrics": {
+            "true_positive": 0,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "matches": [],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": null,
+            "matched_boundary_error_p95_seconds": null,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        }
+      },
+      "speech_methods": {
+        "webrtc": {
+          "status": "unavailable",
+          "reason": "webrtcvad is not installed; no speech scores fabricated"
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 0,
+          "false_positive": 0,
+          "false_negative": 0,
+          "precision": null,
+          "recall": null,
+          "f1": null,
+          "frames": 300,
+          "hop_seconds": 0.02,
+          "true_negative": 300,
+          "nonspeech_false_positive_rate": 0.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "e6c18fdbe59783df"
+    },
+    {
+      "id": "steady-tone",
+      "source_group": "analytic:steady-tone",
+      "evidence_type": "analytic_fixture",
+      "duration_seconds": 6.0,
+      "analyzed_duration_seconds": 6.0,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "112feef54f8f3716fedc0e383a6f0858adc1863a14fb78bf6a665f032b7237ee",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -16.989699975018844,
+        "blockwise_lower_decile_median": -16.989699975018844,
+        "iid_gaussian_corrected_decile": -16.532688629797043
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": {
+        "frozen_level_rule": {
+          "predicted_intervals": [],
+          "metrics": {
+            "true_positive": 0,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "matches": [],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": null,
+            "matched_boundary_error_p95_seconds": null,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        },
+        "adaptive_level_rule": {
+          "predicted_intervals": [],
+          "metrics": {
+            "true_positive": 0,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "matches": [],
+            "minimum_iou": 0.5,
+            "matched_boundary_error_median_seconds": null,
+            "matched_boundary_error_p95_seconds": null,
+            "boundary_scope": "matched events only; unmatched events counted separately"
+          }
+        }
+      },
+      "speech_methods": {
+        "webrtc": {
+          "status": "unavailable",
+          "reason": "webrtcvad is not installed; no speech scores fabricated"
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 0,
+          "false_positive": 300,
+          "false_negative": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0,
+          "frames": 300,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "0769822cabbd03bf"
+    }
+  ],
+  "promotion_eligible": false,
+  "promotion_blockers": [
+    "Development-only runner; no locked independent evaluation performed.",
+    "Natural-audio representativeness and annotation quality are not established by these results.",
+    "Speech-positive support and calibrated noise/SNR accuracy require separate evidence."
+  ],
+  "limitations": [
+    "Event support intervals describe analysis windows, not verified edit boundaries.",
+    "No annotation is different from an explicitly empty annotation list.",
+    "Lower-tail noise estimates assume sufficiently quiet frames and can be biased by continuous speech or noise changes.",
+    "The Gaussian correction is invalid for correlated, colored, non-Gaussian or speech-filled noise frames unless separately validated.",
+    "Analytic fixture bootstrap bounds describe those constructed groups only; they do not support population performance claims."
+  ],
+  "mode": "analytic non-speech fixtures",
+  "manifest_sha256": null
+}

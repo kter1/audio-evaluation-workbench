@@ -1,0 +1,619 @@
+{
+  "schema_version": "vad-runtime-1.0",
+  "method": "silero",
+  "manifest_sha256": "58d4ebf0653201226e476fb3aa45acca26e3394e2fd7fe92be158739647de2fc",
+  "comparison_sha256": "1c5b93ac304597b487d60faf4cb26f4471cb914aa098980e91ea40ffc9473506",
+  "environment": {
+    "python": "3.13.7",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "hardware": {
+      "hw.model": {
+        "unavailable": "sysctl: sysctl fmt -1 1024 1: Operation not permitted"
+      },
+      "machdep.cpu.brand_string": {
+        "unavailable": "sysctl: sysctl fmt -1 1024 1: Operation not permitted"
+      }
+    },
+    "machine": "arm64",
+    "processor": "arm",
+    "logical_cpus": 8,
+    "thread_environment": {
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1"
+    },
+    "device": "cpu",
+    "torch_threads": 1,
+    "torch_interop_threads": 1
+  },
+  "case_count": 30,
+  "repeats": 3,
+  "cold_module_import_seconds": 0.559007165953517,
+  "decode_and_verify_seconds": 0.04394674999639392,
+  "cold_adapter_setup_seconds": 0.9357999577187002,
+  "model_load_and_verification_seconds": 0.05057362513616681,
+  "first_recording_warmup_seconds": 0.11644633300602436,
+  "warm_summary": {
+    "timed_calls": 90,
+    "audio_seconds_including_repeats": 786.948375,
+    "wall_seconds": 2.7572037521749735,
+    "realtime_factor": 0.0035036653480286727,
+    "latency_p50_seconds": 0.032641541911289096,
+    "latency_p95_seconds": 0.050414717034436764,
+    "duration_bins": {
+      "5-15s": {
+        "calls": 69,
+        "p50_seconds": 0.032925291918218136,
+        "p95_seconds": 0.042599858343601193
+      },
+      "<5s": {
+        "calls": 18,
+        "p50_seconds": 0.014344395603984594,
+        "p95_seconds": 0.02537711884360752
+      },
+      ">=15s": {
+        "calls": 3,
+        "p50_seconds": 0.050605291966348886,
+        "p95_seconds": 0.05744337933138013
+      }
+    }
+  },
+  "peak_process_rss_gib": 0.285858154296875,
+  "worker_wall_seconds": 4.473395708017051,
+  "resource_checks_only": {
+    "warm_realtime_factor_le_1": true,
+    "peak_process_rss_le_8_gib": true
+  },
+  "model_sha256": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+  "rows": [
+    {
+      "id": "ten-vad:testset-audio-01",
+      "repeat": 0,
+      "audio_seconds": 11.52,
+      "wall_seconds": 0.03845008322969079
+    },
+    {
+      "id": "ten-vad:testset-audio-02",
+      "repeat": 0,
+      "audio_seconds": 4.045,
+      "wall_seconds": 0.013569207862019539
+    },
+    {
+      "id": "ten-vad:testset-audio-03",
+      "repeat": 0,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.03341270796954632
+    },
+    {
+      "id": "ten-vad:testset-audio-04",
+      "repeat": 0,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.03311979165300727
+    },
+    {
+      "id": "ten-vad:testset-audio-05",
+      "repeat": 0,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.03386020800098777
+    },
+    {
+      "id": "ten-vad:testset-audio-06",
+      "repeat": 0,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.033773125149309635
+    },
+    {
+      "id": "ten-vad:testset-audio-07",
+      "repeat": 0,
+      "audio_seconds": 8.44,
+      "wall_seconds": 0.027410250157117844
+    },
+    {
+      "id": "ten-vad:testset-audio-08",
+      "repeat": 0,
+      "audio_seconds": 9.6,
+      "wall_seconds": 0.030774916987866163
+    },
+    {
+      "id": "ten-vad:testset-audio-09",
+      "repeat": 0,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.0330673330463469
+    },
+    {
+      "id": "ten-vad:testset-audio-10",
+      "repeat": 0,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.03339250013232231
+    },
+    {
+      "id": "ten-vad:testset-audio-11",
+      "repeat": 0,
+      "audio_seconds": 8.832,
+      "wall_seconds": 0.028402249794453382
+    },
+    {
+      "id": "ten-vad:testset-audio-12",
+      "repeat": 0,
+      "audio_seconds": 4.79,
+      "wall_seconds": 0.015321042388677597
+    },
+    {
+      "id": "ten-vad:testset-audio-13",
+      "repeat": 0,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.03383512515574694
+    },
+    {
+      "id": "ten-vad:testset-audio-14",
+      "repeat": 0,
+      "audio_seconds": 6.805,
+      "wall_seconds": 0.022740833926945925
+    },
+    {
+      "id": "ten-vad:testset-audio-15",
+      "repeat": 0,
+      "audio_seconds": 4.736,
+      "wall_seconds": 0.015236333012580872
+    },
+    {
+      "id": "ten-vad:testset-audio-16",
+      "repeat": 0,
+      "audio_seconds": 10.24,
+      "wall_seconds": 0.032829875126481056
+    },
+    {
+      "id": "ten-vad:testset-audio-17",
+      "repeat": 0,
+      "audio_seconds": 3.88,
+      "wall_seconds": 0.012447666842490435
+    },
+    {
+      "id": "ten-vad:testset-audio-18",
+      "repeat": 0,
+      "audio_seconds": 7.296,
+      "wall_seconds": 0.02339383400976658
+    },
+    {
+      "id": "ten-vad:testset-audio-19",
+      "repeat": 0,
+      "audio_seconds": 9.24,
+      "wall_seconds": 0.029622125439345837
+    },
+    {
+      "id": "ten-vad:testset-audio-20",
+      "repeat": 0,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.032831708900630474
+    },
+    {
+      "id": "ten-vad:testset-audio-21",
+      "repeat": 0,
+      "audio_seconds": 3.43,
+      "wall_seconds": 0.011020875070244074
+    },
+    {
+      "id": "ten-vad:testset-audio-22",
+      "repeat": 0,
+      "audio_seconds": 14.08,
+      "wall_seconds": 0.0447373753413558
+    },
+    {
+      "id": "ten-vad:testset-audio-23",
+      "repeat": 0,
+      "audio_seconds": 4.992,
+      "wall_seconds": 0.015873875003308058
+    },
+    {
+      "id": "ten-vad:testset-audio-24",
+      "repeat": 0,
+      "audio_seconds": 6.44,
+      "wall_seconds": 0.021479000337421894
+    },
+    {
+      "id": "ten-vad:testset-audio-25",
+      "repeat": 0,
+      "audio_seconds": 15.785,
+      "wall_seconds": 0.050605291966348886
+    },
+    {
+      "id": "ten-vad:testset-audio-26",
+      "repeat": 0,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.032925291918218136
+    },
+    {
+      "id": "ten-vad:testset-audio-27",
+      "repeat": 0,
+      "audio_seconds": 8.704,
+      "wall_seconds": 0.027814374770969152
+    },
+    {
+      "id": "ten-vad:testset-audio-28",
+      "repeat": 0,
+      "audio_seconds": 7.168,
+      "wall_seconds": 0.02280416712164879
+    },
+    {
+      "id": "ten-vad:testset-audio-29",
+      "repeat": 0,
+      "audio_seconds": 8.96,
+      "wall_seconds": 0.02866224991157651
+    },
+    {
+      "id": "ten-vad:testset-audio-30",
+      "repeat": 0,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.03290416719391942
+    },
+    {
+      "id": "ten-vad:testset-audio-01",
+      "repeat": 1,
+      "audio_seconds": 11.52,
+      "wall_seconds": 0.03660966595634818
+    },
+    {
+      "id": "ten-vad:testset-audio-02",
+      "repeat": 1,
+      "audio_seconds": 4.045,
+      "wall_seconds": 0.012959083076566458
+    },
+    {
+      "id": "ten-vad:testset-audio-03",
+      "repeat": 1,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.03321887506172061
+    },
+    {
+      "id": "ten-vad:testset-audio-04",
+      "repeat": 1,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.03299066564068198
+    },
+    {
+      "id": "ten-vad:testset-audio-05",
+      "repeat": 1,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.032949999906122684
+    },
+    {
+      "id": "ten-vad:testset-audio-06",
+      "repeat": 1,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.03300695773214102
+    },
+    {
+      "id": "ten-vad:testset-audio-07",
+      "repeat": 1,
+      "audio_seconds": 8.44,
+      "wall_seconds": 0.026905291248112917
+    },
+    {
+      "id": "ten-vad:testset-audio-08",
+      "repeat": 1,
+      "audio_seconds": 9.6,
+      "wall_seconds": 0.030452542006969452
+    },
+    {
+      "id": "ten-vad:testset-audio-09",
+      "repeat": 1,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.03447149973362684
+    },
+    {
+      "id": "ten-vad:testset-audio-10",
+      "repeat": 1,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.033972958102822304
+    },
+    {
+      "id": "ten-vad:testset-audio-11",
+      "repeat": 1,
+      "audio_seconds": 8.832,
+      "wall_seconds": 0.02817750023677945
+    },
+    {
+      "id": "ten-vad:testset-audio-12",
+      "repeat": 1,
+      "audio_seconds": 4.79,
+      "wall_seconds": 0.015379166230559349
+    },
+    {
+      "id": "ten-vad:testset-audio-13",
+      "repeat": 1,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.03279120894148946
+    },
+    {
+      "id": "ten-vad:testset-audio-14",
+      "repeat": 1,
+      "audio_seconds": 6.805,
+      "wall_seconds": 0.021650583017617464
+    },
+    {
+      "id": "ten-vad:testset-audio-15",
+      "repeat": 1,
+      "audio_seconds": 4.736,
+      "wall_seconds": 0.01511958334594965
+    },
+    {
+      "id": "ten-vad:testset-audio-16",
+      "repeat": 1,
+      "audio_seconds": 10.24,
+      "wall_seconds": 0.032491874881088734
+    },
+    {
+      "id": "ten-vad:testset-audio-17",
+      "repeat": 1,
+      "audio_seconds": 3.88,
+      "wall_seconds": 0.012451583985239267
+    },
+    {
+      "id": "ten-vad:testset-audio-18",
+      "repeat": 1,
+      "audio_seconds": 7.296,
+      "wall_seconds": 0.023273166734725237
+    },
+    {
+      "id": "ten-vad:testset-audio-19",
+      "repeat": 1,
+      "audio_seconds": 9.24,
+      "wall_seconds": 0.029444875195622444
+    },
+    {
+      "id": "ten-vad:testset-audio-20",
+      "repeat": 1,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.034173666033893824
+    },
+    {
+      "id": "ten-vad:testset-audio-21",
+      "repeat": 1,
+      "audio_seconds": 3.43,
+      "wall_seconds": 0.011804916895925999
+    },
+    {
+      "id": "ten-vad:testset-audio-22",
+      "repeat": 1,
+      "audio_seconds": 14.08,
+      "wall_seconds": 0.045146916061639786
+    },
+    {
+      "id": "ten-vad:testset-audio-23",
+      "repeat": 1,
+      "audio_seconds": 4.992,
+      "wall_seconds": 0.01598025020211935
+    },
+    {
+      "id": "ten-vad:testset-audio-24",
+      "repeat": 1,
+      "audio_seconds": 6.44,
+      "wall_seconds": 0.02060933317989111
+    },
+    {
+      "id": "ten-vad:testset-audio-25",
+      "repeat": 1,
+      "audio_seconds": 15.785,
+      "wall_seconds": 0.05018179211765528
+    },
+    {
+      "id": "ten-vad:testset-audio-26",
+      "repeat": 1,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.0328618329949677
+    },
+    {
+      "id": "ten-vad:testset-audio-27",
+      "repeat": 1,
+      "audio_seconds": 8.704,
+      "wall_seconds": 0.02758887503296137
+    },
+    {
+      "id": "ten-vad:testset-audio-28",
+      "repeat": 1,
+      "audio_seconds": 7.168,
+      "wall_seconds": 0.022749208379536867
+    },
+    {
+      "id": "ten-vad:testset-audio-29",
+      "repeat": 1,
+      "audio_seconds": 8.96,
+      "wall_seconds": 0.02899133274331689
+    },
+    {
+      "id": "ten-vad:testset-audio-30",
+      "repeat": 1,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.033510707784444094
+    },
+    {
+      "id": "ten-vad:testset-audio-01",
+      "repeat": 2,
+      "audio_seconds": 11.52,
+      "wall_seconds": 0.03665274986997247
+    },
+    {
+      "id": "ten-vad:testset-audio-02",
+      "repeat": 2,
+      "audio_seconds": 4.045,
+      "wall_seconds": 0.013002749998122454
+    },
+    {
+      "id": "ten-vad:testset-audio-03",
+      "repeat": 2,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.03501862473785877
+    },
+    {
+      "id": "ten-vad:testset-audio-04",
+      "repeat": 2,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.039393582846969366
+    },
+    {
+      "id": "ten-vad:testset-audio-05",
+      "repeat": 2,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.03740358306095004
+    },
+    {
+      "id": "ten-vad:testset-audio-06",
+      "repeat": 2,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.035421791952103376
+    },
+    {
+      "id": "ten-vad:testset-audio-07",
+      "repeat": 2,
+      "audio_seconds": 8.44,
+      "wall_seconds": 0.029002957977354527
+    },
+    {
+      "id": "ten-vad:testset-audio-08",
+      "repeat": 2,
+      "audio_seconds": 9.6,
+      "wall_seconds": 0.033646542113274336
+    },
+    {
+      "id": "ten-vad:testset-audio-09",
+      "repeat": 2,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.03591670794412494
+    },
+    {
+      "id": "ten-vad:testset-audio-10",
+      "repeat": 2,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.035962208174169064
+    },
+    {
+      "id": "ten-vad:testset-audio-11",
+      "repeat": 2,
+      "audio_seconds": 8.832,
+      "wall_seconds": 0.030302375089377165
+    },
+    {
+      "id": "ten-vad:testset-audio-12",
+      "repeat": 2,
+      "audio_seconds": 4.79,
+      "wall_seconds": 0.01650337502360344
+    },
+    {
+      "id": "ten-vad:testset-audio-13",
+      "repeat": 2,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.03405145788565278
+    },
+    {
+      "id": "ten-vad:testset-audio-14",
+      "repeat": 2,
+      "audio_seconds": 6.805,
+      "wall_seconds": 0.021751416847109795
+    },
+    {
+      "id": "ten-vad:testset-audio-15",
+      "repeat": 2,
+      "audio_seconds": 4.736,
+      "wall_seconds": 0.015986458864063025
+    },
+    {
+      "id": "ten-vad:testset-audio-16",
+      "repeat": 2,
+      "audio_seconds": 10.24,
+      "wall_seconds": 0.03290441678836942
+    },
+    {
+      "id": "ten-vad:testset-audio-17",
+      "repeat": 2,
+      "audio_seconds": 3.88,
+      "wall_seconds": 0.012439040932804346
+    },
+    {
+      "id": "ten-vad:testset-audio-18",
+      "repeat": 2,
+      "audio_seconds": 7.296,
+      "wall_seconds": 0.023136417381465435
+    },
+    {
+      "id": "ten-vad:testset-audio-19",
+      "repeat": 2,
+      "audio_seconds": 9.24,
+      "wall_seconds": 0.03529795818030834
+    },
+    {
+      "id": "ten-vad:testset-audio-20",
+      "repeat": 2,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.03293433412909508
+    },
+    {
+      "id": "ten-vad:testset-audio-21",
+      "repeat": 2,
+      "audio_seconds": 3.43,
+      "wall_seconds": 0.010999999940395355
+    },
+    {
+      "id": "ten-vad:testset-audio-22",
+      "repeat": 2,
+      "audio_seconds": 14.08,
+      "wall_seconds": 0.10665270779281855
+    },
+    {
+      "id": "ten-vad:testset-audio-23",
+      "repeat": 2,
+      "audio_seconds": 4.992,
+      "wall_seconds": 0.07566166715696454
+    },
+    {
+      "id": "ten-vad:testset-audio-24",
+      "repeat": 2,
+      "audio_seconds": 6.44,
+      "wall_seconds": 0.07647783402353525
+    },
+    {
+      "id": "ten-vad:testset-audio-25",
+      "repeat": 2,
+      "audio_seconds": 15.785,
+      "wall_seconds": 0.0582031668163836
+    },
+    {
+      "id": "ten-vad:testset-audio-26",
+      "repeat": 2,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.035429167095571756
+    },
+    {
+      "id": "ten-vad:testset-audio-27",
+      "repeat": 2,
+      "audio_seconds": 8.704,
+      "wall_seconds": 0.02968995925039053
+    },
+    {
+      "id": "ten-vad:testset-audio-28",
+      "repeat": 2,
+      "audio_seconds": 7.168,
+      "wall_seconds": 0.026194666977971792
+    },
+    {
+      "id": "ten-vad:testset-audio-29",
+      "repeat": 2,
+      "audio_seconds": 8.96,
+      "wall_seconds": 0.02865583309903741
+    },
+    {
+      "id": "ten-vad:testset-audio-30",
+      "repeat": 2,
+      "audio_seconds": 10.3333125,
+      "wall_seconds": 0.03427650034427643
+    }
+  ],
+  "code_sha256": {
+    "scripts/benchmark_vad_runtime.py": "e4ffad199a194b3be2b203b7ded473fb1069b8b28ac6d02ff783adedda5b7346",
+    "lab/runtime_metrics.py": "293ff5be620620a9def697b88cea1dc5eb29347d20cb107721d68a0631060bd2",
+    "lab/research_vad.py": "1cc80dcaf91a79b2c81641f2b18d1075529451baaf8db619f2646e908250f529",
+    "lab/research_analysis.py": "14941e78b1ff6c9e345bb0a99dde583aa052b2b0140eb369ab26731120d5b4e4",
+    "lab/research_benchmark.py": "9d1bdf1f0fd712fa721785445319a5d8d9da5287edb4df2a2fe7000a3412331a"
+  },
+  "scope": "Local fresh-process CPU experiment on previously consumed development clips; no accuracy or promotion claim. One first-clip warmup excluded. Timed calls include per-recording state reset, validation and output conversion. Peak RSS includes interpreter, imports and all decoded clips; not model-only memory. Worker wall excludes interpreter startup and output writing. Repeats are not independent recordings. Run each method in a separate invocation; shared model is sequential and not thread safe.",
+  "package_version": "2.14.1"
+}

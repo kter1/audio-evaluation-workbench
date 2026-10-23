@@ -1,0 +1,127 @@
+{
+  "schema_version": "corpus-qualification-1.0",
+  "case_rows": 1,
+  "connected_groups": 1,
+  "group_membership": {
+    "historical-example-not-independent": "21911cd83fcba082"
+  },
+  "history_matches": [
+    {
+      "id": "historical-example-not-independent",
+      "identities": [
+        "audio:c66c5de7fc246870ab9cecd54d893f7e30025c177da326206a043ee2ebd6a0c7",
+        "librispeech:speaker:7850",
+        "librispeech:utterance:7850-281318-0013"
+      ]
+    }
+  ],
+  "excluded_unresolved_labels": [],
+  "critical_condition_support": {
+    "unseen generator families": {
+      "human": {
+        "connected_groups": 0,
+        "required": 300
+      },
+      "synthetic": {
+        "connected_groups": 0,
+        "required": 200
+      }
+    },
+    "recorded device/channel shift": {
+      "human": {
+        "connected_groups": 0,
+        "required": 300
+      },
+      "synthetic": {
+        "connected_groups": 0,
+        "required": 200
+      }
+    },
+    "lossy codec": {
+      "human": {
+        "connected_groups": 0,
+        "required": 300
+      },
+      "synthetic": {
+        "connected_groups": 0,
+        "required": 200
+      }
+    },
+    "real background noise": {
+      "human": {
+        "connected_groups": 0,
+        "required": 300
+      },
+      "synthetic": {
+        "connected_groups": 0,
+        "required": 200
+      }
+    },
+    "replay": {
+      "human": {
+        "connected_groups": 0,
+        "required": 300
+      },
+      "synthetic": {
+        "connected_groups": 0,
+        "required": 200
+      }
+    },
+    "short speech": {
+      "human": {
+        "connected_groups": 0,
+        "required": 300
+      },
+      "synthetic": {
+        "connected_groups": 0,
+        "required": 200
+      }
+    },
+    "partially synthetic speech": {
+      "human": {
+        "connected_groups": 0,
+        "required": 300
+      },
+      "synthetic": {
+        "connected_groups": 0,
+        "required": 200
+      }
+    }
+  },
+  "verified_audit_file_sha256": {},
+  "errors": [
+    "Prospective corpus overlaps prior-use identities",
+    "Independent audit unresolved: perceptual_duplicates",
+    "Independent audit unresolved: label_provenance",
+    "Independent audit unresolved: training_exposure",
+    "Independent audit unresolved: previous_use",
+    "Development, calibration and locked-test partitions are all required",
+    "Declare non-empty heldout_generator_families",
+    "Declare non-empty heldout_domains",
+    "Insufficient independent support: unseen generator families/human 0 < 300",
+    "Insufficient independent support: unseen generator families/synthetic 0 < 200",
+    "Insufficient independent support: recorded device/channel shift/human 0 < 300",
+    "Insufficient independent support: recorded device/channel shift/synthetic 0 < 200",
+    "Insufficient independent support: lossy codec/human 0 < 300",
+    "Insufficient independent support: lossy codec/synthetic 0 < 200",
+    "Insufficient independent support: real background noise/human 0 < 300",
+    "Insufficient independent support: real background noise/synthetic 0 < 200",
+    "Insufficient independent support: replay/human 0 < 300",
+    "Insufficient independent support: replay/synthetic 0 < 200",
+    "Insufficient independent support: short speech/human 0 < 300",
+    "Insufficient independent support: short speech/synthetic 0 < 200",
+    "Insufficient independent support: partially synthetic speech/human 0 < 300",
+    "Insufficient independent support: partially synthetic speech/synthetic 0 < 200"
+  ],
+  "structural_gates_passed": false,
+  "scope": "Structural/evidence-file qualification only; reviewer assertions are not independently proven by this program.",
+  "limitations": [
+    "Header and byte hashes are checked; full decoder validity is checked by the analysis runner.",
+    "No detection performance, calibration or world-class claim follows from qualification.",
+    "History scope is limited to identities supplied by the prior-use registry."
+  ],
+  "manifest_sha256": "69187edc8626dc7c08ab3d8f31a6463374159b9519ed10eedd6bddd53b8a3f38",
+  "contract_sha256": "36fec15d112e6a7c87b198a51ab9705eea79242a2c8005a75ff5035e60e757d7",
+  "history_registry_sha256": "759bcbd969880cd80ad537f2a96907037b99946097ce0dd66d2ebdae63aa0ebe",
+  "qualification_code_sha256": "d8d215552351e28e39016e161429a4f0d4918b3fe6d0797040d02eaf03b6a1e6"
+}

@@ -1,0 +1,1593 @@
+{
+  "schema_version": "vad-transport-audit-1.0",
+  "manifest_sha256": "c27bb9bca38cc51d905296d1171d91347027b16cd587502242b4bc36a55399bc",
+  "case_count": 120,
+  "passed_cases": 120,
+  "cases": [
+    {
+      "id": "ten-vad:testset-audio-01::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "5b50772967297007392d94c080bd290d9a17fcb5c7102cfd6bba3f7adf437cd3",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-01::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "e6cd6cf34e9e1405b144c88b34808ba3b275b79010b5419bc7d599badde96abd",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-01::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "bb905d7542800c81162aaeff788e1fd99c3f5d0be5cf983b146750f7fdda0ff8",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-01::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "37f8253c9eec3749d833f1694a9fffad5ab7165877e0c7f87f971b714e614fad",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-02::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "af99108150c10b4bc7cce1f367cddfd61b8958c9b5ca1bf63d7c7cc886c816df",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-02::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "d76e2ed77ce6b61a553ab7479b9c0608a39deaec8182ec042a00a57fb0ac5d61",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-02::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "ef481f6f5186d2154a37136eb38f0dc8106b72d98753d20f6b4a8f2beb9ae79a",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-02::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "5803fb2e1608b8cb886e6f5076fc1a547bfe1027d184c429dfaa9a480f2316ef",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-03::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "a0a27d464f6d874f9addf1654e95a3112d98371915dea29b1ac92da8a20ec121",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-03::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "36c46955dfac3be4f28fa36089256e4c83404a38f3e1dab93d59935b4445e970",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-03::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "d5f1536a374cdb04df23650ec47727087ebd92f67454e25ea637bd48cfb929cb",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-03::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "f3072a4c0ffa11b3a674c4ed42c222545b192a44a863d380c2528987a29d7095",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-04::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "c523a47b69a0c23e92d2fb2d21b36aab44bfbf4981e4593d20653a77d487b40a",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-04::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "9fdf4e74e4e22ca3d367ad1317992fb7d5442f9f8b21c9851647c7438ede848b",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-04::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "954613ddb5ee4498b67a66515860570a760b53c2085629b22dc5645d9d3c9e3e",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-04::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "a6d892fefa50b6fbd3688544e8f480cfd430c7f7c562107b185639bfec85e684",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-05::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "be34c9793efea9c35650dfc506db8af35377d94d06c2ce2523d3d0baaee2201d",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-05::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "7e7779074d76b1fae117fdb8c1efc358ad1dc3f2bce2406e52be7d31a9e648f9",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-05::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "908a8dc4e9fb3794c6488c766ac86543bd71b1fb0c4e2089193095358dd858ab",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-05::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "c353d4367fab9d81e3a1c3780b8424b6a67005df30f8997aa79c405178a820ed",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-06::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "62f79366268b41256b384d88142ba5a3cca3a022ea1d44b8bceb6673604f2bd5",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "More than 1% of channel samples are near full scale; saturation or limiting may affect model evidence.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-06::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "db14616185750e453d597ab4153c14994491f632241e8895a08c34b22ebb2c91",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-06::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "a6f2081edb29189b97c37299d8ff0554298e168d1aacf0c50afbaab6b3fcd62e",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-06::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "1424dde9305b01cb6942f15716de7b0dcee1b9f2cb6143cccd011e273644a5f1",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-07::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "2777ba385b53d1f0f1c5980697bf238197cdf1ea0971dcb84a3cd8d6b45a9042",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-07::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "55e3f5f4fe39c0578fcef3e747adc7b47900b45c3a0d215f7fa250d5dafd20f5",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-07::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "bc5daff12ec9c83144dc76cc5c48338657ecd04a94ed48088f6c372bcb4f99e2",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-07::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "2e45ddda58f1aef26cc69eed46d2a2453b79e55768bde5b9babf6f191529055f",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-08::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "3c169be3e56f1c35130ef1d19204b330d9b657e20e4f6c86a67444f52046dd02",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-08::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "439c0bfee1afdbc30b1eecc0d0ce02ce16c8e6884a841608d5263ac29e607cea",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-08::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "acf95388eb8c69fc2d8a76a2a4c7c0fa0a2fb2929c4b7b5569df248c548cee5e",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-08::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "9f6c4236e3c5fb151f1a7933d954da6729c2675a4d6315173800c04d281ff050",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-09::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "c5769ca1b70245ad44cd69e53398dd85bba17431159ead43486b9f4daf947f6d",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-09::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "dfbb95719637876addc9b48ba78c241504fb8eefb7f7eb8aac7dffb97ad90e93",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-09::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "e705cd29030e6d29bef479de4588e52625269d029d281e40b351b38bcfbfb7d0",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-09::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "19f242e7bf78b22b39d79a25e285dea277fe3824e81bdbdf08ef6c7021742fe8",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-10::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "5b62c803f1a684ac6576c791fb7d3fca79ff2ff36bc232bdede65cba64e7beb6",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-10::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "f7bf99364169aaa7a5b04e1d0bd97f27b7649ba14fd77e6349d3582b5948a279",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-10::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "955f5c112b433fb6c6ea3f3bf5e4ecf0b19d1a2de6608ed133ae57ee85442cdc",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-10::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "f631e8af4adffe0668bf58ba033e8f0837cb5682d9260781b4f5f3cefd29ebfe",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-11::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "381f37ea5cea0d0c1c896b1211565637281ce85b884afafdd0a56f19385b97cb",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-11::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "c21f2de4b4f51cf4b82441bf54f61675b3b2afb7024e689ac62630cbdd485fe6",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-11::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "b2c95fa631ba01467abf6f733b2bb9de2f8259efb6cfbf10a9773f72ae9b3b2e",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-11::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "c1d06419a6924a6e74b363c9e27f31bbca497f8b43e7439c39963b32b7c7a403",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-12::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "b20e6379f62e6c91388d837f39d73361c86f206eca442b63702d44422a0b8838",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-12::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "c4a211d673fe6debf28caabcc474090fcd0ba2ce94f32c4f89bebb0b3b66fd99",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-12::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "31168722aa413926d832810d11e08c7a04e1bf96a3b7e422bc7593e362fad27b",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-12::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "2111bb0f76ed9cf6410eec109b9a95326ec830d60a033f42008af6237b91537d",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-13::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "d8574a0c07f4cb468ba8ef19284d640dacbab4ef42e159c2dee66d4ad75368a7",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-13::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "fce1981f3222295c42e8fa8b6ed09eb9ab69b88a71d406b009844cf8366b98ad",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-13::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "3578df5cefa71b797ff2fed3eccf4ec96eb45c61b3da3e1c5875dcf48a169034",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-13::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "8dfc6673a3d4c944504615d20b9501f8dda9ffd1f2d7e99e3901c2c12b750da2",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-14::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "86474617f4bdf64ab3dca49c7f64a68884c6f9eca6817ab1e35630b074b4dc39",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-14::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "fe8c61f551141d3826f9c66afc28d48b9d0e1edae00aea98a10e0c2e5dc711b4",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-14::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "783530d5bb4438a5a1f9005e7968cb9274cf831c49443ea5448ba3bdc656745e",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-14::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "4182f8b88393e616f09afe1897020ee8dd1f4e79a7b0de1140972dc106c3512b",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-15::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "f6ebf9108b0e9899cbf4d8321a700e1edbdc3049361938c10ccda4caea1082ab",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-15::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "329fd20147d9f4cf62898eb66d04761bde94e115c2dea3134949a5632c7fe551",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-15::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "a7c3f683b5c15e410c90de519b44aee9fe77fe6d0575676184d30858616dc4bc",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-15::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "3373269e3681bf86a97239625faf99df40c863e684c3a5196e32e7c34e170353",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-16::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "ab6048b7f787f8429c7109e763d86f23acf7d7f708e6bc5118c98ea1c6bcbb40",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-16::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "3dd1bed6152bee0461d70afb90ac9758a3de6a9fd8c7fb2ada0de2d0260cc54b",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-16::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "6ad3d32ab6d98b5959c0d7f984188c52aa0385b570d5ae732b1f3c8eb1177bf0",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-16::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "78cdbe3f548854db22ebf2cc9eee3da4854e20df00f4bd43b776e35997abc849",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-17::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "8a8f2d6dede6e6ed2a2f3be1556e973c98399cd9811540f97e6c699282a5a265",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-17::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "3656d6bd1090f6aaa540812750f3c7aa3c4e8f7e896c4dad14ba82a63ebe4db7",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-17::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "c9b00b7956eb0720d96f828e58d4163c5a3011c53890555e445ed8d0392e0eb5",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-17::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "e234ac760747ce77d4c588a87728f0f318990d6bf340ca6cc5dfa6b161932ce6",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-18::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "e5bb9263876a83e43eb5198a637256b8c0cf7de9c8cffeaa0a29cf9f364edf8e",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-18::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "72e1c936dff7cbae342a843bab78cdf270b44bd1aada46641a05746845bb1d12",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-18::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "7d7687cd5d6b0b8a4f74c892fdbda0fb138cf6af0e1b02f7dca58163a195833d",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-18::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "273d3638dfc74f9cd1ddc97ea87412ac9cdc8f5130547725dafed2b8bd17ca30",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-19::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "8315739fe0ebc5918892046f6256dd24d255c3a32f8ded8842b8f3db4d5f4f9a",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-19::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "3cc910469dddf4d3d4e32f5d32e303ba6c3628262ee62ed5689a3a634ac880f4",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-19::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "1836b7a3589ef9021c122cacdbc8910cca27ccfbd019134158fe58e208dfa195",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-19::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "21fa41f8e754a4fc6c68428b691853e0a294a54c366325fcf21bb44d0846031f",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-20::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "89b6065fadc9498f53772e4b4c8584860b74deb4c2c3701f38971772ffec22e8",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-20::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "d8ec4e138f3d872a5f3b5511073e954cf8f61c81472db8e9bab7f7fdc16d22a4",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-20::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "6ebc1e4d11636d15bb1ce5f8636848f6145291230ae55796011bc6e8dc3c55e8",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-20::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "d55c82ec45da3eccaa3db0e39dc5ad7580978223c4aaeaa9e432261d17b4526e",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-21::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "4a05a842a2d17b3984f4967e16fec574f65a941f5676948bae6bfd942642dfab",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-21::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "69f09df56325c975c19151690937d067fc182901283226c1cc5cd3e2c73c9d0d",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-21::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "0bd3114952581533a195b65cf2add0315e5823a22b35a0d68f399d712d3130fe",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-21::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "5b12e8b117d3dd170d1a210d4941347fa8c7e10499dd082f485596ed1c11347e",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-22::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "5353373683bc151bbbeb3584b05c801b65e825b923ff4ae9bb37ab871ad18783",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-22::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "af810544c352091a9304dc8ac66dfab8cc0a020dbca24b783eb592d6dcb44226",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-22::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "42a40e97879e53fde2ac8b1be039e0c88605cbb10852966565eeffbe7377a68b",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-22::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "e982e7da1e3b3044277ca82aca114a610578396e7b9e882a92b8b801f911402c",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-23::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "b6e79e27d8e03fb2be8df247220795bce8cdb22e383786fd1484daf923bb6752",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-23::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "a1a44f2e0b79b3b5eed07d59df1b60cf133878b230f37a371834be32610b26e3",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-23::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "1a03d4f64ce99d3745d9a16aa0b1c249bd6e5a42813ff75062797b3fccab83e6",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-23::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "a992d328fd83a033dd65c19325591e17117125fc11c2b54f6d3deecfe36bac86",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-24::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "63a7032bad906c8dffd8b2345edb16ba1de052c1a54fd651cd7773bab8ebeaa2",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-24::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "3a76b9f719e3351626ccc3bf0c31b7d9d0808c7cab147eb02d4128baec7a8901",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-24::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "1c781b73be100158f646289ac3ad271538d2af15c1ba7ee18ccb27f990022830",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-24::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "90ea32bdc9d78d0388f74ea51b5238794865cad2e1300f6dae3057214aaba860",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-25::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "58242a816064732b464a7bcc402c3f62581cfcd41657882900dfc7c642fbd2f8",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-25::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "40b5eb1b1ca5469b232f98e271d106e8faf4ea013139255aac298147394d1fe3",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-25::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "31dbc553607fe416e58b8904c9fd3254a79b2e60cf06ef5e2451fba003c64025",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-25::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "22eabcef7f377e939219cc2aec0a64fbb0c9ea5def6282bde050b78341890082",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-26::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "ab55c2de46d5b6acd5025743739592c9f300792f83d83905aad78b2f136f68c4",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-26::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "ba187f385b4c54e6d79c08f81174a89629c50be833d73f47b691f80030c03a70",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-26::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "f0933153c03df5d8b12d1f4912ea9b7e9daf4effe3a5320cdf70ab1c6f509b4a",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-26::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "3f5d5a5ecc501045e1dabd9d083fede786cc213c86ae77088461001134e61830",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-27::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "efb2d64d2dbba37bb6d20d9b835efc859184696bad984f4f94602210c603a2c8",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-27::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "8ede5e7282f5a4524b109fe88064920d98ac630c5eca5b85f0c5d3f6cb50b6d9",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-27::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "3a9e409151e2a5b5398419d18b51e43407cc096a2418cfd709deedec0882e37f",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-27::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "b251fc3c3378be42953d6b89ca40a9167edc3c82b4effbd5030501225a5e7c3f",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-28::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "e5b714243e33bf6bc73115d027004172a2d00f124601268fb755f14bea3b7cd2",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-28::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "31db39dbf4c08cea5e64417877b43aa80fb4e28d82998335a55f12ac9a853eb2",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-28::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "53b7d7203eafca7a90dd4dccc2ad85e65389f88cdfe6c3f9ac38b2736e9e5513",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-28::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "3c66b6e2dc3c7e4d9bf20aacf511a0a20f82e3b57693de16fc2118548af48e7a",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-29::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "b217b01404762ef23443a8a698beaccb5fcdf20abead66da828d89ebc501d7d3",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-29::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "a8e11b08a9f488a1b3f2b063e231c194d314423691d9bd708103e7dc531bad36",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-29::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "639f467c26f1eb27674ef0c1358f1fb2352f71986f06de3d2d452fd34bb9ac63",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-29::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "c6ba248d614afa44a36a6798ad2a11b4e8738cca034e4c7aa4b1b0342fdf2277",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-30::stereo_antiphase",
+      "condition": "stereo_antiphase",
+      "sha256": "cebd14c5437c1ee3d2950de6cbc22e470f30c6b77dcd9a8c48599706a1c6caf6",
+      "checks": {
+        "two_source_channels": true,
+        "source_channels_nonzero": true,
+        "exact_mono_cancellation": true,
+        "cancellation_warning_present": true,
+        "inactive_signal_warning_present": true
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive.",
+        "Opposite-phase stereo may cancel speech when mixed to mono."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-30::crop_center500ms",
+      "condition": "crop_center500ms",
+      "sha256": "30502b6e70871cb9ea817a74e97815f769c1f0b284b94b236a3851fdadca7474",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-30::crop_center1s",
+      "condition": "crop_center1s",
+      "sha256": "6d44e2e31298919590e7957b81490f02bd2931d27ebd4a76d018c15a2226a735",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "ten-vad:testset-audio-30::crop_center2s",
+      "condition": "crop_center2s",
+      "sha256": "d67d64938048cb9de08c734fe3c5b6b6f83d169043b51880c4921072bf8ef772",
+      "checks": {
+        "short_audio": true,
+        "minimum_context_warning_present": true
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    }
+  ],
+  "by_condition": {
+    "stereo_antiphase": {
+      "case_count": 30,
+      "passed_cases": 30
+    },
+    "crop_center500ms": {
+      "case_count": 30,
+      "passed_cases": 30
+    },
+    "crop_center1s": {
+      "case_count": 30,
+      "passed_cases": 30
+    },
+    "crop_center2s": {
+      "case_count": 30,
+      "passed_cases": 30
+    }
+  },
+  "scope": "Known constructed cancellation/short-context diagnostics and existing warnings only; no authenticity-model inference or proof of end-to-end abstention.",
+  "code_sha256": {
+    "lab/vad_transport_audit.py": "a25aae7d491b131f987cb64e97e36acca5e6e515448e0798f6863968d40aea6e",
+    "lab/forensics.py": "1d8f330b541ca8986cead35689df28882fec40e7c79687ec4c06b442f84cb7b7",
+    "lab/source_measurements.py": "881226c8aabec738e5e3963466d8e2c2ddffa2a5ca94fb72bfb3bdb4b381d657"
+  }
+}

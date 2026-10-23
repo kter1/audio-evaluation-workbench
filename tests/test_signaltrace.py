@@ -77,6 +77,25 @@ def test_known_acoustic_intervals_are_not_verdicts():
         acoustic_markers(np.array([np.nan]*rate), rate, "x"*64)
 
 
+def test_inspect_preserves_native_channel_measurements_when_mono_cancels():
+    rate = 48000
+    x = (1.2*np.sin(2*np.pi*12000*np.arange(rate)/rate)).astype(np.float32)
+    stream = BytesIO()
+    sf.write(stream, np.stack([x, -x], axis=1), rate, format="WAV", subtype="FLOAT")
+    result = client.post("/api/inspect", files={"file": ("opposite-phase.wav", stream.getvalue())})
+    assert result.status_code == 200, result.text
+    data = result.json()
+    original = data["metrics"]["source_measurements"]
+    assert original["sample_rate_hz"] == rate
+    assert len(original["channels"]) == 2
+    assert original["arithmetic_mixdown"]["complete_cancellation"]
+    assert all(c["sample_peak_amplitude"] == pytest.approx(1.2) for c in original["channels"])
+    assert all(c["over_full_scale_fraction"] == pytest.approx(.5) for c in original["channels"])
+    assert data["metrics"]["rms_dbfs"] == -240
+    assert any("mono mixing masks" in warning for warning in data["warnings"])
+    assert data["metrics"]["analysis_representation"]["sample_rate_hz"] == 16000
+
+
 def test_model_window_boundaries_are_preserved():
     report = {
         "source": {"sha256":"a"*64},
@@ -159,3 +178,26 @@ def test_generated_fallback_has_no_arbitrary_human_synthetic_label():
         assert entry["speech"] is False
         assert entry["source"] == "generated_signal"
         assert len(load(resolve(entry["id"]))) > 100
+
+
+@pytest.mark.parametrize('kind', ['short', 'silent', 'canceled', 'clipped'])
+def test_quality_preflight_skips_model_and_preserves_inconclusive(monkeypatch, kind):
+    t = np.arange(3*16000)/16000
+    x = .2*np.sin(2*np.pi*440*t)
+    if kind == 'short': x = x[:8000]
+    elif kind == 'silent': x = np.zeros_like(x)
+    elif kind == 'canceled': x = np.column_stack((x, -x))
+    else: x = np.ones_like(x)
+    def forbidden():
+        raise AssertionError('Model must not load for rejected recording')
+    monkeypatch.setattr(server, 'fusion_model', forbidden)
+    monkeypatch.setattr(server, 'detectors_available', lambda: True)
+    response = client.post('/api/infer', files={'file': ('voice.wav', audio_blob(x))})
+    assert response.status_code == 200
+    result = response.json()
+    assert result['model_executed'] is False
+    assert result['assessment']['assessment'] == 'Inconclusive'
+    assert result['assessment']['synthetic_score'] is None
+    assert result['assessment']['binary_model_decision'] is None
+    assert result['assessment']['abstention_reasons']
+    assert result['windows'] == [] and result['links'] is None
