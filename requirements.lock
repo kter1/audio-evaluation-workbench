@@ -4,7 +4,7 @@ anyio==4.15.1
 attrs==26.1.0
 blinker==1.9.0
 cachetools==6.2.6
-certifi==2026.10.18
+certifi==2026.10.23
 cffi==2.1.1
 charset-normalizer==3.5.2
 click==8.5.0
@@ -33,7 +33,7 @@ networkx==3.7
 numpy==2.3.3
 packaging==25.0
 pandas==2.3.3
-pillow==12.3.0
+pillow==13.0.0
 plotly==6.3.1
 pluggy==1.7.0
 protobuf==6.33.6
@@ -59,7 +59,7 @@ six==1.17.0
 smmap==5.0.3
 soundfile==0.13.1
 starlette==1.9.0
-streamlit==1.66.0
+streamlit==1.66.1
 sympy==1.14.0
 tenacity==9.2.1
 tokenizers==0.23.3

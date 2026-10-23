@@ -15,6 +15,8 @@ from starlette.concurrency import run_in_threadpool
 from starlette.responses import FileResponse, JSONResponse, Response
 from starlette.routing import Mount, Route
 from starlette.staticfiles import StaticFiles
+from starlette.middleware import Middleware
+from starlette.middleware.trustedhost import TrustedHostMiddleware
 
 ROOT = Path(__file__).resolve().parent
 DIST = ROOT / "studio" / "dist"
@@ -22,6 +24,46 @@ RECEIPT = ROOT / "docs" / "detector-evaluation.json"
 ANALYSES = ROOT / "data" / "analyses"
 MAX_BYTES = 256 * 1024 * 1024
 MODEL_LOCK = asyncio.Lock()
+
+
+class UploadTooLarge(Exception):
+    pass
+
+
+class LocalSecurityMiddleware:
+    """Bound streamed bodies before multipart parsing; prevent response caching."""
+    def __init__(self, app):
+        self.app = app
+
+    async def __call__(self, scope, receive, send):
+        if scope['type'] != 'http':
+            return await self.app(scope, receive, send)
+        received = 0
+
+        async def bounded_receive():
+            nonlocal received
+            message = await receive()
+            if message['type'] == 'http.request':
+                received += len(message.get('body', b''))
+                if received > MAX_BYTES + 16384:
+                    raise UploadTooLarge()
+            return message
+
+        async def secure_send(message):
+            if message['type'] == 'http.response.start':
+                message['headers'] = list(message.get('headers', [])) + [
+                    (b'cache-control', b'no-store'),
+                    (b'x-content-type-options', b'nosniff'),
+                    (b'referrer-policy', b'no-referrer'),
+                    (b'x-frame-options', b'DENY'),
+                    (b'content-security-policy', b"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' blob:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"),
+                ]
+            await send(message)
+
+        try:
+            await self.app(scope, bounded_receive, secure_send)
+        except UploadTooLarge:
+            await JSONResponse({'error': 'Upload exceeds the 256 MB audio limit.'}, status_code=413)(scope, receive, secure_send)
 
 
 def detectors_available():
@@ -166,12 +208,11 @@ async def upload_bytes(request):
             raise ValueError("Invalid request size.") from exc
         if size > MAX_BYTES + 16384:
             raise ValueError("Upload exceeds the 256 MB audio limit.")
-    form = await request.form(max_files=1, max_fields=1)
-    file = form.get("file")
-    if not hasattr(file, "read"):
-        raise ValueError("Select an audio recording.")
-    raw = await file.read(MAX_BYTES+1)
-    await file.close()
+    async with request.form(max_files=1, max_fields=1) as form:
+        file = form.get("file")
+        if not hasattr(file, "read"):
+            raise ValueError("Select an audio recording.")
+        raw = await file.read(MAX_BYTES+1)
     if not raw or len(raw) > MAX_BYTES:
         raise ValueError("Select an audio file no larger than 256 MB.")
     return raw
@@ -193,8 +234,8 @@ async def status(request):
 async def benchmark(request):
     try:
         return JSONResponse(benchmark_data())
-    except (ValueError, OSError, KeyError) as exc:
-        return JSONResponse({"error": str(exc)}, status_code=503)
+    except (ValueError, OSError, KeyError):
+        return JSONResponse({"error": "Benchmark data is unavailable."}, status_code=503)
 
 
 async def samples(request):
@@ -230,8 +271,8 @@ async def inspect(request):
     try:
         raw = await upload_bytes(request)
         return JSONResponse(await run_in_threadpool(inspect_bytes, raw))
-    except (ValueError, RuntimeError, OSError, ImportError) as exc:
-        return JSONResponse({"error": str(exc)}, status_code=400)
+    except (ValueError, RuntimeError, OSError, ImportError):
+        return JSONResponse({"error": "Cannot inspect this recording. Check its format, size, and recording quality."}, status_code=400)
 
 
 async def infer(request):
@@ -242,8 +283,8 @@ async def infer(request):
         async with MODEL_LOCK:
             result = await run_in_threadpool(infer_bytes, raw)
         return JSONResponse(result)
-    except (ValueError, RuntimeError, OSError, ImportError, KeyError) as exc:
-        return JSONResponse({"error": str(exc)}, status_code=400)
+    except (ValueError, RuntimeError, OSError, ImportError, KeyError):
+        return JSONResponse({"error": "Cannot assess this recording. Check its format and local detector setup."}, status_code=400)
 
 
 async def download(request):
@@ -268,7 +309,10 @@ async def homepage(request):
     return FileResponse(DIST / "index.html")
 
 
-app = Starlette(routes=[
+app = Starlette(middleware=[
+    Middleware(TrustedHostMiddleware, allowed_hosts=['127.0.0.1', 'localhost', '[::1]']),
+    Middleware(LocalSecurityMiddleware),
+], routes=[
     Route("/api/status", status),
     Route("/api/benchmark", benchmark),
     Route("/api/demo", demo),

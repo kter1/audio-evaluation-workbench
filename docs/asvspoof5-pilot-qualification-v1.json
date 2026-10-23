@@ -1,5 +1,5 @@
 {
-  "acquisition_sha256": "418ac3e2148b0e83ef3895fa9270c1ccf6c21e41c51d6d746da908bae34279e7",
+  "acquisition_sha256": "3a84719402e0b6f15c5f42e392dfdf09e0618f64bb60f8d0ffb3c1e12fc3b99c",
   "audio_files_verified": 40,
   "archive_prefixes_verified": 10,
   "calibration_declared_speakers": 20,
@@ -454,5 +454,9 @@
     "scripts/audit_asvspoof5_pilot.py": "4fe27df8f913e4147137a043048a5fd2c478df767c638e9de548f044c0882727",
     "lab/corpus_inventory.py": "8c75dded8d71016c5b64269f64c1fd687c13c0ac75e2e5dbc61716abfb597f70"
   },
-  "scope": "Integrity and declared-identity qualification only. No scores computed. Full archive MD5, perceptual cross-corpus duplicates, biometric speaker overlap and model-training exposure remain unverified. Sample counts fall below confirmatory gates. Reserved evaluation remains unscored; it is not a qualified independent locked set."
+  "scope": "Integrity and declared-identity qualification only. No scores computed. Full archive MD5, perceptual cross-corpus duplicates, biometric speaker overlap and model-training exposure remain unverified. Sample counts fall below confirmatory gates. Reserved evaluation remains unscored; it is not a qualified independent locked set.",
+  "publication_redaction": {
+    "original_receipt_sha256": "9273c304f8614fc3fb8fad7581377f67ee0c94bc0f4d902752ff0150c9dd0462",
+    "change": "Public references rebound to receipts with repository-relative notice paths. Original immutable receipts retained privately; this is a publication transformation, not a new inference or integrity-audit run."
+  }
 }

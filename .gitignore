@@ -13,3 +13,8 @@ exports/
 # Personal notes and local tooling, never published
 private/
 .cl*/
+.env
+.env.*
+!.env.example
+*.pem
+*.key

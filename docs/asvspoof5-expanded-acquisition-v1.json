@@ -1,8 +1,8 @@
 {
   "spec": {
     "version": "1.0",
-    "pilot_acquisition_sha256": "418ac3e2148b0e83ef3895fa9270c1ccf6c21e41c51d6d746da908bae34279e7",
-    "pilot_reservation_sha256": "2b09f949f09589a2314a8c9e0043edb2768c3039578ee8aa2bda0d48f1dfac4f",
+    "pilot_acquisition_sha256": "3a84719402e0b6f15c5f42e392dfdf09e0618f64bb60f8d0ffb3c1e12fc3b99c",
+    "pilot_reservation_sha256": "f1113b32a13e6eb5900868249e49b4678067b4d6bdf7dc05fd0f6b8b1a4bf7b8",
     "seed": "asvspoof5-expansion-20261023:",
     "prefix_bytes_per_archive": 100663296,
     "additional_transfer_max_bytes": 922746880,
@@ -17264,5 +17264,9 @@
     "Same-speaker codec parents grouped; cloning/source identity beyond publisher metadata unresolved.",
     "No claim of absence from pretraining, training or upstream model evaluation.",
     "Counts do not establish per-condition independent-group gates; no detector or threshold changes."
-  ]
+  ],
+  "publication_redaction": {
+    "original_receipt_sha256": "d64183c556b549b3264c613b287dd20d5cfd007f343809ca73205b9302919166",
+    "change": "Public references rebound to receipts with repository-relative notice paths. Original immutable receipts retained privately; this is a publication transformation, not a new inference or integrity-audit run."
+  }
 }

@@ -1,6 +1,6 @@
 # SignalTrace · AI Voice Check
 
-A local audio deepfake detection and research project exploring synthetic speech, recording quality, and reliable evaluation. Built as a personal portfolio project to demonstrate interest in audio annotation and research quality. This is an independent project, unaffiliated with Pindrop.
+A local audio deepfake detection and research project exploring synthetic speech, recording quality, and reliable evaluation. Built as a personal portfolio project to demonstrate interest in audio annotation and research quality. This is an independent portfolio project.
 
 ![SignalTrace main screen: upload a recording for a local AI voice check](docs/images/signaltrace-main.png)
 
@@ -46,7 +46,7 @@ node --check studio/dist/app.js
 node --test tests/frontend-evidence.test.cjs
 ```
 
-Publication checks: **375 Python tests and 6 frontend tests passed**. Full model inference additionally requires separately acquired checkpoints and data.
+Publication checks: **378 Python tests and 6 frontend tests passed**. Full model inference additionally requires separately acquired checkpoints and data.
 
 ## Privacy, licensing, and authorship
 
