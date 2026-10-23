@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "source_acquisition_sha256": "418ac3e2148b0e83ef3895fa9270c1ccf6c21e41c51d6d746da908bae34279e7",
+  "source_acquisition_sha256": "3a84719402e0b6f15c5f42e392dfdf09e0618f64bb60f8d0ffb3c1e12fc3b99c",
   "rule": "Within each class, sort declared speakers by SHA256(asvspoof5-pilot-reservation-v2:+speaker); first10 calibration_reserved, remaining10 evaluation_reserved. Metadata only, before any detector inference.",
   "reason": "The original group-only hash split produced6human/14synthetic calibration records. This metadata-only update balances both reserved partitions while preserving original acquisition and qualification receipts.",
   "detector_inference_run": false,
@@ -286,5 +286,9 @@
       "source_sha256": "ba9444c418e3595d5a760fd79b771bc4b4e7f4cfb094cb8c8e15b2d3ec78375f",
       "partition": "evaluation_reserved"
     }
-  ]
+  ],
+  "publication_redaction": {
+    "original_receipt_sha256": "2b09f949f09589a2314a8c9e0043edb2768c3039578ee8aa2bda0d48f1dfac4f",
+    "change": "Public references rebound to receipts with repository-relative notice paths. Original immutable receipts retained privately; this is a publication transformation, not a new inference or integrity-audit run."
+  }
 }

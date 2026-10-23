@@ -12,7 +12,32 @@ from starlette.testclient import TestClient
 import signaltrace_server as server
 from lab.signal_events import acoustic_markers, model_markers
 
-client = TestClient(server.app)
+client = TestClient(server.app, base_url='http://127.0.0.1')
+
+
+def test_local_security_headers_and_dns_rebinding_guard():
+    response = client.get('/')
+    assert response.headers['x-frame-options'] == 'DENY'
+    assert response.headers['x-content-type-options'] == 'nosniff'
+    assert response.headers['cache-control'] == 'no-store'
+    assert "frame-ancestors 'none'" in response.headers['content-security-policy']
+    assert client.get('/api/status', headers={'host': 'attacker.example'}).status_code == 400
+
+
+def test_chunked_upload_limit_applies_without_content_length(monkeypatch):
+    monkeypatch.setattr(server, 'MAX_BYTES', 64)
+    boundary = b'--test-boundary\r\nContent-Disposition: form-data; name="file"; filename="voice.wav"\r\nContent-Type: audio/wav\r\n\r\n'
+    def body():
+        yield boundary
+        yield b'x' * 20000
+        yield b'\r\n--test-boundary--\r\n'
+    response = client.post('/api/inspect', content=body(), headers={'content-type': 'multipart/form-data; boundary=test-boundary'})
+    assert response.status_code == 413
+
+
+def test_foreign_origin_cannot_upload():
+    response = client.post('/api/inspect', files={'file': ('voice.wav', b'x')}, headers={'origin': 'https://attacker.example'})
+    assert response.status_code == 400
 
 
 def audio_blob(audio, rate=16000):

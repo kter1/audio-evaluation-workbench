@@ -1,5 +1,5 @@
 {
-  "acquisition_sha256": "d64183c556b549b3264c613b287dd20d5cfd007f343809ca73205b9302919166",
+  "acquisition_sha256": "48292857ffa1f17cc278e6fbb10c23a7191040d7b3c87abf3a76044200e66db3",
   "audio_files_verified": 900,
   "archive_prefixes_verified": 10,
   "partitions": {
@@ -23,5 +23,9 @@
   "detector_inference_run": false,
   "qualified_confirmatory": false,
   "code_sha256": "4e2da5adea40bfb1b96f78ec6a3aa73edc123fc97f1a5d5962a46eb80d2a631e",
-  "scope": "Integrity and declared speaker separation only. Training exposure, biometric identity, cross-corpus perceptual overlap, representative sampling and full archive publisher checksums remain unverified. Counts alone do not qualify an independent detector benchmark."
+  "scope": "Integrity and declared speaker separation only. Training exposure, biometric identity, cross-corpus perceptual overlap, representative sampling and full archive publisher checksums remain unverified. Counts alone do not qualify an independent detector benchmark.",
+  "publication_redaction": {
+    "original_receipt_sha256": "c30b34dff819f06c6ae4fbad89c3042cd489ffba3b077a7eb31d8ebc75eeb272",
+    "change": "Public references rebound to receipts with repository-relative notice paths. Original immutable receipts retained privately; this is a publication transformation, not a new inference or integrity-audit run."
+  }
 }

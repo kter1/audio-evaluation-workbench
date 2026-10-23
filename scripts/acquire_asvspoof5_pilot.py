@@ -149,6 +149,7 @@ def main():
     for name, md5 in [('README.txt','784002b8449ba1eeecc042bfad285de7'),('LICENSE.txt','9cbefc63251e8cbc8eb22e62cd6fe584')]:
         notices.append(download(f'https://zenodo.org/records/14498691/files/{name}?download=1',directory/name,
                                 maximum=32768,publisher_md5=md5))
+        notices[-1]['path'] = str((directory/name).relative_to(ROOT))
     result = {'spec':spec,'archive_prefixes':receipts,'eligible_complete_members':len(entries),
         'files':selected,'declared_speaker_groups':len({r['speaker'] for r in selected}),
         'protocol_sha256':sha256(protocol).hexdigest(),'notices':notices,

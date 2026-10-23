@@ -838,5 +838,9 @@
     "Only bounded archive prefixes; not a representative full benchmark.",
     "Declared speaker groups are not cross-corpus biometric independence.",
     "Codec ancestors and model training exposure require qualification before calibration or final testing."
-  ]
+  ],
+  "publication_redaction": {
+    "original_receipt_sha256": "418ac3e2148b0e83ef3895fa9270c1ccf6c21e41c51d6d746da908bae34279e7",
+    "change": "Notice paths made repository-relative; original immutable receipt retained privately. Historical hash references bind the original receipt."
+  }
 }

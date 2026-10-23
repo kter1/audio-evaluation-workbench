@@ -67,16 +67,16 @@ On a frozen test of 320 new clips from 73 speakers, scored once:
 - **Safe parsing.** Archives are read by exact expected member names (no path traversal); SQL is parameterized; HTML in reports and the UI is escaped; CSV exports neutralize spreadsheet formulas.
 - **Dependencies are pinned and audited.** `requirements.lock` reported no known vulnerabilities in `pip-audit` on 2026-10-19, after upgrading torch, transformers, Streamlit, and Pillow. A regression check confirmed the published detector results did not change.
 
-## How this was built
+## Study status
 
-The study separates personal listening judgments from automated detector results. Completed personal annotation results and independent reviewer agreement have not been established. Detector claims must be read alongside their frozen manifests, receipts, and documented limitations in [`docs/`](docs/).
+The study separates personal listening judgments from automated detector results. Completed annotation accuracy and independent reviewer agreement have not been established. Detector claims must be read alongside the frozen manifests, receipts, and documented limitations in [`docs/`](docs/).
 
 ## Run it
 
 Requires Python 3.11–3.13 (tested on 3.13, Apple Silicon). From this folder:
 
 ```sh
-./run.sh
+./run-legacy.sh
 ```
 
 Open [localhost:8501](http://localhost:8501). The first launch creates a virtual environment, installs `requirements.lock`, and opens a clearly labeled practice workspace (generated tones, arbitrary labels). Switch between the research study, listening challenge, and practice workspaces in the sidebar. Drafts survive restarts, and **Save & skip** moves on without losing work.
