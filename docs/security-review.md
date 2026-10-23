@@ -67,12 +67,23 @@ not be bypassed to resume an old specification against changed public receipts.
 
 ## Remaining limits
 
-Historical commits contain a personal author email/name and earlier versions of
-redacted files and assistant-related metadata. Removing them from the current
-files does not purge Git history, pull-request refs, caches, or existing clones.
-Full historical removal requires a coordinated history rewrite and remote
-updates; it has not been performed by this review. Keep the repository private
-until that separate operation is resolved if historical disclosure is unwanted.
+All three published branch histories were rewritten after explicit authorization.
+Authors and committers now use a generic maintainer identity and reserved invalid
+email address. Earlier personal paths, incidental attribution text, and assistant
+co-author trailers were removed from reachable branch history. The rewrite was
+performed in an isolated mirror after creating a private recovery bundle; pushes
+were atomic and protected by exact old-commit leases. The local checkout was
+aligned only after verifying identical current file-tree hashes. Git integrity
+checks passed, and scanning all reachable historical text blobs found none of
+the targeted personal paths or incidental assistant references. No test rerun was
+needed for the rewrite itself because current application file content did not
+change. GitHub pull-request head and merge refs refreshed to new hashes.
+
+A history rewrite does not erase existing clones, backups, cached commit pages,
+or other retained server objects. Those copies remain outside this verification;
+GitHub support may be needed for sensitive-data purging beyond published refs.
+The recovery bundle and original receipts remain local in ignored private storage.
+Public account handles and required research/license attribution are retained.
 
 The service has no authentication and is for a trusted local single operator.
 Local software can still access it; loopback Host validation is not authentication.
