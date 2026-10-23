@@ -20,6 +20,8 @@ on:
       - "scripts/expand_asvspoof5_corpus.py"
       - "scripts/audit_asvspoof5_expansion.py"
       - "scripts/build_annotation_example.py"
+      - "scripts/transcribe_annotation_example.py"
+      - "scripts/templates/**"
       - "scripts/setup_research_vad.py"
       - "scripts/prepare_speech_review.py"
       - "scripts/compare_speech_reviews.py"
@@ -74,6 +76,7 @@ jobs:
           tests/test_three_model_candidate.py
           tests/test_complementary_calibration.py tests/test_asvspoof5_pilot.py
           tests/test_asvspoof5_expansion.py
+          tests/test_annotation_example.py
       - name: Validate AI-voice decision safeguards
         run: >-
           python -m pytest -q
