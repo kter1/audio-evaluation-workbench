@@ -102,12 +102,24 @@ def fusion_model():
 
 
 def infer_bytes(raw):
-    from lab.forensics import analyze, explain, save_report
+    from lab.forensics import analyze, explain, save_report, read_audio, diagnostics, quality_blockers
     from lab.signal_events import model_markers
+    audio, rate, source = read_audio(raw)
+    _, measurements, warnings = diagnostics(audio, rate)
+    blockers = quality_blockers(measurements, source["duration_seconds"])
+    if blockers:
+        return {
+            "id": None, "sha256": source["sha256"], "model_executed": False,
+            "assessment": {"assessment": "Inconclusive", "synthetic_score": None,
+                           "binary_model_decision": None, "abstention_reasons": blockers,
+                           "interpretation": "Recording quality prevents a reliable assessment; model inference was skipped."},
+            "threshold": None, "model_name": None, "checks": [], "windows": [],
+            "markers": [], "warnings": warnings, "links": None,
+        }
     report, _ = analyze(raw, fusion_model(), robustness=True)
     target = save_report(report)
     return {
-        "id": target.stem, "sha256": report["source"]["sha256"],
+        "id": target.stem, "sha256": report["source"]["sha256"], "model_executed": True,
         "assessment": report["assessment"], "threshold": report["policy"]["binary_threshold"],
         "model_name": report["model"].get("name"), "checks": explain(report)["checks"],
         "windows": [{

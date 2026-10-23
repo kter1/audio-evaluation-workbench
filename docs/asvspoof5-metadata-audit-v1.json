@@ -1,0 +1,261 @@
+{
+  "schema_version": "asvspoof5-metadata-audit-1.0",
+  "archive_bytes": 20669392,
+  "archive_sha256": "ab4505dcce14306d99e60f4255dfdd0ee9988d225e7194698da219dda690ec81",
+  "publisher_archive_md5": "865d0e894ea9f686f0f37e5ae3ae3616",
+  "protocols": {
+    "ASVspoof5.dev.track_1.tsv": {
+      "rows": 140950,
+      "class_rows": {
+        "spoof": 109616,
+        "bonafide": 31334
+      },
+      "declared_speaker_ids": 785,
+      "declared_connected_speaker_groups": 785,
+      "speaker_groups_by_class": {
+        "spoof": 392,
+        "bonafide": 785
+      },
+      "codec_conditions": {
+        "-": {
+          "rows": {
+            "spoof": 109616,
+            "bonafide": 31334
+          },
+          "declared_speaker_groups": {
+            "bonafide": 785,
+            "spoof": 392
+          }
+        }
+      },
+      "attack_label_rows": {
+        "A09": 13702,
+        "A10": 13702,
+        "A11": 13702,
+        "A12": 13702,
+        "A13": 13702,
+        "A14": 13702,
+        "A15": 13702,
+        "A16": 13702,
+        "bonafide": 31334
+      },
+      "codec_seed_references": 0,
+      "unresolved_codec_seed_references": 0,
+      "cross_speaker_codec_links": 0,
+      "member_md5": "e949dee1091a49b04943c548b5cf9860",
+      "member_sha256": "c24ee1b9ad9697e63f7ad52fd89bcdbc44a401cadebba31493c1476dffb43fc1"
+    },
+    "ASVspoof5.eval.track_1.tsv": {
+      "rows": 680774,
+      "class_rows": {
+        "spoof": 542086,
+        "bonafide": 138688
+      },
+      "declared_speaker_ids": 737,
+      "declared_connected_speaker_groups": 737,
+      "speaker_groups_by_class": {
+        "spoof": 367,
+        "bonafide": 737
+      },
+      "codec_conditions": {
+        "-": {
+          "rows": {
+            "bonafide": 35149,
+            "spoof": 136453
+          },
+          "declared_speaker_groups": {
+            "bonafide": 737,
+            "spoof": 367
+          }
+        },
+        "C01": {
+          "rows": {
+            "spoof": 37719,
+            "bonafide": 9534
+          },
+          "declared_speaker_groups": {
+            "bonafide": 737,
+            "spoof": 367
+          }
+        },
+        "C02": {
+          "rows": {
+            "spoof": 37772,
+            "bonafide": 9654
+          },
+          "declared_speaker_groups": {
+            "bonafide": 737,
+            "spoof": 367
+          }
+        },
+        "C03": {
+          "rows": {
+            "spoof": 38277,
+            "bonafide": 9710
+          },
+          "declared_speaker_groups": {
+            "bonafide": 737,
+            "spoof": 367
+          }
+        },
+        "C04": {
+          "rows": {
+            "spoof": 37998,
+            "bonafide": 9701
+          },
+          "declared_speaker_groups": {
+            "bonafide": 737,
+            "spoof": 367
+          }
+        },
+        "C05": {
+          "rows": {
+            "spoof": 37848,
+            "bonafide": 9693
+          },
+          "declared_speaker_groups": {
+            "bonafide": 737,
+            "spoof": 367
+          }
+        },
+        "C06": {
+          "rows": {
+            "spoof": 32578,
+            "bonafide": 8976
+          },
+          "declared_speaker_groups": {
+            "bonafide": 737,
+            "spoof": 367
+          }
+        },
+        "C07": {
+          "rows": {
+            "spoof": 37738,
+            "bonafide": 9610
+          },
+          "declared_speaker_groups": {
+            "bonafide": 737,
+            "spoof": 367
+          }
+        },
+        "C08": {
+          "rows": {
+            "spoof": 37675,
+            "bonafide": 9003
+          },
+          "declared_speaker_groups": {
+            "bonafide": 737,
+            "spoof": 367
+          }
+        },
+        "C09": {
+          "rows": {
+            "spoof": 32605,
+            "bonafide": 8994
+          },
+          "declared_speaker_groups": {
+            "bonafide": 737,
+            "spoof": 367
+          }
+        },
+        "C10": {
+          "rows": {
+            "bonafide": 9673,
+            "spoof": 37804
+          },
+          "declared_speaker_groups": {
+            "bonafide": 737,
+            "spoof": 367
+          }
+        },
+        "C11": {
+          "rows": {
+            "spoof": 37619,
+            "bonafide": 8991
+          },
+          "declared_speaker_groups": {
+            "bonafide": 737,
+            "spoof": 367
+          }
+        }
+      },
+      "attack_label_rows": {
+        "A17": 34414,
+        "A18": 34368,
+        "A19": 30860,
+        "A20": 31444,
+        "A21": 34360,
+        "A22": 34380,
+        "A23": 34392,
+        "A24": 34338,
+        "A25": 34386,
+        "A26": 34386,
+        "A27": 34184,
+        "A28": 34414,
+        "A29": 34408,
+        "A30": 34106,
+        "A31": 33956,
+        "A32": 33690,
+        "bonafide": 138688
+      },
+      "codec_seed_references": 509172,
+      "unresolved_codec_seed_references": 0,
+      "cross_speaker_codec_links": 0,
+      "member_md5": "50c0591d45a282cb787a5a4614394f67",
+      "member_sha256": "62cc6d5e30eb7624ab348ea21713cce5d814299d723b4ce789ec9c1cf18611f2"
+    },
+    "ASVspoof5.train.tsv": {
+      "rows": 182357,
+      "class_rows": {
+        "spoof": 163560,
+        "bonafide": 18797
+      },
+      "declared_speaker_ids": 400,
+      "declared_connected_speaker_groups": 400,
+      "speaker_groups_by_class": {
+        "spoof": 400,
+        "bonafide": 400
+      },
+      "codec_conditions": {
+        "-": {
+          "rows": {
+            "spoof": 163560,
+            "bonafide": 18797
+          },
+          "declared_speaker_groups": {
+            "bonafide": 400,
+            "spoof": 400
+          }
+        }
+      },
+      "attack_label_rows": {
+        "A01": 20445,
+        "A02": 20445,
+        "A03": 20445,
+        "A04": 20445,
+        "A05": 20445,
+        "A06": 20445,
+        "A07": 20445,
+        "A08": 20445,
+        "bonafide": 18797
+      },
+      "codec_seed_references": 0,
+      "unresolved_codec_seed_references": 0,
+      "cross_speaker_codec_links": 0,
+      "member_md5": "cbfa08e2fab1423e828f102bc97a22f0",
+      "member_sha256": "5d66be5e63ad671c1788464397d6b7caaab816e0ceeab27935dd43f6d055fa94"
+    }
+  },
+  "audio_downloaded": false,
+  "detector_inference_performed": false,
+  "qualified_locked_corpus": false,
+  "limitations": [
+    "Speaker counts are declared protocol identities, not independently verified physical-speaker counts.",
+    "Codec seed links connect declared speakers where observable; unresolved ancestry must be investigated before partitioning.",
+    "Attack labels are not generator-family provenance; label differences do not prove model-family independence.",
+    "Protocol metadata has no reviewed speech-activity, noise-level or edit-boundary annotations.",
+    "Upstream detector training exposure, perceptual duplicates and cross-corpus physical-speaker overlap remain unresolved.",
+    "Metadata coverage alone cannot satisfy corpus qualification or performance gates."
+  ],
+  "audit_code_sha256": "93cec4fec4cd8c3606436b01b04a1cf4118fe1b15514ae2f06d35f04e53a1ecd"
+}

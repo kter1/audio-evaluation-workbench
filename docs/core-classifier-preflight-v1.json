@@ -1,0 +1,29 @@
+{
+  "schema_version": "classifier-preflight-1.0",
+  "candidate": "eliya/forensics_0.3B_base_deepfake_classifier",
+  "revision": "cfd11365b02167214dc3b392378809fef6ca3cfa",
+  "metadata_source": "https://huggingface.co/api/models/eliya/forensics_0.3B_base_deepfake_classifier?blobs=true",
+  "publisher_license": "CC-BY-NC-4.0",
+  "checkpoint": {
+    "name": "checkpoint_epoch_5.safetensors",
+    "bytes": 1269932956,
+    "sha256": "803d2c57e705395d007b9deaf5b1a110965950f207df223e6dff5b6d298490fb"
+  },
+  "inspected_sources": {
+    "config.json": "d35749b23b8ef4665bc0afdc60a4f19be016bf90",
+    "inference.py": "bf9b8d6e2c9847480b6d532c35338976cc52a88f",
+    "model.py": "a27455a6ed46ee0a1d9a69ed8f7b6cd4ad7b0ebf",
+    "requirements.txt": "42cc8de7a1476bf11f8ff7b6fd98d2b6a7c880f2"
+  },
+  "source_identity_kind": "Git blob SHA-1 from pinned publisher metadata; sources inspected as text, not executed",
+  "inference_findings": [
+    "Higher fake score is 1-sigmoid(logit); training label 1 means real.",
+    "Publisher script peak-normalizes, repeats short audio and center-crops long audio to 80000 samples at 16 kHz.",
+    "Constructor automatically downloads microsoft/wavlm-large before loading the classifier checkpoint.",
+    "Publisher loader can fall back to unrestricted pickle deserialization and loads with strict=False. An isolated adapter must disable both behaviors.",
+    "Classifier checkpoint includes fine-tuned WavLM weights; existing XLSR weights cannot substitute."
+  ],
+  "decision": "Deferred before weight acquisition; not tested or integrated. Respect the evaluation contract against automatic large downloads. Noncommercial license also prevents assuming unrestricted product redistribution.",
+  "downloaded_checkpoint_bytes": 0,
+  "fallback": "Evaluate the already-installed pinned Wav2Vec2 classifier on exactly the existing 45-source, five-condition development screen, fixed default threshold 0.5, no tuning. This older local alternative does not test the publisher claims of the deferred noise-trained WavLM model."
+}

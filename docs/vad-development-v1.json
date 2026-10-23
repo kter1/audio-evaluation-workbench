@@ -1,0 +1,2911 @@
+{
+  "schema_version": "method-benchmark-result-1.0",
+  "config": {
+    "version": "analysis-research-1.0",
+    "rate_hz": 16000,
+    "frame_seconds": 0.02,
+    "energy_threshold_dbfs": -50.0,
+    "noise_quantile": 0.1,
+    "rolling_noise_block_seconds": 2.0,
+    "change_side_seconds": 0.12,
+    "change_context_seconds": 2.0,
+    "change_minimum_db": 6.0,
+    "change_mad_multiplier": 6.0,
+    "change_minimum_side_dbfs": -50.0,
+    "change_separation_seconds": 0.3,
+    "webrtc_mode": 2,
+    "promotion_status": "experimental; no production integration",
+    "gaussian_noise_correction": "divide frame-power q10 by chi2.ppf(0.1, 320)/320; assumes iid zero-mean Gaussian noise"
+  },
+  "environment": {
+    "python": "3.13.7",
+    "numpy": "2.3.3",
+    "scipy": "1.16.3"
+  },
+  "code_sha256": {
+    "lab/research_analysis.py": "14941e78b1ff6c9e345bb0a99dde583aa052b2b0140eb369ab26731120d5b4e4",
+    "lab/research_metrics.py": "6e33445ee2119317b5c9fe0578ff74d8c4a04a510b891c68dca548e87460c83c",
+    "lab/research_benchmark.py": "d0ad13a5d9c195023c4332ddc576bb19f470d920e268c6b8e8d8ebd67fc07591",
+    "lab/signal_events.py": "2a344a22851f28779cb5e95e5a73d48bd4820cb09ad89c0309a6aab091a9e305"
+  },
+  "case_count": 30,
+  "source_groups": 1,
+  "input_identities": [
+    {
+      "record_id": "ten-vad:testset-audio-01",
+      "identity_tokens": [
+        "analysis-pcm:c857ebade87e32be132dc424f3477c84e8d5741c5350c27dc082b246dc817569",
+        "audio:27cfaad6f5eb8c501171ed9c787dc0f26070d5c0d18717b918cccf15428487f5",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    },
+    {
+      "record_id": "ten-vad:testset-audio-02",
+      "identity_tokens": [
+        "analysis-pcm:b9a5d756ebcd55f3e2d467a655948fd0977fc8a436208db30cd18044d9fd9772",
+        "audio:c65e4f2093ae81e9e7f5290808ca13e18fce0bedf9b3515bdf149a85c7f45a6f",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    },
+    {
+      "record_id": "ten-vad:testset-audio-03",
+      "identity_tokens": [
+        "analysis-pcm:b4588d1f0219ed55e45b869a876d62109aa3c5a40ab3e55c9a90c442cde8b408",
+        "audio:00d4f33e6f499f67df4787b389b10f0f3608dad906c89e68ff58a9e9555ea3a1",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    },
+    {
+      "record_id": "ten-vad:testset-audio-04",
+      "identity_tokens": [
+        "analysis-pcm:b955599cd21bf010e341b86ac154223e78571b0cbe309a614af1246de68528ef",
+        "audio:8556acc7ec9b4b462c28b8989e43f226713416b4748f635c0d8eeaf0664ce736",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    },
+    {
+      "record_id": "ten-vad:testset-audio-05",
+      "identity_tokens": [
+        "analysis-pcm:2a2c9c477c69281a05469d4a4be6e871b7222890e1b3414f24e820b9df5e1dc6",
+        "audio:85c138fc926740369cc3fe41b5e55f4780992da1c1da53619dfbd4c56e574275",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    },
+    {
+      "record_id": "ten-vad:testset-audio-06",
+      "identity_tokens": [
+        "analysis-pcm:32573e470bae174bb08da352188e2cbade1e4824d49f53c06935858771f17d63",
+        "audio:d5da0b54a745b8387cd5c89ad8a6a9934b2ecc2da1b1a1bd623fc63951830542",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    },
+    {
+      "record_id": "ten-vad:testset-audio-07",
+      "identity_tokens": [
+        "analysis-pcm:e14be07b32dec543e85961d0c3918f0b39a6fc8871410431d5bd084ba8604788",
+        "audio:24e2929e1266e2e67526096b59d27edc550c6b97ca96816c8976193b18c3e884",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    },
+    {
+      "record_id": "ten-vad:testset-audio-08",
+      "identity_tokens": [
+        "analysis-pcm:aaf9f6f7ff0d462753434e20ed202ffa98a70d113a03d9bd53a220ebdbe86eb7",
+        "audio:d25165c8e1dd540d93beb2b9467d4064516569afbfb84020ae237af919cd3f5d",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    },
+    {
+      "record_id": "ten-vad:testset-audio-09",
+      "identity_tokens": [
+        "analysis-pcm:00675a7c3ab9e2218d31c9d04b3b66a1f538fd152edc9493ec2b92a6a7c0ab63",
+        "audio:ba0098673ba665d7f56237508dc510691a6e7c8ad87a322f33fc33fa7cb3aacb",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    },
+    {
+      "record_id": "ten-vad:testset-audio-10",
+      "identity_tokens": [
+        "analysis-pcm:5fa0ae7ccd46faf858760980e7c871b161eb9abd74d71d34754e8bf451066b84",
+        "audio:56d6c5bf36308086de176b51341482605f8658e02a02c963bb5e6a773c7d0868",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    },
+    {
+      "record_id": "ten-vad:testset-audio-11",
+      "identity_tokens": [
+        "analysis-pcm:29acc8654a4eff72ca2c2163941c9161757745373c9d6faab393dfbbb2fec9c7",
+        "audio:eeccaff1c16e4167a896a07cd0cce15ffa53251f2ba081f3402cc69802538b01",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    },
+    {
+      "record_id": "ten-vad:testset-audio-12",
+      "identity_tokens": [
+        "analysis-pcm:a2b9a13dbf7775e8fb9bce54fd56479137f4494bfb400da8504eb9983acd87ce",
+        "audio:a1131821079f313e7a5719e9d90e437b0a28ba76ed33877bae5c0140ce14d867",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    },
+    {
+      "record_id": "ten-vad:testset-audio-13",
+      "identity_tokens": [
+        "analysis-pcm:0b2785d832880adfdb0d4ee755db7047915abd253560681e04d2a3924dcfa892",
+        "audio:27ff840a38d3052e0e01a96dbe20e33f6e0c2916a8bd85f4a9e5d0841083a7d9",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    },
+    {
+      "record_id": "ten-vad:testset-audio-14",
+      "identity_tokens": [
+        "analysis-pcm:11753c4717e371a3c6f05b6075a64d9e8e1305456f7a187f0372eecd1663ca7e",
+        "audio:76cfbe88a9b670e6bec76d083a25a16c262728768e21a36ca088ea56b94b38de",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    },
+    {
+      "record_id": "ten-vad:testset-audio-15",
+      "identity_tokens": [
+        "analysis-pcm:fec3c8147f5a86d255f392894d3ed04bac0d805363e74289788588db5a035819",
+        "audio:64c4e91704f7ca9d745b17412b82b16d725a39a4d41b7e415be70c81dc05d85f",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    },
+    {
+      "record_id": "ten-vad:testset-audio-16",
+      "identity_tokens": [
+        "analysis-pcm:f9c58e3e57090baa11d921605559611ae1e79de6e41cfeb7ed9eddb60fdbf0fc",
+        "audio:a6e0818381e0d6e8f8c70f346cb04e486d83ce677618152e592a9301280ce086",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    },
+    {
+      "record_id": "ten-vad:testset-audio-17",
+      "identity_tokens": [
+        "analysis-pcm:ce96bfbd64d1347ed2aabef7e6acbbf2ec8bb256a5e548af6a306a341b884290",
+        "audio:d0314570c0da423f19aebe29104e92f89a4f416e7477dcac007bd2aee090191c",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    },
+    {
+      "record_id": "ten-vad:testset-audio-18",
+      "identity_tokens": [
+        "analysis-pcm:b0049aea1f1fcecac6fec06b7ee3557b1ef1d304d79d72d466bc6b1e47617890",
+        "audio:2714334967a0f57fea475fc5f6f711c01e60a007c4d85c7f12faa6dff6251cee",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    },
+    {
+      "record_id": "ten-vad:testset-audio-19",
+      "identity_tokens": [
+        "analysis-pcm:6d5be29a622ec7de987b2b037d55f861785521f56ef777160c8726e4eb8d0e81",
+        "audio:162c1ff528781efa8dba6626ac20ba6861576df4c96bfb23723fada1c42b230c",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    },
+    {
+      "record_id": "ten-vad:testset-audio-20",
+      "identity_tokens": [
+        "analysis-pcm:6b1de3c5432bd8ce1f8c7728f3356704b4d38e5642bf35df99418fc310a8b9f0",
+        "audio:2573850eb7dca230ab5ab15a2cee4a41b2071220d95488345172eeec7b0db9f9",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    },
+    {
+      "record_id": "ten-vad:testset-audio-21",
+      "identity_tokens": [
+        "analysis-pcm:660e2be69de80793d89e741f3178e8396b34148018ad0a11729fc6803f35dd15",
+        "audio:5108681447873375f1bd53d0924ba2e34447564d76f462227fb603f3d8f2469a",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    },
+    {
+      "record_id": "ten-vad:testset-audio-22",
+      "identity_tokens": [
+        "analysis-pcm:16c40700172d9b7300cea360228039fc78136118a907b747116231047efbfe93",
+        "audio:af365cbcadc2cd77e4b8ad0f4665af4dd732690740100c122a7ad045d005e4ce",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    },
+    {
+      "record_id": "ten-vad:testset-audio-23",
+      "identity_tokens": [
+        "analysis-pcm:4efb1c4e333e5fb129235b18fc129444fb0bec806ef7a51ea15a24e578dea41d",
+        "audio:f607e5861f6340e97a549ceeeaa96a693954601b1cc5223dd158dae289585308",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    },
+    {
+      "record_id": "ten-vad:testset-audio-24",
+      "identity_tokens": [
+        "analysis-pcm:787fcc3390d019f7afe5a682ce32068eaa2796aabfe0ca27dc0095ac45b27b5f",
+        "audio:d82369cbf34b377c4872ec4af062b226aa77c18a8e783b44fac086fb75f07dae",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    },
+    {
+      "record_id": "ten-vad:testset-audio-25",
+      "identity_tokens": [
+        "analysis-pcm:1c3fb6bfec4e3f5a5282350b8c492251c147317229d8625fe22e8ed5ae298d39",
+        "audio:faa1ad3f2e66659fc9f63776b8820f0afbe3fb4958a3da9bf0be52db1d983f3a",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    },
+    {
+      "record_id": "ten-vad:testset-audio-26",
+      "identity_tokens": [
+        "analysis-pcm:0dae0c8ae2209b711b8306c75d9ea2544bfbc41394b000cf6cbf0cfe27976c4f",
+        "audio:d3bc4941e32cdb4b789b59ad2de1a96a1fedd12a9f30e9731a8a501e87b5514d",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    },
+    {
+      "record_id": "ten-vad:testset-audio-27",
+      "identity_tokens": [
+        "analysis-pcm:4b7b4452fbfd0089d4bc8c1cd54378852fbfbd91428d83fced0764d6a616e7f3",
+        "audio:787541ec4e9424cb2f754905d920213cc4ab89024601d2b2d259b035b12f041a",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    },
+    {
+      "record_id": "ten-vad:testset-audio-28",
+      "identity_tokens": [
+        "analysis-pcm:495cffbf2c59d17447041a5b10c0970b856289733573bc38c6874520db55539f",
+        "audio:0f4fcc392c64b0e96c06dcc8e1eda240a1fada1ff5b51f8ea606339ab1e7810b",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    },
+    {
+      "record_id": "ten-vad:testset-audio-29",
+      "identity_tokens": [
+        "analysis-pcm:49543a156565784bc98cfcf483fced94473b391aafd1305db0aa8fbe5ad90d1b",
+        "audio:dc68d7c5ee7ad02c5c5d9c7dd5b30e8d1205516826438a639c44d51636187192",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    },
+    {
+      "record_id": "ten-vad:testset-audio-30",
+      "identity_tokens": [
+        "analysis-pcm:d18421f9886c16760f0ec4d702d818f88864759dbb691f72bab358c4bce35836",
+        "audio:af0fc39db6080f65d5b8c9a19aeca04a19d60c503a06fc6f3a875e64e7ac7ebf",
+        "ten-vad:testset:unresolved-source-identities"
+      ]
+    }
+  ],
+  "annotated_event_cases": 0,
+  "negative_event_seconds": 0.0,
+  "event_aggregate": {
+    "frozen_level_rule": {
+      "true_positive": 0,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": null,
+      "recall": null,
+      "f1": null,
+      "false_events_per_negative_hour": null
+    },
+    "adaptive_level_rule": {
+      "true_positive": 0,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": null,
+      "recall": null,
+      "f1": null,
+      "false_events_per_negative_hour": null
+    }
+  },
+  "paired_event_f1_gain": {
+    "groups": 0,
+    "gain_percentile95": null,
+    "valid_draws": 0
+  },
+  "results": [
+    {
+      "id": "ten-vad:testset-audio-01",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 11.52,
+      "analyzed_duration_seconds": 11.52,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "c857ebade87e32be132dc424f3477c84e8d5741c5350c27dc082b246dc817569",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -35.28796314412056,
+        "blockwise_lower_decile_median": -34.1925221298971,
+        "iid_gaussian_corrected_decile": -34.83095179889875
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 0.28
+            },
+            {
+              "start": 0.34,
+              "end": 1.3
+            },
+            {
+              "start": 1.34,
+              "end": 1.42
+            },
+            {
+              "start": 1.48,
+              "end": 3.44
+            },
+            {
+              "start": 3.48,
+              "end": 3.64
+            },
+            {
+              "start": 3.74,
+              "end": 3.98
+            },
+            {
+              "start": 4.0,
+              "end": 6.7
+            },
+            {
+              "start": 6.72,
+              "end": 11.06
+            },
+            {
+              "start": 11.1,
+              "end": 11.28
+            },
+            {
+              "start": 11.44,
+              "end": 11.52
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 454,
+            "false_positive": 95,
+            "false_negative": 15,
+            "precision": 0.8269581056466302,
+            "recall": 0.9680170575692963,
+            "f1": 0.8919449901768173,
+            "frames": 576,
+            "hop_seconds": 0.02,
+            "true_negative": 12,
+            "nonspeech_false_positive_rate": 0.8878504672897196,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 469,
+          "false_positive": 107,
+          "false_negative": 0,
+          "precision": 0.8142361111111112,
+          "recall": 1.0,
+          "f1": 0.8976076555023923,
+          "frames": 576,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    },
+    {
+      "id": "ten-vad:testset-audio-02",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 4.045,
+      "analyzed_duration_seconds": 4.04,
+      "ignored_incomplete_tail_seconds": 0.004999999999999893,
+      "analysis_samples_sha256": "b9a5d756ebcd55f3e2d467a655948fd0977fc8a436208db30cd18044d9fd9772",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -56.100750093890426,
+        "blockwise_lower_decile_median": -56.08997314064371,
+        "iid_gaussian_corrected_decile": -55.643738748668625
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 0.08
+            },
+            {
+              "start": 0.16,
+              "end": 0.76
+            },
+            {
+              "start": 0.96,
+              "end": 1.5
+            },
+            {
+              "start": 1.68,
+              "end": 2.72
+            },
+            {
+              "start": 2.82,
+              "end": 2.92
+            },
+            {
+              "start": 3.06,
+              "end": 3.8
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 125,
+            "false_positive": 30,
+            "false_negative": 0,
+            "precision": 0.8064516129032258,
+            "recall": 1.0,
+            "f1": 0.8928571428571429,
+            "frames": 202,
+            "hop_seconds": 0.02,
+            "true_negative": 47,
+            "nonspeech_false_positive_rate": 0.38961038961038963,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 123,
+          "false_positive": 24,
+          "false_negative": 2,
+          "precision": 0.8367346938775511,
+          "recall": 0.984,
+          "f1": 0.9044117647058824,
+          "frames": 202,
+          "hop_seconds": 0.02,
+          "true_negative": 53,
+          "nonspeech_false_positive_rate": 0.3116883116883117,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    },
+    {
+      "id": "ten-vad:testset-audio-03",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 10.3333125,
+      "analyzed_duration_seconds": 10.32,
+      "ignored_incomplete_tail_seconds": 0.013312499999999616,
+      "analysis_samples_sha256": "b4588d1f0219ed55e45b869a876d62109aa3c5a40ab3e55c9a90c442cde8b408",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -34.012603518606056,
+        "blockwise_lower_decile_median": -34.073385755851774,
+        "iid_gaussian_corrected_decile": -33.555592173384255
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 2.72
+            },
+            {
+              "start": 2.74,
+              "end": 5.38
+            },
+            {
+              "start": 5.46,
+              "end": 5.54
+            },
+            {
+              "start": 5.76,
+              "end": 6.26
+            },
+            {
+              "start": 6.28,
+              "end": 6.84
+            },
+            {
+              "start": 6.9,
+              "end": 7.24
+            },
+            {
+              "start": 7.28,
+              "end": 8.1
+            },
+            {
+              "start": 8.12,
+              "end": 10.3
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 395,
+            "false_positive": 97,
+            "false_negative": 17,
+            "precision": 0.8028455284552846,
+            "recall": 0.9587378640776699,
+            "f1": 0.8738938053097345,
+            "frames": 516,
+            "hop_seconds": 0.02,
+            "true_negative": 7,
+            "nonspeech_false_positive_rate": 0.9326923076923077,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 403,
+          "false_positive": 104,
+          "false_negative": 9,
+          "precision": 0.7948717948717948,
+          "recall": 0.9781553398058253,
+          "f1": 0.8770402611534276,
+          "frames": 516,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    },
+    {
+      "id": "ten-vad:testset-audio-04",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 10.3333125,
+      "analyzed_duration_seconds": 10.32,
+      "ignored_incomplete_tail_seconds": 0.013312499999999616,
+      "analysis_samples_sha256": "b955599cd21bf010e341b86ac154223e78571b0cbe309a614af1246de68528ef",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -33.62628343379362,
+        "blockwise_lower_decile_median": -31.371778923651572,
+        "iid_gaussian_corrected_decile": -33.16927208857181
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 3.64
+            },
+            {
+              "start": 3.68,
+              "end": 4.38
+            },
+            {
+              "start": 4.56,
+              "end": 5.24
+            },
+            {
+              "start": 5.26,
+              "end": 10.06
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 407,
+            "false_positive": 84,
+            "false_negative": 25,
+            "precision": 0.8289205702647657,
+            "recall": 0.9421296296296297,
+            "f1": 0.8819068255687974,
+            "frames": 516,
+            "hop_seconds": 0.02,
+            "true_negative": 0,
+            "nonspeech_false_positive_rate": 1.0,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 432,
+          "false_positive": 84,
+          "false_negative": 0,
+          "precision": 0.8372093023255814,
+          "recall": 1.0,
+          "f1": 0.9113924050632911,
+          "frames": 516,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    },
+    {
+      "id": "ten-vad:testset-audio-05",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 10.3333125,
+      "analyzed_duration_seconds": 10.32,
+      "ignored_incomplete_tail_seconds": 0.013312499999999616,
+      "analysis_samples_sha256": "2a2c9c477c69281a05469d4a4be6e871b7222890e1b3414f24e820b9df5e1dc6",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -40.54293795178527,
+        "blockwise_lower_decile_median": -40.147664022466586,
+        "iid_gaussian_corrected_decile": -40.08592660656347
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 0.08
+            },
+            {
+              "start": 0.62,
+              "end": 2.1
+            },
+            {
+              "start": 2.14,
+              "end": 2.58
+            },
+            {
+              "start": 2.6,
+              "end": 3.28
+            },
+            {
+              "start": 3.32,
+              "end": 3.46
+            },
+            {
+              "start": 3.56,
+              "end": 3.68
+            },
+            {
+              "start": 4.24,
+              "end": 4.38
+            },
+            {
+              "start": 4.42,
+              "end": 5.72
+            },
+            {
+              "start": 6.0,
+              "end": 6.9
+            },
+            {
+              "start": 6.94,
+              "end": 8.34
+            },
+            {
+              "start": 9.1,
+              "end": 9.18
+            },
+            {
+              "start": 9.58,
+              "end": 10.3
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 356,
+            "false_positive": 18,
+            "false_negative": 18,
+            "precision": 0.9518716577540107,
+            "recall": 0.9518716577540107,
+            "f1": 0.9518716577540107,
+            "frames": 516,
+            "hop_seconds": 0.02,
+            "true_negative": 124,
+            "nonspeech_false_positive_rate": 0.1267605633802817,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 374,
+          "false_positive": 142,
+          "false_negative": 0,
+          "precision": 0.7248062015503876,
+          "recall": 1.0,
+          "f1": 0.8404494382022472,
+          "frames": 516,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    },
+    {
+      "id": "ten-vad:testset-audio-06",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 10.3333125,
+      "analyzed_duration_seconds": 10.32,
+      "ignored_incomplete_tail_seconds": 0.013312499999999616,
+      "analysis_samples_sha256": "32573e470bae174bb08da352188e2cbade1e4824d49f53c06935858771f17d63",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -42.8047214138111,
+        "blockwise_lower_decile_median": -41.53553311113777,
+        "iid_gaussian_corrected_decile": -42.34771006858929
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 3.54
+            },
+            {
+              "start": 3.68,
+              "end": 3.76
+            },
+            {
+              "start": 3.98,
+              "end": 10.26
+            },
+            {
+              "start": 10.28,
+              "end": 10.32
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 413,
+            "false_positive": 84,
+            "false_negative": 1,
+            "precision": 0.8309859154929577,
+            "recall": 0.9975845410628019,
+            "f1": 0.9066959385290889,
+            "frames": 516,
+            "hop_seconds": 0.02,
+            "true_negative": 18,
+            "nonspeech_false_positive_rate": 0.8235294117647058,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 412,
+          "false_positive": 101,
+          "false_negative": 2,
+          "precision": 0.8031189083820662,
+          "recall": 0.9951690821256038,
+          "f1": 0.8888888888888888,
+          "frames": 516,
+          "hop_seconds": 0.02,
+          "true_negative": 1,
+          "nonspeech_false_positive_rate": 0.9901960784313726,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    },
+    {
+      "id": "ten-vad:testset-audio-07",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 8.44,
+      "analyzed_duration_seconds": 8.44,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "e14be07b32dec543e85961d0c3918f0b39a6fc8871410431d5bd084ba8604788",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -35.98919335064102,
+        "blockwise_lower_decile_median": -35.704551784458374,
+        "iid_gaussian_corrected_decile": -35.532182005419216
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 0.08
+            },
+            {
+              "start": 0.14,
+              "end": 1.82
+            },
+            {
+              "start": 2.28,
+              "end": 2.36
+            },
+            {
+              "start": 2.48,
+              "end": 3.12
+            },
+            {
+              "start": 3.2,
+              "end": 3.78
+            },
+            {
+              "start": 3.84,
+              "end": 4.26
+            },
+            {
+              "start": 4.38,
+              "end": 4.76
+            },
+            {
+              "start": 4.94,
+              "end": 5.02
+            },
+            {
+              "start": 5.92,
+              "end": 6.02
+            },
+            {
+              "start": 6.14,
+              "end": 6.66
+            },
+            {
+              "start": 6.74,
+              "end": 7.06
+            },
+            {
+              "start": 7.08,
+              "end": 7.36
+            },
+            {
+              "start": 7.38,
+              "end": 7.52
+            },
+            {
+              "start": 7.68,
+              "end": 8.02
+            },
+            {
+              "start": 8.18,
+              "end": 8.44
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 232,
+            "false_positive": 63,
+            "false_negative": 52,
+            "precision": 0.7864406779661017,
+            "recall": 0.8169014084507042,
+            "f1": 0.8013816925734024,
+            "frames": 422,
+            "hop_seconds": 0.02,
+            "true_negative": 75,
+            "nonspeech_false_positive_rate": 0.45652173913043476,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 284,
+          "false_positive": 138,
+          "false_negative": 0,
+          "precision": 0.6729857819905213,
+          "recall": 1.0,
+          "f1": 0.8045325779036827,
+          "frames": 422,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    },
+    {
+      "id": "ten-vad:testset-audio-08",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 9.6,
+      "analyzed_duration_seconds": 9.6,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "aaf9f6f7ff0d462753434e20ed202ffa98a70d113a03d9bd53a220ebdbe86eb7",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -39.18387629777337,
+        "blockwise_lower_decile_median": -38.66172929087653,
+        "iid_gaussian_corrected_decile": -38.726864952551566
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 0.08
+            },
+            {
+              "start": 0.28,
+              "end": 0.78
+            },
+            {
+              "start": 0.86,
+              "end": 1.26
+            },
+            {
+              "start": 1.3,
+              "end": 2.02
+            },
+            {
+              "start": 2.12,
+              "end": 3.32
+            },
+            {
+              "start": 3.82,
+              "end": 5.64
+            },
+            {
+              "start": 5.72,
+              "end": 6.66
+            },
+            {
+              "start": 6.68,
+              "end": 6.88
+            },
+            {
+              "start": 7.02,
+              "end": 8.36
+            },
+            {
+              "start": 8.46,
+              "end": 9.6
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 368,
+            "false_positive": 49,
+            "false_negative": 24,
+            "precision": 0.882494004796163,
+            "recall": 0.9387755102040817,
+            "f1": 0.9097651421508035,
+            "frames": 480,
+            "hop_seconds": 0.02,
+            "true_negative": 39,
+            "nonspeech_false_positive_rate": 0.5568181818181818,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 392,
+          "false_positive": 88,
+          "false_negative": 0,
+          "precision": 0.8166666666666667,
+          "recall": 1.0,
+          "f1": 0.8990825688073395,
+          "frames": 480,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    },
+    {
+      "id": "ten-vad:testset-audio-09",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 10.3333125,
+      "analyzed_duration_seconds": 10.32,
+      "ignored_incomplete_tail_seconds": 0.013312499999999616,
+      "analysis_samples_sha256": "00675a7c3ab9e2218d31c9d04b3b66a1f538fd152edc9493ec2b92a6a7c0ab63",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -40.85483651327631,
+        "blockwise_lower_decile_median": -34.09382741023077,
+        "iid_gaussian_corrected_decile": -40.39782516805451
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 0.7
+            },
+            {
+              "start": 0.72,
+              "end": 1.72
+            },
+            {
+              "start": 2.0,
+              "end": 2.22
+            },
+            {
+              "start": 2.46,
+              "end": 2.64
+            },
+            {
+              "start": 2.66,
+              "end": 2.84
+            },
+            {
+              "start": 3.02,
+              "end": 3.3
+            },
+            {
+              "start": 3.44,
+              "end": 3.6
+            },
+            {
+              "start": 4.64,
+              "end": 4.72
+            },
+            {
+              "start": 4.88,
+              "end": 5.56
+            },
+            {
+              "start": 5.78,
+              "end": 6.02
+            },
+            {
+              "start": 6.14,
+              "end": 8.2
+            },
+            {
+              "start": 9.3,
+              "end": 10.32
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 325,
+            "false_positive": 15,
+            "false_negative": 64,
+            "precision": 0.9558823529411765,
+            "recall": 0.8354755784061697,
+            "f1": 0.8916323731138546,
+            "frames": 516,
+            "hop_seconds": 0.02,
+            "true_negative": 112,
+            "nonspeech_false_positive_rate": 0.11811023622047244,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 389,
+          "false_positive": 82,
+          "false_negative": 0,
+          "precision": 0.8259023354564756,
+          "recall": 1.0,
+          "f1": 0.9046511627906977,
+          "frames": 516,
+          "hop_seconds": 0.02,
+          "true_negative": 45,
+          "nonspeech_false_positive_rate": 0.6456692913385826,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    },
+    {
+      "id": "ten-vad:testset-audio-10",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 10.3333125,
+      "analyzed_duration_seconds": 10.32,
+      "ignored_incomplete_tail_seconds": 0.013312499999999616,
+      "analysis_samples_sha256": "5fa0ae7ccd46faf858760980e7c871b161eb9abd74d71d34754e8bf451066b84",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -42.7224237957754,
+        "blockwise_lower_decile_median": -42.82322847393335,
+        "iid_gaussian_corrected_decile": -42.26541245055359
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 0.1
+            },
+            {
+              "start": 0.22,
+              "end": 1.38
+            },
+            {
+              "start": 2.12,
+              "end": 2.42
+            },
+            {
+              "start": 2.5,
+              "end": 3.34
+            },
+            {
+              "start": 3.38,
+              "end": 3.72
+            },
+            {
+              "start": 4.04,
+              "end": 5.96
+            },
+            {
+              "start": 6.38,
+              "end": 7.68
+            },
+            {
+              "start": 7.92,
+              "end": 8.02
+            },
+            {
+              "start": 8.04,
+              "end": 8.18
+            },
+            {
+              "start": 8.22,
+              "end": 8.5
+            },
+            {
+              "start": 8.66,
+              "end": 9.32
+            },
+            {
+              "start": 9.36,
+              "end": 10.32
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 331,
+            "false_positive": 74,
+            "false_negative": 26,
+            "precision": 0.817283950617284,
+            "recall": 0.927170868347339,
+            "f1": 0.868766404199475,
+            "frames": 516,
+            "hop_seconds": 0.02,
+            "true_negative": 85,
+            "nonspeech_false_positive_rate": 0.46540880503144655,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 356,
+          "false_positive": 159,
+          "false_negative": 1,
+          "precision": 0.6912621359223301,
+          "recall": 0.9971988795518207,
+          "f1": 0.8165137614678899,
+          "frames": 516,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    },
+    {
+      "id": "ten-vad:testset-audio-11",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 8.832,
+      "analyzed_duration_seconds": 8.82,
+      "ignored_incomplete_tail_seconds": 0.012000000000000455,
+      "analysis_samples_sha256": "29acc8654a4eff72ca2c2163941c9161757745373c9d6faab393dfbbb2fec9c7",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -34.07655778807281,
+        "blockwise_lower_decile_median": -33.71790694160459,
+        "iid_gaussian_corrected_decile": -33.619546442851004
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 1.9
+            },
+            {
+              "start": 2.02,
+              "end": 2.1
+            },
+            {
+              "start": 2.3,
+              "end": 2.38
+            },
+            {
+              "start": 2.58,
+              "end": 2.9
+            },
+            {
+              "start": 2.92,
+              "end": 3.02
+            },
+            {
+              "start": 3.12,
+              "end": 3.4
+            },
+            {
+              "start": 3.5,
+              "end": 3.58
+            },
+            {
+              "start": 4.22,
+              "end": 4.56
+            },
+            {
+              "start": 4.62,
+              "end": 4.7
+            },
+            {
+              "start": 4.88,
+              "end": 6.02
+            },
+            {
+              "start": 6.1,
+              "end": 6.22
+            },
+            {
+              "start": 6.24,
+              "end": 6.8
+            },
+            {
+              "start": 6.84,
+              "end": 7.02
+            },
+            {
+              "start": 7.06,
+              "end": 7.2
+            },
+            {
+              "start": 7.26,
+              "end": 7.52
+            },
+            {
+              "start": 7.58,
+              "end": 8.14
+            },
+            {
+              "start": 8.22,
+              "end": 8.4
+            },
+            {
+              "start": 8.52,
+              "end": 8.82
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 316,
+            "false_positive": 19,
+            "false_negative": 43,
+            "precision": 0.9432835820895522,
+            "recall": 0.8802228412256268,
+            "f1": 0.9106628242074928,
+            "frames": 441,
+            "hop_seconds": 0.02,
+            "true_negative": 63,
+            "nonspeech_false_positive_rate": 0.23170731707317074,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 359,
+          "false_positive": 82,
+          "false_negative": 0,
+          "precision": 0.8140589569160998,
+          "recall": 1.0,
+          "f1": 0.8975,
+          "frames": 441,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    },
+    {
+      "id": "ten-vad:testset-audio-12",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 4.79,
+      "analyzed_duration_seconds": 4.78,
+      "ignored_incomplete_tail_seconds": 0.009999999999999787,
+      "analysis_samples_sha256": "a2b9a13dbf7775e8fb9bce54fd56479137f4494bfb400da8504eb9983acd87ce",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -41.06696705160129,
+        "blockwise_lower_decile_median": -41.46767468294266,
+        "iid_gaussian_corrected_decile": -40.60995570637949
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 2.94
+            },
+            {
+              "start": 3.14,
+              "end": 3.22
+            },
+            {
+              "start": 3.48,
+              "end": 4.18
+            },
+            {
+              "start": 4.26,
+              "end": 4.36
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 142,
+            "false_positive": 49,
+            "false_negative": 4,
+            "precision": 0.743455497382199,
+            "recall": 0.9726027397260274,
+            "f1": 0.8427299703264095,
+            "frames": 239,
+            "hop_seconds": 0.02,
+            "true_negative": 44,
+            "nonspeech_false_positive_rate": 0.5268817204301075,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 146,
+          "false_positive": 92,
+          "false_negative": 0,
+          "precision": 0.6134453781512605,
+          "recall": 1.0,
+          "f1": 0.7604166666666666,
+          "frames": 239,
+          "hop_seconds": 0.02,
+          "true_negative": 1,
+          "nonspeech_false_positive_rate": 0.989247311827957,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    },
+    {
+      "id": "ten-vad:testset-audio-13",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 10.3333125,
+      "analyzed_duration_seconds": 10.32,
+      "ignored_incomplete_tail_seconds": 0.013312499999999616,
+      "analysis_samples_sha256": "0b2785d832880adfdb0d4ee755db7047915abd253560681e04d2a3924dcfa892",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -38.33577771445288,
+        "blockwise_lower_decile_median": -37.874295105773214,
+        "iid_gaussian_corrected_decile": -37.87876636923108
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 0.46
+            },
+            {
+              "start": 1.34,
+              "end": 1.48
+            },
+            {
+              "start": 1.52,
+              "end": 2.86
+            },
+            {
+              "start": 2.88,
+              "end": 3.26
+            },
+            {
+              "start": 4.62,
+              "end": 5.74
+            },
+            {
+              "start": 5.92,
+              "end": 7.54
+            },
+            {
+              "start": 7.56,
+              "end": 10.06
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 366,
+            "false_positive": 12,
+            "false_negative": 21,
+            "precision": 0.9682539682539683,
+            "recall": 0.9457364341085271,
+            "f1": 0.9568627450980393,
+            "frames": 516,
+            "hop_seconds": 0.02,
+            "true_negative": 117,
+            "nonspeech_false_positive_rate": 0.09302325581395349,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 387,
+          "false_positive": 129,
+          "false_negative": 0,
+          "precision": 0.75,
+          "recall": 1.0,
+          "f1": 0.8571428571428571,
+          "frames": 516,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    },
+    {
+      "id": "ten-vad:testset-audio-14",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 6.805,
+      "analyzed_duration_seconds": 6.8,
+      "ignored_incomplete_tail_seconds": 0.004999999999999893,
+      "analysis_samples_sha256": "11753c4717e371a3c6f05b6075a64d9e8e1305456f7a187f0372eecd1663ca7e",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -44.48626608474177,
+        "blockwise_lower_decile_median": -44.624589059632044,
+        "iid_gaussian_corrected_decile": -44.02925473951996
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 0.08
+            },
+            {
+              "start": 0.32,
+              "end": 1.68
+            },
+            {
+              "start": 1.7,
+              "end": 4.26
+            },
+            {
+              "start": 4.28,
+              "end": 4.84
+            },
+            {
+              "start": 4.9,
+              "end": 4.98
+            },
+            {
+              "start": 5.14,
+              "end": 6.5
+            },
+            {
+              "start": 6.72,
+              "end": 6.8
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 263,
+            "false_positive": 41,
+            "false_negative": 5,
+            "precision": 0.8651315789473685,
+            "recall": 0.9813432835820896,
+            "f1": 0.9195804195804196,
+            "frames": 340,
+            "hop_seconds": 0.02,
+            "true_negative": 31,
+            "nonspeech_false_positive_rate": 0.5694444444444444,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 268,
+          "false_positive": 72,
+          "false_negative": 0,
+          "precision": 0.788235294117647,
+          "recall": 1.0,
+          "f1": 0.881578947368421,
+          "frames": 340,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    },
+    {
+      "id": "ten-vad:testset-audio-15",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 4.736,
+      "analyzed_duration_seconds": 4.72,
+      "ignored_incomplete_tail_seconds": 0.016000000000000014,
+      "analysis_samples_sha256": "fec3c8147f5a86d255f392894d3ed04bac0d805363e74289788588db5a035819",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -40.940629301912274,
+        "blockwise_lower_decile_median": -41.91263050866723,
+        "iid_gaussian_corrected_decile": -40.483617956690466
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 0.16
+            },
+            {
+              "start": 0.2,
+              "end": 0.36
+            },
+            {
+              "start": 0.5,
+              "end": 2.6
+            },
+            {
+              "start": 2.88,
+              "end": 3.64
+            },
+            {
+              "start": 3.96,
+              "end": 4.68
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 169,
+            "false_positive": 26,
+            "false_negative": 2,
+            "precision": 0.8666666666666667,
+            "recall": 0.9883040935672515,
+            "f1": 0.9234972677595629,
+            "frames": 236,
+            "hop_seconds": 0.02,
+            "true_negative": 39,
+            "nonspeech_false_positive_rate": 0.4,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 171,
+          "false_positive": 65,
+          "false_negative": 0,
+          "precision": 0.7245762711864406,
+          "recall": 1.0,
+          "f1": 0.8402948402948403,
+          "frames": 236,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    },
+    {
+      "id": "ten-vad:testset-audio-16",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 10.24,
+      "analyzed_duration_seconds": 10.24,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "f9c58e3e57090baa11d921605559611ae1e79de6e41cfeb7ed9eddb60fdbf0fc",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -57.468677982832745,
+        "blockwise_lower_decile_median": -50.89748220861618,
+        "iid_gaussian_corrected_decile": -57.01166663761094
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 0.22
+            },
+            {
+              "start": 0.26,
+              "end": 1.42
+            },
+            {
+              "start": 1.46,
+              "end": 2.34
+            },
+            {
+              "start": 3.36,
+              "end": 4.0
+            },
+            {
+              "start": 4.06,
+              "end": 5.32
+            },
+            {
+              "start": 5.44,
+              "end": 5.52
+            },
+            {
+              "start": 5.74,
+              "end": 10.1
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 403,
+            "false_positive": 27,
+            "false_negative": 21,
+            "precision": 0.9372093023255814,
+            "recall": 0.9504716981132075,
+            "f1": 0.9437939110070258,
+            "frames": 512,
+            "hop_seconds": 0.02,
+            "true_negative": 61,
+            "nonspeech_false_positive_rate": 0.3068181818181818,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 376,
+          "false_positive": 17,
+          "false_negative": 48,
+          "precision": 0.9567430025445293,
+          "recall": 0.8867924528301887,
+          "f1": 0.9204406364749081,
+          "frames": 512,
+          "hop_seconds": 0.02,
+          "true_negative": 71,
+          "nonspeech_false_positive_rate": 0.19318181818181818,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    },
+    {
+      "id": "ten-vad:testset-audio-17",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 3.88,
+      "analyzed_duration_seconds": 3.88,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "ce96bfbd64d1347ed2aabef7e6acbbf2ec8bb256a5e548af6a306a341b884290",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -41.24117281853518,
+        "blockwise_lower_decile_median": -37.99259701000861,
+        "iid_gaussian_corrected_decile": -40.78416147331338
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 0.16
+            },
+            {
+              "start": 0.54,
+              "end": 3.88
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 138,
+            "false_positive": 37,
+            "false_negative": 1,
+            "precision": 0.7885714285714286,
+            "recall": 0.9928057553956835,
+            "f1": 0.8789808917197452,
+            "frames": 194,
+            "hop_seconds": 0.02,
+            "true_negative": 18,
+            "nonspeech_false_positive_rate": 0.6727272727272727,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 138,
+          "false_positive": 42,
+          "false_negative": 1,
+          "precision": 0.7666666666666667,
+          "recall": 0.9928057553956835,
+          "f1": 0.8652037617554859,
+          "frames": 194,
+          "hop_seconds": 0.02,
+          "true_negative": 13,
+          "nonspeech_false_positive_rate": 0.7636363636363637,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    },
+    {
+      "id": "ten-vad:testset-audio-18",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 7.296,
+      "analyzed_duration_seconds": 7.28,
+      "ignored_incomplete_tail_seconds": 0.016000000000000014,
+      "analysis_samples_sha256": "b0049aea1f1fcecac6fec06b7ee3557b1ef1d304d79d72d466bc6b1e47617890",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -39.569048263174956,
+        "blockwise_lower_decile_median": -38.6691363594814,
+        "iid_gaussian_corrected_decile": -39.112036917953155
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 0.56
+            },
+            {
+              "start": 0.64,
+              "end": 0.96
+            },
+            {
+              "start": 1.2,
+              "end": 1.88
+            },
+            {
+              "start": 1.9,
+              "end": 2.08
+            },
+            {
+              "start": 2.12,
+              "end": 2.6
+            },
+            {
+              "start": 2.66,
+              "end": 2.82
+            },
+            {
+              "start": 2.84,
+              "end": 2.94
+            },
+            {
+              "start": 3.08,
+              "end": 3.34
+            },
+            {
+              "start": 3.88,
+              "end": 3.98
+            },
+            {
+              "start": 4.24,
+              "end": 4.54
+            },
+            {
+              "start": 5.38,
+              "end": 5.76
+            },
+            {
+              "start": 5.8,
+              "end": 6.28
+            },
+            {
+              "start": 6.32,
+              "end": 6.64
+            },
+            {
+              "start": 6.66,
+              "end": 7.0
+            },
+            {
+              "start": 7.04,
+              "end": 7.18
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 231,
+            "false_positive": 9,
+            "false_negative": 43,
+            "precision": 0.9625,
+            "recall": 0.843065693430657,
+            "f1": 0.8988326848249028,
+            "frames": 364,
+            "hop_seconds": 0.02,
+            "true_negative": 81,
+            "nonspeech_false_positive_rate": 0.1,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 274,
+          "false_positive": 90,
+          "false_negative": 0,
+          "precision": 0.7527472527472527,
+          "recall": 1.0,
+          "f1": 0.8589341692789969,
+          "frames": 364,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    },
+    {
+      "id": "ten-vad:testset-audio-19",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 9.24,
+      "analyzed_duration_seconds": 9.24,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "6d5be29a622ec7de987b2b037d55f861785521f56ef777160c8726e4eb8d0e81",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -41.28713306221859,
+        "blockwise_lower_decile_median": -42.512237976119195,
+        "iid_gaussian_corrected_decile": -40.830121716996786
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 0.74
+            },
+            {
+              "start": 0.84,
+              "end": 1.22
+            },
+            {
+              "start": 1.38,
+              "end": 1.48
+            },
+            {
+              "start": 1.5,
+              "end": 4.48
+            },
+            {
+              "start": 4.68,
+              "end": 5.52
+            },
+            {
+              "start": 5.86,
+              "end": 6.18
+            },
+            {
+              "start": 6.22,
+              "end": 9.24
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 349,
+            "false_positive": 70,
+            "false_negative": 15,
+            "precision": 0.8329355608591885,
+            "recall": 0.9587912087912088,
+            "f1": 0.8914431673052363,
+            "frames": 462,
+            "hop_seconds": 0.02,
+            "true_negative": 28,
+            "nonspeech_false_positive_rate": 0.7142857142857143,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 364,
+          "false_positive": 79,
+          "false_negative": 0,
+          "precision": 0.8216704288939052,
+          "recall": 1.0,
+          "f1": 0.9021065675340768,
+          "frames": 462,
+          "hop_seconds": 0.02,
+          "true_negative": 19,
+          "nonspeech_false_positive_rate": 0.8061224489795918,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    },
+    {
+      "id": "ten-vad:testset-audio-20",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 10.3333125,
+      "analyzed_duration_seconds": 10.32,
+      "ignored_incomplete_tail_seconds": 0.013312499999999616,
+      "analysis_samples_sha256": "6b1de3c5432bd8ce1f8c7728f3356704b4d38e5642bf35df99418fc310a8b9f0",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -39.544153354165,
+        "blockwise_lower_decile_median": -39.0782206724858,
+        "iid_gaussian_corrected_decile": -39.08714200894319
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 0.08
+            },
+            {
+              "start": 0.6,
+              "end": 2.7
+            },
+            {
+              "start": 2.9,
+              "end": 5.3
+            },
+            {
+              "start": 6.02,
+              "end": 9.24
+            },
+            {
+              "start": 9.4,
+              "end": 10.32
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 412,
+            "false_positive": 24,
+            "false_negative": 2,
+            "precision": 0.944954128440367,
+            "recall": 0.9951690821256038,
+            "f1": 0.9694117647058823,
+            "frames": 516,
+            "hop_seconds": 0.02,
+            "true_negative": 78,
+            "nonspeech_false_positive_rate": 0.23529411764705882,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 413,
+          "false_positive": 90,
+          "false_negative": 1,
+          "precision": 0.8210735586481114,
+          "recall": 0.9975845410628019,
+          "f1": 0.9007633587786259,
+          "frames": 516,
+          "hop_seconds": 0.02,
+          "true_negative": 12,
+          "nonspeech_false_positive_rate": 0.8823529411764706,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    },
+    {
+      "id": "ten-vad:testset-audio-21",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 3.43,
+      "analyzed_duration_seconds": 3.42,
+      "ignored_incomplete_tail_seconds": 0.010000000000000231,
+      "analysis_samples_sha256": "660e2be69de80793d89e741f3178e8396b34148018ad0a11729fc6803f35dd15",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -42.92975915902915,
+        "blockwise_lower_decile_median": -42.84702338634414,
+        "iid_gaussian_corrected_decile": -42.47274781380735
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 0.08
+            },
+            {
+              "start": 0.6,
+              "end": 1.84
+            },
+            {
+              "start": 2.14,
+              "end": 2.9
+            },
+            {
+              "start": 3.1,
+              "end": 3.18
+            },
+            {
+              "start": 3.32,
+              "end": 3.4
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 100,
+            "false_positive": 12,
+            "false_negative": 6,
+            "precision": 0.8928571428571429,
+            "recall": 0.9433962264150944,
+            "f1": 0.9174311926605505,
+            "frames": 171,
+            "hop_seconds": 0.02,
+            "true_negative": 53,
+            "nonspeech_false_positive_rate": 0.18461538461538463,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 106,
+          "false_positive": 65,
+          "false_negative": 0,
+          "precision": 0.6198830409356725,
+          "recall": 1.0,
+          "f1": 0.7653429602888087,
+          "frames": 171,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    },
+    {
+      "id": "ten-vad:testset-audio-22",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 14.08,
+      "analyzed_duration_seconds": 14.08,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "16c40700172d9b7300cea360228039fc78136118a907b747116231047efbfe93",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -34.57269988138668,
+        "blockwise_lower_decile_median": -33.37223217231137,
+        "iid_gaussian_corrected_decile": -34.115688536164875
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 1.26
+            },
+            {
+              "start": 1.28,
+              "end": 3.5
+            },
+            {
+              "start": 3.56,
+              "end": 11.5
+            },
+            {
+              "start": 11.54,
+              "end": 12.82
+            },
+            {
+              "start": 13.06,
+              "end": 13.96
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 467,
+            "false_positive": 213,
+            "false_negative": 4,
+            "precision": 0.6867647058823529,
+            "recall": 0.9915074309978769,
+            "f1": 0.8114682884448305,
+            "frames": 704,
+            "hop_seconds": 0.02,
+            "true_negative": 20,
+            "nonspeech_false_positive_rate": 0.9141630901287554,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 467,
+          "false_positive": 213,
+          "false_negative": 4,
+          "precision": 0.6867647058823529,
+          "recall": 0.9915074309978769,
+          "f1": 0.8114682884448305,
+          "frames": 704,
+          "hop_seconds": 0.02,
+          "true_negative": 20,
+          "nonspeech_false_positive_rate": 0.9141630901287554,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    },
+    {
+      "id": "ten-vad:testset-audio-23",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 4.992,
+      "analyzed_duration_seconds": 4.98,
+      "ignored_incomplete_tail_seconds": 0.011999999999999567,
+      "analysis_samples_sha256": "4efb1c4e333e5fb129235b18fc129444fb0bec806ef7a51ea15a24e578dea41d",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -30.402195382825916,
+        "blockwise_lower_decile_median": -30.45557956336532,
+        "iid_gaussian_corrected_decile": -29.94518403760411
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 4.98
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 189,
+            "false_positive": 60,
+            "false_negative": 0,
+            "precision": 0.7590361445783133,
+            "recall": 1.0,
+            "f1": 0.863013698630137,
+            "frames": 249,
+            "hop_seconds": 0.02,
+            "true_negative": 0,
+            "nonspeech_false_positive_rate": 1.0,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 189,
+          "false_positive": 60,
+          "false_negative": 0,
+          "precision": 0.7590361445783133,
+          "recall": 1.0,
+          "f1": 0.863013698630137,
+          "frames": 249,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    },
+    {
+      "id": "ten-vad:testset-audio-24",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 6.44,
+      "analyzed_duration_seconds": 6.44,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "787fcc3390d019f7afe5a682ce32068eaa2796aabfe0ca27dc0095ac45b27b5f",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -40.68338815963329,
+        "blockwise_lower_decile_median": -40.35052870645401,
+        "iid_gaussian_corrected_decile": -40.22637681441148
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 0.08
+            },
+            {
+              "start": 0.5,
+              "end": 0.94
+            },
+            {
+              "start": 1.42,
+              "end": 1.58
+            },
+            {
+              "start": 1.62,
+              "end": 1.8
+            },
+            {
+              "start": 1.96,
+              "end": 2.06
+            },
+            {
+              "start": 2.1,
+              "end": 2.2
+            },
+            {
+              "start": 2.24,
+              "end": 2.58
+            },
+            {
+              "start": 2.62,
+              "end": 2.98
+            },
+            {
+              "start": 3.18,
+              "end": 3.58
+            },
+            {
+              "start": 3.7,
+              "end": 4.12
+            },
+            {
+              "start": 4.16,
+              "end": 4.34
+            },
+            {
+              "start": 4.44,
+              "end": 4.72
+            },
+            {
+              "start": 5.1,
+              "end": 5.76
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 176,
+            "false_positive": 9,
+            "false_negative": 55,
+            "precision": 0.9513513513513514,
+            "recall": 0.7619047619047619,
+            "f1": 0.8461538461538461,
+            "frames": 322,
+            "hop_seconds": 0.02,
+            "true_negative": 82,
+            "nonspeech_false_positive_rate": 0.0989010989010989,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 231,
+          "false_positive": 91,
+          "false_negative": 0,
+          "precision": 0.717391304347826,
+          "recall": 1.0,
+          "f1": 0.8354430379746836,
+          "frames": 322,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    },
+    {
+      "id": "ten-vad:testset-audio-25",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 15.785,
+      "analyzed_duration_seconds": 15.78,
+      "ignored_incomplete_tail_seconds": 0.005000000000000782,
+      "analysis_samples_sha256": "1c3fb6bfec4e3f5a5282350b8c492251c147317229d8625fe22e8ed5ae298d39",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -48.523304625934934,
+        "blockwise_lower_decile_median": -46.64736694388786,
+        "iid_gaussian_corrected_decile": -48.06629328071313
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 0.08
+            },
+            {
+              "start": 0.54,
+              "end": 2.66
+            },
+            {
+              "start": 2.68,
+              "end": 4.84
+            },
+            {
+              "start": 5.64,
+              "end": 6.5
+            },
+            {
+              "start": 6.54,
+              "end": 7.3
+            },
+            {
+              "start": 7.46,
+              "end": 10.98
+            },
+            {
+              "start": 11.02,
+              "end": 11.94
+            },
+            {
+              "start": 12.04,
+              "end": 12.54
+            },
+            {
+              "start": 12.68,
+              "end": 14.1
+            },
+            {
+              "start": 14.14,
+              "end": 15.18
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 607,
+            "false_positive": 62,
+            "false_negative": 27,
+            "precision": 0.9073243647234679,
+            "recall": 0.9574132492113565,
+            "f1": 0.9316960859554874,
+            "frames": 789,
+            "hop_seconds": 0.02,
+            "true_negative": 93,
+            "nonspeech_false_positive_rate": 0.4,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 634,
+          "false_positive": 155,
+          "false_negative": 0,
+          "precision": 0.8035487959442332,
+          "recall": 1.0,
+          "f1": 0.8910751932536893,
+          "frames": 789,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    },
+    {
+      "id": "ten-vad:testset-audio-26",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 10.3333125,
+      "analyzed_duration_seconds": 10.32,
+      "ignored_incomplete_tail_seconds": 0.013312499999999616,
+      "analysis_samples_sha256": "0dae0c8ae2209b711b8306c75d9ea2544bfbc41394b000cf6cbf0cfe27976c4f",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -69.60481007769248,
+        "blockwise_lower_decile_median": -34.64153127248614,
+        "iid_gaussian_corrected_decile": -69.14779873247068
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 2.54
+            },
+            {
+              "start": 2.56,
+              "end": 2.64
+            },
+            {
+              "start": 2.66,
+              "end": 5.76
+            },
+            {
+              "start": 6.1,
+              "end": 8.18
+            },
+            {
+              "start": 9.24,
+              "end": 10.32
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 376,
+            "false_positive": 68,
+            "false_negative": 0,
+            "precision": 0.8468468468468469,
+            "recall": 1.0,
+            "f1": 0.9170731707317074,
+            "frames": 516,
+            "hop_seconds": 0.02,
+            "true_negative": 72,
+            "nonspeech_false_positive_rate": 0.4857142857142857,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 376,
+          "false_positive": 59,
+          "false_negative": 0,
+          "precision": 0.864367816091954,
+          "recall": 1.0,
+          "f1": 0.9272503082614056,
+          "frames": 516,
+          "hop_seconds": 0.02,
+          "true_negative": 81,
+          "nonspeech_false_positive_rate": 0.42142857142857143,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    },
+    {
+      "id": "ten-vad:testset-audio-27",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 8.704,
+      "analyzed_duration_seconds": 8.7,
+      "ignored_incomplete_tail_seconds": 0.004000000000001336,
+      "analysis_samples_sha256": "4b7b4452fbfd0089d4bc8c1cd54378852fbfbd91428d83fced0764d6a616e7f3",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -34.279332295545004,
+        "blockwise_lower_decile_median": -33.47698134787145,
+        "iid_gaussian_corrected_decile": -33.8223209503232
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 0.18
+            },
+            {
+              "start": 0.22,
+              "end": 0.3
+            },
+            {
+              "start": 0.4,
+              "end": 3.1
+            },
+            {
+              "start": 3.42,
+              "end": 3.56
+            },
+            {
+              "start": 4.08,
+              "end": 4.24
+            },
+            {
+              "start": 4.26,
+              "end": 5.1
+            },
+            {
+              "start": 5.14,
+              "end": 5.24
+            },
+            {
+              "start": 5.34,
+              "end": 6.8
+            },
+            {
+              "start": 6.82,
+              "end": 7.14
+            },
+            {
+              "start": 7.48,
+              "end": 7.6
+            },
+            {
+              "start": 7.66,
+              "end": 7.84
+            },
+            {
+              "start": 7.9,
+              "end": 8.52
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 259,
+            "false_positive": 86,
+            "false_negative": 30,
+            "precision": 0.7507246376811594,
+            "recall": 0.8961937716262975,
+            "f1": 0.8170347003154574,
+            "frames": 435,
+            "hop_seconds": 0.02,
+            "true_negative": 60,
+            "nonspeech_false_positive_rate": 0.589041095890411,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 289,
+          "false_positive": 146,
+          "false_negative": 0,
+          "precision": 0.664367816091954,
+          "recall": 1.0,
+          "f1": 0.7983425414364641,
+          "frames": 435,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    },
+    {
+      "id": "ten-vad:testset-audio-28",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 7.168,
+      "analyzed_duration_seconds": 7.16,
+      "ignored_incomplete_tail_seconds": 0.008000000000000007,
+      "analysis_samples_sha256": "495cffbf2c59d17447041a5b10c0970b856289733573bc38c6874520db55539f",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -31.30882217118954,
+        "blockwise_lower_decile_median": -31.084705093229722,
+        "iid_gaussian_corrected_decile": -30.85181082596774
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 7.16
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 268,
+            "false_positive": 90,
+            "false_negative": 0,
+            "precision": 0.7486033519553073,
+            "recall": 1.0,
+            "f1": 0.8562300319488818,
+            "frames": 358,
+            "hop_seconds": 0.02,
+            "true_negative": 0,
+            "nonspeech_false_positive_rate": 1.0,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 268,
+          "false_positive": 90,
+          "false_negative": 0,
+          "precision": 0.7486033519553073,
+          "recall": 1.0,
+          "f1": 0.8562300319488818,
+          "frames": 358,
+          "hop_seconds": 0.02,
+          "true_negative": 0,
+          "nonspeech_false_positive_rate": 1.0,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    },
+    {
+      "id": "ten-vad:testset-audio-29",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 8.96,
+      "analyzed_duration_seconds": 8.96,
+      "ignored_incomplete_tail_seconds": 0.0,
+      "analysis_samples_sha256": "49543a156565784bc98cfcf483fced94473b391aafd1305db0aa8fbe5ad90d1b",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -49.34543446471374,
+        "blockwise_lower_decile_median": -49.083097685457616,
+        "iid_gaussian_corrected_decile": -48.88842311949194
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 0.08
+            },
+            {
+              "start": 0.18,
+              "end": 0.78
+            },
+            {
+              "start": 0.96,
+              "end": 4.28
+            },
+            {
+              "start": 5.16,
+              "end": 7.22
+            },
+            {
+              "start": 7.42,
+              "end": 8.9
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 326,
+            "false_positive": 51,
+            "false_negative": 9,
+            "precision": 0.8647214854111406,
+            "recall": 0.9731343283582089,
+            "f1": 0.9157303370786517,
+            "frames": 448,
+            "hop_seconds": 0.02,
+            "true_negative": 62,
+            "nonspeech_false_positive_rate": 0.45132743362831856,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 326,
+          "false_positive": 97,
+          "false_negative": 9,
+          "precision": 0.7706855791962175,
+          "recall": 0.9731343283582089,
+          "f1": 0.8601583113456465,
+          "frames": 448,
+          "hop_seconds": 0.02,
+          "true_negative": 16,
+          "nonspeech_false_positive_rate": 0.8584070796460177,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    },
+    {
+      "id": "ten-vad:testset-audio-30",
+      "source_group": "ten-vad:testset:unresolved-source-identities",
+      "evidence_type": "supplied_development_annotations",
+      "duration_seconds": 10.3333125,
+      "analyzed_duration_seconds": 10.32,
+      "ignored_incomplete_tail_seconds": 0.013312499999999616,
+      "analysis_samples_sha256": "d18421f9886c16760f0ec4d702d818f88864759dbb691f72bab358c4bce35836",
+      "noise_estimates_dbfs": {
+        "global_lower_decile": -43.13479618521028,
+        "blockwise_lower_decile_median": -35.246256826979604,
+        "iid_gaussian_corrected_decile": -42.67778483998847
+      },
+      "noise_absolute_error_db": null,
+      "level_changes": null,
+      "speech_methods": {
+        "webrtc": {
+          "status": "available",
+          "distribution": "webrtcvad-wheels",
+          "package_version": "2.0.14.post1",
+          "intervals": [
+            {
+              "start": 0.0,
+              "end": 0.16
+            },
+            {
+              "start": 0.18,
+              "end": 0.98
+            },
+            {
+              "start": 1.02,
+              "end": 1.5
+            },
+            {
+              "start": 2.1,
+              "end": 2.46
+            },
+            {
+              "start": 2.5,
+              "end": 3.02
+            },
+            {
+              "start": 3.06,
+              "end": 3.14
+            },
+            {
+              "start": 3.48,
+              "end": 3.66
+            },
+            {
+              "start": 3.82,
+              "end": 4.52
+            },
+            {
+              "start": 4.74,
+              "end": 4.82
+            },
+            {
+              "start": 5.0,
+              "end": 5.08
+            },
+            {
+              "start": 5.32,
+              "end": 5.52
+            },
+            {
+              "start": 5.54,
+              "end": 6.44
+            },
+            {
+              "start": 6.56,
+              "end": 7.12
+            },
+            {
+              "start": 7.42,
+              "end": 7.58
+            },
+            {
+              "start": 7.66,
+              "end": 9.0
+            },
+            {
+              "start": 9.48,
+              "end": 10.32
+            }
+          ],
+          "input_conversion": "mono16 -> clipped, rounded signed little-endian PCM16; no padded tail",
+          "clipped_input_samples": 0,
+          "metrics": {
+            "true_positive": 319,
+            "false_positive": 53,
+            "false_negative": 52,
+            "precision": 0.8575268817204301,
+            "recall": 0.8598382749326146,
+            "f1": 0.8586810228802153,
+            "frames": 516,
+            "hop_seconds": 0.02,
+            "true_negative": 92,
+            "nonspeech_false_positive_rate": 0.36551724137931035,
+            "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+          }
+        },
+        "energy_activity_diagnostic": {
+          "true_positive": 355,
+          "false_positive": 119,
+          "false_negative": 16,
+          "precision": 0.7489451476793249,
+          "recall": 0.9568733153638814,
+          "f1": 0.8402366863905325,
+          "frames": 516,
+          "hop_seconds": 0.02,
+          "true_negative": 26,
+          "nonspeech_false_positive_rate": 0.8206896551724138,
+          "boundary_rule": "frame center in [start, end); incomplete final audio frame excluded"
+        }
+      },
+      "evaluation_group": "5845b35c0430c4d3"
+    }
+  ],
+  "promotion_eligible": false,
+  "promotion_blockers": [
+    "Development-only runner; no locked independent evaluation performed.",
+    "Natural-audio representativeness and annotation quality are not established by these results.",
+    "Speech-positive support and calibrated noise/SNR accuracy require separate evidence."
+  ],
+  "limitations": [
+    "Event support intervals describe analysis windows, not verified edit boundaries.",
+    "No annotation is different from an explicitly empty annotation list.",
+    "Lower-tail noise estimates assume sufficiently quiet frames and can be biased by continuous speech or noise changes.",
+    "The Gaussian correction is invalid for correlated, colored, non-Gaussian or speech-filled noise frames unless separately validated.",
+    "Analytic fixture bootstrap bounds describe those constructed groups only; they do not support population performance claims."
+  ],
+  "mode": "supplied development annotations",
+  "manifest_sha256": "58d4ebf0653201226e476fb3aa45acca26e3394e2fd7fe92be158739647de2fc"
+}

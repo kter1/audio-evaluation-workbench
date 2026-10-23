@@ -1,0 +1,463 @@
+{
+  "schema_version": "wavlm-device-parity-1.0",
+  "passed": true,
+  "checkpoint_sha256": "803d2c57e705395d007b9deaf5b1a110965950f207df223e6dff5b6d298490fb",
+  "model": {
+    "repository": "eliya/forensics_0.3B_base_deepfake_classifier",
+    "revision": "cfd11365b02167214dc3b392378809fef6ca3cfa",
+    "license": "CC-BY-NC-4.0",
+    "backbone": "microsoft/wavlm-large",
+    "backbone_revision": "c1423ed94bb01d80a3f5ce5bc39f6026a0f4828c",
+    "files": {
+      "checkpoint_epoch_5.safetensors": {
+        "bytes": 1269932956,
+        "sha256": "803d2c57e705395d007b9deaf5b1a110965950f207df223e6dff5b6d298490fb"
+      },
+      "README.md": {
+        "bytes": 6155,
+        "sha256": "cbb1b0d24ea2b98cdd21a973683b168ba684fdd75aa2767157b144c3c2b0bb78",
+        "git_blob_sha1": "669489393b1f590fb87522c90d9a0aab79a57c4a"
+      },
+      "model.py": {
+        "bytes": 7763,
+        "sha256": "c99898e4f8fd5fb9ac1edfbc8736033d0a21680ccb58541e23c4188a36c860c9",
+        "git_blob_sha1": "a27455a6ed46ee0a1d9a69ed8f7b6cd4ad7b0ebf"
+      },
+      "config.json": {
+        "bytes": 190,
+        "sha256": "c0707e960fce86299863f317fcd9b6f16f02cfa1fd8a40b9a0ec0c3ffccd82e9",
+        "git_blob_sha1": "d35749b23b8ef4665bc0afdc60a4f19be016bf90"
+      },
+      "inference.py": {
+        "bytes": 2578,
+        "sha256": "53f16ec69e325ed479ea51de83579b2c1ee912a6de1d27f3fb5bef735ee66034",
+        "git_blob_sha1": "bf9b8d6e2c9847480b6d532c35338976cc52a88f"
+      },
+      "wavlm-large-config.json": {
+        "bytes": 2222,
+        "sha256": "a3d8fe831aaf63d725b54a8ac36f3549cd4365c5086774b2c89cabbc6f9e129d",
+        "git_blob_sha1": "b1d1becf90dd05db908a9114148c204484ebec69"
+      }
+    },
+    "preprocessing": {
+      "sample_rate": 16000,
+      "samples": 80000,
+      "normalization": "divide entire supplied mono16k crop by its peak + 1e-8",
+      "padding": "repeat short waveform and trim to 5 seconds",
+      "crop": "center 5 seconds if supplied input is longer",
+      "score_direction": "native label1=real; fake score=1-sigmoid(native real logit)",
+      "threshold": "author inference.py fixed fake score >=0.5; no threshold tuning"
+    },
+    "native_threshold": 0.5,
+    "unused_checkpoint_parameters": [
+      {
+        "name": "projection.0.bias",
+        "shape": [
+          320
+        ],
+        "dtype": "torch.float32",
+        "sha256": "268a8c4e0c1b39219fb86b7fde69764111efeb36b117cb9ba4acc36b9a5e95dd",
+        "reason": "Not constructed or referenced by pinned published inference architecture"
+      },
+      {
+        "name": "projection.0.weight",
+        "shape": [
+          320,
+          320
+        ],
+        "dtype": "torch.float32",
+        "sha256": "3752915c4a27fc70ed850ca8e50f8261113eded1c103d64b386ddd3c51a5c2a9",
+        "reason": "Not constructed or referenced by pinned published inference architecture"
+      },
+      {
+        "name": "projection.2.bias",
+        "shape": [
+          320
+        ],
+        "dtype": "torch.float32",
+        "sha256": "5666395e1eb42d65b9cf15989d921b9464dfb277630de3375967ee4c4333997e",
+        "reason": "Not constructed or referenced by pinned published inference architecture"
+      },
+      {
+        "name": "projection.2.weight",
+        "shape": [
+          320,
+          320
+        ],
+        "dtype": "torch.float32",
+        "sha256": "9daea865528424cd39519558e77af44f7ce601c01acce1eb6663e8f4684db687",
+        "reason": "Not constructed or referenced by pinned published inference architecture"
+      }
+    ],
+    "device": "mps",
+    "torch_version": "2.14.1",
+    "precision": "float32; no autocast or quantization",
+    "device_parity_required": true
+  },
+  "selection": "Ten fixed lexicographically first cases: human in every declared condition plus each of five AI families in one condition; selection independent of scores",
+  "case_count": 10,
+  "results": [
+    {
+      "id": "voxenes-2026:voxenes-2026/bonafide/english/libri_0077.flac::original",
+      "label": "human",
+      "group": "human",
+      "condition": "original",
+      "cpu": {
+        "synthetic_score": 0.0736398696899414,
+        "human_score": 0.9263601303100586,
+        "logits": [
+          0.0,
+          -2.532076358795166
+        ],
+        "native_real_logit": 2.532076358795166,
+        "model_input_sha256": "c6defd819d1e71639319ae66875adc33a8f487bd261e6934bf601a68c22304d3"
+      },
+      "mps": {
+        "synthetic_score": 0.07363992929458618,
+        "human_score": 0.9263600707054138,
+        "logits": [
+          0.0,
+          -2.5320749282836914
+        ],
+        "native_real_logit": 2.5320749282836914,
+        "model_input_sha256": "c6defd819d1e71639319ae66875adc33a8f487bd261e6934bf601a68c22304d3"
+      },
+      "probability_abs_error": 5.960464477539063e-08,
+      "native_logit_abs_error": 1.430511474609375e-06,
+      "stored_cpu_probability_abs_error": 0.0,
+      "model_input_hash_matches": true,
+      "binary_matches": true,
+      "passed": true
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/chroma/english/random/random_002.wav::original",
+      "label": "synthetic",
+      "group": "chroma",
+      "condition": "original",
+      "cpu": {
+        "synthetic_score": 0.8644983470439911,
+        "human_score": 0.1355016529560089,
+        "logits": [
+          0.0,
+          1.8531655073165894
+        ],
+        "native_real_logit": -1.8531655073165894,
+        "model_input_sha256": "264bd057a2df96b65adf693619d8281b167ebc000547de941f64629810cf9c64"
+      },
+      "mps": {
+        "synthetic_score": 0.8644983172416687,
+        "human_score": 0.1355016827583313,
+        "logits": [
+          0.0,
+          1.8531652688980103
+        ],
+        "native_real_logit": -1.8531652688980103,
+        "model_input_sha256": "264bd057a2df96b65adf693619d8281b167ebc000547de941f64629810cf9c64"
+      },
+      "probability_abs_error": 2.9802322387695312e-08,
+      "native_logit_abs_error": 2.384185791015625e-07,
+      "stored_cpu_probability_abs_error": 0.0,
+      "model_input_hash_matches": true,
+      "binary_matches": true,
+      "passed": true
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/bonafide/english/libri_0077.flac::gain_minus12db",
+      "label": "human",
+      "group": "human",
+      "condition": "gain_minus12db",
+      "cpu": {
+        "synthetic_score": 0.07364004850387573,
+        "human_score": 0.9263599514961243,
+        "logits": [
+          0.0,
+          -2.532073974609375
+        ],
+        "native_real_logit": 2.532073974609375,
+        "model_input_sha256": "5dc3a8eba3745c36dbed62fcbf4b745fa7a6c3cc894f3015762f016e332f5ec8"
+      },
+      "mps": {
+        "synthetic_score": 0.07363975048065186,
+        "human_score": 0.9263602495193481,
+        "logits": [
+          0.0,
+          -2.5320777893066406
+        ],
+        "native_real_logit": 2.5320777893066406,
+        "model_input_sha256": "5dc3a8eba3745c36dbed62fcbf4b745fa7a6c3cc894f3015762f016e332f5ec8"
+      },
+      "probability_abs_error": 2.980232238769531e-07,
+      "native_logit_abs_error": 3.814697265625e-06,
+      "stored_cpu_probability_abs_error": 0.0,
+      "model_input_hash_matches": true,
+      "binary_matches": true,
+      "passed": true
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/glm_tts/english/random/random_016.wav::gain_minus12db",
+      "label": "synthetic",
+      "group": "glm_tts",
+      "condition": "gain_minus12db",
+      "cpu": {
+        "synthetic_score": 0.853497788310051,
+        "human_score": 0.14650221168994904,
+        "logits": [
+          0.0,
+          1.7623023986816406
+        ],
+        "native_real_logit": -1.7623023986816406,
+        "model_input_sha256": "47522bc7e5ee6bb7439f41a54854e9882fe14641cdf7019f9539a9fe4698a33f"
+      },
+      "mps": {
+        "synthetic_score": 0.853497102856636,
+        "human_score": 0.14650289714336395,
+        "logits": [
+          0.0,
+          1.7622969150543213
+        ],
+        "native_real_logit": -1.7622969150543213,
+        "model_input_sha256": "47522bc7e5ee6bb7439f41a54854e9882fe14641cdf7019f9539a9fe4698a33f"
+      },
+      "probability_abs_error": 6.854534149169922e-07,
+      "native_logit_abs_error": 5.4836273193359375e-06,
+      "stored_cpu_probability_abs_error": 0.0,
+      "model_input_hash_matches": true,
+      "binary_matches": true,
+      "passed": true
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/bonafide/english/libri_0077.flac::added_noise20db",
+      "label": "human",
+      "group": "human",
+      "condition": "added_noise20db",
+      "cpu": {
+        "synthetic_score": 0.07074373960494995,
+        "human_score": 0.92925626039505,
+        "logits": [
+          0.0,
+          -2.57532000541687
+        ],
+        "native_real_logit": 2.57532000541687,
+        "model_input_sha256": "704dc180ad7066439f15a5ab13132e9396024bcb313f31cf8c4faf82e048e4ee"
+      },
+      "mps": {
+        "synthetic_score": 0.07074397802352905,
+        "human_score": 0.929256021976471,
+        "logits": [
+          0.0,
+          -2.5753164291381836
+        ],
+        "native_real_logit": 2.5753164291381836,
+        "model_input_sha256": "704dc180ad7066439f15a5ab13132e9396024bcb313f31cf8c4faf82e048e4ee"
+      },
+      "probability_abs_error": 2.384185791015625e-07,
+      "native_logit_abs_error": 3.5762786865234375e-06,
+      "stored_cpu_probability_abs_error": 0.0,
+      "model_input_hash_matches": true,
+      "binary_matches": true,
+      "passed": true
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/qwen3_tts/english/fixed/fixed_005.wav::added_noise20db",
+      "label": "synthetic",
+      "group": "qwen3_tts",
+      "condition": "added_noise20db",
+      "cpu": {
+        "synthetic_score": 0.178503155708313,
+        "human_score": 0.821496844291687,
+        "logits": [
+          0.0,
+          -1.5265216827392578
+        ],
+        "native_real_logit": 1.5265216827392578,
+        "model_input_sha256": "817834a1d1c78d550775632cb9d88b29c99346d632e5ff6105ea409bcccb9ecf"
+      },
+      "mps": {
+        "synthetic_score": 0.17850053310394287,
+        "human_score": 0.8214994668960571,
+        "logits": [
+          0.0,
+          -1.526539921760559
+        ],
+        "native_real_logit": 1.526539921760559,
+        "model_input_sha256": "817834a1d1c78d550775632cb9d88b29c99346d632e5ff6105ea409bcccb9ecf"
+      },
+      "probability_abs_error": 2.6226043701171875e-06,
+      "native_logit_abs_error": 1.823902130126953e-05,
+      "stored_cpu_probability_abs_error": 0.0,
+      "model_input_hash_matches": true,
+      "binary_matches": true,
+      "passed": true
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/bonafide/english/libri_0077.flac::bandwidth8k",
+      "label": "human",
+      "group": "human",
+      "condition": "bandwidth8k",
+      "cpu": {
+        "synthetic_score": 0.07225441932678223,
+        "human_score": 0.9277455806732178,
+        "logits": [
+          0.0,
+          -2.5525636672973633
+        ],
+        "native_real_logit": 2.5525636672973633,
+        "model_input_sha256": "877fc68ab2bf9974efc5956c1af411b74237e0aa7d4ade1c36fa55add5db1839"
+      },
+      "mps": {
+        "synthetic_score": 0.07225346565246582,
+        "human_score": 0.9277465343475342,
+        "logits": [
+          0.0,
+          -2.5525784492492676
+        ],
+        "native_real_logit": 2.5525784492492676,
+        "model_input_sha256": "877fc68ab2bf9974efc5956c1af411b74237e0aa7d4ade1c36fa55add5db1839"
+      },
+      "probability_abs_error": 9.5367431640625e-07,
+      "native_logit_abs_error": 1.4781951904296875e-05,
+      "stored_cpu_probability_abs_error": 0.0,
+      "model_input_hash_matches": true,
+      "binary_matches": true,
+      "passed": true
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/vibevoice/english/fixed/fixed_031.wav::bandwidth8k",
+      "label": "synthetic",
+      "group": "vibevoice",
+      "condition": "bandwidth8k",
+      "cpu": {
+        "synthetic_score": 0.17303752899169922,
+        "human_score": 0.8269624710083008,
+        "logits": [
+          0.0,
+          -1.5642510652542114
+        ],
+        "native_real_logit": 1.5642510652542114,
+        "model_input_sha256": "8f88538b0e243502ef1d11733097cec16a10c3a31350b87c8bade0efa5aeaf8a"
+      },
+      "mps": {
+        "synthetic_score": 0.17304259538650513,
+        "human_score": 0.8269574046134949,
+        "logits": [
+          0.0,
+          -1.5642153024673462
+        ],
+        "native_real_logit": 1.5642153024673462,
+        "model_input_sha256": "8f88538b0e243502ef1d11733097cec16a10c3a31350b87c8bade0efa5aeaf8a"
+      },
+      "probability_abs_error": 5.066394805908203e-06,
+      "native_logit_abs_error": 3.5762786865234375e-05,
+      "stored_cpu_probability_abs_error": 0.0,
+      "model_input_hash_matches": true,
+      "binary_matches": true,
+      "passed": true
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/bonafide/english/libri_0077.flac::vorbis_roundtrip",
+      "label": "human",
+      "group": "human",
+      "condition": "vorbis_roundtrip",
+      "cpu": {
+        "synthetic_score": 0.07389724254608154,
+        "human_score": 0.9261027574539185,
+        "logits": [
+          0.0,
+          -2.5283093452453613
+        ],
+        "native_real_logit": 2.5283093452453613,
+        "model_input_sha256": "4f24670f1d8b517ea17705523039255bb7986ef913af6243e9afe28241bfbb1f"
+      },
+      "mps": {
+        "synthetic_score": 0.07389718294143677,
+        "human_score": 0.9261028170585632,
+        "logits": [
+          0.0,
+          -2.528310775756836
+        ],
+        "native_real_logit": 2.528310775756836,
+        "model_input_sha256": "4f24670f1d8b517ea17705523039255bb7986ef913af6243e9afe28241bfbb1f"
+      },
+      "probability_abs_error": 5.960464477539063e-08,
+      "native_logit_abs_error": 1.430511474609375e-06,
+      "stored_cpu_probability_abs_error": 0.0,
+      "model_input_hash_matches": true,
+      "binary_matches": true,
+      "passed": true
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/voxcpm/english/fixed/fixed_008.wav::vorbis_roundtrip",
+      "label": "synthetic",
+      "group": "voxcpm",
+      "condition": "vorbis_roundtrip",
+      "cpu": {
+        "synthetic_score": 0.8647233992815018,
+        "human_score": 0.13527660071849823,
+        "logits": [
+          0.0,
+          1.8550881147384644
+        ],
+        "native_real_logit": -1.8550881147384644,
+        "model_input_sha256": "abaeaab8b1a36b4026092ed82678763790958a81705ad75448362d023eff697c"
+      },
+      "mps": {
+        "synthetic_score": 0.8647233992815018,
+        "human_score": 0.13527660071849823,
+        "logits": [
+          0.0,
+          1.8550881147384644
+        ],
+        "native_real_logit": -1.8550881147384644,
+        "model_input_sha256": "abaeaab8b1a36b4026092ed82678763790958a81705ad75448362d023eff697c"
+      },
+      "probability_abs_error": 0.0,
+      "native_logit_abs_error": 0.0,
+      "stored_cpu_probability_abs_error": 0.0,
+      "model_input_hash_matches": true,
+      "binary_matches": true,
+      "passed": true
+    }
+  ],
+  "tolerances": {
+    "probability_abs": 0.0001,
+    "native_real_logit_abs": 0.001,
+    "stored_cpu_probability_abs": 1e-06,
+    "identical_model_input_hashes": true,
+    "identical_binary_decisions": true
+  },
+  "scope": "Numerical device parity on ten previously scored development examples; not an accuracy estimate or independent validation. CPU references are recomputed because the stored screen omits native logits.",
+  "code_sha256": {
+    "lab/research_wavlm_aasist.py": "d0df6c10c298af50a597637eccb39c220b71af2af883a497c6c760104ce90917",
+    "lab/research_wavlm_mps.py": "ec9db928084a37d854117c436c0891a178d197e021e221f37d3af67aa791073f",
+    "scripts/screen_wavlm_mps.py": "7029ed4432a04f37ee63a13e9d89b070c9aecdb33d41d687bcd22c4e5b0c5e66",
+    "scripts/screen_candidate_regression.py": "387f68314511d6a0a661f415838101dde3dbc6de36e72a1a89b8f0d888c33690",
+    "lab/core_screen.py": "ea423c2bbfff886e727357332c24883538d0ceb543ca4fec57fabf1d78f8ce1c",
+    "lab/forensics.py": "41ba2cfd1830744cfbbf7dcd7941885275109982b99f5bc39da83fd9fedb43bd",
+    "lab/corpus_inventory.py": "8c75dded8d71016c5b64269f64c1fd687c13c0ac75e2e5dbc61716abfb597f70",
+    "lab/vad_stress.py": "5ed89d18a8a7a5c03921650415be94b45c30b1257a3d9d369a2004b319e73bde",
+    "lab/vad_channel_stress.py": "fc9b2d7f0d2591a62fd8adcc0cb092969dfbca1ede0006c3b1f499d401bf8718"
+  },
+  "cpu_screen_file_sha256": "c15b1e56ee599da6dbad31409b9396f847ddc9c69ca1f3d8eb3c3c1f1e495e88",
+  "acquisition_sha256": "fe0449e1a81f8c31902ddbb1ea36686caa20cd764a76951e41b82803066a60e8",
+  "environment": {
+    "python": "3.13.7",
+    "torch": "2.14.1",
+    "threads": 1,
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "device": "mps",
+    "mps_built": true
+  },
+  "model_construction_and_verified_load_seconds": 13.067152209114283,
+  "runtime_including_model_load_seconds": 32.058036792092025,
+  "score_resources": {
+    "calls": 10,
+    "seconds_total": 6.196430414915085,
+    "latency_p50_seconds": 0.14815206243656576,
+    "latency_p95_seconds": 2.7383715827716464,
+    "realtime_factor_window_inputs": 0.1587200413656528,
+    "process_peak_resident_gib": 2.4252777099609375,
+    "mps_current_allocated_gib": 1.1818938255310059,
+    "mps_driver_allocated_gib": 2.124664306640625,
+    "scope": "Sequential synchronized MPS calls including first call. RSS includes CPU/model load; driver allocation is final resident allocation, not peak GPU memory."
+  }
+}

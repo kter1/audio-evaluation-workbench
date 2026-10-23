@@ -1,0 +1,60 @@
+{
+  "repository": "Sadanie/pellav2-audio-deepfake-detector",
+  "revision": "808e16a49526178f8e1e6276725dfd14f218ec82",
+  "license": "MIT (publisher model-card declaration)",
+  "architecture": "Wav2Vec2BertModel 580M with learned layer weighting and linear head; distinct from installed historical XLS-R 300M Pella",
+  "max_total_bytes": 2322400000,
+  "authorization": "User request: Make this the most capable detector. Bounded larger-model research acquisition supersedes previous self-imposed small-download research restriction for this candidate only. No automatic app download, training or paid compute.",
+  "checkpoint": {
+    "name": "pellav2_detector.pt",
+    "url": "https://huggingface.co/Sadanie/pellav2-audio-deepfake-detector/resolve/808e16a49526178f8e1e6276725dfd14f218ec82/pellav2_detector.pt",
+    "size": 2322248702,
+    "sha256": "2279c24f6e4b672c85eb2593f93cbbad83a7c1e9486fe3bcdc246c13fcca80e6"
+  },
+  "files": [
+    {
+      "name": "pellav2_infer.py",
+      "url": "https://huggingface.co/Sadanie/pellav2-audio-deepfake-detector/resolve/808e16a49526178f8e1e6276725dfd14f218ec82/pellav2_infer.py",
+      "size": 4496,
+      "git_blob_sha1": "bb77354927508be7ddd92073a1fe3f0d40b3c4a7"
+    },
+    {
+      "name": "config.json",
+      "url": "https://huggingface.co/Sadanie/pellav2-audio-deepfake-detector/resolve/808e16a49526178f8e1e6276725dfd14f218ec82/config.json",
+      "size": 24,
+      "git_blob_sha1": "5d10bb18fc6fcbfcc2930dade47b97646c701b02"
+    },
+    {
+      "name": "README.md",
+      "url": "https://huggingface.co/Sadanie/pellav2-audio-deepfake-detector/resolve/808e16a49526178f8e1e6276725dfd14f218ec82/README.md",
+      "size": 484,
+      "git_blob_sha1": "de5dc94849af78c762c8eec2763b488ede64fbc1"
+    },
+    {
+      "name": "w2v-bert-config.json",
+      "url": "https://huggingface.co/facebook/w2v-bert-2.0/resolve/da985ba0987f70aaeb84a80f2851cfac8c697a7b/config.json",
+      "size": 1874,
+      "git_blob_sha1": "a383a594dac18459628cd2837168cd276342a31a"
+    },
+    {
+      "name": "kaldi.py",
+      "url": "https://raw.githubusercontent.com/pytorch/audio/a224ab24a7f4797f6707051257265e223e12576f/src/torchaudio/compliance/kaldi.py",
+      "size": 36666,
+      "git_blob_sha1": "98358f40b522facc0abdfbaceec45f5887e00e54"
+    },
+    {
+      "name": "TORCHAUDIO-LICENSE",
+      "url": "https://raw.githubusercontent.com/pytorch/audio/a224ab24a7f4797f6707051257265e223e12576f/LICENSE",
+      "size": 1338,
+      "git_blob_sha1": "1bec23eaf1dd562ae3d3216420b1b1bbfbd39cbc"
+    }
+  ],
+  "evaluation": {
+    "primary_threshold": 0.5,
+    "threshold_tuning": false,
+    "initial_screen": "same 45-source VoxENES development cohort and all five fixed conditions",
+    "follow_up": "all v4 stored originals and channels if promising; no old test is relabeled independent",
+    "promotion": "No model switch from this small development screen alone; retain historical model and reports.",
+    "independent_benchmark_warning": "Do not attribute August benchmark results to this different October22 checkpoint."
+  }
+}

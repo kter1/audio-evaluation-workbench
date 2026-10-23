@@ -1,0 +1,18 @@
+{
+  "version": "1.0",
+  "status": "development candidate frozen before broader WavLM regression results",
+  "purpose": "Evaluate complementary detection without assuming a larger standalone detector is better",
+  "rule": "At recording level, flag synthetic if frozen current fusion score >= its threshold OR WavLM+AASIST native fake score >=0.5. No score averaging, fit, threshold search or probability claim. This is a raw binary research comparison, not the product assessment policy.",
+  "selection_basis": "Post-hoc on repeated45-source modern development screen: WavLM independently rescues two noisy misses and one bandwidth miss, with0/100 raw human alerts. This is not independent model selection or confirmatory evidence.",
+  "broader_test": "All320 frozen v4 originals/fourconditions; historical fusion recording scores paired with candidate native5s anchored recording scores. Source-file comparison, contexts differ.",
+  "rejection_gates": [
+    "Any additional genuine raw false alert in any v4 condition rejects this OR rule as a safe no-FP-increase upgrade.",
+    "Retain all existing fused detections by construction; record incremental catches and false alerts with exact denominators.",
+    "No production promotion or world-class claim from these spent regression sets. Independent calibration/locked validation remain required."
+  ],
+  "sources": {
+    "baseline": "docs/detector-evaluation.json",
+    "modern_baseline": "docs/core-modern-stress-v1.json",
+    "modern_candidate": "docs/core-wavlm-aasist-screen-v1.json"
+  }
+}

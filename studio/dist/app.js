@@ -1,6 +1,7 @@
 "use strict";
 const $=id=>document.getElementById(id);
-const state={data:null,inference:null,file:null,url:null,selected:null,filter:"all",zoom:1,offset:0,loop:false,benchmark:null,modelReady:false,notes:{},demo:false};
+const state={data:null,inference:null,file:null,url:null,selected:null,filter:"all",zoom:1,offset:0,loop:false,benchmark:null,modelReady:false,notes:{},demo:false,generation:0,busy:false,statusError:false};
+let statusPromise;
 const COLORS={signal:"#6bddc9",model:"#bc96f3",reliability:"#f0b86e"};
 
 let toastTimer;
@@ -10,7 +11,7 @@ function precise(n){return Number(n).toFixed(2)+"s"}
 function escapeHTML(text){return String(text??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function markers(){return [...(state.data?.markers||[]),...(state.inference?.markers||[])].sort((a,b)=>a.start-b.start)}
 function filtered(){return markers().filter(m=>state.filter==="all"||m.category===state.filter||(state.filter==="model"&&m.category==="reliability"))}
-function setPage(page){for(const n of document.querySelectorAll(".nav"))n.classList.toggle("active",n.dataset.page===page);$("analyze").classList.toggle("hidden",page!=="analyze");$("benchmark").classList.toggle("hidden",page!=="benchmark");$("breadcrumb").textContent=page==="analyze"?"ANALYZE":"BENCHMARK LAB";if(page==="benchmark")loadBenchmark();if(page==="analyze")requestAnimationFrame(draw)}
+function setPage(page){for(const n of document.querySelectorAll(".nav"))n.classList.toggle("active",n.dataset.page===page);$("analyze").classList.toggle("hidden",page!=="analyze");$("benchmark").classList.toggle("hidden",page!=="benchmark");$("breadcrumb").textContent=page==="analyze"?"VOICE CHECK":"VALIDATION HISTORY";if(page==="benchmark")loadBenchmark();if(page==="analyze")requestAnimationFrame(draw)}
 document.querySelectorAll(".nav").forEach(b=>b.addEventListener("click",()=>setPage(b.dataset.page)));
 function resize(){const canvas=$("wave");const width=canvas.parentElement.clientWidth;if(!width)return;const dpr=Math.min(2,devicePixelRatio||1);canvas.width=width*dpr;canvas.height=242*dpr;canvas.getContext("2d").setTransform(dpr,0,0,dpr,0,0);draw()}
 window.addEventListener("resize",resize);
@@ -44,9 +45,58 @@ $("analyst-note").addEventListener("input",e=>{state.notes[id]=e.target.value});
 $("replay").disabled=false;renderMarkers();draw();}
 $("replay").onclick=()=>{const m=markers().find(x=>x.id===state.selected);if(!m)return;state.loop=false;$("loop").textContent="↻ Loop off";seek(Math.max(0,m.start-.4));$("player").play().catch(()=>toast("Playback failed."))};
 document.querySelectorAll("[data-filter]").forEach(b=>b.onclick=()=>{state.filter=b.dataset.filter;document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("selected",x===b));renderMarkers()});
-function reset(){state.inference=null;state.data=null;state.selected=null;state.notes={};state.zoom=1;state.offset=0;state.loop=false;$("zoom-label").textContent="1.0×";$("model-output").innerHTML="";$("inference-metric").textContent="Not run";$("detail").innerHTML='<div class="blank"><span>◇</span><strong>Select a highlighted interval</strong><p>Click any marker to see the underlying observation and its limitations.</p></div>';$("marker-category").textContent="NO SELECTION";$("download-report").disabled=true;$("run-model").disabled=true;$("replay").disabled=true;$("play").disabled=true;$("loop").disabled=true}
-async function loadFile(file,demo){reset();state.file=file;state.demo=demo;if(state.url)URL.revokeObjectURL(state.url);state.url=URL.createObjectURL(file);$("player").src=state.url;$("filename").textContent=file.name;$("source-status").textContent="Measuring acoustic evidence locally…";$("empty-wave").classList.add("hidden");try{const body=new FormData();body.append("file",file);const response=await fetch("/api/inspect",{method:"POST",body});const payload=await response.json();if(!response.ok)throw Error(payload.error||"Audio analysis failed");state.data=payload;$("source-status").textContent=(demo?"Generated tone fixture · Not speech · ":"")+"Measured signal evidence · SHA-256 "+payload.sha256.slice(0,16)+"…";$("duration").textContent=clock(payload.duration);$("time-end").textContent=clock(payload.duration);$("duration-metric").textContent=payload.duration.toFixed(1)+"s";$("rms-metric").textContent=payload.metrics.rms_dbfs.toFixed(1)+" dBFS";$("play").disabled=false;$("loop").disabled=false;$("download-report").disabled=false;$("run-model").disabled=!state.modelReady||demo;renderMarkers();resize();if(payload.markers.length)selectMarker(payload.markers[0].id);else toast("Analysis complete. No configured evidence rules triggered.");if(payload.warnings.length)toast("Signal analysis complete; reliability warnings available in export.");}catch(e){$("source-status").textContent=e.message;$("empty-wave").classList.remove("hidden");toast(e.message)}}
-$("upload-button").onclick=()=>$("audio-file").click();$("audio-file").addEventListener("change",e=>{const file=e.target.files[0];if(file)loadFile(file,false)});
+function renderQuality(){
+  const data=state.data;
+  $("recording-quality").classList.toggle("hidden",!data);
+  if(!data)return;
+  const warnings=[...new Set([...(data.warnings||[]),...(state.inference?.warnings||[])])];
+  $("quality-warnings").innerHTML=warnings.length?'<ul>'+warnings.map(w=>'<li>'+escapeHTML(w)+'</li>').join('')+'</ul>':'<p>No configured quality warning triggered. This does not establish authenticity.</p>';
+  const source=data.metrics.source_measurements;
+  if(!source){$("source-measurement-summary").textContent="Source measurements unavailable";$("source-measurements").textContent="";return;}
+  const db=value=>value===null?"Undefined (zero energy)":Number(value).toFixed(2);
+  $("source-measurement-summary").textContent=source.sample_rate_hz.toLocaleString()+" Hz · "+source.channels.length+" original channel(s) · "+source.version;
+  const rows=source.channels.map(c=>'<tr><td>'+c.channel+'</td><td>'+db(c.rms_dbfs)+'</td><td>'+db(c.sample_peak_dbfs)+'</td><td>'+Number(c.dc_offset).toPrecision(4)+'</td><td>'+(100*c.near_full_scale_fraction).toFixed(3)+'%</td></tr>').join('');
+  const mix=source.arithmetic_mixdown;
+  const mixText=mix.complete_cancellation?"Original channels cancel completely in the arithmetic mono mix.":mix.attenuation_db===null?"Mixdown attenuation is undefined for a silent source.":"Arithmetic mono mix attenuation: "+Number(mix.attenuation_db).toFixed(2)+" dB relative to mean channel power.";
+  $("source-measurements").innerHTML='<div class="measurement-table"><table><thead><tr><th>Channel</th><th>RMS (dBFS)</th><th>Sample peak (dBFS)</th><th>DC offset</th><th>Near full scale</th></tr></thead><tbody>'+rows+'</tbody></table></div><p>'+escapeHTML(mixText)+'</p><p>These measurements use decoded source channels before mixing or resampling. Near full scale means |sample| ≥ '+source.near_full_scale_threshold+'; this does not prove clipping. Sample peaks are not reconstructed true peaks.</p><p>The waveform, acoustic markers and summary RMS use an arithmetic mono mix resampled to 16,000 Hz. Channel cancellation and source frequencies above 8 kHz can be hidden in that view.</p>';
+}
+function reset(){state.generation++;state.busy=false;state.file=null;state.inference=null;state.data=null;state.selected=null;state.notes={};state.zoom=1;state.offset=0;state.loop=false;$("recording-quality").classList.add("hidden");$("quality-warnings").textContent="";$("source-measurements").textContent="";$("zoom-label").textContent="1.0×";showAssessmentState("Ready when you are.","Upload a voice recording to check it.");$("inference-metric").textContent="Not run";$("detail").innerHTML='<div class="blank"><span>◇</span><strong>Select a highlighted interval</strong><p>Click any marker to see the underlying observation and its limitations.</p></div>';$("marker-category").textContent="NO SELECTION";$("download-report").disabled=true;$("run-model").disabled=true;$("run-model").textContent="Check voice";$("replay").disabled=true;$("play").disabled=true;$("loop").disabled=true;renderMarkers();draw()}
+function showAssessmentState(title, description){$("model-output").innerHTML='<div class="assessment-empty"><span class="eyebrow">ASSESSMENT</span><h2>'+escapeHTML(title)+'</h2><p>'+escapeHTML(description)+'</p></div>'}
+function renderAssessment(payload){
+  const a=payload.assessment;
+  const inconclusive=a.assessment==="Inconclusive";
+  const kind=inconclusive?"inconclusive":a.binary_model_decision==="synthetic"?"synthetic":"human";
+  const title=inconclusive?"Inconclusive":kind==="synthetic"?"AI voice indicated":"No clear AI signal";
+  const description=inconclusive?"There is not enough reliable evidence for a clear result.":kind==="synthetic"?"The detector found patterns associated with AI-generated speech.":"The detector did not find a clear AI signal. Short AI inserts can still be missed.";
+  $("inference-metric").textContent=title;
+  const score=typeof a.synthetic_score==="number"?'<div class="scores"><div class="score"><span>RAW SYNTHETIC SCORE</span><strong>'+a.synthetic_score.toFixed(3)+'</strong></div><div class="score"><span>ANALYZED WINDOWS</span><strong>'+payload.windows.length+'</strong></div><div class="score"><span>DECISION THRESHOLD</span><strong>'+Number(payload.threshold).toFixed(3)+'</strong></div></div><p>Raw scores are not calibrated probabilities of authenticity.</p>':'<p>Model inference was skipped because the recording failed quality checks.</p>';
+  const links=payload.links?'<p><a href="'+escapeHTML(payload.links.html)+'">Download detailed report</a> · <a href="'+escapeHTML(payload.links.json)+'">JSON</a></p>':'';
+  $("model-output").innerHTML='<div class="model-output" data-result="'+kind+'"><span class="eyebrow">ASSESSMENT</span><h2 class="assessment-title">'+title+'</h2><p class="assessment-note">'+description+'</p>'+((a.abstention_reasons||[]).length?'<ul class="assessment-reasons">'+a.abstention_reasons.map(r=>'<li>'+escapeHTML(r)+'</li>').join('')+'</ul>':'')+'<p>An indication, not proof. Results are best supported on English speech.</p><details><summary>How this result was reached</summary>'+score+links+'</details></div>';
+}
+async function loadFile(file,demo){
+  reset();const generation=state.generation;state.file=file;state.demo=demo;
+  if(state.url)URL.revokeObjectURL(state.url);state.url=URL.createObjectURL(file);$("player").src=state.url;
+  $("filename").textContent=file.name;$("source-status").textContent="Preparing your recording locally…";
+  $("empty-wave").classList.add("hidden");showAssessmentState("Preparing recording…","Checking audio quality before detection.");
+  try{
+    const body=new FormData();body.append("file",file);
+    const response=await fetch("/api/inspect",{method:"POST",body});const payload=await response.json();
+    if(generation!==state.generation)return;
+    if(!response.ok)throw Error(payload.error||"Audio analysis failed");
+    state.data=payload;$("source-status").textContent=(demo?"Generated non-speech demo · Voice detection is disabled.":"Recording ready · "+payload.duration.toFixed(1)+" seconds · Processed locally");
+    $("duration").textContent=clock(payload.duration);$("time-end").textContent=clock(payload.duration);
+    $("duration-metric").textContent=payload.duration.toFixed(1)+"s";$("rms-metric").textContent=payload.metrics.rms_dbfs.toFixed(1)+" dBFS";
+    $("play").disabled=false;$("loop").disabled=false;$("download-report").disabled=false;
+    renderQuality();renderMarkers();resize();
+    await statusPromise;if(generation!==state.generation)return;
+    $("run-model").disabled=!state.modelReady||demo;
+    if(demo)showAssessmentState("Signal demonstration","This is a generated non-speech fixture, not an AI-voice detection example.");
+    else if(state.modelReady)await checkVoice();
+    else showAssessmentState("Detector unavailable",state.statusError?"The local service could not be reached. Refresh to try again.":"Set up the local voice detector to assess this recording.");
+  }catch(e){if(generation!==state.generation)return;$("source-status").textContent=e.message;$("empty-wave").classList.remove("hidden");showAssessmentState("Recording could not be checked",e.message);toast(e.message)}
+}
+
+$("upload-button").onclick=()=>$("audio-file").click();$("audio-file").addEventListener("change",e=>{const file=e.target.files[0];if(file){loadFile(file,false);e.target.value=""}});
 async function loadCatalogSample(entry){
   if(!entry)throw Error("No startup sample found");
   const response=await fetch("/api/samples/"+encodeURIComponent(entry.id)+"/audio");
@@ -55,7 +105,7 @@ async function loadCatalogSample(entry){
   const ext=(entry.extension||".wav").replace(/^\./,"");
   const sample=new File([blob],entry.label+"."+ext,{type:blob.type==="application/octet-stream"?"":blob.type});
   await loadFile(sample,entry.source==="generated_signal");
-  if(state.data){$("source-status").textContent=(entry.source==="generated_signal"?"GENERATED NON-SPEECH SIGNAL · ":"LOCAL RECORDING DATABASE · ")+"Measured evidence · "+state.data.duration.toFixed(1)+" seconds";state.sampleSource=entry.source;}
+  if(state.data&&state.file===sample){$("source-status").textContent=(entry.source==="generated_signal"?"GENERATED NON-SPEECH SIGNAL · ":"LOCAL RECORDING DATABASE · ")+"Measured evidence · "+state.data.duration.toFixed(1)+" seconds";state.sampleSource=entry.source;}
 }
 async function randomStartup(){
   try{
@@ -70,11 +120,38 @@ async function randomStartup(){
 }
 $("random-button").onclick=randomStartup;
 $("demo-button").onclick=async()=>{try{toast("Loading measured signal demonstration…");const r=await fetch("/api/demo");if(!r.ok)throw Error("Example not available");const b=await r.blob();await loadFile(new File([b],"signal-test-tone.wav",{type:"audio/wav"}),true)}catch(e){toast(e.message)}};
-$("run-model").onclick=async()=>{if(!state.file||!state.modelReady||state.demo)return;const original=state.data.sha256;const button=$("run-model");button.disabled=true;button.textContent="Analyzing audio…";try{const body=new FormData();body.append("file",state.file);const response=await fetch("/api/infer",{method:"POST",body});const payload=await response.json();if(!response.ok)throw Error(payload.error||"Inference failed");if(payload.sha256!==original)throw Error("File identity changed; result rejected.");state.inference=payload;$("inference-metric").textContent=payload.assessment.assessment==="Inconclusive"?"Inconclusive":payload.assessment.binary_model_decision==="synthetic"?"Synthetic indicated":"Human indicated";const a=payload.assessment;$("model-output").innerHTML='<div class="model-output"><strong>'+escapeHTML(a.assessment)+'</strong><p>The result applies only to the uploaded file; scores are not calibrated probabilities of authenticity.</p><div class="scores"><div class="score"><span>FUSED SYNTHETIC SCORE</span><strong>'+Number(a.synthetic_score).toFixed(3)+'</strong></div><div class="score"><span>ANALYZED WINDOWS</span><strong>'+payload.windows.length+'</strong></div><div class="score"><span>DECISION THRESHOLD</span><strong>'+Number(payload.threshold).toFixed(3)+'</strong></div></div>'+(a.abstention_reasons||[]).map(s=>'<p>⚠ '+escapeHTML(s)+'</p>').join('')+'<p><a href="'+payload.links.html+'">Download full forensic report (HTML)</a> · <a href="'+payload.links.json+'">JSON receipt</a></p></div>';renderMarkers();draw();$("download-report").disabled=false;toast("Fresh model inference complete.")}catch(e){toast(e.message)}finally{button.textContent="Run deepfake assessment";button.disabled=!state.modelReady||state.demo}};
-$("download-report").onclick=()=>{if(!state.data)return;const payload={product:"SignalTrace",type:"recording_evidence",generated_at:new Date().toISOString(),file_name:state.file.name,sha256:state.data.sha256,duration_seconds:state.data.duration,metrics:state.data.metrics,markers:markers().map(m=>({...m,analyst_note:state.notes[m.id]||""})),model_report:state.inference?.links||null,limitations:["Signal markers are measurements, not verified edits.","Model scores are not calibrated authenticity probabilities.","The supplied signal demo is synthetic non-speech test tone."]};const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});const url=URL.createObjectURL(blob);const anchor=document.createElement("a");anchor.href=url;anchor.download="signaltrace-evidence.json";anchor.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
-async function loadStatus(){try{const r=await fetch("/api/status");const status=await r.json();state.modelReady=status.ready;$("model-status").textContent=status.ready?"● Fusion detector ready":"○ Signal analysis ready";$("model-status").title=status.ready?"Verified models installed":"Model inference optional; install checkpoints";$("setup-commands").textContent=status.setup.join("\n");$("run-model").disabled=!status.ready||!state.file||state.demo;}catch(e){$("model-status").textContent="Service unavailable";toast("Unable to reach local analysis service.")}}
+async function checkVoice(){
+  if(!state.file||!state.data||!state.modelReady||state.demo||state.busy)return;
+  const generation=state.generation,original=state.data.sha256,file=state.file,button=$("run-model");
+  state.busy=true;button.disabled=true;button.textContent="Checking voice…";
+  state.inference=null;$("inference-metric").textContent="Checking…";renderQuality();renderMarkers();
+  showAssessmentState("Checking voice…","The detector runs locally. Longer recordings take more time.");
+  try{
+    const body=new FormData();body.append("file",file);
+    const response=await fetch("/api/infer",{method:"POST",body});const payload=await response.json();
+    if(generation!==state.generation)return;
+    if(!response.ok)throw Error(payload.error||"Inference failed");
+    if(payload.sha256!==original)throw Error("File identity changed; result rejected.");
+    state.inference=payload;renderAssessment(payload);renderQuality();renderMarkers();draw();
+    $("download-report").disabled=false;
+  }catch(e){if(generation!==state.generation)return;showAssessmentState("Assessment unavailable",e.message);$("inference-metric").textContent="Not available";toast(e.message)}
+  finally{if(generation===state.generation){state.busy=false;button.textContent="Check voice";button.disabled=!state.modelReady||state.demo}}
+}
+$("run-model").onclick=checkVoice;
+$("download-report").onclick=()=>{if(!state.data)return;const payload={product:"SignalTrace",type:"recording_evidence",generated_at:new Date().toISOString(),file_name:state.file.name,sha256:state.data.sha256,duration_seconds:state.data.duration,metrics:state.data.metrics,warnings:[...new Set([...(state.data.warnings||[]),...(state.inference?.warnings||[])])],markers:markers().map(m=>({...m,analyst_note:state.notes[m.id]||""})),assessment:state.inference?.assessment||null,model_executed:state.inference?.model_executed??null,model_report:state.inference?.links||null,limitations:["Signal markers are measurements, not verified edits.","Model scores are not calibrated authenticity probabilities.","The supplied signal demo is synthetic non-speech test tone."]};const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});const url=URL.createObjectURL(blob);const anchor=document.createElement("a");anchor.href=url;anchor.download="signaltrace-evidence.json";anchor.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
+async function loadStatus(){try{
+  const r=await fetch("/api/status");if(!r.ok)throw Error("Detector status unavailable");const status=await r.json();
+  state.modelReady=status.ready;state.statusError=false;
+  $("model-status").textContent=status.ready?"● Voice detector ready":"○ Detector setup required";
+  $("model-status").title=status.ready?"Local model checkpoints available":"Install checkpoints to assess voices";
+  $("setup").classList.toggle("hidden",status.ready);$("setup-commands").textContent=status.setup.join("\n");
+  $("run-model").disabled=!status.ready||!state.data||state.demo||state.busy;
+  if(!status.ready)showAssessmentState("Set up voice detection","The local model checkpoints are required. Use the setup instructions below.");
+}catch(e){state.modelReady=false;state.statusError=true;$("model-status").textContent="Service unavailable";showAssessmentState("Service unavailable","Start the local server and refresh this page.")}}
+
 $("setup").onclick=()=>$("setup-dialog").showModal();$("close-setup").onclick=()=>$("setup-dialog").close();
 async function loadBenchmark(){if(state.benchmark){renderBenchmark();return}try{const r=await fetch("/api/benchmark");const result=await r.json();if(!r.ok)throw Error(result.error||"Benchmark unavailable");state.benchmark=result;renderBenchmark()}catch(e){toast(e.message)}}
 function renderBenchmark(){const all=state.benchmark;if(!all)return;const condition=$("condition").value,model=$("model-choice").value;const values=all.conditions[condition][model];const fmt=(n,d)=>d?((100*n/d).toFixed(1)+"%"):"—";$("bench-synthetic").textContent=fmt(values.synthetic_flagged,values.synthetic_total);$("bench-human").textContent=fmt(values.human_flagged,values.human_total);$("bench-synthetic-count").textContent=values.synthetic_flagged+" of "+values.synthetic_total+" synthetic recordings";$("bench-human-count").textContent=values.human_flagged+" of "+values.human_total+" genuine recordings";const names={"fusion":"Two-model fusion","pellav2 alone (same rule)":"PellaV2 alone","AntiDeepfake alone (same rule)":"AntiDeepfake alone","pellav2 at authors’ 0.5":"PellaV2 default threshold"};$("comparison").innerHTML=Object.entries(all.conditions[condition]).map(([name,v])=>'<div class="compare-row"><span>'+escapeHTML(names[name]||name)+'</span><div class="bar"><div class="bar-inner" style="width:'+Math.min(100,100*v.human_flagged/v.human_total)+'%"></div></div><span>'+v.human_flagged+"/"+v.human_total+" false alerts</span></div>").join('')+'<p class="hint">Bars compare genuine recordings falsely flagged. Lower is better. Threshold selection differs by model.</p>';$("limitations").innerHTML=all.limitations.map(x=>"<p>• "+escapeHTML(x)+"</p>").join("");}
 $("condition").onchange=renderBenchmark;$("model-choice").onchange=renderBenchmark;
-loadStatus();window.addEventListener("load",resize);setTimeout(resize,100);randomStartup();
+statusPromise=loadStatus();window.addEventListener("load",resize);setTimeout(resize,100);
+document.querySelectorAll(".playback-details,.advanced").forEach(detail=>detail.addEventListener("toggle",resize));

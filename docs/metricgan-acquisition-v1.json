@@ -1,0 +1,34 @@
+{
+  "model_repository": "speechbrain/metricgan-plus-voicebank",
+  "model_revision": "a196ce26b3bdace6fa1d819017584bdbcce462a8",
+  "license": "Apache-2.0 per pinned model card",
+  "max_total_bytes": 10485760,
+  "files": [
+    {
+      "name": "README.md",
+      "url": "https://huggingface.co/speechbrain/metricgan-plus-voicebank/resolve/a196ce26b3bdace6fa1d819017584bdbcce462a8/README.md",
+      "size": 4141,
+      "git_blob_sha1": "bb868b93be1b738bc3b81157f1ed920b23c9261c"
+    },
+    {
+      "name": "enhance_model.ckpt",
+      "url": "https://huggingface.co/speechbrain/metricgan-plus-voicebank/resolve/a196ce26b3bdace6fa1d819017584bdbcce462a8/enhance_model.ckpt",
+      "size": 7586021,
+      "git_blob_sha1": "1c7c412f3adf0fdb54eaa4297cece5dc708dd00e"
+    },
+    {
+      "name": "hyperparams.yaml",
+      "url": "https://huggingface.co/speechbrain/metricgan-plus-voicebank/resolve/a196ce26b3bdace6fa1d819017584bdbcce462a8/hyperparams.yaml",
+      "size": 1121,
+      "git_blob_sha1": "35e2124cb58c0350e034f94fb07d9ce5f51f3e76"
+    }
+  ],
+  "source_revision": "c0241278f93ef02cd5191f03caf4e5f8e1292bf6",
+  "source_files": [
+    "speechbrain/lobes/models/MetricGAN.py",
+    "speechbrain/processing/features.py",
+    "speechbrain/processing/signal_processing.py",
+    "speechbrain/inference/enhancement.py",
+    "LICENSE"
+  ]
+}

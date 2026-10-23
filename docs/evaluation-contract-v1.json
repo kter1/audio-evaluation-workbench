@@ -1,0 +1,68 @@
+{
+  "version": "1.0",
+  "status": "protocol frozen before candidate tuning; new locked corpus not yet acquired",
+  "scope": "local audio measurement, synthetic speech detection, and separately validated manipulation localization",
+  "historical_v4_role": "regression only; previously published and consulted",
+  "partitions": {
+    "development": "candidate selection, feature engineering and fusion fitting",
+    "calibration": "disjoint source/speaker groups for score calibration, threshold and abstention selection",
+    "locked_test": "new source/speaker groups; labels/results withheld from tuning; one final frozen-system evaluation",
+    "grouping": "connected components of speaker, source utterance, cloning reference, duplicate audio and derivatives; no component crosses partitions",
+    "heldout": "generator families and recording domains held out from development and calibration",
+    "manifest_required": ["id", "partition", "label_provenance", "source_group", "speaker_group", "generator_family", "domain", "language", "duration_seconds", "original_sha256", "parent_id", "license", "acquisition_source"],
+    "checks": ["byte duplicate audit", "perceptual duplicate audit", "speaker/source/reference overlap", "generator-family overlap", "upstream training-data contamination assessment"],
+    "unknown_provenance_policy": "exclude from primary confirmatory results; disclose in exploratory results"
+  },
+  "synthetic_speech": {
+    "score_direction": "higher is synthetic",
+    "primary_operating_point": "threshold selected on calibration for empirical false-positive rate <= 0.01; frozen before testing",
+    "minimum_detection_rate": 0.95,
+    "minimum_detection_rate_each_declared_critical_condition": 0.9,
+    "maximum_false_positive_rate_each_critical_condition": 0.02,
+    "maximum_one_sided_95_false_positive_upper_bound": 0.02,
+    "minimum_independent_human_groups_each_critical_condition": 300,
+    "minimum_independent_synthetic_groups_each_critical_condition": 200,
+    "critical_conditions": ["unseen generator families", "recorded device/channel shift", "lossy codec", "real background noise", "replay", "short speech", "partially synthetic speech"],
+    "domain_policy": "declare supported languages, duration bins, codecs and devices before locking; untested domains remain unsupported",
+    "uncertainty": "paired connected-source-group bootstrap, 10000 draws, seed 20261022; report class-empty draws; report speaker and generator sensitivity analyses",
+    "rare_error_policy": "zero-error bootstrap intervals cannot establish low population risk; additionally report one-sided exact binomial upper bound using one prespecified recording per independent group; require both safeguards",
+    "diagnostics": ["ROC and DET curves", "EER as diagnostic only", "detection at calibration-fixed FPR targets 0.001, 0.01, 0.05", "per-condition counts and intervals", "Brier score", "reliability plots with bin counts", "risk versus abstention coverage", "performance versus synthetic duration/fraction"],
+    "probability_policy": "no authenticity-probability claim without target-domain and prevalence validation",
+    "promotion": {
+      "all_absolute_gates_required": true,
+      "material_improvement_either": ["detection gain >= 0.02 at the same calibration FPR target with paired 95% gain lower bound > 0", "false-positive reduction >= 25% relative at matched calibration detection target, paired 95% reduction lower bound > 0"],
+      "maximum_detection_regression_each_critical_condition": 0.02,
+      "no_exception_freeze": "failed gates retain baseline; any revised protocol requires a new version and untouched test data"
+    }
+  },
+  "measurement": {
+    "original_channels_and_rate_preserved": true,
+    "derived_model_inputs_documented": true,
+    "analytic_fixture_level_error_db_max": 0.1,
+    "analytic_fixture_event_boundary_error_max_hops": 1,
+    "natural_audio_validation": "annotated positives and confounder negatives; report event precision/recall and false alarms per hour",
+    "anomaly_promotion": "paired improvement with 95% lower bound > 0 on prespecified event F1; false-alarm rate <= baseline; no edit-origin claim",
+    "units_method_version_and_resolution_required": true
+  },
+  "localization": {
+    "release_status": "experimental until independent gates pass",
+    "annotations": "known alteration provenance, exact intervals and independent boundary review",
+    "metrics": ["one-to-one event precision/recall/F1 at IoU >= 0.5", "frame precision-recall curve", "boundary absolute error median and p95", "false events per hour on unedited audio"],
+    "minimum_event_precision": 0.9,
+    "minimum_event_recall": 0.9,
+    "maximum_boundary_error_p95_seconds": 0.25,
+    "maximum_false_events_per_unedited_hour": 1,
+    "minimum_altered_source_groups": 200,
+    "minimum_unedited_hours": 20,
+    "classification_windows_are_not_edit_boundaries": true
+  },
+  "resources": {
+    "candidate_limit": 3,
+    "reference_environment": "record actual hardware, OS, package versions, thread counts and device for every run",
+    "maximum_cpu_realtime_factor": 1.0,
+    "maximum_peak_resident_memory_gib": 8,
+    "timing": "report cold model load separately; warm p50/p95 latency by recording duration and total runtime/audio duration",
+    "acquisition": "inventory local resources first; no automatic large downloads, training or paid compute"
+  },
+  "claim_gate": "world-class requires comparable external results and independent replication; passing this internal protocol alone is insufficient"
+}

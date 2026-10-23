@@ -1,37 +1,38 @@
-# SignalTrace — Audio Evidence Studio
+# SignalTrace — AI Voice Check
 
-SignalTrace is a local waveform-first audio investigation instrument.
-It highlights **measured** signal changes, synchronizes each timestamped
-observation with playback, and can optionally add window-level synthetic
-speech model evidence using the repository's existing two-model fusion.
+Upload a voice recording and get one clear result: **AI voice indicated**,
+**No clear AI signal**, or **Inconclusive**, with a short explanation.
+Processing runs locally. The current detector combines PellaV2 and AntiDeepfake;
+its accuracy has not been established as world-class.
 
-## Launch on macOS
+## Run
 
-Open Terminal in the repository, then run:
+From the project folder:
 
 ```sh
-git fetch origin
-git switch feature/signaltrace-studio
-git pull --ff-only origin feature/signaltrace-studio
 sh run.sh
 ```
 
-Open **http://127.0.0.1:8501**. Stop with Ctrl+C.
-The first launch installs a few lightweight dependencies if needed.
+Open [SignalTrace](http://127.0.0.1:8501). Stop with Ctrl+C. After updating Python
+code, restart the server; refresh the page after frontend changes. The first
+launch installs lightweight dependencies if needed.
 
-At startup, SignalTrace opens a randomly selected audio clip from the local recording catalog. If a research database has no playable media, a separate local SQLite sample library is automatically created under `data/` with four reproducible **non-speech** WAV samples. Use **Random sample** to choose another clip; the sample source is always labeled.
+1. Upload an English voice recording.
+2. Detection starts automatically when the local models are installed.
+3. Read the result and its reasons. Listen or open technical evidence if useful.
 
-Click **Try signal demo** for a generated, **non-speech** audio fixture containing
-known quiet, frequency-change and saturated intervals. The demo proves only
-that the acoustic visualization and detection rules work, not that any voice
-is synthetic. Upload your own audio to investigate a recording. Accepted source
-formats depend on the local decoder, typically WAV, FLAC, MP3, OGG and AIFF.
-Limits: 256 MiB, 0.5–600 seconds (10 minutes), up to 8 channels at 8–192 kHz, and 60 million decoded samples per source. Very high-rate multichannel files may reach the sample cap earlier.
+Use at least 2.5 seconds of speech. Supported inputs depend on the decoder,
+typically WAV, FLAC, MP3, OGG and AIFF. Limits are 256 MiB, 0.5–600 seconds,
+1–8 channels at 8–192 kHz, and 60 million decoded source samples.
 
-### Optional synthetic-speech inference
+Recordings that fail existing duration, activity, clipping or stereo-cancellation
+checks return Inconclusive before loading the detector. A model result that
+changes materially under the existing perturbation check is also Inconclusive.
+These checks do not establish that an input is speech or verify its language.
 
-Signal analysis, region playback, JSON evidence export, and the **Benchmark
-lab** work without neural model weights. To install the original frozen fusion:
+## Install the voice detector
+
+If the screen says setup is required, run:
 
 ```sh
 .venv/bin/python -m pip install -r requirements.txt
@@ -39,34 +40,37 @@ lab** work without neural model weights. To install the original frozen fusion:
 .venv/bin/python scripts/setup_antideepfake.py
 ```
 
-The pretrained checkpoint downloads can be large. The combined detector
-inherits **non-commercial** model licensing restrictions. Neither model is
-downloaded automatically at startup. Model scores are uncalibrated class
-outputs, not verified probabilities of authenticity or accurate edit
-boundaries. A detected acoustic change is likewise *not* proof of tampering.
+Refresh the page afterward. Checkpoint downloads can be large. The combined
+model inherits non-commercial licensing restrictions. Opening the app does not
+automatically download models. Model scores are not calibrated authenticity
+probabilities; music, unfamiliar generators, replay and recording changes remain
+limitations. A negative result does not certify human origin: short AI inserts
+in a longer recording can be missed.
 
-Historical research comes from docs/detector-evaluation.json: 320 source clips
-(200 human, 120 synthetic) reused in four audio conditions, not 1,280
-independent recordings. Benchmarks and live user recordings remain separate.
+## Details when needed
 
-### Legacy application
+Playback and recording evidence are collapsed by default. Technical details
+retain the raw model score, threshold, window results and report downloads.
+Recording details retain native channel measurements, signal warnings, markers,
+analyst notes and evidence export. Signal changes do not establish AI generation
+or edit boundaries. Generated non-speech demos remain under those signal tools;
+no sample loads automatically.
 
-Use `sh run-legacy.sh` for the original annotation and evaluation Streamlit
-application. All original detectors, evaluation receipts, and study code are
-preserved.
+**About the detector → Validation history** shows the archived benchmark. It is
+not a fresh evaluation: 320 source clips were reused across four conditions.
+The legacy Streamlit app remains available through `sh run-legacy.sh`.
 
-## Implementation
+Research records remain available without occupying the main product workflow:
+[baseline audit](docs/baseline-methods-audit.md),
+[evaluation contract](docs/evaluation-contract-v1.json),
+[source measurements](docs/source-measurements.md),
+[method research](docs/method-research.md),
+[VAD development](docs/vad-development-study.md),
+[local runtime](docs/vad-runtime-study.md),
+[gain/noise stress](docs/vad-stress-study.md), and
+[channel/short-context stress](docs/vad-channel-stress-study.md).
 
-- `studio/dist/` — self-contained HTML/CSS/Canvas/Web Audio front end;
-  no external JS CDN or Node build required.
-- `signaltrace_server.py` — localhost-only Starlette API and audio analyzer.
-- `lab/signal_events.py` — versioned deterministic acoustic and model markers.
-- `lab/sample_catalog.py` — random local SQLite-backed sample selection with a transparent generated fallback.
-- `lab/forensics.py`, `lab/detectors.py`, `lab/fusion.py` — existing research engine.
-- `tests/test_signaltrace.py` — API, marker and benchmark regression tests.
-
-The studio intentionally focuses on two destinations: **Analyze** and
-**Benchmark lab**. Evidence exports include timestamped markers and local-session
-analyst notes; audio files are not exported or saved by the signal-only path.
-After optional model inference, separate research reports may be saved under
-data/analyses, consistent with the original forensics engine.
+The current [core-detector progress report](docs/core-detector-progress.md)
+records direct testing on five newer TTS systems and a reliability correction:
+a human indication requires corroboration from both component detectors.
+Conflicting evidence is inconclusive; raw fused scores remain available in details.

@@ -1,0 +1,48 @@
+{
+  "schema_version": "metricgan-port-validation-1.0",
+  "manifest": {
+    "repository": "speechbrain/metricgan-plus-voicebank",
+    "revision": "a196ce26b3bdace6fa1d819017584bdbcce462a8",
+    "model_sha256": "147bfb866bac8264603546e035bf283370e716ed2f4b7412d308d2bcee88304f",
+    "source_revision": "c0241278f93ef02cd5191f03caf4e5f8e1292bf6",
+    "policy": "Full-length single-recording inference; log magnitude mask, noisy phase, upstream peak normalization; exact-zero input returned unchanged"
+  },
+  "cases": [
+    {
+      "samples": 8000,
+      "kind": "noise",
+      "maximum_absolute_error": 0.0
+    },
+    {
+      "samples": 8000,
+      "kind": "tone",
+      "maximum_absolute_error": 0.0
+    },
+    {
+      "samples": 16001,
+      "kind": "noise",
+      "maximum_absolute_error": 0.0
+    },
+    {
+      "samples": 16001,
+      "kind": "tone",
+      "maximum_absolute_error": 0.0
+    },
+    {
+      "samples": 64000,
+      "kind": "noise",
+      "maximum_absolute_error": 0.0
+    },
+    {
+      "samples": 64000,
+      "kind": "tone",
+      "maximum_absolute_error": 0.0
+    }
+  ],
+  "max_absolute_error": 0.0,
+  "scope": "Six full-length tensor parity fixtures against pinned upstream definitions with plain full-length torch LSTM wrapper. Not installed-package parity or speech enhancement accuracy. Exact-zero guard intentionally differs from upstream epsilon/peak-normalization behavior.",
+  "code_sha256": {
+    "lab/research_metricgan.py": "31192a684654e0616843a37f92c296741375c054912c0a5d4a8d1aaeb9fd9573",
+    "scripts/validate_metricgan_port.py": "200a69c63c2abeb6da985af581ad90285cc375353eaa687aadaf2dbc913f0bef"
+  }
+}

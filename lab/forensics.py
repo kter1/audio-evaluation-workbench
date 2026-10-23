@@ -18,6 +18,7 @@ import soundfile as sf
 from scipy import signal
 
 from .audio import decode
+from .source_measurements import measure_source
 
 ROOT = Path(__file__).resolve().parents[1]
 MODEL_DIR = ROOT / "data/models/wav2vec2-detector"
@@ -32,7 +33,7 @@ MODEL_FILES = {
 RATE = 16000
 MAX_SECONDS = 600
 MAX_BYTES = 256 * 1024 * 1024
-POLICY = {"version": "1.0", "binary_threshold": 0.5, "human_below": 0.35,
+POLICY = {"version": "1.1", "component_vote_threshold": 0.5, "human_requires_component_consensus": True, "binary_threshold": 0.5, "human_below": 0.35,
           "synthetic_above": 0.65, "window_seconds": 6,
           "minimum_duration_seconds": 2.5, "minimum_rms_dbfs": -50,
           "minimum_active_fraction": 0.10, "maximum_clipped_fraction": 0.01,
@@ -62,7 +63,7 @@ def fmt_p(value):
 
 def read_audio(blob):
     if not blob or len(blob) > MAX_BYTES:
-        raise ValueError("Choose a non-empty audio file of at most 50 MiB.")
+        raise ValueError("Choose a non-empty audio file of at most 256 MiB.")
     try:
         info = sf.info(BytesIO(blob))
         if info.channels > 8 or not 8000 <= info.samplerate <= 192000:
@@ -98,6 +99,7 @@ def dbfs(value):
 
 
 def diagnostics(audio, rate):
+    source_measurements = measure_source(audio, rate)
     x = mono16(audio, rate)
     rms = float(np.sqrt(np.mean(np.square(x, dtype=np.float64))))
     peak = float(np.max(np.abs(x)))
@@ -122,13 +124,15 @@ def diagnostics(audio, rate):
     if rms < 10**(-50/20) or activity < .10:
         warnings.append("Insufficient active signal; origin inference is inconclusive.")
     if clipping > .01:
-        warnings.append("More than 1% of channel samples are at full scale; clipping can distort model evidence.")
+        warnings.append("More than 1% of channel samples are near full scale; saturation or limiting may affect model evidence.")
     if rate < RATE:
         warnings.append("Upsampling cannot restore frequencies missing from the source.")
     if correlation is not None and correlation < -.5:
         warnings.append("Opposite-phase stereo may cancel speech when mixed to mono.")
     if peak > 1:
         warnings.append("Floating-point audio exceeds full scale; amplitude is preserved for analysis.")
+    elif any(c["over_full_scale_samples"] for c in source_measurements["channels"]):
+        warnings.append("Original decoded channels exceed full scale even though mono mixing masks those peaks.")
     metrics = {"rms_dbfs": dbfs(rms), "peak_dbfs": dbfs(peak),
                "crest_factor_db": dbfs(peak/max(rms, 1e-12)), "dc_offset": float(x.mean()),
                "clipped_sample_fraction": clipping, "active_frame_fraction": activity,
@@ -138,7 +142,14 @@ def diagnostics(audio, rate):
                "spectral_flatness": flatness, "zero_crossing_rate": float(np.mean(np.diff(np.signbit(x)))),
                "band_power_fractions": {"0–300 Hz": float(normalized[freqs < 300].sum()),
                                         "300–3400 Hz": float(normalized[(freqs >= 300) & (freqs < 3400)].sum()),
-                                        "3400–8000 Hz": float(normalized[freqs >= 3400].sum())}}
+                                        "3400–8000 Hz": float(normalized[freqs >= 3400].sum())},
+               "source_measurements": source_measurements,
+               "analysis_representation": {
+                   "version": "mono16-1.0", "sample_rate_hz": RATE, "channels": 1,
+                   "mixing": "arithmetic channel mean", "normalization": "none before diagnostics",
+                   "resampling": "scipy.signal.resample_poly; reduced rational factors; default Kaiser filter",
+                   "scope": "Top-level RMS, peak, DC, crest, spectral and activity metrics use this derived signal; source clipping, channel RMS and stereo correlation use decoded original channels.",
+               }}
     return x, metrics, warnings
 
 
@@ -159,16 +170,7 @@ def anchored_spans(n, size):
     return [(a, a+size) for a in starts]
 
 
-def decision(scores, metrics, duration, threshold=POLICY["binary_threshold"], band=None):
-    if not scores:
-        raise ValueError("No inference windows.")
-    weight = np.array([s.get("aggregation_weight", s["end"]-s["start"]) for s in scores])
-    values = np.array([s["synthetic_score"] for s in scores])
-    if not np.isfinite(values).all() or np.any((values < 0) | (values > 1)) or np.any(weight <= 0):
-        raise ValueError("Invalid detector output.")
-    low, high = band or abstention_band(threshold)
-    mean = float(np.average(values, weights=weight))
-    binary = "synthetic" if mean >= threshold else "human"
+def quality_blockers(metrics, duration):
     reasons = []
     if duration < POLICY["minimum_duration_seconds"]:
         reasons.append("Input is shorter than 2.5 seconds.")
@@ -178,11 +180,45 @@ def decision(scores, metrics, duration, threshold=POLICY["binary_threshold"], ba
         reasons.append("Severe full-scale clipping.")
     if metrics.get("stereo_correlation") is not None and metrics["stereo_correlation"] < -.5:
         reasons.append("Stereo cancellation risk.")
+    return reasons
+
+
+def component_scores(scores, weight):
+    names = ("pellav2", "antideepfake")
+    if not any(set(names) & set(s.get("components", {})) for s in scores):
+        return {}
+    if not all(set(names) <= set(s.get("components", {})) for s in scores):
+        raise ValueError("Incomplete fusion component outputs.")
+    result = {}
+    for name in names:
+        values = np.asarray([s["components"][name] for s in scores], dtype=float)
+        if not np.isfinite(values).all() or np.any((values < 0) | (values > 1)):
+            raise ValueError("Invalid fusion component output.")
+        result[name] = float(np.average(values, weights=weight))
+    return result
+
+
+def decision(scores, metrics, duration, threshold=POLICY["binary_threshold"], band=None):
+    if not scores:
+        raise ValueError("No inference windows.")
+    weight = np.array([s.get("aggregation_weight", s["end"]-s["start"]) for s in scores])
+    values = np.array([s["synthetic_score"] for s in scores])
+    if not np.isfinite(values).all() or np.any((values < 0) | (values > 1)) or not np.isfinite(weight).all() or np.any(weight <= 0):
+        raise ValueError("Invalid detector output.")
+    low, high = band or abstention_band(threshold)
+    mean = float(np.average(values, weights=weight))
+    binary = "synthetic" if mean >= threshold else "human"
+    reasons = quality_blockers(metrics, duration)
+    components = component_scores(scores, weight)
+    disagreement = bool(components) and ((components["pellav2"] >= POLICY["component_vote_threshold"]) != (components["antideepfake"] >= POLICY["component_vote_threshold"]))
+    if disagreement and binary == "human":
+        reasons.append("A human-voice indication requires agreement between both detectors; one detector flagged AI-generated speech.")
     if values.min() < low and values.max() > high:
         reasons.append("Windows disagree; inspect temporal scores.")
     if low <= mean <= high:
         reasons.append("Aggregate score falls in the abstention interval.")
     return {"synthetic_score": mean, "binary_model_decision": binary,
+            "component_scores": components, "component_disagreement": disagreement,
             "assessment": "Inconclusive" if reasons else ("Synthetic speech indicated" if binary == "synthetic" else "Human speech indicated"),
             "abstention_reasons": reasons, "window_min": float(values.min()), "window_max": float(values.max()),
             "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
@@ -278,8 +314,10 @@ def analyze(blob, detector, robustness=False, on_progress=None):
                               **result, "score_change": result["synthetic_score"]-scores[index]["synthetic_score"]})
         if max(abs(r["score_change"]) for r in stability) > .2:
             warnings.append("Model score changed by more than 0.20 under a tested perturbation. Stability is limited.")
+            assessment["assessment"] = "Inconclusive"
+            assessment["abstention_reasons"].append("Model result is unstable under tested audio changes.")
     versions = {pkg: importlib.metadata.version(pkg) for pkg in ("numpy", "scipy", "soundfile", "torch", "transformers", "safetensors")}
-    report = {"schema_version": "forensics-1.1", "created_at": datetime.now(timezone.utc).isoformat(),
+    report = {"schema_version": "forensics-1.2", "created_at": datetime.now(timezone.utc).isoformat(),
               "source": source, "model": {**detector.manifest, "parameters": detector.parameters,
               "name": getattr(detector, "name", "Wav2Vec2-XLSR"), "description": getattr(detector, "description", "Local classifier"),
               "class_mapping": getattr(detector, "class_mapping", {"0": "human / real", "1": "synthetic / fake"}),
@@ -311,7 +349,12 @@ def explain(report):
     span = lambda w: f'{fmt_p(w["synthetic_score"])} at {w["start"]:.2f}–{w["end"]:.2f} s'
     correlation = m.get("stereo_correlation")
     shift = max((abs(r["score_change"]) for r in report["robustness"]), default=None)
+    components = a.get("component_scores", {})
+    component_limit = policy.get("component_vote_threshold", .5)
     checks = [
+        check("Human indication corroborated", str(components) if components and a["binary_model_decision"] == "human" else "not applicable",
+              f"same class at component threshold {component_limit}",
+              not a.get("component_disagreement", False) if components and a["binary_model_decision"] == "human" else None),
         check("Score clear of the uncertain band", fmt_p(score), f"outside {fmt_p(low)}–{fmt_p(high)}", not low <= score <= high),
         check("Windows agree", f"lowest {span(lo)}; highest {span(hi)}", f"not both below {fmt_p(low)} and above {fmt_p(high)}",
               not (lo["synthetic_score"] < low and hi["synthetic_score"] > high)),

@@ -1,0 +1,45 @@
+{
+  "repository": "adipiz99/RawNetLite",
+  "revision": "fcb0fe8d0f40146d110e322c00a0723ba27d5520",
+  "license": "MIT",
+  "max_total_bytes": 1100000,
+  "selection": "Single augmented triple-domain focal-loss checkpoint, selected before scoring; no other family checkpoints or threshold tuning.",
+  "files": [
+    {
+      "name": "models/augmented_triple_cross_domain_focal_rawnet_lite.pt",
+      "size": 987460,
+      "git_blob_sha1": "3a8d4225a5dc83ebda9e84c0bab22d7b686ee424",
+      "url": "https://raw.githubusercontent.com/adipiz99/RawNetLite/fcb0fe8d0f40146d110e322c00a0723ba27d5520/models/augmented_triple_cross_domain_focal_rawnet_lite.pt"
+    },
+    {
+      "name": "RawNetLite.py",
+      "size": 4128,
+      "git_blob_sha1": "472af09eec7c843b5206eadd455e49715d293d61",
+      "url": "https://raw.githubusercontent.com/adipiz99/RawNetLite/fcb0fe8d0f40146d110e322c00a0723ba27d5520/RawNetLite.py"
+    },
+    {
+      "name": "audio_preprocessor.py",
+      "size": 7398,
+      "git_blob_sha1": "36d7890b2932fb296a953fc1febd2ede471c0f79",
+      "url": "https://raw.githubusercontent.com/adipiz99/RawNetLite/fcb0fe8d0f40146d110e322c00a0723ba27d5520/audio_preprocessor.py"
+    },
+    {
+      "name": "FOR_dataset.py",
+      "size": 2639,
+      "git_blob_sha1": "0c5d9cc39ca044483e2b2fe05eceaab62e1048ef",
+      "url": "https://raw.githubusercontent.com/adipiz99/RawNetLite/fcb0fe8d0f40146d110e322c00a0723ba27d5520/FOR_dataset.py"
+    },
+    {
+      "name": "tester.py",
+      "size": 3862,
+      "git_blob_sha1": "5632096f1a2eb44a33d664b2e849413e624d8df3",
+      "url": "https://raw.githubusercontent.com/adipiz99/RawNetLite/fcb0fe8d0f40146d110e322c00a0723ba27d5520/tester.py"
+    },
+    {
+      "name": "LICENSE",
+      "size": 1073,
+      "git_blob_sha1": "a9e7960d3b13e3bba3bd20b12d57ff82d192e0f4",
+      "url": "https://raw.githubusercontent.com/adipiz99/RawNetLite/fcb0fe8d0f40146d110e322c00a0723ba27d5520/LICENSE"
+    }
+  ]
+}

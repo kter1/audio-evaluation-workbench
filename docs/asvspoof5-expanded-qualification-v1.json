@@ -1,0 +1,27 @@
+{
+  "acquisition_sha256": "d64183c556b549b3264c613b287dd20d5cfd007f343809ca73205b9302919166",
+  "audio_files_verified": 900,
+  "archive_prefixes_verified": 10,
+  "partitions": {
+    "calibration_reserved": {
+      "human": 300,
+      "synthetic": 100
+    },
+    "evaluation_reserved": {
+      "human": 300,
+      "synthetic": 200
+    }
+  },
+  "declared_speaker_groups": 600,
+  "pilot_sources_preserved": 40,
+  "cross_partition_speaker_overlap": 0,
+  "duplicate_source_or_pcm_pairs": 0,
+  "duration_seconds_range": [
+    2.3360625,
+    12.73425
+  ],
+  "detector_inference_run": false,
+  "qualified_confirmatory": false,
+  "code_sha256": "4e2da5adea40bfb1b96f78ec6a3aa73edc123fc97f1a5d5962a46eb80d2a631e",
+  "scope": "Integrity and declared speaker separation only. Training exposure, biometric identity, cross-corpus perceptual overlap, representative sampling and full archive publisher checksums remain unverified. Counts alone do not qualify an independent detector benchmark."
+}

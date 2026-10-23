@@ -1,0 +1,62 @@
+{
+  "reference": "installed torchaudio2.6.0 / torch2.6.0",
+  "candidate_torch": "2.14.1",
+  "method": "unchanged authenticated official torchaudio2.9.1 filterbank functions, executed under torch2.14.1",
+  "fixtures_sha256": "8842c33e40944acc488ccd9ce0d64a5da1ade99dc49e15a37b712d41deb4c82c",
+  "rows": [
+    {
+      "case": "noise_8000",
+      "shape": [
+        48,
+        80
+      ],
+      "max_abs_error": 0.0,
+      "equal": true
+    },
+    {
+      "case": "noise_16001",
+      "shape": [
+        98,
+        80
+      ],
+      "max_abs_error": 0.0,
+      "equal": true
+    },
+    {
+      "case": "noise_64000",
+      "shape": [
+        398,
+        80
+      ],
+      "max_abs_error": 0.0,
+      "equal": true
+    },
+    {
+      "case": "tone_8000",
+      "shape": [
+        48,
+        80
+      ],
+      "max_abs_error": 0.0,
+      "equal": true
+    },
+    {
+      "case": "tone_16001",
+      "shape": [
+        98,
+        80
+      ],
+      "max_abs_error": 0.0,
+      "equal": true
+    },
+    {
+      "case": "tone_64000",
+      "shape": [
+        398,
+        80
+      ],
+      "max_abs_error": 0.0,
+      "equal": true
+    }
+  ]
+}

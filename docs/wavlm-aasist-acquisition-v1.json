@@ -1,0 +1,51 @@
+{
+  "repository": "eliya/forensics_0.3B_base_deepfake_classifier",
+  "revision": "cfd11365b02167214dc3b392378809fef6ca3cfa",
+  "license": "CC-BY-NC-4.0",
+  "max_total_bytes": 1270000000,
+  "authorization": "Second and final larger candidate in this capability round, authorized by user request for most capable detector. Research only; not commercial redistribution or automatic app download.",
+  "checkpoint": {
+    "name": "checkpoint_epoch_5.safetensors",
+    "size": 1269932956,
+    "sha256": "803d2c57e705395d007b9deaf5b1a110965950f207df223e6dff5b6d298490fb",
+    "url": "https://huggingface.co/eliya/forensics_0.3B_base_deepfake_classifier/resolve/cfd11365b02167214dc3b392378809fef6ca3cfa/checkpoint_epoch_5.safetensors"
+  },
+  "files": [
+    {
+      "name": "README.md",
+      "size": 6155,
+      "git_blob_sha1": "669489393b1f590fb87522c90d9a0aab79a57c4a",
+      "url": "https://huggingface.co/eliya/forensics_0.3B_base_deepfake_classifier/resolve/cfd11365b02167214dc3b392378809fef6ca3cfa/README.md"
+    },
+    {
+      "name": "model.py",
+      "size": 7763,
+      "git_blob_sha1": "a27455a6ed46ee0a1d9a69ed8f7b6cd4ad7b0ebf",
+      "url": "https://huggingface.co/eliya/forensics_0.3B_base_deepfake_classifier/resolve/cfd11365b02167214dc3b392378809fef6ca3cfa/model.py"
+    },
+    {
+      "name": "config.json",
+      "size": 190,
+      "git_blob_sha1": "d35749b23b8ef4665bc0afdc60a4f19be016bf90",
+      "url": "https://huggingface.co/eliya/forensics_0.3B_base_deepfake_classifier/resolve/cfd11365b02167214dc3b392378809fef6ca3cfa/config.json"
+    },
+    {
+      "name": "inference.py",
+      "size": 2578,
+      "git_blob_sha1": "bf9b8d6e2c9847480b6d532c35338976cc52a88f",
+      "url": "https://huggingface.co/eliya/forensics_0.3B_base_deepfake_classifier/resolve/cfd11365b02167214dc3b392378809fef6ca3cfa/inference.py"
+    },
+    {
+      "name": "wavlm-large-config.json",
+      "size": 2222,
+      "git_blob_sha1": "b1d1becf90dd05db908a9114148c204484ebec69",
+      "url": "https://huggingface.co/microsoft/wavlm-large/resolve/c1423ed94bb01d80a3f5ce5bc39f6026a0f4828c/config.json"
+    }
+  ],
+  "evaluation": {
+    "primary_threshold": 0.5,
+    "threshold_tuning": false,
+    "initial_screen": "Same45 originals/fiveconditions; frozen native0.5, no tuning; followpromisingcandidatewith320-sourcev4regression",
+    "promotion": "No independent world-class claim or automatic promotion from development screen"
+  }
+}
