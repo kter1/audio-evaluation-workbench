@@ -16,6 +16,10 @@ Open **http://127.0.0.1:8501**. The default launcher serves the redesigned Signa
 
 Upload a recording to get **AI voice indicated**, **No clear AI signal**, or **Inconclusive**. Recording playback, quality measurements, model evidence, analyst notes, and report exports are available when needed. Audio processing runs locally; audio is not uploaded to a hosted detection API.
 
+## Annotated sample
+
+Open **http://127.0.0.1:8501/samples/annotation-example.html** after starting the app, or follow the sample link on the main screen. The bundled 30-second LibriSpeech excerpt includes timestamped signal measurements, interval playback, and CSV/JSON exports. Perceptual annotations are explicitly pending listening review; this is a reference-informed demonstration, excluded from personal review and model evaluation metrics. See [sample provenance and measurements](studio/dist/samples/annotation-demo.json).
+
 ## What the project demonstrates
 
 - **Careful interpretation:** uncertain or unsuitable recordings can produce an inconclusive result. A negative result does not certify human origin.
@@ -46,10 +50,10 @@ node --check studio/dist/app.js
 node --test tests/frontend-evidence.test.cjs
 ```
 
-Publication checks: **378 Python tests and 6 frontend tests passed**. Full model inference additionally requires separately acquired checkpoints and data.
+Publication checks: **379 Python tests and 6 frontend tests passed**. Full model inference additionally requires separately acquired checkpoints and data.
 
 ## Privacy, licensing, and authorship
 
-Audio corpora, model weights, work databases, exports, and personal notes stay outside Git. Dataset and model acquisition scripts preserve source provenance and license notices. Several model/data components have non-commercial or research restrictions; consult [setup](SIGNALTRACE.md), individual acquisition reports, and [third-party notices](lab/vendor/) before use or redistribution.
+Audio corpora, model weights, work databases, exports, and personal notes stay outside Git. One explicitly attributed, CC BY 4.0, 30-second LibriSpeech excerpt is bundled for the annotation demonstration. Dataset and model acquisition scripts preserve source provenance and license notices. Several model/data components have non-commercial or research restrictions; consult [setup](SIGNALTRACE.md), individual acquisition reports, and [third-party notices](lab/vendor/) before use or redistribution.
 
 Automated tests and research reports are distinguished from personal listening work; no completed human annotations or independent agreement results are claimed. Earlier study documentation and attribution are preserved in [the annotation workspace guide](ANNOTATION_WORKSPACE.md).

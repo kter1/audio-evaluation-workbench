@@ -1,0 +1,241 @@
+{
+  "schema_version": "annotation-example-1.0",
+  "sample": "annotation-demo.wav",
+  "sample_sha256": "299c3e4a38abd3e74c61b39ec52824f406f75c62673b0220db5167b3aaabb640",
+  "duration_seconds": 30,
+  "sample_rate_hz": 16000,
+  "scope": "Reference-informed automated signal annotation demonstration. Not a blind listening submission.",
+  "guideline": "Speech annotation guide 1.1; perceptual fields require listening.",
+  "review_status": "Automated measurements complete; listening review pending",
+  "listening_review_completed": false,
+  "detector_inference_run": false,
+  "perceptual_annotation": {
+    "intelligibility": "not_assessed",
+    "interference": {
+      "background_noise": "not_assessed",
+      "compression_artifacts": "not_assessed",
+      "reverb_echo": "not_assessed",
+      "music_hold_audio": "not_assessed",
+      "audible_clipping": "not_assessed",
+      "dropouts": "not_assessed",
+      "distortion": "not_assessed",
+      "overlap": "not_assessed"
+    },
+    "synthetic_cues": "not_assessed",
+    "human_cues": "not_assessed",
+    "perceived_origin": "uncertain",
+    "confidence": null,
+    "reason": "No listening review performed. Reference provenance is separate from perceived origin.",
+    "escalation": "Listen at original speed; confirm intelligibility and channel interference, review quiet intervals, and check whether the 30-second crop truncates a word. Record only cues actually heard."
+  },
+  "reference": {
+    "corpus": "LibriSpeech test-clean",
+    "source_id": "2094-142345-0010",
+    "reference_origin": "human",
+    "reference_origin_basis": "Corpus provenance, not a listening or detector verdict",
+    "crop_seconds": [
+      0,
+      30
+    ],
+    "original_duration_seconds": 30.615,
+    "processing": "First 30 seconds, unmodified PCM samples; no normalization, denoising, or splicing.",
+    "license": "CC BY 4.0",
+    "source_url": "https://www.openslr.org/12/",
+    "attribution": "LibriSpeech corpus, Vassil Panayotov, Guoguo Chen, Daniel Povey and Sanjeev Khudanpur. Excerpt cropped to 30 seconds.",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "privacy": "Public audiobook excerpt; no personal workstation paths or reviewer identifiers included. Not a guarantee that spoken fiction contains no names."
+  },
+  "source_measurements": {
+    "version": "source-measurements-1.0",
+    "representation": "decoded source channels; no mixing, resampling or normalization",
+    "sample_rate_hz": 16000,
+    "frames": 480000,
+    "duration_seconds": 30.0,
+    "amplitude_reference": 1.0,
+    "near_full_scale_threshold": 0.999,
+    "units": {
+      "rms_dbfs": "dBFS",
+      "sample_peak_dbfs": "dBFS",
+      "crest_factor_db": "dB",
+      "dc_offset": "normalized amplitude",
+      "near_full_scale_fraction": "fraction of channel samples",
+      "over_full_scale_fraction": "fraction of channel samples",
+      "attenuation_db": "dB"
+    },
+    "channels": [
+      {
+        "channel": 1,
+        "rms_amplitude": 0.07934786564940359,
+        "rms_dbfs": -22.009295013759985,
+        "minimum_sample": -0.5753173828125,
+        "maximum_sample": 0.65325927734375,
+        "sample_peak_amplitude": 0.65325927734375,
+        "sample_peak_dbfs": -3.6982882773831953,
+        "crest_factor_db": 18.311006736376786,
+        "dc_offset": 0.00048306789398193357,
+        "near_full_scale_samples": 0,
+        "near_full_scale_fraction": 0.0,
+        "over_full_scale_samples": 0,
+        "over_full_scale_fraction": 0.0
+      }
+    ],
+    "arithmetic_mixdown": {
+      "reference": "mean original-channel power before resampling",
+      "energy_ratio": 1.0,
+      "attenuation_db": -0.0,
+      "complete_cancellation": false
+    },
+    "limitations": [
+      "Measures decoded samples; decoder precision and lossy-codec history remain relevant.",
+      "Sample peak is not oversampled true peak; near-full-scale samples do not prove clipping.",
+      "Null dB values indicate zero energy or an undefined ratio, not missing samples.",
+      "Mixdown attenuation describes channel interaction, not tampering or synthetic speech."
+    ]
+  },
+  "annotations": [
+    {
+      "start": 0.0,
+      "end": 5.0,
+      "kind": "interval_review",
+      "observation": "RMS -21.66 dBFS; sample peak -4.76 dBFS; 0 near-full-scale samples.",
+      "rms_dbfs": -21.65687374332886,
+      "peak_dbfs": -4.75818959684574,
+      "near_full_scale_samples": 0,
+      "interpretation": "Amplitude measurements only; no listening or authenticity judgment.",
+      "review_status": "listening_pending"
+    },
+    {
+      "start": 0.0,
+      "end": 0.42,
+      "kind": "low_energy",
+      "observation": "Consecutive 20 ms frames below -40 dBFS RMS for at least 200 ms.",
+      "rms_dbfs": null,
+      "peak_dbfs": null,
+      "near_full_scale_samples": null,
+      "interpretation": "Possible pause or quiet passage. Not classified as a dropout, breath, or absence of speech.",
+      "review_status": "listening_pending"
+    },
+    {
+      "start": 1.28,
+      "end": 1.66,
+      "kind": "low_energy",
+      "observation": "Consecutive 20 ms frames below -40 dBFS RMS for at least 200 ms.",
+      "rms_dbfs": null,
+      "peak_dbfs": null,
+      "near_full_scale_samples": null,
+      "interpretation": "Possible pause or quiet passage. Not classified as a dropout, breath, or absence of speech.",
+      "review_status": "listening_pending"
+    },
+    {
+      "start": 5.0,
+      "end": 10.0,
+      "kind": "interval_review",
+      "observation": "RMS -21.80 dBFS; sample peak -3.70 dBFS; 0 near-full-scale samples.",
+      "rms_dbfs": -21.796529827874544,
+      "peak_dbfs": -3.6982882773831953,
+      "near_full_scale_samples": 0,
+      "interpretation": "Amplitude measurements only; no listening or authenticity judgment.",
+      "review_status": "listening_pending"
+    },
+    {
+      "start": 7.98,
+      "end": 8.28,
+      "kind": "low_energy",
+      "observation": "Consecutive 20 ms frames below -40 dBFS RMS for at least 200 ms.",
+      "rms_dbfs": null,
+      "peak_dbfs": null,
+      "near_full_scale_samples": null,
+      "interpretation": "Possible pause or quiet passage. Not classified as a dropout, breath, or absence of speech.",
+      "review_status": "listening_pending"
+    },
+    {
+      "start": 10.0,
+      "end": 15.0,
+      "kind": "interval_review",
+      "observation": "RMS -22.90 dBFS; sample peak -4.42 dBFS; 0 near-full-scale samples.",
+      "rms_dbfs": -22.901443096427656,
+      "peak_dbfs": -4.424525519662647,
+      "near_full_scale_samples": 0,
+      "interpretation": "Amplitude measurements only; no listening or authenticity judgment.",
+      "review_status": "listening_pending"
+    },
+    {
+      "start": 10.04,
+      "end": 10.58,
+      "kind": "low_energy",
+      "observation": "Consecutive 20 ms frames below -40 dBFS RMS for at least 200 ms.",
+      "rms_dbfs": null,
+      "peak_dbfs": null,
+      "near_full_scale_samples": null,
+      "interpretation": "Possible pause or quiet passage. Not classified as a dropout, breath, or absence of speech.",
+      "review_status": "listening_pending"
+    },
+    {
+      "start": 10.6,
+      "end": 10.9,
+      "kind": "low_energy",
+      "observation": "Consecutive 20 ms frames below -40 dBFS RMS for at least 200 ms.",
+      "rms_dbfs": null,
+      "peak_dbfs": null,
+      "near_full_scale_samples": null,
+      "interpretation": "Possible pause or quiet passage. Not classified as a dropout, breath, or absence of speech.",
+      "review_status": "listening_pending"
+    },
+    {
+      "start": 14.2,
+      "end": 14.54,
+      "kind": "low_energy",
+      "observation": "Consecutive 20 ms frames below -40 dBFS RMS for at least 200 ms.",
+      "rms_dbfs": null,
+      "peak_dbfs": null,
+      "near_full_scale_samples": null,
+      "interpretation": "Possible pause or quiet passage. Not classified as a dropout, breath, or absence of speech.",
+      "review_status": "listening_pending"
+    },
+    {
+      "start": 15.0,
+      "end": 20.0,
+      "kind": "interval_review",
+      "observation": "RMS -23.04 dBFS; sample peak -4.05 dBFS; 0 near-full-scale samples.",
+      "rms_dbfs": -23.042800343684174,
+      "peak_dbfs": -4.047691602924147,
+      "near_full_scale_samples": 0,
+      "interpretation": "Amplitude measurements only; no listening or authenticity judgment.",
+      "review_status": "listening_pending"
+    },
+    {
+      "start": 17.02,
+      "end": 17.54,
+      "kind": "low_energy",
+      "observation": "Consecutive 20 ms frames below -40 dBFS RMS for at least 200 ms.",
+      "rms_dbfs": null,
+      "peak_dbfs": null,
+      "near_full_scale_samples": null,
+      "interpretation": "Possible pause or quiet passage. Not classified as a dropout, breath, or absence of speech.",
+      "review_status": "listening_pending"
+    },
+    {
+      "start": 20.0,
+      "end": 25.0,
+      "kind": "interval_review",
+      "observation": "RMS -20.33 dBFS; sample peak -4.22 dBFS; 0 near-full-scale samples.",
+      "rms_dbfs": -20.333463897988338,
+      "peak_dbfs": -4.219619002110965,
+      "near_full_scale_samples": 0,
+      "interpretation": "Amplitude measurements only; no listening or authenticity judgment.",
+      "review_status": "listening_pending"
+    },
+    {
+      "start": 25.0,
+      "end": 30.0,
+      "kind": "interval_review",
+      "observation": "RMS -23.02 dBFS; sample peak -5.75 dBFS; 0 near-full-scale samples.",
+      "rms_dbfs": -23.022960361824577,
+      "peak_dbfs": -5.7502367518060185,
+      "near_full_scale_samples": 0,
+      "interpretation": "Amplitude measurements only; no listening or authenticity judgment.",
+      "review_status": "listening_pending"
+    }
+  ],
+  "exclusions": "Demonstration only; excluded from blind review, personal annotation results, reserved evaluation, and agreement metrics."
+}

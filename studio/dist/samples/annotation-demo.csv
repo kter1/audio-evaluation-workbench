@@ -1,0 +1,14 @@
+start,end,kind,observation,rms_dbfs,peak_dbfs,near_full_scale_samples,interpretation,review_status
+0.0,5.0,interval_review,RMS -21.66 dBFS; sample peak -4.76 dBFS; 0 near-full-scale samples.,-21.65687374332886,-4.75818959684574,0,Amplitude measurements only; no listening or authenticity judgment.,listening_pending
+0.0,0.42,low_energy,Consecutive 20 ms frames below -40 dBFS RMS for at least 200 ms.,,,,"Possible pause or quiet passage. Not classified as a dropout, breath, or absence of speech.",listening_pending
+1.28,1.66,low_energy,Consecutive 20 ms frames below -40 dBFS RMS for at least 200 ms.,,,,"Possible pause or quiet passage. Not classified as a dropout, breath, or absence of speech.",listening_pending
+5.0,10.0,interval_review,RMS -21.80 dBFS; sample peak -3.70 dBFS; 0 near-full-scale samples.,-21.796529827874544,-3.6982882773831953,0,Amplitude measurements only; no listening or authenticity judgment.,listening_pending
+7.98,8.28,low_energy,Consecutive 20 ms frames below -40 dBFS RMS for at least 200 ms.,,,,"Possible pause or quiet passage. Not classified as a dropout, breath, or absence of speech.",listening_pending
+10.0,15.0,interval_review,RMS -22.90 dBFS; sample peak -4.42 dBFS; 0 near-full-scale samples.,-22.901443096427656,-4.424525519662647,0,Amplitude measurements only; no listening or authenticity judgment.,listening_pending
+10.04,10.58,low_energy,Consecutive 20 ms frames below -40 dBFS RMS for at least 200 ms.,,,,"Possible pause or quiet passage. Not classified as a dropout, breath, or absence of speech.",listening_pending
+10.6,10.9,low_energy,Consecutive 20 ms frames below -40 dBFS RMS for at least 200 ms.,,,,"Possible pause or quiet passage. Not classified as a dropout, breath, or absence of speech.",listening_pending
+14.2,14.54,low_energy,Consecutive 20 ms frames below -40 dBFS RMS for at least 200 ms.,,,,"Possible pause or quiet passage. Not classified as a dropout, breath, or absence of speech.",listening_pending
+15.0,20.0,interval_review,RMS -23.04 dBFS; sample peak -4.05 dBFS; 0 near-full-scale samples.,-23.042800343684174,-4.047691602924147,0,Amplitude measurements only; no listening or authenticity judgment.,listening_pending
+17.02,17.54,low_energy,Consecutive 20 ms frames below -40 dBFS RMS for at least 200 ms.,,,,"Possible pause or quiet passage. Not classified as a dropout, breath, or absence of speech.",listening_pending
+20.0,25.0,interval_review,RMS -20.33 dBFS; sample peak -4.22 dBFS; 0 near-full-scale samples.,-20.333463897988338,-4.219619002110965,0,Amplitude measurements only; no listening or authenticity judgment.,listening_pending
+25.0,30.0,interval_review,RMS -23.02 dBFS; sample peak -5.75 dBFS; 0 near-full-scale samples.,-23.022960361824577,-5.7502367518060185,0,Amplitude measurements only; no listening or authenticity judgment.,listening_pending
