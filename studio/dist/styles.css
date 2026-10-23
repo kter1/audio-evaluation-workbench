@@ -3,3 +3,17 @@
 /* Detection is the primary workflow; evidence remains available on demand. */
 .intro h1{max-width:780px}.intro p{max-width:660px}.model-panel{margin-top:8px;padding:20px 0;border:0;background:transparent;box-shadow:none}.model-panel #model-output{flex-basis:100%}.model-output{border:0;padding:0}.model-output .assessment-title{font-size:30px;letter-spacing:-.6px;margin:10px 0}.model-output[data-result="synthetic"] .assessment-title{color:#e7bd83}.model-output[data-result="human"] .assessment-title{color:#83ddc7}.model-output[data-result="inconclusive"] .assessment-title{color:#d9c3f2}.assessment-empty h2{font-size:27px;margin:10px 0}.assessment-note{max-width:650px}.model-output details{margin-top:16px;color:#a9bfce}.model-output summary{cursor:pointer;font-size:13px}.assessment-reasons{font-size:14px;line-height:1.75;color:#cedbe5;padding-left:20px}.playback-details,.advanced{margin-top:20px}.playback-details>summary,.advanced>summary{cursor:pointer;color:#9dbbc9;padding:12px 0;font-size:13px}.playback-details .wave-shell{margin-top:12px}.advanced{border-top:1px solid #294354;padding:8px 0}.research-nav{margin-top:20px;color:#8099ad;font-size:12px}.research-nav>summary{cursor:pointer;padding:12px}.research-nav .nav{font-size:12px;margin-top:8px}.example-tools{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:24px 0;font-size:12px;color:#809bad}.model-output .scores{margin-bottom:12px}.model-output a{color:#83d5ce}.model-panel .link-button{padding:0}.workspace .actions{flex-wrap:wrap}.btn:focus-visible,summary:focus-visible{outline:2px solid #83d5ce;outline-offset:4px}
 @media(max-width:700px){.breadcrumb>span:first-child,.breadcrumb .slash{display:none}.breadcrumb{white-space:nowrap}.head-right .status{font-size:10px}.research-nav{margin-top:0}.research-nav>summary{padding:12px 8px}.intro h1{font-size:32px}}
+
+
+/* Detection-specific visual language: distinguish the diagnostic method, not just priority. */
+.marker-icon{background:#22394b;border:1px solid #36576b;transition:transform .18s ease,background .18s ease}
+.marker-card:hover .marker-icon,.marker-card.active .marker-icon{transform:scale(1.08)}
+.evidence-svg{display:block;flex-shrink:0}
+.kind-clipping,.kind-impulse{color:#ff9c87;background:#452b35;border-color:#80505b}
+.kind-low_energy,.kind-signal_gap{color:#b1c7e8;background:#263954;border-color:#416184}
+.kind-level_change,.kind-dc_offset{color:#f6bd70;background:#483d31;border-color:#715941}
+.kind-spectral_change,.kind-bandwidth_limit{color:#7cdddf;background:#24474b;border-color:#39747a}
+.kind-channel_imbalance,.kind-phase_inversion{color:#d0a6fb;background:#403452;border-color:#6c5084}
+.kind-synthetic_score,.kind-component_separation,.kind-sensitivity{color:#e0afff;background:#423258;border-color:#76518a}
+.marker-card.active{border-color:#66bbb5;box-shadow:inset 3px 0 #62d8c4}
+.marker-card:focus-visible,.btn:focus-visible,.nav:focus-visible,.chip:focus-visible{outline:2px solid #90f6e4;outline-offset:2px}

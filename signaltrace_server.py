@@ -81,6 +81,7 @@ def waveform_peaks(samples, max_bins=4000):
 def inspect_bytes(raw):
     from lab.forensics import read_audio, diagnostics, RATE
     from lab.signal_events import acoustic_markers
+    from lab.signal_intelligence import extra_acoustic_markers, stereo_markers
     decoded, rate, metadata = read_audio(raw)
     samples, measurements, warnings = diagnostics(decoded, rate)
     return {
@@ -90,7 +91,10 @@ def inspect_bytes(raw):
         "format": metadata["format"], "bytes": metadata["bytes"],
         "metrics": measurements, "warnings": warnings,
         "peaks": waveform_peaks(samples),
-        "markers": acoustic_markers(samples, RATE, metadata["sha256"]),
+        "markers": sorted([*acoustic_markers(samples, RATE, metadata["sha256"]),
+                           *extra_acoustic_markers(samples, metadata["sha256"]),
+                           *stereo_markers(decoded, rate, metadata["sha256"])],
+                          key=lambda item: (item["start"], item["kind"])),
         "method": "Deterministic local signal analysis; no speech identity or authenticity claims.",
     }
 

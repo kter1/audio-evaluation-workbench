@@ -46,7 +46,7 @@ node --check studio/dist/app.js
 node --test tests/frontend-evidence.test.cjs
 ```
 
-Publication checks: **372 Python tests and 6 frontend tests passed**. Full model inference additionally requires separately acquired checkpoints and data.
+Publication checks: **375 Python tests and 6 frontend tests passed**. Full model inference additionally requires separately acquired checkpoints and data.
 
 ## Privacy, licensing, and authorship
 
