@@ -6,7 +6,11 @@
 ![Python 3.11–3.13](https://img.shields.io/badge/python-3.11%E2%80%933.13-3776AB?logo=python&logoColor=white)
 ![Runs locally](https://img.shields.io/badge/audio-stays%20local-2a9d8f)
 
-![SignalTrace main screen: upload a voice recording for a local AI-voice check](docs/images/signaltrace-main.png)
+<p align="center">
+  <img src="docs/images/signaltrace-demo.gif" width="100%" alt="SignalTrace demo: a recording is uploaded and checked, the result reads AI voice indicated, the waveform plays with evidence markers, and a flagged moment opens in the evidence inspector">
+  <br>
+  <sub>Recorded in the local app with a held-out XTTS-v2 clone from the frozen test set. The model wait is shortened.</sub>
+</p>
 
 Upload a voice recording and SignalTrace returns one of three results, **AI voice indicated**, **No clear AI signal**, or **Inconclusive**, with the reasons behind it. Everything runs on your machine. No audio goes to a hosted service, and models are never downloaded without an explicit setup step.
 
@@ -15,6 +19,7 @@ The repository also has a blind annotation workspace for labeling real versus cl
 ## Contents
 
 - [Features](#features)
+- [Screenshots](#screenshots)
 - [Quick start](#quick-start)
 - [Results](#results)
 - [Annotation workflow](#annotation-workflow)
@@ -31,6 +36,31 @@ The repository also has a blind annotation workspace for labeling real versus cl
 - **Analyst notes and exports.** Recording details, model evidence, and notes export as JSON and printable HTML reports.
 - **Annotated sample.** A 30-second LibriSpeech excerpt with word-level timestamps, transcript differences, and quiet-interval annotations, viewable without any model download.
 - **Blind annotation workspace.** A separate app for structured, guide-driven labeling with frozen judgments, delayed blind repeats, and second-reviewer packages ([details](#annotation-workflow)).
+
+## Screenshots
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/images/signaltrace-result.png" alt="Result screen reading AI voice indicated, with the recording waveform and evidence markers">
+      <br><b>AI voice indicated.</b> A held-out XTTS-v2 clone, with model windows and acoustic markers shaded on the waveform.
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/images/signaltrace-genuine.png" alt="Result screen reading No clear AI signal for a 30-second genuine recording">
+      <br><b>No clear AI signal.</b> The genuine 30-second LibriSpeech reading used for the annotated sample.
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/images/signaltrace-evidence.png" alt="Evidence index of flagged moments beside the evidence inspector showing one sudden level change">
+      <br><b>Evidence inspector.</b> Each flagged moment shows what was measured, the rule that fired, what it does not prove, and a suggested next check.
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/images/signaltrace-validation.png" alt="Validation history page with frozen test results for the telephone channel and a comparison of component models">
+      <br><b>Validation history.</b> Frozen test results by channel, shown here for telephone audio, with the fusion compared against each component model.
+    </td>
+  </tr>
+</table>
 
 ## Quick start
 
