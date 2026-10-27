@@ -1,4 +1,4 @@
-# Audio Forensics Lab — method 4.0
+# Detector method · version 4.0
 
 ## What the instrument does
 

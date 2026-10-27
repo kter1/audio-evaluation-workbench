@@ -109,7 +109,7 @@ See the [acquisition specification](metricgan-acquisition-v1.json) and retained
 SpeechBrain source license. Experiments save durable prior-use identities, retain
 original source grouping, and never overwrite earlier results. Labels are
 publisher supplied/inherited; training exposure and independent source identity
-remain unresolved. Results cannot establish world-class performance.
+remain unresolved. Results cannot establish general performance.
 
 ## Neural candidate results: rejected
 

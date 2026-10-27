@@ -2,7 +2,7 @@
 
 This is the first implementation milestone of the methods improvement plan.
 It establishes the baseline and a prospective evaluation contract. It does not
-establish world-class performance or replace the existing detector.
+establish state-of-the-art performance or replace the existing detector.
 
 ## Reproduce
 
@@ -130,7 +130,7 @@ sample minimums, confidence safeguards, condition-specific regression limits,
 calibration diagnostics, separate localization targets and CPU/memory budgets.
 These are acceptance requirements, not achieved measurements or an implemented
 automatic promotion service. The contract deliberately prevents an internal
-benchmark pass alone from authorizing a world-class claim.
+benchmark pass alone from authorizing a general performance claim.
 
 Next implementation work is corpus inventory/acquisition planning and validated
 measurement corrections, followed by at most three detector candidates. Before

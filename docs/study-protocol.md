@@ -33,9 +33,9 @@ Before revealing each relevant batch:
 Give them the repository and blind ZIP, which contains neutral WAV media, assignment IDs, the guideline, and generic source attribution. It contains no source filenames, per-recording metadata, reference labels, scores, or earlier judgments. On their machine:
 
 ```sh
-# Install with ./run.sh once, then stop the practice app.
+# Install with sh run-legacy.sh once, then stop the practice app.
 .venv/bin/python -m lab --db data/second-main01.sqlite load-package --file /absolute/path/to/main01_blind.zip
-AUDIO_LAB_DB=data/second-main01.sqlite ./run.sh
+AUDIO_LAB_DB=data/second-main01.sqlite sh run-legacy.sh
 # After all assigned judgments are submitted:
 .venv/bin/python -m lab --db data/second-main01.sqlite export-results --output exports/main01_results.json
 ```

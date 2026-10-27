@@ -31,7 +31,7 @@ separately measured; this is not a resource-promotion result.
 
 These are repeated development observations on 45 originals, conservatively one
 unresolved connected source group. They do not establish independent accuracy,
-training independence, calibrated probabilities or a world-class claim. The
+training independence, calibrated probabilities or general performance. The
 fusion counts are the previously frozen core scores, not a fresh product run.
 
 ## Newer WavLM candidate preflight

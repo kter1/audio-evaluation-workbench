@@ -69,11 +69,10 @@ localization. [Fusion challenge](core-partial-fusion-v1.json),
 ## Release decision
 
 Retain the current detector while developing calibrated use of the complementary
-model. No automatic production promotion or world-class claim follows from spent
-regression data. Source-diverse calibration and untouched independent evaluation,
+model. Spent regression data does not justify promoting it to production. Source-diverse calibration and untouched independent evaluation,
 including brief inserts and real noisy recordings, remain necessary. Large
-acquisitions were explicitly bounded research actions under the user's capability
-request; opening the app still never downloads models. All processing stayed local.
+downloads were bounded, one-time research acquisitions; opening the app still
+never downloads models. All processing stayed local.
 
 Checks: 363 Python tests and 6 frontend tests passed; compilation, JavaScript
 syntax, diff checks and recorded regression code hashes passed.

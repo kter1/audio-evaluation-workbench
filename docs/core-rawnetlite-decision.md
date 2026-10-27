@@ -70,7 +70,7 @@ screen wall time. Resource feasibility passes the internal numerical bounds,
 while accuracy fails badly; this is not model promotion.
 
 These are development-only observations, not independent validation, population
-risk estimates or a world-class claim. Source/speaker/training overlap is unknown.
+risk estimates or a general performance claim. Source/speaker/training overlap is unknown.
 Repeated conditions do not increase independent sample support.
 
 ## Reproduce

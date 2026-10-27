@@ -1,6 +1,8 @@
-# ◉ Audio Review Lab
+# Annotation workspace (Audio Review Lab)
 
 A blind speech-annotation workspace for telling real voices from AI voice clones. I use it to measure my own listening: how accurate and how consistent my labels are, which cues I rely on, and where I get fooled. Only after a batch is locked do I compare my judgments with the dataset's truth and with a modern deepfake detector.
+
+It is a separate Streamlit app from SignalTrace, started with `sh run-legacy.sh` (see [Run it](#run-it)).
 
 ## Blind by design
 
@@ -13,22 +15,22 @@ Annotations are only useful if a model or an answer key hasn't already influence
 - **Independent review is possible.** A blind package (neutral WAVs, no metadata) can go to a second reviewer, whose returned labels are compared before adjudication.
 - **No detector during review.** The Detector Lab scores only audio I upload, and it warns while any clip in the workspace is still blind.
 
-## My results
+## Study plan
 
-> ⏳ **In progress.** Numbers appear here only from revealed, exported work. Nothing is estimated or prefilled.
+Results are reported only from revealed, exported work; nothing is estimated or prefilled. No study results have been published yet, and independent reviewer agreement has not been measured.
 
-| Work | Clips | Result |
+| Work | Clips | Reported after reveal |
 |---|---|---|
-| Listening challenge: real voices vs. modern clones | 20 (10 real, 10 clones from 3 generators) | ⏳ fakes that fooled me · detector caught |
-| Calibration batch (learning, excluded from results) | 20 | ⏳ |
-| Main batch 1 | 80 | ⏳ accuracy among decided · uncertainty rate |
-| Blind repeats, ≥ 48 h later | 20 | ⏳ self-agreement (kappa) |
-| Which cues held up | all revealed clips | ⏳ |
-| Investigated cases | 5 | ⏳ |
+| Listening challenge: real voices vs. modern clones | 20 (10 real, 10 clones from 3 generators) | Clones that passed as human; detector catches |
+| Calibration batch (practice, excluded from results) | 20 | Guide revisions, if any |
+| Main batch 1 | 80 | Accuracy among decided clips; uncertainty rate |
+| Blind repeats, at least 48 h later | 20 | Self-agreement (Cohen's kappa) |
+| Cue analysis | All revealed clips | Which cues held up |
+| Investigated cases | 5 | Written case studies |
 
 ## What I record for every clip
 
-Defined in the [annotation guide](docs/annotation-guide.md) (versioned; v1.1 registered before any review began):
+Defined in the [annotation guide](annotation-guide.md) (versioned; v1.1 registered before any review began):
 
 - **Intelligibility:** clear, partly intelligible, unintelligible, or no speech.
 - **Channel and environment:** background noise, compression artifacts, reverb or echo, music or hold audio, clipping, dropouts, distortion, overlap.
@@ -36,7 +38,7 @@ Defined in the [annotation guide](docs/annotation-guide.md) (versioned; v1.1 reg
 - **Perceived origin:** human, synthetic, or **uncertain**, which is a valid answer with a required explanation.
 - **Confidence (1–5),** **timestamped observations** (for example, "1.18–1.36 s: abrupt silence mid-word"), and an **escalation** with the open question when a case falls outside the guide.
 
-After reveal, **Quality Review** filters for detector mistakes, disagreements, escalations, and uncertain calls, and turns a clip into a short case study: observation, possible explanation, recommended next check. **Findings & Export** produces spreadsheet-ready CSVs (annotations, revision history, cases, adjudications), metrics, and a printable report. [SQL examples](docs/queries.sql) query the same SQLite records.
+After reveal, **Quality Review** filters for detector mistakes, disagreements, escalations, and uncertain calls, and turns a clip into a short case study: observation, possible explanation, recommended next check. **Findings & Export** produces spreadsheet-ready CSVs (annotations, revision history, cases, adjudications), metrics, and a printable report. [SQL examples](queries.sql) query the same SQLite records.
 
 ## The detector, used only after reveal
 
@@ -51,7 +53,7 @@ On a frozen test of 320 new clips from 73 speakers, scored once:
 | Telephone, 8 kHz | 120/120 | 5/200 (2.5%) |
 | Added background noise | 119/120 | 10/200 (5.0%) |
 
-**What this means for listening work:** compressed and noisy genuine speech is where models struggle most. The detector's false alarms concentrate there, and so do the hardest calls for a human ear. That is why the guide treats channel artifacts as interference, not as evidence of synthesis. Full method, failures, and limits are in [the evaluation](docs/model-evaluation.md) and [technical method](docs/forensics-method.md). Scope: English read speech, three open generators, and simulated channels. This is not a test of commercial voices or live calls.
+**What this means for listening work:** compressed and noisy genuine speech is where models struggle most. The detector's false alarms concentrate there, and so do the hardest calls for a human ear. That is why the guide treats channel artifacts as interference, not as evidence of synthesis. Full method, failures, and limits are in [the evaluation](model-evaluation.md) and [technical method](forensics-method.md). Scope: English read speech, three open generators, and simulated channels. This is not a test of commercial voices or live calls.
 
 ## Data handling
 
@@ -67,19 +69,15 @@ On a frozen test of 320 new clips from 73 speakers, scored once:
 - **Safe parsing.** Archives are read by exact expected member names (no path traversal); SQL is parameterized; HTML in reports and the UI is escaped; CSV exports neutralize spreadsheet formulas.
 - **Dependencies are pinned and audited.** `requirements.lock` reported no known vulnerabilities in `pip-audit` on 2026-10-19, after upgrading torch, transformers, Streamlit, and Pillow. A regression check confirmed the published detector results did not change.
 
-## Study status
-
-The study separates personal listening judgments from automated detector results. Completed annotation accuracy and independent reviewer agreement have not been established. Detector claims must be read alongside the frozen manifests, receipts, and documented limitations in [`docs/`](docs/).
-
 ## Run it
 
-Requires Python 3.11–3.13 (tested on 3.13, Apple Silicon). From this folder:
+Requires Python 3.11–3.13 (tested on 3.13, Apple Silicon). From the project folder:
 
 ```sh
-./run-legacy.sh
+sh run-legacy.sh
 ```
 
-Open [localhost:8501](http://localhost:8501). The first launch creates a virtual environment, installs `requirements.lock`, and opens a clearly labeled practice workspace (generated tones, arbitrary labels). Switch between the research study, listening challenge, and practice workspaces in the sidebar. Drafts survive restarts, and **Save & skip** moves on without losing work.
+Open [localhost:8501](http://localhost:8501). The first launch installs `requirements.lock` into `.venv/` and, if no study or challenge workspace exists yet, creates a clearly labeled practice workspace (generated tones, arbitrary labels). It uses the same port as SignalTrace, so stop one before starting the other. Switch between the research study, listening challenge, and practice workspaces in the sidebar. Drafts survive restarts, and **Save & skip** moves on without losing work.
 
 The Detector Lab needs two one-time downloads (about 1.26 GB each, checksum-verified). Inference then runs offline on CPU:
 
@@ -90,7 +88,7 @@ The Detector Lab needs two one-time downloads (about 1.26 GB each, checksum-veri
 
 ## Research setup
 
-1. Read [the annotation guide](docs/annotation-guide.md) and [study protocol](docs/study-protocol.md).
+1. Read [the annotation guide](annotation-guide.md) and [study protocol](study-protocol.md).
 2. Fetch the official ASVspoof 2021 metadata, scores, and source mappings (~36 MB; no audio):
 
 ```sh
@@ -123,7 +121,7 @@ Complete calibration and reveal it, revise the guide if needed (as a new version
 .venv/bin/python -m lab --db data/study.sqlite export --directory exports/study
 ```
 
-See [the protocol](docs/study-protocol.md) for independent reviewer packages and the [walkthrough](docs/walkthrough.md) for a three-minute demo.
+See [the protocol](study-protocol.md) for independent reviewer packages and the [walkthrough](walkthrough.md) for a three-minute demo.
 
 ## Verification
 
