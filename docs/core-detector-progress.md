@@ -123,7 +123,7 @@ a product failure, rather than merely a screening difference.
 Policy 1.1 now requires corroboration for a **human** indication: both component
 aggregate class votes must favor human at their default 0.5 thresholds. Component
 aggregation uses the same window weights as the file score. A conflict retains
-the raw fused score and binary decision for technical evidence, but the user
+the raw fused score and binary decision for technical evidence, but the displayed
 assessment becomes **Inconclusive**, with a plain-language reason. Synthetic
 indications still follow the frozen fusion and existing quality/uncertainty/
 stability checks. No weights, learned threshold, model score or UI control changed.
@@ -206,12 +206,12 @@ requires independent calibration and validation before product promotion.
 
 A retrospective connected-group split calibrated the complementary detector
 without using evaluation scores to choose its threshold. The evaluation noise
-cell catches52/53 synthetic recordings with1/100 genuine alerts. This threshold
+cell catches 52/53 synthetic recordings with 1/100 genuine alerts. This threshold
 is not promoted; see [calibration details](complementary-calibration.md).
 
 ## Unscored external acquisition
 
-An official ASVspoof5 pilot now contains40 new-to-project recordings from40
+An official ASVspoof5 pilot now contains 40 new-to-project recordings from 40
 declared speakers, with balanced reserved partitions and no detector scores.
 See [acquisition and qualification limits](asvspoof5-pilot.md). It is not yet a
 qualified independent calibration or locked evaluation corpus.

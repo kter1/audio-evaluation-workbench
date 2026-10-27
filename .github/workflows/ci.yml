@@ -1,7 +1,7 @@
-name: SignalTrace Studio
+name: CI
 on:
   push:
-    branches: [feature/signaltrace-studio]
+    branches: [main, feature/signaltrace-studio]
   pull_request:
     paths:
       - "signaltrace_server.py"

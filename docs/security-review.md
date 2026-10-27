@@ -21,9 +21,8 @@ test or a guarantee that all vulnerabilities or personal data have been found.
   for compatibility. The pinned dependency audit changed from 36 known advisories
   in two packages to zero known advisories. Compatibility checking passed.
 - Replaced personal absolute notice paths in two acquisition receipts with
-  repository-relative paths. Removed incidental assistant authorship wording
-  from the README. Product terminology and required upstream model identifiers
-  and license attribution remain accurate.
+  repository-relative paths. Required upstream model identifiers and license
+  attribution are unchanged.
 - Prevented future pilot acquisition receipts from storing absolute notice paths.
 
 ## Verification
@@ -34,8 +33,8 @@ Content-Length, and response security headers. JavaScript syntax checks passed.
 The lockfile audit reported no known vulnerabilities; it does not verify model
 checkpoints, operating-system packages, or every separate research environment.
 
-A pattern scan of 265 tracked and publication-candidate text files found no personal workstation paths,
-incidental assistant branding, or supported credential patterns after cleanup.
+A pattern scan of 265 tracked and publication-candidate text files found no
+personal workstation paths or supported credential patterns after cleanup.
 The one email-shaped match is a deliberately invalid credential-in-URL test
 fixture, not an actual contact address. Public repository account identifiers,
 research source identifiers, and legally required attribution remain present.
@@ -67,23 +66,10 @@ not be bypassed to resume an old specification against changed public receipts.
 
 ## Remaining limits
 
-All three published branch histories were rewritten after explicit authorization.
-Authors and committers now use a generic maintainer identity and reserved invalid
-email address. Earlier personal paths, incidental attribution text, and assistant
-co-author trailers were removed from reachable branch history. The rewrite was
-performed in an isolated mirror after creating a private recovery bundle; pushes
-were atomic and protected by exact old-commit leases. The local checkout was
-aligned only after verifying identical current file-tree hashes. Git integrity
-checks passed, and scanning all reachable historical text blobs found none of
-the targeted personal paths or incidental assistant references. No test rerun was
-needed for the rewrite itself because current application file content did not
-change. GitHub pull-request head and merge refs refreshed to new hashes.
-
-A history rewrite does not erase existing clones, backups, cached commit pages,
-or other retained server objects. Those copies remain outside this verification;
-GitHub support may be needed for sensitive-data purging beyond published refs.
-The recovery bundle and original receipts remain local in ignored private storage.
-Public account handles and required research/license attribution are retained.
+Published branch history was rewritten to remove personal workstation paths,
+and commits use a generic maintainer identity. Git integrity checks passed after
+the rewrite, and current file contents did not change. A rewrite does not erase
+existing clones, backups, cached commit pages, or other retained copies.
 
 The service has no authentication and is for a trusted local single operator.
 Local software can still access it; loopback Host validation is not authentication.
