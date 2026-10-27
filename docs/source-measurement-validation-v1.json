@@ -1,0 +1,152 @@
+{
+  "schema_version": "source-measurement-validation-1.0",
+  "measurement_version": "source-measurements-1.0",
+  "contract_sha256": "36fec15d112e6a7c87b198a51ab9705eea79242a2c8005a75ff5035e60e757d7",
+  "measurement_code_sha256": "881226c8aabec738e5e3963466d8e2c2ddffa2a5ca94fb72bfb3bdb4b381d657",
+  "environment": {
+    "python": "3.13.7",
+    "numpy": "2.3.3"
+  },
+  "sine_fixtures": [
+    {
+      "sample_rate_hz": 8000,
+      "amplitude": 0.05,
+      "rms_error_db": 2.6495074223475967e-07,
+      "sample_peak_error_db": 1.2942983929065122e-07,
+      "crest_factor_error_db": 1.3552089894730557e-07
+    },
+    {
+      "sample_rate_hz": 8000,
+      "amplitude": 0.2,
+      "rms_error_db": 2.64950738682046e-07,
+      "sample_peak_error_db": 1.2942983929065122e-07,
+      "crest_factor_error_db": 1.3552089894730557e-07
+    },
+    {
+      "sample_rate_hz": 8000,
+      "amplitude": 0.8,
+      "rms_error_db": 2.64950738682046e-07,
+      "sample_peak_error_db": 1.2942984017882964e-07,
+      "crest_factor_error_db": 1.3552089894730557e-07
+    },
+    {
+      "sample_rate_hz": 16000,
+      "amplitude": 0.05,
+      "rms_error_db": 6.834134325117702e-08,
+      "sample_peak_error_db": 1.2942983929065122e-07,
+      "crest_factor_error_db": 6.108849825992024e-08
+    },
+    {
+      "sample_rate_hz": 16000,
+      "amplitude": 0.2,
+      "rms_error_db": 6.834134325117702e-08,
+      "sample_peak_error_db": 1.2942983929065122e-07,
+      "crest_factor_error_db": 6.108849825992024e-08
+    },
+    {
+      "sample_rate_hz": 16000,
+      "amplitude": 0.8,
+      "rms_error_db": 6.834134147482018e-08,
+      "sample_peak_error_db": 1.2942984017882964e-07,
+      "crest_factor_error_db": 6.108849825992024e-08
+    },
+    {
+      "sample_rate_hz": 44100,
+      "amplitude": 0.05,
+      "rms_error_db": 1.5697516175805504e-08,
+      "sample_peak_error_db": 5.487842620510719e-05,
+      "crest_factor_error_db": 5.48627286924841e-05
+    },
+    {
+      "sample_rate_hz": 44100,
+      "amplitude": 0.2,
+      "rms_error_db": 1.5697516175805504e-08,
+      "sample_peak_error_db": 5.48784262086599e-05,
+      "crest_factor_error_db": 5.48627286924841e-05
+    },
+    {
+      "sample_rate_hz": 44100,
+      "amplitude": 0.8,
+      "rms_error_db": 1.5697515287627084e-08,
+      "sample_peak_error_db": 5.487842620599537e-05,
+      "crest_factor_error_db": 5.48627286924841e-05
+    },
+    {
+      "sample_rate_hz": 48000,
+      "amplitude": 0.05,
+      "rms_error_db": 1.7309691457967347e-08,
+      "sample_peak_error_db": 1.2942983929065122e-07,
+      "crest_factor_error_db": 1.121201491649515e-07
+    },
+    {
+      "sample_rate_hz": 48000,
+      "amplitude": 0.2,
+      "rms_error_db": 1.7309687905253668e-08,
+      "sample_peak_error_db": 1.2942983929065122e-07,
+      "crest_factor_error_db": 1.121201491649515e-07
+    },
+    {
+      "sample_rate_hz": 48000,
+      "amplitude": 0.8,
+      "rms_error_db": 1.7309690569788927e-08,
+      "sample_peak_error_db": 1.2942984017882964e-07,
+      "crest_factor_error_db": 1.121201491649515e-07
+    },
+    {
+      "sample_rate_hz": 96000,
+      "amplitude": 0.05,
+      "rms_error_db": 3.736722931080294e-09,
+      "sample_peak_error_db": 1.2942983929065122e-07,
+      "crest_factor_error_db": 1.2569312080046302e-07
+    },
+    {
+      "sample_rate_hz": 96000,
+      "amplitude": 0.2,
+      "rms_error_db": 3.736719378366615e-09,
+      "sample_peak_error_db": 1.2942983929065122e-07,
+      "crest_factor_error_db": 1.2569312080046302e-07
+    },
+    {
+      "sample_rate_hz": 96000,
+      "amplitude": 0.8,
+      "rms_error_db": 3.736719378366615e-09,
+      "sample_peak_error_db": 1.2942984017882964e-07,
+      "crest_factor_error_db": 1.2569312080046302e-07
+    },
+    {
+      "sample_rate_hz": 192000,
+      "amplitude": 0.05,
+      "rms_error_db": 7.933704893048343e-08,
+      "sample_peak_error_db": 1.2942983929065122e-07,
+      "crest_factor_error_db": 5.009279213652462e-08
+    },
+    {
+      "sample_rate_hz": 192000,
+      "amplitude": 0.2,
+      "rms_error_db": 7.933704893048343e-08,
+      "sample_peak_error_db": 1.2942983929065122e-07,
+      "crest_factor_error_db": 5.009279213652462e-08
+    },
+    {
+      "sample_rate_hz": 192000,
+      "amplitude": 0.8,
+      "rms_error_db": 7.93370471541266e-08,
+      "sample_peak_error_db": 1.2942984017882964e-07,
+      "crest_factor_error_db": 5.009279213652462e-08
+    }
+  ],
+  "maximum_level_error_db": 5.48784262086599e-05,
+  "allowed_level_error_db": 0.1,
+  "checks": {
+    "analytic_levels_within_contract": true,
+    "opposite_phase_source_peaks_preserved": true,
+    "opposite_phase_complete_cancellation_measured": true,
+    "over_full_scale_source_samples_counted": true,
+    "silence_has_explicit_null_levels": true
+  },
+  "passed": true,
+  "limitations": [
+    "Generated analytic fixtures validate measurement arithmetic only.",
+    "No natural-audio anomaly precision/recall, speech authenticity, edit localization or true-peak validation is established."
+  ]
+}

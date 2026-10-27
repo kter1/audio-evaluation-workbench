@@ -1,146 +1,181 @@
-# ◉ Audio Review Lab
+# SignalTrace
 
-A blind speech-annotation workspace for telling real voices from AI voice clones. I use it to measure my own listening: how accurate and how consistent my labels are, which cues I rely on, and where I get fooled. Only after a batch is locked do I compare my judgments with the dataset's truth and with a modern deepfake detector.
+**Local AI-voice detection and speech-annotation tooling, with documented evaluations and known failure modes.**
 
-## Blind by design
+[![CI](https://github.com/kter1/audio-evaluation-workbench/actions/workflows/ci.yml/badge.svg)](https://github.com/kter1/audio-evaluation-workbench/actions/workflows/ci.yml)
+![Python 3.11–3.13](https://img.shields.io/badge/python-3.11%E2%80%933.13-3776AB?logo=python&logoColor=white)
+![Runs locally](https://img.shields.io/badge/audio-stays%20local-2a9d8f)
 
-Annotations are only useful if a model or an answer key hasn't already influenced them. The workflow enforces that:
+<p align="center">
+  <img src="docs/images/signaltrace-demo.gif" width="100%" alt="SignalTrace demo: a recording is uploaded and checked, the result reads AI voice indicated, the waveform plays with evidence markers, and a flagged moment opens in the evidence inspector">
+  <br>
+  <sub>Recorded in the local app with a held-out XTTS-v2 clone from the frozen test set. The model wait is shortened.</sub>
+</p>
 
-- **Judge first.** Reference labels, detector scores, file names, and earlier answers stay hidden during review.
-- **Freeze, then reveal.** Submitting freezes the original judgment. A batch is revealed only when every clip in it is submitted.
-- **Corrections never overwrite.** Later corrections and adjudications are stored separately, next to the original.
-- **Consistency is measured, not assumed.** Twenty clips come back as blind repeats at least 48 hours later, and agreement with my earlier self is scored (Cohen's kappa).
-- **Independent review is possible.** A blind package (neutral WAVs, no metadata) can go to a second reviewer, whose returned labels are compared before adjudication.
-- **No detector during review.** The Detector Lab scores only audio I upload, and it warns while any clip in the workspace is still blind.
+Upload a voice recording and SignalTrace returns one of three results, **AI voice indicated**, **No clear AI signal**, or **Inconclusive**, with the reasons behind it. Everything runs on your machine. No audio goes to a hosted service, and models are never downloaded without an explicit setup step.
 
-## My results
+The repository also has a blind annotation workspace for labeling real versus cloned speech to a written guide, and the evaluation records behind every detector claim: what was tested, what failed, and what remains unknown.
 
-> ⏳ **In progress.** Numbers appear here only from revealed, exported work. Nothing is estimated or prefilled.
+## Contents
 
-| Work | Clips | Result |
-|---|---|---|
-| Listening challenge: real voices vs. modern clones | 20 (10 real, 10 clones from 3 generators) | ⏳ fakes that fooled me · detector caught |
-| Calibration batch (learning, excluded from results) | 20 | ⏳ |
-| Main batch 1 | 80 | ⏳ accuracy among decided · uncertainty rate |
-| Blind repeats, ≥ 48 h later | 20 | ⏳ self-agreement (kappa) |
-| Which cues held up | all revealed clips | ⏳ |
-| Investigated cases | 5 | ⏳ |
+- [Features](#features)
+- [Screenshots](#screenshots)
+- [Quick start](#quick-start)
+- [Results](#results)
+- [Annotation workflow](#annotation-workflow)
+- [Limitations](#limitations)
+- [Repository layout](#repository-layout)
+- [Development](#development)
+- [Data, models, and licensing](#data-models-and-licensing)
 
-## What I record for every clip
+## Features
 
-Defined in the [annotation guide](docs/annotation-guide.md) (versioned; v1.1 registered before any review began):
+- **A clear verdict, with an honest "Inconclusive."** Recordings that are too short, silent, clipped, or phase-cancelled are flagged before the model runs. A verdict that flips under small perturbations is reported as Inconclusive. A human result requires both component models to agree.
+- **Two-model detector.** Fuses [PellaV2](https://huggingface.co/Sadanie/pellav2-audio-deepfake-detector) and NII [AntiDeepfake](https://huggingface.co/nii-yamagishilab/mms-300m-anti-deepfake). Both ports are parity-checked against their official code, and every checkpoint is verified against a pinned SHA-256 before it loads.
+- **Acoustic evidence markers.** Clipping, gaps, level jumps, spectral shifts, DC offset, limited bandwidth, and stereo problems are marked on the waveform. Each marker states its rule, measurement, timestamps, limitations, and a suggested next check.
+- **Analyst notes and exports.** Recording details, model evidence, and notes export as JSON and printable HTML reports.
+- **Annotated sample.** A 30-second LibriSpeech excerpt with word-level timestamps, transcript differences, and quiet-interval annotations, viewable without any model download.
+- **Blind annotation workspace.** A separate app for structured, guide-driven labeling with frozen judgments, delayed blind repeats, and second-reviewer packages ([details](#annotation-workflow)).
 
-- **Intelligibility:** clear, partly intelligible, unintelligible, or no speech.
-- **Channel and environment:** background noise, compression artifacts, reverb or echo, music or hold audio, clipping, dropouts, distortion, overlap.
-- **Perceptual cues:** what I heard that leans synthetic (unnatural prosody, flat emotion, metallic timbre, missing breaths, odd stress, splices, too-clean sound) or human (natural breaths, hesitations, consistent room acoustics).
-- **Perceived origin:** human, synthetic, or **uncertain**, which is a valid answer with a required explanation.
-- **Confidence (1–5),** **timestamped observations** (for example, "1.18–1.36 s: abrupt silence mid-word"), and an **escalation** with the open question when a case falls outside the guide.
+## Screenshots
 
-After reveal, **Quality Review** filters for detector mistakes, disagreements, escalations, and uncertain calls, and turns a clip into a short case study: observation, possible explanation, recommended next check. **Findings & Export** produces spreadsheet-ready CSVs (annotations, revision history, cases, adjudications), metrics, and a printable report. [SQL examples](docs/queries.sql) query the same SQLite records.
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/images/signaltrace-result.png" alt="Result screen reading AI voice indicated, with the recording waveform and evidence markers">
+      <br><b>AI voice indicated.</b> A held-out XTTS-v2 clone, with model windows and acoustic markers shaded on the waveform.
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/images/signaltrace-genuine.png" alt="Result screen reading No clear AI signal for a 30-second genuine recording">
+      <br><b>No clear AI signal.</b> The genuine 30-second LibriSpeech reading used for the annotated sample.
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/images/signaltrace-evidence.png" alt="Evidence index of flagged moments beside the evidence inspector showing one sudden level change">
+      <br><b>Evidence inspector.</b> Each flagged moment shows what was measured, the rule that fired, what it does not prove, and a suggested next check.
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/images/signaltrace-validation.png" alt="Validation history page with frozen test results for the telephone channel and a comparison of component models">
+      <br><b>Validation history.</b> Frozen test results by channel, shown here for telephone audio, with the fusion compared against each component model.
+    </td>
+  </tr>
+</table>
 
-## The detector, used only after reveal
+## Quick start
 
-The Detector Lab fuses two independently trained speech-deepfake models: [pellav2](https://huggingface.co/Sadanie/pellav2-audio-deepfake-detector) and NII's [AntiDeepfake](https://huggingface.co/nii-yamagishilab/mms-300m-anti-deepfake). Every result explains itself: each model's vote, the threshold, and pass/fail reliability checks for duration, level, clipping, and stability under noise.
-
-On a frozen test of 320 new clips from 73 speakers, scored once:
-
-| Channel | Clones caught | Real voices wrongly flagged |
-|---|---|---|
-| Clean | 120/120, including 60/60 from a generator held out of development | 0/200 |
-| MP3 64 kbps | 120/120 | 3/200 (1.5%) |
-| Telephone, 8 kHz | 120/120 | 5/200 (2.5%) |
-| Added background noise | 119/120 | 10/200 (5.0%) |
-
-**What this means for listening work:** compressed and noisy genuine speech is where models struggle most. The detector's false alarms concentrate there, and so do the hardest calls for a human ear. That is why the guide treats channel artifacts as interference, not as evidence of synthesis. Full method, failures, and limits are in [the evaluation](docs/model-evaluation.md) and [technical method](docs/forensics-method.md). Scope: English read speech, three open generators, and simulated channels. This is not a test of commercial voices or live calls.
-
-## Data handling
-
-- Everything runs locally on `127.0.0.1`. No audio is sent to an online service.
-- Audio, model weights, and work databases live under a git-ignored `data/` folder and are never committed.
-- Real speech comes from public research corpora ([ASVspoof 2021](https://www.asvspoof.org/index2021.html), ODC-By; [LibriSpeech](https://www.openslr.org/12), CC BY 4.0). Voice clones were generated locally from public audiobook readers, for research only, and are not distributed.
-- Some components are licensed for non-commercial research only: AntiDeepfake weights (CC BY-NC-SA 4.0), and the XTTS-v2 generator (Coqui Public Model License) used to make test clips.
-
-## Security
-
-- **Local only.** The app binds to `127.0.0.1`, has upload limits (50 MB, 120 s, 24 million samples), and makes no network calls during review or inference.
-- **Model files are verified before use.** Every checkpoint and config has a pinned SHA-256 checked before loading. PyTorch weights load with `weights_only=True`, AntiDeepfake with safetensors, and Hugging Face loaders never run remote code. Both detector ports are parity-checked against their official code.
-- **Safe parsing.** Archives are read by exact expected member names (no path traversal); SQL is parameterized; HTML in reports and the UI is escaped; CSV exports neutralize spreadsheet formulas.
-- **Dependencies are pinned and audited.** `requirements.lock` reported no known vulnerabilities in `pip-audit` on 2026-10-19, after upgrading torch, transformers, Streamlit, and Pillow. A regression check confirmed the published detector results did not change.
-
-## How this was built
-
-The study separates personal listening judgments from automated detector results. Completed personal annotation results and independent reviewer agreement have not been established. Detector claims must be read alongside their frozen manifests, receipts, and documented limitations in [`docs/`](docs/).
-
-## Run it
-
-Requires Python 3.11–3.13 (tested on 3.13, Apple Silicon). From this folder:
+Requires Python 3.11–3.13 (CI uses 3.13) on macOS or Linux.
 
 ```sh
-./run.sh
+git clone https://github.com/kter1/audio-evaluation-workbench.git
+cd audio-evaluation-workbench
+sh run.sh
 ```
 
-Open [localhost:8501](http://localhost:8501). The first launch creates a virtual environment, installs `requirements.lock`, and opens a clearly labeled practice workspace (generated tones, arbitrary labels). Switch between the research study, listening challenge, and practice workspaces in the sidebar. Drafts survive restarts, and **Save & skip** moves on without losing work.
+Open **http://127.0.0.1:8501**. The first run creates `.venv/` and installs the lightweight app dependencies. If `python3` is older than 3.11, run `PYTHON=python3.13 sh run.sh` instead.
 
-The Detector Lab needs two one-time downloads (about 1.26 GB each, checksum-verified). Inference then runs offline on CPU:
+The interface, signal measurements, and annotated sample (at `/samples/annotation-example.html`) work right away. To enable AI-voice detection, install the detector once (about 2.5 GB of checkpoints):
 
 ```sh
+.venv/bin/python -m pip install -r requirements.txt
 .venv/bin/python scripts/setup_pellav2.py
 .venv/bin/python scripts/setup_antideepfake.py
 ```
 
-## Research setup
+Then refresh the page; the status badge changes to **Voice detector ready**. After that, inference runs offline on CPU. The [app guide](docs/app-guide.md) covers input limits, result details, and the evidence markers.
 
-1. Read [the annotation guide](docs/annotation-guide.md) and [study protocol](docs/study-protocol.md).
-2. Fetch the official ASVspoof 2021 metadata, scores, and source mappings (~36 MB; no audio):
+## Results
 
-```sh
-.venv/bin/python -m lab fetch-metadata
+The detector was frozen before each test below, with no threshold tuning on test data.
+
+**Frozen test of 320 clips from 73 speakers.** The set is English read speech: 200 genuine recordings and 120 clones from three open TTS generators. Sixty of the clones come from XTTS-v2, which was held out of development entirely.
+
+| Channel | Clones detected | Genuine recordings flagged |
+| --- | ---: | ---: |
+| Clean | 120 / 120 | 0 / 200 |
+| MP3, 64 kbps | 120 / 120 | 3 / 200 (1.5%) |
+| Telephone, 8 kHz µ-law | 120 / 120 | 5 / 200 (2.5%) |
+| White noise, 20 dB SNR | 119 / 120 | 10 / 200 (5.0%) |
+
+The same 320 source clips are reused across all four channels, so the rows are correlated. That set has since been used for regression checks, and it is no longer an untouched test. Full protocol: [detector evaluation](docs/model-evaluation.md).
+
+**Newer generators.** On a 45-clip screen covering five recent TTS systems (Chroma, GLM-TTS, Qwen3-TTS, VibeVoice, VoxCPM), the detector flagged 25/25 clean synthetic clips with no false alerts on 20 human clips. Under added noise it flagged 19/25 and gave two wrong human verdicts; the corroboration rule now turns both into Inconclusive. See [core detector progress](docs/core-detector-progress.md).
+
+**What did not work.** Each of these was tested and rejected, with numbers:
+
+- MetricGAN speech enhancement reached 25/25 on noisy clones but falsely flagged all 20 noisy human clips.
+- A compact noise-augmented classifier (RawNetLite) and a third pretrained classifier both missed too many clones.
+- Logit clipping before fusion raised false alerts.
+
+See the [research log](docs/research-log.md) for the full sequence.
+
+## Annotation workflow
+
+Two pieces of the repository are built around careful human labeling.
+
+**Annotated sample** (in SignalTrace at `/samples/annotation-example.html`). The 30-second LibriSpeech excerpt has 79 estimated word timestamps from local speech recognition and six specific differences from the source text. It also has grouped quiet intervals and CSV/JSON exports. Its provenance and measurements are in [annotation-demo.json](studio/dist/samples/annotation-demo.json).
+
+<p align="center"><img src="docs/images/annotation-sample.png" width="720" alt="Annotated sample: recording summary, word-timed transcript with playback, and CSV/JSON exports"></p>
+
+**Blind annotation workspace** (`sh run-legacy.sh`). A Streamlit app for labeling real versus AI-cloned speech under blind conditions:
+
+- A versioned [annotation guide](docs/annotation-guide.md) defines intelligibility, interference tags (noise, codec artifacts, reverb, hold audio, clipping, dropouts), perceptual cues, origin (human, synthetic, or uncertain with a required explanation), confidence, timestamped observations, and escalation.
+- Labels, scores, and file names stay hidden during review. Submitted judgments are frozen; corrections and adjudications are stored beside the original and never overwrite it.
+- Twenty clips return as blind repeats at least 48 hours later to measure self-agreement (Cohen's kappa).
+- Blind packages (neutral WAVs, no metadata) go to a second reviewer, and their returned labels are compared before adjudication.
+- After reveal, a quality-review queue surfaces disagreements, detector misses, and escalations as short case studies. Everything exports as spreadsheet-ready CSV, with [SQL examples](docs/queries.sql) for the underlying SQLite data.
+
+The study design, research setup, and CLI are in the [annotation workspace guide](docs/annotation-workspace.md) and [study protocol](docs/study-protocol.md). No personal annotation results or inter-reviewer agreement figures have been published yet.
+
+## Limitations
+
+- **Short inserts can be missed.** In a constructed test, all four one-second AI segments spliced into 12-second genuine recordings were read as human. A **No clear AI signal** result does not certify human origin.
+- **Scores are not probabilities.** Model outputs are not calibrated authenticity probabilities.
+- **Limited scope.** All testing so far is English read speech, open generators, and simulated channels. No results are claimed for commercial voice-cloning services, live phone calls, replayed audio, or music.
+- **Single local user.** The app binds to `127.0.0.1` with no authentication. Do not expose it to a network. See the [security review](docs/security-review.md).
+- **Not a forensic tool.** SignalTrace does not establish fraud, identify speakers, or evaluate any vendor's production system.
+
+## Repository layout
+
+```text
+signaltrace_server.py   Local web API and static host for SignalTrace
+studio/dist/            Browser front end (no build step) and the annotated sample
+app.py                  Blind annotation workspace (Streamlit)
+lab/                    Detection, signal measurement, annotation, and evaluation code
+scripts/                Model setup, data acquisition, and evaluation runners
+tests/                  pytest suite and front-end tests (node:test)
+docs/                   Guides, evaluation reports, and machine-readable receipts
 ```
 
-3. Download the [official ASVspoof 2021 LA audio archive](https://zenodo.org/records/4837263) (~7.8 GB), verify its published MD5 (`2abee34d8b0b91159555fc4f016e4562`), keep its notices, and extract it.
-4. Register the dataset and create the source-separated sample:
+Start with the [documentation index](docs/README.md).
 
-```sh
-.venv/bin/python -m lab --db data/study.sqlite import-asvspoof --audio-dir /absolute/path/to/ASVspoof2021_LA_eval/flac
-.venv/bin/python -m lab --db data/study.sqlite prepare-study --reviewer your-name
-```
-
-The sample has **20 calibration + 80 + 100 main + 100 fresh validation = 300 unique recordings**. Each batch is class-balanced, and no source speaker or text repeats across batches. Unreadable or corrupt audio is excluded and recorded, never counted as reviewed.
-
-The listening challenge is built from the frozen modern-voice test after the detector evaluation:
-
-```sh
-.venv/bin/python -m lab --db data/challenge-v4.sqlite prepare-challenge --reviewer your-name
-```
-
-## Study operations
-
-Complete calibration and reveal it, revise the guide if needed (as a new version, before starting the next batch), then complete main batch 1. Schedule 20 blind repeats, wait at least 48 hours, complete them, and only then reveal. Assign any independent review **before** reveal. Quality Review handles all of this in the app; the CLI equivalents are:
-
-```sh
-.venv/bin/python -m lab --db data/study.sqlite schedule-repeats --count 20
-.venv/bin/python -m lab --db data/study.sqlite reveal --phase main-01
-.venv/bin/python -m lab --db data/study.sqlite export --directory exports/study
-```
-
-See [the protocol](docs/study-protocol.md) for independent reviewer packages and the [walkthrough](docs/walkthrough.md) for a three-minute demo.
-
-## Verification
+## Development
 
 ```sh
 .venv/bin/python -m pip install -r requirements-dev.txt
 .venv/bin/python -m pytest -q
+node --test tests/frontend-evidence.test.cjs
 ```
 
-## Boundaries
+| File | Purpose |
+| --- | --- |
+| `requirements-signaltrace.txt` | App runtime; installed by `run.sh` |
+| `requirements.txt` | Detector and research stack (PyTorch, Transformers, Streamlit) |
+| `requirements.lock` | Fully pinned, audited versions of everything above, including pytest |
+| `requirements-dev.txt` | Development install; uses the lockfile |
 
-A trusted, local, single-operator app with no authentication. Reviewer isolation uses separate databases and sanitized media packages, not logins. The owner can inspect their own SQLite data, so blind mode is a study discipline, not protection against a dishonest owner. The project evaluates audio only. It does not establish fraud, identify speakers, or evaluate any vendor's production system. Confidence is self-reported, disagreement is not automatically annotation error, and independent agreement remains **not measured** until another person actually returns reviews.
+CI runs the server, measurement, research-pipeline, and front-end tests on pushes and pull requests. Some detector tests need the model checkpoints installed locally.
 
-## Sources and attribution
+## Data, models, and licensing
 
-- [ASVspoof 2021](https://www.asvspoof.org/index2021.html) and its [Logical Access dataset](https://zenodo.org/records/4837263), [baseline scores and evaluation package](https://github.com/asvspoof-challenge/2021/tree/main/eval-package), and [source mappings](https://www.asvspoof.org/asvspoof2019/ASVspoof2019_2021_VCTK_VCC_MetaInfo.tar.gz); ODC-By attribution, official notices retained.
-- [LibriSpeech](https://www.openslr.org/12), CC BY 4.0.
-- Detectors: [pellav2](https://huggingface.co/Sadanie/pellav2-audio-deepfake-detector) (MIT), [NII AntiDeepfake](https://huggingface.co/nii-yamagishilab/mms-300m-anti-deepfake) (CC BY-NC-SA 4.0), [AASIST](https://github.com/clovaai/aasist) (MIT); vendored notices are in `lab/vendor/`.
-- Generators used for test clips: [Chatterbox](https://github.com/resemble-ai/chatterbox) (MIT), [F5-TTS](https://github.com/SWivid/F5-TTS), [XTTS-v2](https://huggingface.co/coqui/XTTS-v2) (Coqui Public Model License).
+Audio corpora, model weights, databases, and exports live under the git-ignored `data/` folder and are never committed. The one exception is the 30-second annotated LibriSpeech sample (CC BY 4.0).
 
-ASVspoof source groups use the official VCTK speaker ID for genuine and converted speech and normalized input text for TTS. Identical spoken text across human and TTS recordings is not fully observable from this mapping.
+**Datasets:** [ASVspoof 2021](https://www.asvspoof.org/index2021.html) and [ASVspoof 5](https://zenodo.org/records/14498691) (ODC-By), [LibriSpeech](https://www.openslr.org/12) (CC BY 4.0), [VoxENES 2026](https://www.kaggle.com/datasets/interspeech2712/voxenes-2026) (CC BY 4.0).
+
+**Detectors:** [PellaV2](https://huggingface.co/Sadanie/pellav2-audio-deepfake-detector) (MIT), [NII AntiDeepfake](https://huggingface.co/nii-yamagishilab/mms-300m-anti-deepfake) (CC BY-NC-SA 4.0), [AASIST](https://github.com/clovaai/aasist) (MIT). Vendored code keeps its notices in [`lab/vendor/`](lab/vendor/).
+
+**Test-clip generators:** [Chatterbox](https://github.com/resemble-ai/chatterbox) (MIT), [F5-TTS](https://github.com/SWivid/F5-TTS), [XTTS-v2](https://huggingface.co/coqui/XTTS-v2) (Coqui Public Model License). Generated clips are not distributed.
+
+Several components are licensed for non-commercial research only, and the installed detector inherits those terms. Acquisition receipts in `docs/` record sources, revisions, checksums, and licenses.
+
+This repository's own code carries no open-source license; all rights are reserved. Third-party components remain under their own licenses. SignalTrace is an independent project, not affiliated with any of the organizations above.

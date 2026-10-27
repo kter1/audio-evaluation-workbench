@@ -1,0 +1,43 @@
+{
+  "scope": "Targeted post-hoc followup of two known development errors; not population validation",
+  "results": [
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/qwen3_tts/english/random/random_026.wav::added_noise20db",
+      "label": "synthetic",
+      "core_score": 0.011396996327160075,
+      "product_assessment": {
+        "synthetic_score": 0.011396869589674128,
+        "binary_model_decision": "human",
+        "assessment": "Human speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.011396869589674128,
+        "window_max": 0.011396869589674128,
+        "aggregation": "arithmetic mean of fused window probabilities",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "links": {
+        "json": "/api/reports/6a99ec39d6484223b9505c2c0d1f7705d4cefc97f5a81b3c8ba46f2680d3d65f/json",
+        "html": "/api/reports/6a99ec39d6484223b9505c2c0d1f7705d4cefc97f5a81b3c8ba46f2680d3d65f/html"
+      }
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/qwen3_tts/english/random/random_022.wav::added_noise20db",
+      "label": "synthetic",
+      "core_score": 0.01691244982782745,
+      "product_assessment": {
+        "synthetic_score": 0.01691235965011821,
+        "binary_model_decision": "human",
+        "assessment": "Human speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.01691235965011821,
+        "window_max": 0.01691235965011821,
+        "aggregation": "arithmetic mean of fused window probabilities",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "links": {
+        "json": "/api/reports/518b3bf006a2da0a4e74f83a5edcb71d36b63b080d48fc2f786bcae09b739d23/json",
+        "html": "/api/reports/518b3bf006a2da0a4e74f83a5edcb71d36b63b080d48fc2f786bcae09b739d23/html"
+      }
+    }
+  ]
+}

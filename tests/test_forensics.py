@@ -71,7 +71,8 @@ def test_input_decode_limits_and_resampling():
     assert len(x) == 3*RATE
     assert source["duration_seconds"] == 3
     assert np.sqrt(np.mean(x**2)) == pytest.approx(.2/np.sqrt(2), abs=.001)
-    for bad in [b"corrupt", blob(tone(.1)), blob(tone(121))]:
+    assert read_audio(blob(tone(121)))[2]["duration_seconds"] == 121
+    for bad in [b"corrupt", blob(tone(.1)), blob(tone(601))]:
         with pytest.raises(ValueError):
             read_audio(bad)
 
@@ -166,7 +167,8 @@ def test_explain_reports_each_check_against_its_limit():
     why = explain(report)
     status = {c["check"]: c["status"] for c in why["checks"]}
     assert status["No stereo cancellation"] == "n/a"
-    assert all(v == "pass" for k, v in status.items() if k != "No stereo cancellation")
+    assert status["Human indication corroborated"] == "n/a"
+    assert all(v == "pass" for k, v in status.items() if k not in {"No stereo cancellation", "Human indication corroborated"})
     assert why["verdict"] == "Flagged as synthetic: score 0.80 is at or above the 0.50 threshold and all 7 applicable reliability checks passed."
     short = explain(analyze(blob(tone(2)), TestDetector())[0])
     assert {c["check"]: c["status"] for c in short["checks"]}["Long enough"] == "fail"
@@ -186,3 +188,59 @@ def test_detector_threshold_moves_vote_band_and_explanation():
     assert report["assessment"]["assessment"] == "Inconclusive"
     assert "0.85" in explain(report)["verdict"]
     assert 'y1="51.00"' in report_html(report)  # dotted threshold line at 0.85
+
+
+def test_unstable_model_cannot_keep_positive_assessment():
+    class Unstable(TestDetector):
+        def score(self, x):
+            # Exercise the existing gain perturbation; no real-world evidence.
+            score = .95 if np.sqrt(np.mean(x**2)) > .1 else .1
+            return {'synthetic_score': score, 'human_score': 1-score, 'logits': [0., 1.]}
+    report, _ = analyze(blob(tone(3)), Unstable(), robustness=True)
+    assert report['assessment']['binary_model_decision'] == 'synthetic'
+    assert report['assessment']['assessment'] == 'Inconclusive'
+    assert any('unstable' in r for r in report['assessment']['abstention_reasons'])
+
+
+@pytest.mark.parametrize('pella,adf', [(.95,.001),(.01,.95)])
+def test_conflicting_component_models_cannot_certify_human(pella, adf):
+    metrics=diagnostics(tone()[:,None],RATE)[1]
+    scores=[{'start':0,'end':3,'synthetic_score':.01,'components':{'pellav2':pella,'antideepfake':adf}}]
+    result=decision(scores,metrics,3)
+    assert result['synthetic_score']==.01
+    assert result['binary_model_decision']=='human'
+    assert result['assessment']=='Inconclusive'
+    assert result['component_disagreement']
+    assert any('requires agreement' in r for r in result['abstention_reasons'])
+
+
+def test_component_consensus_and_invalid_component_scores():
+    metrics=diagnostics(tone()[:,None],RATE)[1]
+    row={'start':0,'end':3,'synthetic_score':.01,'components':{'pellav2':.01,'antideepfake':.02}}
+    assert decision([row],metrics,3)['assessment']=='Human speech indicated'
+    with pytest.raises(ValueError,match='component'):
+        decision([{**row,'components':{'pellav2':float('nan'),'antideepfake':.02}}],metrics,3)
+    with pytest.raises(ValueError,match='Incomplete'):
+        decision([{**row,'components':{'pellav2':.1}}],metrics,3)
+    with pytest.raises(ValueError):
+        decision([{**row,'aggregation_weight':float('nan')}],metrics,3)
+
+
+def test_component_consensus_uses_same_window_weights_as_file_score():
+    metrics=diagnostics(tone()[:,None],RATE)[1]
+    rows=[{'start':0,'end':1,'synthetic_score':.01,'aggregation_weight':1,
+           'components':{'pellav2':.9,'antideepfake':.2}},
+          {'start':1,'end':4,'synthetic_score':.01,'aggregation_weight':3,
+           'components':{'pellav2':.1,'antideepfake':.1}}]
+    result=decision(rows,metrics,4)
+    assert result['component_scores']['pellav2']==pytest.approx(.3)
+    assert not result['component_disagreement']
+    assert result['assessment']=='Human speech indicated'
+
+
+def test_human_corroboration_guard_does_not_suppress_clear_fusion_ai_indication():
+    metrics=diagnostics(tone()[:,None],RATE)[1]
+    row={'start':0,'end':3,'synthetic_score':.99,'components':{'pellav2':.95,'antideepfake':.01}}
+    result=decision([row],metrics,3)
+    assert result['component_disagreement']
+    assert result['assessment']=='Synthetic speech indicated'

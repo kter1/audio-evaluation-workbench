@@ -1,0 +1,294 @@
+{
+  "version": "2.0",
+  "source_acquisition_sha256": "3a84719402e0b6f15c5f42e392dfdf09e0618f64bb60f8d0ffb3c1e12fc3b99c",
+  "rule": "Within each class, sort declared speakers by SHA256(asvspoof5-pilot-reservation-v2:+speaker); first10 calibration_reserved, remaining10 evaluation_reserved. Metadata only, before any detector inference.",
+  "reason": "The original group-only hash split produced6human/14synthetic calibration records. This metadata-only update balances both reserved partitions while preserving original acquisition and qualification receipts.",
+  "detector_inference_run": false,
+  "qualified_confirmatory": false,
+  "records": [
+    {
+      "id": "E_0007016699",
+      "speaker": "E_0579",
+      "label": "human",
+      "source_sha256": "bcf615904376158d6b2e3e7de3af356c4b39d7385625f9c2dd685082ec1d412a",
+      "partition": "calibration_reserved"
+    },
+    {
+      "id": "E_0000000991",
+      "speaker": "E_2769",
+      "label": "human",
+      "source_sha256": "07c4832eff97911648f3a74221467d99c071fc880e4603ff444aac3e35d78588",
+      "partition": "calibration_reserved"
+    },
+    {
+      "id": "E_0003019049",
+      "speaker": "E_4632",
+      "label": "human",
+      "source_sha256": "3b3d1ccbeb03deef103fc99276219a20f8baf362333ebd27cf0793a6e3459db2",
+      "partition": "calibration_reserved"
+    },
+    {
+      "id": "E_0007017251",
+      "speaker": "E_1742",
+      "label": "human",
+      "source_sha256": "3e281f2ad4e03b136d677219f10a9c7135581b82db7beeb7e67d463e452af5c9",
+      "partition": "calibration_reserved"
+    },
+    {
+      "id": "E_0007016393",
+      "speaker": "E_3463",
+      "label": "human",
+      "source_sha256": "e96211f1648b8596655744fff71d4b427cfce7b3ae2fccf8cca51b273a6df77d",
+      "partition": "calibration_reserved"
+    },
+    {
+      "id": "E_0002015454",
+      "speaker": "E_2281",
+      "label": "human",
+      "source_sha256": "404116c8cd8566b3dbcb7cdf54a27331ea5c04ae7686fae266ecb00726aa3084",
+      "partition": "calibration_reserved"
+    },
+    {
+      "id": "E_0003018228",
+      "speaker": "E_2241",
+      "label": "human",
+      "source_sha256": "87e6174fcb28d34f623c65ae941fc8fdd16fa4155cbd6abeafcfa7d9e1602751",
+      "partition": "calibration_reserved"
+    },
+    {
+      "id": "E_0007016230",
+      "speaker": "E_2343",
+      "label": "human",
+      "source_sha256": "c6d40fee2ae0c17ae989d2ce6f05fd34e0ece8b5049a671be8274da59b719f5f",
+      "partition": "calibration_reserved"
+    },
+    {
+      "id": "E_0006014855",
+      "speaker": "E_5158",
+      "label": "human",
+      "source_sha256": "a9ad719265c344dd9caf17a4ed781baf7eb0f926d4c8aad9ac14eaddae16b3e9",
+      "partition": "calibration_reserved"
+    },
+    {
+      "id": "E_0007017205",
+      "speaker": "E_4337",
+      "label": "human",
+      "source_sha256": "eb8e3046e83b07b4c371bab53376df20c50a3d699e353fd0ea5f0d7c4c7c1e65",
+      "partition": "calibration_reserved"
+    },
+    {
+      "id": "E_0000000995",
+      "speaker": "E_0067",
+      "label": "human",
+      "source_sha256": "2938cee206eaa60ca585fb36e874392a03ff7d3733888b10348b04bcfbc18834",
+      "partition": "evaluation_reserved"
+    },
+    {
+      "id": "E_0001017510",
+      "speaker": "E_3647",
+      "label": "human",
+      "source_sha256": "d8386c10c4d4ed3efddb3d8926f0a0046c96b51a20fc82f4c4d43bdb8bd0f0d0",
+      "partition": "evaluation_reserved"
+    },
+    {
+      "id": "E_0003018609",
+      "speaker": "E_1429",
+      "label": "human",
+      "source_sha256": "10a732213b8fa3f8f4b8f2f015be4863bd246563207cadac51603edcb181ce0c",
+      "partition": "evaluation_reserved"
+    },
+    {
+      "id": "E_0006015597",
+      "speaker": "E_5046",
+      "label": "human",
+      "source_sha256": "6ad29a5e090282c228eda444a53f082a3cf5fdfadff11084588254f839f1dce1",
+      "partition": "evaluation_reserved"
+    },
+    {
+      "id": "E_0002015172",
+      "speaker": "E_0561",
+      "label": "human",
+      "source_sha256": "c8bd5e29d7c54906343ead7e6bdfdcc6654c52c8d31e40703c43831a867dba0d",
+      "partition": "evaluation_reserved"
+    },
+    {
+      "id": "E_0008018288",
+      "speaker": "E_0602",
+      "label": "human",
+      "source_sha256": "3ee7012f42039369ab58f6998bb8a5c67ea5b4e9b794dd21035926b546da9a88",
+      "partition": "evaluation_reserved"
+    },
+    {
+      "id": "E_0002015972",
+      "speaker": "E_3522",
+      "label": "human",
+      "source_sha256": "5ead7a193165b93f953b0bb548d3f1f7c983aad6798fe22e8141557ee7e921ac",
+      "partition": "evaluation_reserved"
+    },
+    {
+      "id": "E_0005016742",
+      "speaker": "E_0990",
+      "label": "human",
+      "source_sha256": "697fe1bc3464be9d96d37777af872d2f6fd50fcfa9995049b10c2af90cfa862c",
+      "partition": "evaluation_reserved"
+    },
+    {
+      "id": "E_0001017417",
+      "speaker": "E_0284",
+      "label": "human",
+      "source_sha256": "f278f40d2c6fa3d0deab1144aac00062662ef765cca44618f6d8c6aeed0c8de5",
+      "partition": "evaluation_reserved"
+    },
+    {
+      "id": "E_0006014823",
+      "speaker": "E_3919",
+      "label": "human",
+      "source_sha256": "bfb28019f9c9b7a1543087a114185aac7e1ac1a7b8ce017d1c2aa9aa8686ecd2",
+      "partition": "evaluation_reserved"
+    },
+    {
+      "id": "E_0008019190",
+      "speaker": "E_3756",
+      "label": "synthetic",
+      "source_sha256": "ad3a4fce7eee08608194b74f94889c745654d90176a20c4e6ecee91ec5fd88a3",
+      "partition": "calibration_reserved"
+    },
+    {
+      "id": "E_0005016348",
+      "speaker": "E_5371",
+      "label": "synthetic",
+      "source_sha256": "d4c8de9b79932da9eb20db0ac6005f8b537ab0413b83bb8e8b913c3fa2704687",
+      "partition": "calibration_reserved"
+    },
+    {
+      "id": "E_0006015103",
+      "speaker": "E_2020",
+      "label": "synthetic",
+      "source_sha256": "0154d637299c3ce9968ba5c0fa3a0cebbfb6f593f9b59a922779597fc224cb21",
+      "partition": "calibration_reserved"
+    },
+    {
+      "id": "E_0003018387",
+      "speaker": "E_0377",
+      "label": "synthetic",
+      "source_sha256": "bf8dbd272680bf5739dd676ab7e22f56e64f68b4a46d026d8606d248ea24c781",
+      "partition": "calibration_reserved"
+    },
+    {
+      "id": "E_0000000557",
+      "speaker": "E_2244",
+      "label": "synthetic",
+      "source_sha256": "5f786c24c9645eecf1caa71aeb8e8ac8047bcf1456d3689f39623dbfe7f69249",
+      "partition": "calibration_reserved"
+    },
+    {
+      "id": "E_0007016249",
+      "speaker": "E_2088",
+      "label": "synthetic",
+      "source_sha256": "14585d8e07c9761ac9abc5129e3199d8133fb446ef5273c4a86f4022c5df5aac",
+      "partition": "calibration_reserved"
+    },
+    {
+      "id": "E_0003018993",
+      "speaker": "E_5298",
+      "label": "synthetic",
+      "source_sha256": "838355d3763c770bf41f8612fe6e3a698528f8658b9b4803a85891ab6d09842c",
+      "partition": "calibration_reserved"
+    },
+    {
+      "id": "E_0004014748",
+      "speaker": "E_4720",
+      "label": "synthetic",
+      "source_sha256": "d4300ea80087eac2a16173cf48f39e225659966035f13686487bdaf074eea288",
+      "partition": "calibration_reserved"
+    },
+    {
+      "id": "E_0005016075",
+      "speaker": "E_3750",
+      "label": "synthetic",
+      "source_sha256": "6b71aae5440972419f7c1e6eb06140075ff004e4a85b2731ea5310212d77057e",
+      "partition": "calibration_reserved"
+    },
+    {
+      "id": "E_0004014849",
+      "speaker": "E_0253",
+      "label": "synthetic",
+      "source_sha256": "afd232e82ba148797bee4b742d19422f0ede58bcfb0436822720a573c61840ea",
+      "partition": "calibration_reserved"
+    },
+    {
+      "id": "E_0007016478",
+      "speaker": "E_1028",
+      "label": "synthetic",
+      "source_sha256": "ce832509d54c8354cc6829061a665d0fac32cdb3a69efc475ad6c6fabe096407",
+      "partition": "evaluation_reserved"
+    },
+    {
+      "id": "E_0007016260",
+      "speaker": "E_0653",
+      "label": "synthetic",
+      "source_sha256": "d448adeedf5a93afbc863b0e2b8ac116566ee00b7015b2fa2ba4c67d0a17f1d2",
+      "partition": "evaluation_reserved"
+    },
+    {
+      "id": "E_0002015068",
+      "speaker": "E_4478",
+      "label": "synthetic",
+      "source_sha256": "94df4d3d6d9c8c06489d130f50dc4206c5614e596c4b47e6c5009b2e692fb3ab",
+      "partition": "evaluation_reserved"
+    },
+    {
+      "id": "E_0001017442",
+      "speaker": "E_4793",
+      "label": "synthetic",
+      "source_sha256": "6a7f77f4afe07290b4aa776ba537af9780470672019f1e771af8f2ac9a90cc84",
+      "partition": "evaluation_reserved"
+    },
+    {
+      "id": "E_0004014760",
+      "speaker": "E_0237",
+      "label": "synthetic",
+      "source_sha256": "d3fa5547b97798125f134da5b4172769608be47efd7988fdaea4ffe38c75b89e",
+      "partition": "evaluation_reserved"
+    },
+    {
+      "id": "E_0000000768",
+      "speaker": "E_2750",
+      "label": "synthetic",
+      "source_sha256": "09db5ce9561f4414a44411c379445cb89cfd1b3e4f6678cab724cb12f57acfac",
+      "partition": "evaluation_reserved"
+    },
+    {
+      "id": "E_0001017587",
+      "speaker": "E_0825",
+      "label": "synthetic",
+      "source_sha256": "ea8709a315c6640d73e765e6eb7afe416ba444a70bb70f8bdbe3c275c7092284",
+      "partition": "evaluation_reserved"
+    },
+    {
+      "id": "E_0002015787",
+      "speaker": "E_2997",
+      "label": "synthetic",
+      "source_sha256": "549d8cece699a3f75d06e2ec779e45b00231dd1432976e6d4bfc1f8f1b43a2fe",
+      "partition": "evaluation_reserved"
+    },
+    {
+      "id": "E_0000001071",
+      "speaker": "E_3909",
+      "label": "synthetic",
+      "source_sha256": "1296c5ec4bff59a3aaa4e0510cb1f1070dcfe187181056b57f3621ec4c2997b9",
+      "partition": "evaluation_reserved"
+    },
+    {
+      "id": "E_0009014500",
+      "speaker": "E_1095",
+      "label": "synthetic",
+      "source_sha256": "ba9444c418e3595d5a760fd79b771bc4b4e7f4cfb094cb8c8e15b2d3ec78375f",
+      "partition": "evaluation_reserved"
+    }
+  ],
+  "publication_redaction": {
+    "original_receipt_sha256": "2b09f949f09589a2314a8c9e0043edb2768c3039578ee8aa2bda0d48f1dfac4f",
+    "change": "Public references rebound to receipts with repository-relative notice paths. Original immutable receipts retained privately; this is a publication transformation, not a new inference or integrity-audit run."
+  }
+}

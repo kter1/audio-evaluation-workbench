@@ -1,0 +1,54 @@
+{
+  "schema_version": "prospective-corpus-1.0",
+  "example_only": true,
+  "description": "Deliberately ineligible historical recording. Exercises rejection; not a new locked corpus.",
+  "heldout_generator_families": [],
+  "heldout_domains": [],
+  "audits": {
+    "perceptual_duplicates": {
+      "status": "pending",
+      "reviewer": null,
+      "path": null,
+      "sha256": null
+    },
+    "label_provenance": {
+      "status": "pending",
+      "reviewer": null,
+      "path": null,
+      "sha256": null
+    },
+    "training_exposure": {
+      "status": "pending",
+      "reviewer": null,
+      "path": null,
+      "sha256": null
+    },
+    "previous_use": {
+      "status": "pending",
+      "reviewer": null,
+      "path": null,
+      "sha256": null
+    }
+  },
+  "cases": [
+    {
+      "id": "historical-example-not-independent",
+      "partition": "locked_test",
+      "label": "human",
+      "label_provenance": "LibriSpeech human reference already used in the published v4 evaluation",
+      "source_group": "librispeech:utterance:7850-281318-0013",
+      "speaker_group": "librispeech:speaker:7850",
+      "source_references": [],
+      "generator_family": "bonafide",
+      "domain": "historical-librispeech-dev-clean",
+      "language": "en",
+      "duration_seconds": 6.04,
+      "original_sha256": "c66c5de7fc246870ab9cecd54d893f7e30025c177da326206a043ee2ebd6a0c7",
+      "parent_id": null,
+      "license": "CC BY 4.0",
+      "acquisition_source": "https://www.openslr.org/12",
+      "path": "data/librispeech/LibriSpeech/dev-clean/7850/281318/7850-281318-0013.flac",
+      "conditions": []
+    }
+  ]
+}

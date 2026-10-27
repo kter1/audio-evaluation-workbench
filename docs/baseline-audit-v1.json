@@ -1,0 +1,255 @@
+{
+  "schema_version": "baseline-audit-1.0",
+  "mode": "archived replay; no fresh inference",
+  "input_sha256": {
+    "receipt": "bf22706876067829cc38a85c73333c97d83b9599ba8cc01086850d9139cdfb69",
+    "fusion": "9bb4517c2c1dd219c2585373b6cf6e874fc466e260eb44e954fac5f0b58296bc",
+    "development": "43cf084394d17e39465fca7eae037304f979ba044f9c3116c0b1b8666f38b80a",
+    "evaluation": "67db09102eb4a7376a0bdb9d1f90823f835aeacc08e14f77ed75e5e5841b2375",
+    "development_features": "020378deb1a25361b7fb0f4a8fd14d7add53da373f6c5f6d2c6d446cd1f9ee0e"
+  },
+  "errors": [],
+  "integrity_passed": true,
+  "environment": {
+    "python": "3.13.7",
+    "numpy": "2.3.3",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O"
+  },
+  "audit_code_sha256": "054d1bb31480143113ed1408f7871d0201fd4d817ec05e58d3f3256fc94f06cd",
+  "development_evaluation_overlap": {
+    "speaker": {
+      "count": 0,
+      "examples": []
+    },
+    "audio_sha256": {
+      "count": 0,
+      "examples": []
+    },
+    "source_or_reference_utterance": {
+      "count": 0,
+      "examples": []
+    },
+    "normalized_text": {
+      "count": 0,
+      "examples": []
+    }
+  },
+  "local_audio": {
+    "checked": 2120,
+    "missing": [],
+    "mismatched": []
+  },
+  "evaluation": {
+    "source_recordings": 320,
+    "clip_versions": 1280,
+    "speakers": 73,
+    "heldout_generator": "xtts",
+    "channels": {
+      "clean": {
+        "summary": {
+          "n": 320,
+          "human": 200,
+          "synthetic": 120,
+          "correct": 320,
+          "false_positive": 0,
+          "false_negative": 0,
+          "accuracy": 1.0,
+          "accuracy_wilson95": [
+            0.9881378411686904,
+            1.0
+          ],
+          "balanced_accuracy": 1.0,
+          "roc_auc": 1.0,
+          "abstained": 4,
+          "decided": 316,
+          "correct_among_decided": 316,
+          "accuracy_among_decided": 1.0
+        },
+        "speaker_uncertainty": {
+          "method": "speaker percentile bootstrap",
+          "speakers": 73,
+          "repetitions": 2000,
+          "seed": 20261022,
+          "caution": "Zero observed errors yield degenerate bootstrap bounds; not evidence of zero population risk.",
+          "false_positive_rate": {
+            "percentile95": [
+              0.0,
+              0.0
+            ],
+            "valid_draws": 2000
+          },
+          "detection_rate": {
+            "percentile95": [
+              1.0,
+              1.0
+            ],
+            "valid_draws": 2000
+          }
+        },
+        "false_positive_wilson95_descriptive": [
+          1.734723475976807e-18,
+          0.018845326377266575
+        ]
+      },
+      "mp3": {
+        "summary": {
+          "n": 320,
+          "human": 200,
+          "synthetic": 120,
+          "correct": 317,
+          "false_positive": 3,
+          "false_negative": 0,
+          "accuracy": 0.990625,
+          "accuracy_wilson95": [
+            0.9728036253832474,
+            0.9968066312635299
+          ],
+          "balanced_accuracy": 0.9925,
+          "roc_auc": 0.9999583333333333,
+          "abstained": 27,
+          "decided": 293,
+          "correct_among_decided": 292,
+          "accuracy_among_decided": 0.9965870307167235
+        },
+        "speaker_uncertainty": {
+          "method": "speaker percentile bootstrap",
+          "speakers": 73,
+          "repetitions": 2000,
+          "seed": 20261022,
+          "caution": "Zero observed errors yield degenerate bootstrap bounds; not evidence of zero population risk.",
+          "false_positive_rate": {
+            "percentile95": [
+              0.0,
+              0.03349684854619063
+            ],
+            "valid_draws": 2000
+          },
+          "detection_rate": {
+            "percentile95": [
+              1.0,
+              1.0
+            ],
+            "valid_draws": 2000
+          }
+        },
+        "false_positive_wilson95_descriptive": [
+          0.00511423779325831,
+          0.04316572879269026
+        ]
+      },
+      "phone": {
+        "summary": {
+          "n": 320,
+          "human": 200,
+          "synthetic": 120,
+          "correct": 315,
+          "false_positive": 5,
+          "false_negative": 0,
+          "accuracy": 0.984375,
+          "accuracy_wilson95": [
+            0.9639505868110894,
+            0.9933079468210793
+          ],
+          "balanced_accuracy": 0.9875,
+          "roc_auc": 0.9999583333333333,
+          "abstained": 32,
+          "decided": 288,
+          "correct_among_decided": 287,
+          "accuracy_among_decided": 0.9965277777777778
+        },
+        "speaker_uncertainty": {
+          "method": "speaker percentile bootstrap",
+          "speakers": 73,
+          "repetitions": 2000,
+          "seed": 20261022,
+          "caution": "Zero observed errors yield degenerate bootstrap bounds; not evidence of zero population risk.",
+          "false_positive_rate": {
+            "percentile95": [
+              0.004878048780487805,
+              0.05612244897959184
+            ],
+            "valid_draws": 2000
+          },
+          "detection_rate": {
+            "percentile95": [
+              1.0,
+              1.0
+            ],
+            "valid_draws": 2000
+          }
+        },
+        "false_positive_wilson95_descriptive": [
+          0.010724719651761264,
+          0.05717834040664198
+        ]
+      },
+      "noise20": {
+        "summary": {
+          "n": 320,
+          "human": 200,
+          "synthetic": 120,
+          "correct": 309,
+          "false_positive": 10,
+          "false_negative": 1,
+          "accuracy": 0.965625,
+          "accuracy_wilson95": [
+            0.9395043052880933,
+            0.9806990593002495
+          ],
+          "balanced_accuracy": 0.9708333333333333,
+          "roc_auc": 0.99675,
+          "abstained": 38,
+          "decided": 282,
+          "correct_among_decided": 278,
+          "accuracy_among_decided": 0.9858156028368794
+        },
+        "speaker_uncertainty": {
+          "method": "speaker percentile bootstrap",
+          "speakers": 73,
+          "repetitions": 2000,
+          "seed": 20261022,
+          "caution": "Zero observed errors yield degenerate bootstrap bounds; not evidence of zero population risk.",
+          "false_positive_rate": {
+            "percentile95": [
+              0.019321348940914158,
+              0.095
+            ],
+            "valid_draws": 2000
+          },
+          "detection_rate": {
+            "percentile95": [
+              0.9724770642201835,
+              1.0
+            ],
+            "valid_draws": 2000
+          }
+        },
+        "false_positive_wilson95_descriptive": [
+          0.02738264560076393,
+          0.08957814813877599
+        ]
+      }
+    }
+  },
+  "archived_replay": {
+    "rows": 1280,
+    "maximum_score_difference": 0.0,
+    "historical_runtime_seconds_median": 1.2718598544597626,
+    "historical_runtime_seconds_p95": 2.706579241482541,
+    "historical_total_runtime_over_audio_duration": 0.21505621111944362,
+    "peak_memory": null
+  },
+  "development_target_failures": [
+    "noise20: 11/180 real flagged > 5%"
+  ],
+  "eligible_as_locked_test": false,
+  "limitations": [
+    "Published evaluation has been consulted; it is regression evidence, not an untouched test.",
+    "No check proves absence of upstream model-training contamination.",
+    "Byte hashes do not detect perceptual duplicates; normalized text comparison is whitespace/case only.",
+    "Speaker bootstrap captures observed speaker clustering, not unseen domains or generator uncertainty.",
+    "Historical runtime is environment-specific; peak memory was not recorded.",
+    "This command audits v4 fusion development versus evaluation, not every historical dataset.",
+    "No manipulation-localization, multilingual, conversational, or live replay validation is established."
+  ]
+}

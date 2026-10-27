@@ -34,7 +34,7 @@ Preparation seed: `20261019`. Study manifest SHA-256: `52a7481217291d4f3ca515c84
 
 **Path correction:** real-data verification exposed original FLAC that SoundFile could inspect but not fully decode. A pinned FFmpeg fallback was added without rewriting source audio. Fallback output is accepted only when sample count, sample rate, channel count, and embedded original PCM checksum match. **41 candidate recordings** failed strict decoding checks and were excluded during sampling. This is a compatibility/integrity filter, not a human/synthetic or fraud judgment; findings must acknowledge this selection limitation.
 
-The selected 300 study files plus four separate reference examples remain extracted. The verified source archive is cached locally for reproducibility; audio, databases, and exports are excluded from Git. A fresh clone must follow the README's research setup instructions.
+The selected 300 study files plus four separate reference examples remain extracted. The verified source archive is cached locally for reproducibility; audio, databases, and exports are excluded from Git. A fresh clone must follow the [research setup](annotation-workspace.md#research-setup) instructions.
 
 At implementation handoff: **zero personal annotations, zero independent reviewer judgments, and zero authored research case studies**. The software does not fabricate these. The local demo remains separate and explicitly labeled as generated non-speech fixtures.
 

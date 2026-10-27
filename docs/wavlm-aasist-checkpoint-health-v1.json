@@ -1,0 +1,13 @@
+{
+  "schema_version": "research-checkpoint-health-1.0",
+  "repository": "eliya/forensics_0.3B_base_deepfake_classifier",
+  "revision": "cfd11365b02167214dc3b392378809fef6ca3cfa",
+  "checkpoint_sha256": "803d2c57e705395d007b9deaf5b1a110965950f207df223e6dff5b6d298490fb",
+  "tensor_count": 655,
+  "element_count": 317464333,
+  "nonfinite_tensor_names": [],
+  "passes_finite_parameter_gate": true,
+  "torch": "2.14.1",
+  "elapsed_seconds": 2.859522541053593,
+  "scope": "Weight health only, not accuracy."
+}
