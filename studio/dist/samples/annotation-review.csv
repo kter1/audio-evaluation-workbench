@@ -1,0 +1,7 @@
+start,end,kind,status,model_text,reference_text,basis
+0.0,1.16,transcript_difference,review_required,heddy surl,hetty sorrel,Word-sequence comparison against full-source corpus text. Timing is model-estimated; confirm the cropped audio by listening.
+8.94,10.9,transcript_difference,review_required,services,surfaces,Word-sequence comparison against full-source corpus text. Timing is model-estimated; confirm the cropped audio by listening.
+22.5,22.86,transcript_difference,review_required,arranged,ranged,Word-sequence comparison against full-source corpus text. Timing is model-estimated; confirm the cropped audio by listening.
+27.14,27.46,transcript_difference,review_required,hobbes,hobs,Word-sequence comparison against full-source corpus text. Timing is model-estimated; confirm the cropped audio by listening.
+27.66,28.24,transcript_difference,review_required,great,grate,Word-sequence comparison against full-source corpus text. Timing is model-estimated; confirm the cropped audio by listening.
+28.7,28.98,transcript_difference,review_required,shown,shone,Word-sequence comparison against full-source corpus text. Timing is model-estimated; confirm the cropped audio by listening.

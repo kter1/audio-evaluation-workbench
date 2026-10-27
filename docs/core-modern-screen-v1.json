@@ -1,0 +1,2102 @@
+{
+  "schema_version": "core-detector-screen-1.0",
+  "mode": "supplied development authenticity labels",
+  "threshold": 0.20960105988114733,
+  "model": {
+    "repository": "pellav2 + nii-yamagishilab/mms-300m-anti-deepfake",
+    "revision": "fusion 4.0 \u00b7 9bb4517c2c1d",
+    "fusion_sha256": "9bb4517c2c1dd219c2585373b6cf6e874fc466e260eb44e954fac5f0b58296bc",
+    "components": {
+      "pellav2": {
+        "repository": "Sadanie/pellav2-audio-deepfake-detector",
+        "revision": "a4c68a3d4afc7f5d9450c94f5d0652aaa208d40a",
+        "backbone": "facebook/wav2vec2-xls-r-300m",
+        "backbone_revision": "1a640f32ac3e39899438a2931f9924c02f080a54",
+        "files": {
+          "pellav2_detector.pt": {
+            "sha256": "8214705ad784f66bca0736300e3432d5bfc325f1fc211a3aea5f9a13c790b023",
+            "bytes": 1261935478
+          },
+          "pellav2_infer.py": {
+            "sha256": "2ebee7a028a64ed0bf263ec282ad45d8bde84044293394aafb6b0c26fb0f31e6",
+            "bytes": 2665
+          },
+          "config.json": {
+            "sha256": "5a0fe2addbd42f4964d8e4fc4f2c8e70f817db84992094fff926ee1e6933e4a5",
+            "bytes": 24
+          },
+          "xls-r-300m-config.json": {
+            "sha256": "0bffa0d0e98153e883b828d86491f3c6062cb563dc9d7a9cfd1790da30c286ac",
+            "bytes": 1568
+          }
+        }
+      },
+      "antideepfake": {
+        "repository": "nii-yamagishilab/mms-300m-anti-deepfake",
+        "revision": "7928e119e09f616b2ce698892e00ca22dbaa40bf",
+        "files": {
+          "model.safetensors": {
+            "sha256": "9bd5d9785bf72f91dfca8508651354946c4b307921cb358505e1b94035102224",
+            "bytes": 1269622944
+          },
+          "config.json": {
+            "sha256": "be5a16e7bf332832f0a5583357ed37dd67cc4a39abd24832cf6a74a8217b046c",
+            "bytes": 2046
+          },
+          "README.md": {
+            "sha256": "d7139a3c76480f0167f2e768b7af833659541453d7b45f277e3774e98ad1493f",
+            "bytes": 13522
+          }
+        }
+      }
+    }
+  },
+  "case_count": 45,
+  "source_groups": 1,
+  "input_identities": [
+    {
+      "record_id": "voxenes-2026:voxenes-2026/bonafide/english/libri_0164.flac",
+      "identity_tokens": [
+        "analysis-pcm:62ffc2d40b2dbfbf4cd692abb1a31afdc7a4aaa4e7da7b33b54aa5f99b960dbb",
+        "audio:809db901bf0f5772851ff863793a2e0d1b82fa4b188509bbf7696e50ab63690d",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/bonafide/english/libri_0083.flac",
+      "identity_tokens": [
+        "analysis-pcm:58eb3a340a81153ebfb36abda3a574cd879904c6699db4f2d1d23f2a7b272494",
+        "audio:0ea9019d3fad7d48a5c82e914fed045f7b311ed26206d7c3de6a05ab54fa0a0b",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/bonafide/english/libri_0297.flac",
+      "identity_tokens": [
+        "analysis-pcm:73cee8d55e53b25960e0ce7d3f369fa547154a8f2311e6e6c76231cee74d06e5",
+        "audio:d94c410be1f445391a909da41785babc2d10b7029a1efd30055fedc70ee19ea1",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/bonafide/english/libri_1258.flac",
+      "identity_tokens": [
+        "analysis-pcm:5a982c6538c53c6b05007f14899aac22c2930d4b7bfa4aa3400ec327eea00251",
+        "audio:e2ba16490cf1d7ec3e5823b3390f9ea73146eb5df3be21e14b69138485a4bd9f",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/bonafide/english/libri_0698.flac",
+      "identity_tokens": [
+        "analysis-pcm:4a4a33587cbcb1b9457c4aa3a431c51173fa982f9bb16a2ce783cc80c9015b6b",
+        "audio:c86e3911fb04914883b62b57b9e276108d36b0d60d178d4ab8a5ecc2228dc5b6",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/bonafide/english/libri_1328.flac",
+      "identity_tokens": [
+        "analysis-pcm:f4976acb34fff1f22c24d65c871ea5f746d892866428942302b55376f14757a5",
+        "audio:d4488242317c8bd75b2d9564387e35edd319ecaf0d2ec2a65ae33fd6039969b9",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/bonafide/english/libri_0764.flac",
+      "identity_tokens": [
+        "analysis-pcm:5a669aae507aff8bd4b10b9b3b7bfbc7218be96d654c0c9dacd678910480f23e",
+        "audio:a8f2e0323c37a08cf12146aa7ae6e7963b9923909861e2be0751a4bdaf45f3a8",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/bonafide/english/libri_1392.flac",
+      "identity_tokens": [
+        "analysis-pcm:3576da330d1bead2fa64308a4bb35588e9e50b58ae36897d40e91f849e8ded33",
+        "audio:14d5cc2693c841f7e2ec45d0d6834ad6c30d2f699fb599476bcb04e07ac7d569",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/bonafide/english/libri_0529.flac",
+      "identity_tokens": [
+        "analysis-pcm:66ee991f6162f9dd0b0be8147f2f29b884277a4c6d3f5cc507db8f4b2dcbb3f8",
+        "audio:cb7c7bd443820e607cfb0c1a97d43ba0f0c06cc43ea4d357baddab6db9d558f3",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/bonafide/english/libri_0259.flac",
+      "identity_tokens": [
+        "analysis-pcm:01b2854b5137c89f3add02edf5974baffeea9f1da7d5104f98a3ab8e79022cd3",
+        "audio:627ca372d5154c4cc0f9ac20f38ec17bad03aaa403bee4d9fe85f442e1bce437",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/bonafide/english/libri_1098.flac",
+      "identity_tokens": [
+        "analysis-pcm:2f6dde502466725bd4ceb946e9f4369e2aafb8e7d53839a1a58b773f0855a25f",
+        "audio:e1d9a50e220cc7b6c5a6e999b3355f1e583aa49cb9410e2dc826cfa9f5249921",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/bonafide/english/libri_1071.flac",
+      "identity_tokens": [
+        "analysis-pcm:363d5e70ee75ba9949404d5c5596c2d0c55652b40f6b4a966619fb8568813f66",
+        "audio:7d0d3667c707b998c75107b5727bc6db2982f797c4a1a529cd91bce4ec7c5486",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/bonafide/english/libri_1000.flac",
+      "identity_tokens": [
+        "analysis-pcm:b4fef09627520619a953e24c30de77fb7b452d11a5d3a07a009baab6ae92db3e",
+        "audio:6c2ad228539e4bebb9ea18fd46fd406ab5a853e917eb3914a7f864f03cee7166",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/bonafide/english/libri_0263.flac",
+      "identity_tokens": [
+        "analysis-pcm:424e8efadac6c12238a0eb390cf8845f3802d783955c7553c25a314c634c833e",
+        "audio:9038cd08be9b1ce2d561c56cfd0caf95ab5a822ff9888b1badc269dc3be68b6c",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/bonafide/english/libri_1335.flac",
+      "identity_tokens": [
+        "analysis-pcm:0d38144a00e21ce518b9c5ca27acaf6f1da9fb36316117e92f2412956480db35",
+        "audio:2ceef4868d64dc565f8c998a0052a04b92ce65ee91c27a3b0ecb53cbc94a7e84",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/bonafide/english/libri_0250.flac",
+      "identity_tokens": [
+        "analysis-pcm:96b731ae0dc8f1987129553a743836a250117d83366a3f4b73c93c1d1447bf9f",
+        "audio:0fa2d091d94f1fe5d34c900fd1a4e47f9b1200bff6beeb0adc3eeb976d23ebfe",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/bonafide/english/libri_1149.flac",
+      "identity_tokens": [
+        "analysis-pcm:c8e10e35046bc39052388982479f10e18f1a0e45dbea312ffb21b74e85501af0",
+        "audio:dbf428bec37c3035807bfa8bf10249af2070fd15bc54a64a49c713288af20ca2",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/bonafide/english/libri_1417.flac",
+      "identity_tokens": [
+        "analysis-pcm:7cd5af61be5571b0cebd8768a74649deaa2f4ebd3c4c6cd0d32a74ceb75690f3",
+        "audio:4b1f83bf955e8fb035b9086e76eebca3cde41263a06700a016dbaebc59487351",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/bonafide/english/libri_1058.flac",
+      "identity_tokens": [
+        "analysis-pcm:0591689842ea12e829be51d4e83566e0a1c95078e3c9667cb4560c467c19b850",
+        "audio:473b5c9ddea8ff493c2f6d82bb5bb6f6d33aacfc1525a0392d6ca817578f91f3",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/bonafide/english/libri_0077.flac",
+      "identity_tokens": [
+        "analysis-pcm:9ab2fc3ae2287bb0ba025653b7c4aa980663b97501124e94ece5685256c79ee5",
+        "audio:91808d41efd6661ce7206e8d8bbc2433e5d5ed544b0a5c17373b7b5eb7313ebd",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/tts/original/chroma/english/random/random_002.wav",
+      "identity_tokens": [
+        "analysis-pcm:347e89d08e993114958894eff19a287468a1591e99f21cfccbd83d294000eccc",
+        "audio:729119d39f6076a2298b8e2533a3ca2576c56f6d778cdaa8521be615e19eeb81",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/tts/original/chroma/english/random/random_075.wav",
+      "identity_tokens": [
+        "analysis-pcm:99807d7d6bf30a3818a4727cc018a37ce8858f8ddbbf7f8fa8a5078e0c42c118",
+        "audio:dee14a5c0dfa54a9c8b98c832ad64d33407bd5c6af043927e27e06d93dba9a8b",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/tts/original/chroma/english/random/random_099.wav",
+      "identity_tokens": [
+        "analysis-pcm:1bfd459fd98eb65667e3ce429e3216a2dba54272e5f8ef62476825cafc8c43a2",
+        "audio:768b1767213225542024da580ef906fea54c10fa69172061a9705bfd259035a1",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/tts/original/chroma/english/random/random_038.wav",
+      "identity_tokens": [
+        "analysis-pcm:714027db3900fa9ed20b867dedae91fdab497a5e24b4b15ca628111803fb2d5b",
+        "audio:f53d3b07f2468ddaa0bc462535873a1c3e1b4b18923e1c5544432c8036257fa7",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/tts/original/chroma/english/random/random_055.wav",
+      "identity_tokens": [
+        "analysis-pcm:9b31a303183ffc8f52f95e68c757e60a22ad090590a18583fc0bc7dba14a49d9",
+        "audio:ce13d6825cc2a4150d480d04b2d55b1de905362ee5be6bc947191f3ae721e447",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/tts/original/glm_tts/english/random/random_036.wav",
+      "identity_tokens": [
+        "analysis-pcm:6d04ed8ef7986f2c1cf8993be71a2d4e23804be874d49c13c5ca97bce588f390",
+        "audio:38a06ab3c51d5fc4166638740330d7866d34a6a53a42f381cbab7444fe48afb5",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/tts/original/glm_tts/english/random/random_099.wav",
+      "identity_tokens": [
+        "analysis-pcm:705366042d6f3bb075e58ca33d853c5bf390f4bfbdf63fa517ea4a67e79d0512",
+        "audio:b56c6d49f4490c7eb4ed163b87fa23219c478b7441ebcc2924a30957bca2fea8",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/tts/original/glm_tts/english/random/random_016.wav",
+      "identity_tokens": [
+        "analysis-pcm:3fb3b6dd3700f830cd7c5fa2bee6d789e91599a2f738160c347d0fc786883fa4",
+        "audio:44e1cf2f29a8332eb6e476cbe97294564ff5aee45100228b04ee507e92e390db",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/tts/original/glm_tts/english/random/random_066.wav",
+      "identity_tokens": [
+        "analysis-pcm:6dcb54b3a202658a730e4741d2c3c50454cbcf61643ff6b87dc736763ccb0c9f",
+        "audio:682a96ed947b2dd54399eb648f8adf802b602fb1502700725bd17b282ccb987c",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/tts/original/glm_tts/english/random/random_023.wav",
+      "identity_tokens": [
+        "analysis-pcm:dbe8557799693962fc1d8dfa2bfcfce1524552cde9bcba432e7c638d3e951efb",
+        "audio:b8812dc641c29c7943da17bba512dd0e53bf576ce824db5c3d2b827414cd52d2",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/tts/original/qwen3_tts/english/random/random_026.wav",
+      "identity_tokens": [
+        "analysis-pcm:0ec673431cd6f6aebf0b2fff3684e715b13f927160ffab9a800f974b52a9d6d2",
+        "audio:450beef226cfbb628e0e4b2fd372ca33338e00305c675d312ff9f3c055197d01",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/tts/original/qwen3_tts/english/random/random_022.wav",
+      "identity_tokens": [
+        "analysis-pcm:e5ef6867c0cbc9dde1484dc9637f783ad4c96edf749222a461ff2fc97b3dafd7",
+        "audio:97bda7f23164502e39886f18737ada57faa6167214977c891136771332280274",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/tts/original/qwen3_tts/english/fixed/fixed_034.wav",
+      "identity_tokens": [
+        "analysis-pcm:2233bf1329be2b235b4b7707586d22c0a17e7f613dabc23a0a50b31d8c6f084d",
+        "audio:3a916bb3b95319f5e2792d17e3ff23aae3311e182dc232b648db32e95b9474e5",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/tts/original/qwen3_tts/english/random/random_016.wav",
+      "identity_tokens": [
+        "analysis-pcm:927d36e3d35a7d58268c51222ee450cd071b7a390aa65e22e76dc6becf4eaed7",
+        "audio:394a26ac30750f1f9495689b3f54f51c5ae6a5b05f175df3a18b04e572953e57",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/tts/original/qwen3_tts/english/fixed/fixed_005.wav",
+      "identity_tokens": [
+        "analysis-pcm:55fda1077650a1f70bb28dca244846eda46d3033005481193f7bbadfecdd4185",
+        "audio:e3a530a8afdf14418255b8711dbacd193644bf6bdec52a3794da4fd51a2a8876",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/tts/original/vibevoice/english/random/random_085.wav",
+      "identity_tokens": [
+        "analysis-pcm:5b324d85aff69fdcfb58d3f693b0202e97ce357da5fe82c1c66772047188402a",
+        "audio:135b9091c21d38b4c7d5641a3143ab43bc25fa04c4d7b3d056e3e3f792760522",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/tts/original/vibevoice/english/random/random_043.wav",
+      "identity_tokens": [
+        "analysis-pcm:f971409755562c77876417ae1bf7f4e20e65fe6fc1b8766b74ec04f1079bb1b1",
+        "audio:5f81468baf3fc0f9152a4dc32019c9a842114f7cd3da0a6d53524e7c185582ca",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/tts/original/vibevoice/english/random/random_077.wav",
+      "identity_tokens": [
+        "analysis-pcm:18f1a254473c4a90ef2304a74dcfa9de3d23139d5c99e6d3de98e861010c8d37",
+        "audio:6a36472e5cedb464cae553973158e8721fc2f7118752bda765106d4408bb9951",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/tts/original/vibevoice/english/random/random_084.wav",
+      "identity_tokens": [
+        "analysis-pcm:68f38d5333c8d1306aaaa69986f2138b50251701fafefd361780b7343e84a459",
+        "audio:689dceb332bde2f227283845f97d4827232a20d3fe850c92f8997031cdcebf65",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/tts/original/vibevoice/english/fixed/fixed_031.wav",
+      "identity_tokens": [
+        "analysis-pcm:af77b9c317de41676ba67aa259b16524184426fc49b25f9bab8859956a4af88b",
+        "audio:b61b078bcbfbddcc229ecc2357307bd43ac2599cb617cec305a6f3b99f2768ef",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/tts/original/voxcpm/english/random/random_034.wav",
+      "identity_tokens": [
+        "analysis-pcm:7b3e0533fc983863a55f74091c97cf6a0d96347e8d58a1ce7c422f90f5f82a48",
+        "audio:3b8dd84d59520177145b49a23935bcf099b3baca8ddffea4d36a61888299fcae",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/tts/original/voxcpm/english/random/random_100.wav",
+      "identity_tokens": [
+        "analysis-pcm:8f2584b4a1b565ca5373618df1bf3cdef27eb8a55e4f2a53fff662013c9c92d7",
+        "audio:a743566ef086edaca9ebbd7de9c4d15b05fb39e14c45cb9d0b48dce18ffad40c",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/tts/original/voxcpm/english/fixed/fixed_031.wav",
+      "identity_tokens": [
+        "analysis-pcm:d24775422827b34d02ff5c52a27510572ae7ba424dca1fb1b570c28fd77acd2d",
+        "audio:b978b481e0a739c92bcf08414d95295cd575355a7f46f5446f1f0f9379713738",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/tts/original/voxcpm/english/fixed/fixed_081.wav",
+      "identity_tokens": [
+        "analysis-pcm:adff6c4afa2031c6d58d8c0547fa35b2db2ecbc0c7ccf56a665776c71f8dd9c3",
+        "audio:9eafa7276ff30a65d8856bbd80fb0f2d9bd437341f4fad895bb1f7f50ec51382",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    },
+    {
+      "record_id": "voxenes-2026:voxenes-2026/tts/original/voxcpm/english/fixed/fixed_008.wav",
+      "identity_tokens": [
+        "analysis-pcm:4b280636a73122f5ec9efe51b4199ef886804e26a6f0a0e04f53a223ac0ce1c8",
+        "audio:b56f0a06e5dd46e71085df5009b2c953bcd29a623cf1251b4ab7ec8655e399c7",
+        "voxenes-2026:unresolved-source-speaker-identities"
+      ]
+    }
+  ],
+  "results": [
+    {
+      "id": "voxenes-2026:voxenes-2026/bonafide/english/libri_0164.flac",
+      "label": "human",
+      "group": "human",
+      "source": {
+        "format": "FLAC",
+        "subtype": "PCM_16",
+        "original_rate": 16000,
+        "channels": 1,
+        "frames": 88880,
+        "duration_seconds": 5.555,
+        "bytes": 111314,
+        "sha256": "809db901bf0f5772851ff863793a2e0d1b82fa4b188509bbf7696e50ab63690d"
+      },
+      "crop_start_sample_16k": 12440,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "62ffc2d40b2dbfbf4cd692abb1a31afdc7a4aaa4e7da7b33b54aa5f99b960dbb",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.0004342713931427862,
+      "components": {
+        "pellav2": 0.000280687992926687,
+        "antideepfake": 0.00041438147771670996
+      },
+      "assessment": {
+        "synthetic_score": 0.0004342713931427862,
+        "binary_model_decision": "human",
+        "assessment": "Human speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.0004342713931427862,
+        "window_max": 0.0004342713931427862,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/bonafide/english/libri_0083.flac",
+      "label": "human",
+      "group": "human",
+      "source": {
+        "format": "FLAC",
+        "subtype": "PCM_16",
+        "original_rate": 16000,
+        "channels": 1,
+        "frames": 76400,
+        "duration_seconds": 4.775,
+        "bytes": 77225,
+        "sha256": "0ea9019d3fad7d48a5c82e914fed045f7b311ed26206d7c3de6a05ab54fa0a0b"
+      },
+      "crop_start_sample_16k": 6200,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "58eb3a340a81153ebfb36abda3a574cd879904c6699db4f2d1d23f2a7b272494",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.0004894205582895337,
+      "components": {
+        "pellav2": 0.0003667849814519286,
+        "antideepfake": 0.00043134008016603516
+      },
+      "assessment": {
+        "synthetic_score": 0.0004894205582895337,
+        "binary_model_decision": "human",
+        "assessment": "Human speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.0004894205582895337,
+        "window_max": 0.0004894205582895337,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/bonafide/english/libri_0297.flac",
+      "label": "human",
+      "group": "human",
+      "source": {
+        "format": "FLAC",
+        "subtype": "PCM_16",
+        "original_rate": 16000,
+        "channels": 1,
+        "frames": 197920,
+        "duration_seconds": 12.37,
+        "bytes": 219556,
+        "sha256": "d94c410be1f445391a909da41785babc2d10b7029a1efd30055fedc70ee19ea1"
+      },
+      "crop_start_sample_16k": 66960,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "73cee8d55e53b25960e0ce7d3f369fa547154a8f2311e6e6c76231cee74d06e5",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.0024621771626072795,
+      "components": {
+        "pellav2": 0.050897497683763504,
+        "antideepfake": 0.0004738339948963649
+      },
+      "assessment": {
+        "synthetic_score": 0.0024621771626072795,
+        "binary_model_decision": "human",
+        "assessment": "Human speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.0024621771626072795,
+        "window_max": 0.0024621771626072795,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/bonafide/english/libri_1258.flac",
+      "label": "human",
+      "group": "human",
+      "source": {
+        "format": "FLAC",
+        "subtype": "PCM_16",
+        "original_rate": 16000,
+        "channels": 1,
+        "frames": 51200,
+        "duration_seconds": 3.2,
+        "bytes": 64161,
+        "sha256": "e2ba16490cf1d7ec3e5823b3390f9ea73146eb5df3be21e14b69138485a4bd9f"
+      },
+      "crop_start_sample_16k": 0,
+      "crop_samples": 51200,
+      "analysis_samples_sha256": "5a982c6538c53c6b05007f14899aac22c2930d4b7bfa4aa3400ec327eea00251",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 5.2882657810317644e-05,
+      "components": {
+        "pellav2": 4.0728170347392734e-07,
+        "antideepfake": 0.0003722455286672307
+      },
+      "assessment": {
+        "synthetic_score": 5.2882657810317644e-05,
+        "binary_model_decision": "human",
+        "assessment": "Human speech indicated",
+        "abstention_reasons": [],
+        "window_min": 5.2882657810317644e-05,
+        "window_max": 5.2882657810317644e-05,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/bonafide/english/libri_0698.flac",
+      "label": "human",
+      "group": "human",
+      "source": {
+        "format": "FLAC",
+        "subtype": "PCM_16",
+        "original_rate": 16000,
+        "channels": 1,
+        "frames": 64640,
+        "duration_seconds": 4.04,
+        "bytes": 71260,
+        "sha256": "c86e3911fb04914883b62b57b9e276108d36b0d60d178d4ab8a5ecc2228dc5b6"
+      },
+      "crop_start_sample_16k": 320,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "4a4a33587cbcb1b9457c4aa3a431c51173fa982f9bb16a2ce783cc80c9015b6b",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.0003414202128292875,
+      "components": {
+        "pellav2": 0.00013014234718866646,
+        "antideepfake": 0.00041229353609632715
+      },
+      "assessment": {
+        "synthetic_score": 0.0003414202128292875,
+        "binary_model_decision": "human",
+        "assessment": "Human speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.0003414202128292875,
+        "window_max": 0.0003414202128292875,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/bonafide/english/libri_1328.flac",
+      "label": "human",
+      "group": "human",
+      "source": {
+        "format": "FLAC",
+        "subtype": "PCM_16",
+        "original_rate": 16000,
+        "channels": 1,
+        "frames": 89440,
+        "duration_seconds": 5.59,
+        "bytes": 98950,
+        "sha256": "d4488242317c8bd75b2d9564387e35edd319ecaf0d2ec2a65ae33fd6039969b9"
+      },
+      "crop_start_sample_16k": 12720,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "f4976acb34fff1f22c24d65c871ea5f746d892866428942302b55376f14757a5",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.00034521939719092833,
+      "components": {
+        "pellav2": 7.848772656871006e-05,
+        "antideepfake": 0.0004925946717216027
+      },
+      "assessment": {
+        "synthetic_score": 0.00034521939719092833,
+        "binary_model_decision": "human",
+        "assessment": "Human speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.00034521939719092833,
+        "window_max": 0.00034521939719092833,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/bonafide/english/libri_0764.flac",
+      "label": "human",
+      "group": "human",
+      "source": {
+        "format": "FLAC",
+        "subtype": "PCM_16",
+        "original_rate": 16000,
+        "channels": 1,
+        "frames": 39040,
+        "duration_seconds": 2.44,
+        "bytes": 40345,
+        "sha256": "a8f2e0323c37a08cf12146aa7ae6e7963b9923909861e2be0751a4bdaf45f3a8"
+      },
+      "crop_start_sample_16k": 0,
+      "crop_samples": 39040,
+      "analysis_samples_sha256": "5a669aae507aff8bd4b10b9b3b7bfbc7218be96d654c0c9dacd678910480f23e",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.004358056154802595,
+      "components": {
+        "pellav2": 6.761628901585937e-05,
+        "antideepfake": 0.007789258138884334
+      },
+      "assessment": {
+        "synthetic_score": 0.004358056154802595,
+        "binary_model_decision": "human",
+        "assessment": "Inconclusive",
+        "abstention_reasons": [
+          "Input is shorter than 2.5 seconds."
+        ],
+        "window_min": 0.004358056154802595,
+        "window_max": 0.004358056154802595,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/bonafide/english/libri_1392.flac",
+      "label": "human",
+      "group": "human",
+      "source": {
+        "format": "FLAC",
+        "subtype": "PCM_16",
+        "original_rate": 16000,
+        "channels": 1,
+        "frames": 57200,
+        "duration_seconds": 3.575,
+        "bytes": 68773,
+        "sha256": "14d5cc2693c841f7e2ec45d0d6834ad6c30d2f699fb599476bcb04e07ac7d569"
+      },
+      "crop_start_sample_16k": 0,
+      "crop_samples": 57200,
+      "analysis_samples_sha256": "3576da330d1bead2fa64308a4bb35588e9e50b58ae36897d40e91f849e8ded33",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.0003288585953087554,
+      "components": {
+        "pellav2": 2.3266733478521928e-05,
+        "antideepfake": 0.0006971724783969545
+      },
+      "assessment": {
+        "synthetic_score": 0.0003288585953087554,
+        "binary_model_decision": "human",
+        "assessment": "Human speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.0003288585953087554,
+        "window_max": 0.0003288585953087554,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/bonafide/english/libri_0529.flac",
+      "label": "human",
+      "group": "human",
+      "source": {
+        "format": "FLAC",
+        "subtype": "PCM_16",
+        "original_rate": 16000,
+        "channels": 1,
+        "frames": 120160,
+        "duration_seconds": 7.51,
+        "bytes": 154962,
+        "sha256": "cb7c7bd443820e607cfb0c1a97d43ba0f0c06cc43ea4d357baddab6db9d558f3"
+      },
+      "crop_start_sample_16k": 28080,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "66ee991f6162f9dd0b0be8147f2f29b884277a4c6d3f5cc507db8f4b2dcbb3f8",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.00023214188408392247,
+      "components": {
+        "pellav2": 2.72785073320847e-05,
+        "antideepfake": 0.00045577576990758463
+      },
+      "assessment": {
+        "synthetic_score": 0.00023214188408392247,
+        "binary_model_decision": "human",
+        "assessment": "Human speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.00023214188408392247,
+        "window_max": 0.00023214188408392247,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/bonafide/english/libri_0259.flac",
+      "label": "human",
+      "group": "human",
+      "source": {
+        "format": "FLAC",
+        "subtype": "PCM_16",
+        "original_rate": 16000,
+        "channels": 1,
+        "frames": 37040,
+        "duration_seconds": 2.315,
+        "bytes": 51170,
+        "sha256": "627ca372d5154c4cc0f9ac20f38ec17bad03aaa403bee4d9fe85f442e1bce437"
+      },
+      "crop_start_sample_16k": 0,
+      "crop_samples": 37040,
+      "analysis_samples_sha256": "01b2854b5137c89f3add02edf5974baffeea9f1da7d5104f98a3ab8e79022cd3",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.00039295868941080844,
+      "components": {
+        "pellav2": 0.00027635463629849255,
+        "antideepfake": 0.0003742279385591068
+      },
+      "assessment": {
+        "synthetic_score": 0.00039295868941080844,
+        "binary_model_decision": "human",
+        "assessment": "Inconclusive",
+        "abstention_reasons": [
+          "Input is shorter than 2.5 seconds."
+        ],
+        "window_min": 0.00039295868941080844,
+        "window_max": 0.00039295868941080844,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/bonafide/english/libri_1098.flac",
+      "label": "human",
+      "group": "human",
+      "source": {
+        "format": "FLAC",
+        "subtype": "PCM_16",
+        "original_rate": 16000,
+        "channels": 1,
+        "frames": 37040,
+        "duration_seconds": 2.315,
+        "bytes": 38738,
+        "sha256": "e1d9a50e220cc7b6c5a6e999b3355f1e583aa49cb9410e2dc826cfa9f5249921"
+      },
+      "crop_start_sample_16k": 0,
+      "crop_samples": 37040,
+      "analysis_samples_sha256": "2f6dde502466725bd4ceb946e9f4369e2aafb8e7d53839a1a58b773f0855a25f",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.12018674876768759,
+      "components": {
+        "pellav2": 0.7543445825576782,
+        "antideepfake": 0.009131270234613381
+      },
+      "assessment": {
+        "synthetic_score": 0.12018674876768759,
+        "binary_model_decision": "human",
+        "assessment": "Inconclusive",
+        "abstention_reasons": [
+          "Input is shorter than 2.5 seconds.",
+          "Aggregate score falls in the abstention interval."
+        ],
+        "window_min": 0.12018674876768759,
+        "window_max": 0.12018674876768759,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": [
+        "Below the lab's 2.5-second minimum-context policy."
+      ]
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/bonafide/english/libri_1071.flac",
+      "label": "human",
+      "group": "human",
+      "source": {
+        "format": "FLAC",
+        "subtype": "PCM_16",
+        "original_rate": 16000,
+        "channels": 1,
+        "frames": 266800,
+        "duration_seconds": 16.675,
+        "bytes": 271145,
+        "sha256": "7d0d3667c707b998c75107b5727bc6db2982f797c4a1a529cd91bce4ec7c5486"
+      },
+      "crop_start_sample_16k": 101400,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "363d5e70ee75ba9949404d5c5596c2d0c55652b40f6b4a966619fb8568813f66",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.00021947805523627392,
+      "components": {
+        "pellav2": 1.753879951138515e-05,
+        "antideepfake": 0.0004962201396691425
+      },
+      "assessment": {
+        "synthetic_score": 0.00021947805523627392,
+        "binary_model_decision": "human",
+        "assessment": "Human speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.00021947805523627392,
+        "window_max": 0.00021947805523627392,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/bonafide/english/libri_1000.flac",
+      "label": "human",
+      "group": "human",
+      "source": {
+        "format": "FLAC",
+        "subtype": "PCM_16",
+        "original_rate": 16000,
+        "channels": 1,
+        "frames": 296960,
+        "duration_seconds": 18.56,
+        "bytes": 334994,
+        "sha256": "6c2ad228539e4bebb9ea18fd46fd406ab5a853e917eb3914a7f864f03cee7166"
+      },
+      "crop_start_sample_16k": 116480,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "b4fef09627520619a953e24c30de77fb7b452d11a5d3a07a009baab6ae92db3e",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.0007885393510522079,
+      "components": {
+        "pellav2": 0.0007030002889223397,
+        "antideepfake": 0.0005804832974031739
+      },
+      "assessment": {
+        "synthetic_score": 0.0007885393510522079,
+        "binary_model_decision": "human",
+        "assessment": "Human speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.0007885393510522079,
+        "window_max": 0.0007885393510522079,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/bonafide/english/libri_0263.flac",
+      "label": "human",
+      "group": "human",
+      "source": {
+        "format": "FLAC",
+        "subtype": "PCM_16",
+        "original_rate": 16000,
+        "channels": 1,
+        "frames": 223360,
+        "duration_seconds": 13.96,
+        "bytes": 267887,
+        "sha256": "9038cd08be9b1ce2d561c56cfd0caf95ab5a822ff9888b1badc269dc3be68b6c"
+      },
+      "crop_start_sample_16k": 79680,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "424e8efadac6c12238a0eb390cf8845f3802d783955c7553c25a314c634c833e",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.08564218824093134,
+      "components": {
+        "pellav2": 0.0013342819875106215,
+        "antideepfake": 0.07258183231871669
+      },
+      "assessment": {
+        "synthetic_score": 0.08564218824093134,
+        "binary_model_decision": "human",
+        "assessment": "Inconclusive",
+        "abstention_reasons": [
+          "Aggregate score falls in the abstention interval."
+        ],
+        "window_min": 0.08564218824093134,
+        "window_max": 0.08564218824093134,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/bonafide/english/libri_1335.flac",
+      "label": "human",
+      "group": "human",
+      "source": {
+        "format": "FLAC",
+        "subtype": "PCM_16",
+        "original_rate": 16000,
+        "channels": 1,
+        "frames": 59600,
+        "duration_seconds": 3.725,
+        "bytes": 68557,
+        "sha256": "2ceef4868d64dc565f8c998a0052a04b92ce65ee91c27a3b0ecb53cbc94a7e84"
+      },
+      "crop_start_sample_16k": 0,
+      "crop_samples": 59600,
+      "analysis_samples_sha256": "0d38144a00e21ce518b9c5ca27acaf6f1da9fb36316117e92f2412956480db35",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.00038738437552408573,
+      "components": {
+        "pellav2": 8.200787851819769e-05,
+        "antideepfake": 0.0005492980054931037
+      },
+      "assessment": {
+        "synthetic_score": 0.00038738437552408573,
+        "binary_model_decision": "human",
+        "assessment": "Human speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.00038738437552408573,
+        "window_max": 0.00038738437552408573,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/bonafide/english/libri_0250.flac",
+      "label": "human",
+      "group": "human",
+      "source": {
+        "format": "FLAC",
+        "subtype": "PCM_16",
+        "original_rate": 16000,
+        "channels": 1,
+        "frames": 136160,
+        "duration_seconds": 8.51,
+        "bytes": 158081,
+        "sha256": "0fa2d091d94f1fe5d34c900fd1a4e47f9b1200bff6beeb0adc3eeb976d23ebfe"
+      },
+      "crop_start_sample_16k": 36080,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "96b731ae0dc8f1987129553a743836a250117d83366a3f4b73c93c1d1447bf9f",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.0008948438782492193,
+      "components": {
+        "pellav2": 0.001419119886122644,
+        "antideepfake": 0.00052762624974312
+      },
+      "assessment": {
+        "synthetic_score": 0.0008948438782492193,
+        "binary_model_decision": "human",
+        "assessment": "Human speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.0008948438782492193,
+        "window_max": 0.0008948438782492193,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/bonafide/english/libri_1149.flac",
+      "label": "human",
+      "group": "human",
+      "source": {
+        "format": "FLAC",
+        "subtype": "PCM_16",
+        "original_rate": 16000,
+        "channels": 1,
+        "frames": 44560,
+        "duration_seconds": 2.785,
+        "bytes": 49404,
+        "sha256": "dbf428bec37c3035807bfa8bf10249af2070fd15bc54a64a49c713288af20ca2"
+      },
+      "crop_start_sample_16k": 0,
+      "crop_samples": 44560,
+      "analysis_samples_sha256": "c8e10e35046bc39052388982479f10e18f1a0e45dbea312ffb21b74e85501af0",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.001365738494061572,
+      "components": {
+        "pellav2": 0.0030155142303556204,
+        "antideepfake": 0.0006475972714966322
+      },
+      "assessment": {
+        "synthetic_score": 0.001365738494061572,
+        "binary_model_decision": "human",
+        "assessment": "Human speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.001365738494061572,
+        "window_max": 0.001365738494061572,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/bonafide/english/libri_1417.flac",
+      "label": "human",
+      "group": "human",
+      "source": {
+        "format": "FLAC",
+        "subtype": "PCM_16",
+        "original_rate": 16000,
+        "channels": 1,
+        "frames": 85281,
+        "duration_seconds": 5.3300625,
+        "bytes": 95705,
+        "sha256": "4b1f83bf955e8fb035b9086e76eebca3cde41263a06700a016dbaebc59487351"
+      },
+      "crop_start_sample_16k": 10640,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "7cd5af61be5571b0cebd8768a74649deaa2f4ebd3c4c6cd0d32a74ceb75690f3",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.0007158581750537383,
+      "components": {
+        "pellav2": 0.0019299339037388563,
+        "antideepfake": 0.0003754833296584701
+      },
+      "assessment": {
+        "synthetic_score": 0.0007158581750537383,
+        "binary_model_decision": "human",
+        "assessment": "Human speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.0007158581750537383,
+        "window_max": 0.0007158581750537383,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/bonafide/english/libri_1058.flac",
+      "label": "human",
+      "group": "human",
+      "source": {
+        "format": "FLAC",
+        "subtype": "PCM_16",
+        "original_rate": 16000,
+        "channels": 1,
+        "frames": 53520,
+        "duration_seconds": 3.345,
+        "bytes": 68605,
+        "sha256": "473b5c9ddea8ff493c2f6d82bb5bb6f6d33aacfc1525a0392d6ca817578f91f3"
+      },
+      "crop_start_sample_16k": 0,
+      "crop_samples": 53520,
+      "analysis_samples_sha256": "0591689842ea12e829be51d4e83566e0a1c95078e3c9667cb4560c467c19b850",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.0004600793685936442,
+      "components": {
+        "pellav2": 0.00020984586444683373,
+        "antideepfake": 0.00048500231553786255
+      },
+      "assessment": {
+        "synthetic_score": 0.0004600793685936442,
+        "binary_model_decision": "human",
+        "assessment": "Human speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.0004600793685936442,
+        "window_max": 0.0004600793685936442,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/bonafide/english/libri_0077.flac",
+      "label": "human",
+      "group": "human",
+      "source": {
+        "format": "FLAC",
+        "subtype": "PCM_16",
+        "original_rate": 16000,
+        "channels": 1,
+        "frames": 126640,
+        "duration_seconds": 7.915,
+        "bytes": 168961,
+        "sha256": "91808d41efd6661ce7206e8d8bbc2433e5d5ed544b0a5c17373b7b5eb7313ebd"
+      },
+      "crop_start_sample_16k": 31320,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "9ab2fc3ae2287bb0ba025653b7c4aa980663b97501124e94ece5685256c79ee5",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.0004513244556622232,
+      "components": {
+        "pellav2": 0.00028517053578980267,
+        "antideepfake": 0.000429586063481901
+      },
+      "assessment": {
+        "synthetic_score": 0.0004513244556622232,
+        "binary_model_decision": "human",
+        "assessment": "Human speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.0004513244556622232,
+        "window_max": 0.0004513244556622232,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/chroma/english/random/random_002.wav",
+      "label": "synthetic",
+      "group": "chroma",
+      "source": {
+        "format": "WAV",
+        "subtype": "PCM_16",
+        "original_rate": 24000,
+        "channels": 1,
+        "frames": 111360,
+        "duration_seconds": 4.64,
+        "bytes": 222764,
+        "sha256": "729119d39f6076a2298b8e2533a3ca2576c56f6d778cdaa8521be615e19eeb81"
+      },
+      "crop_start_sample_16k": 5120,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "347e89d08e993114958894eff19a287468a1591e99f21cfccbd83d294000eccc",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.9999986248815074,
+      "components": {
+        "pellav2": 1.0,
+        "antideepfake": 0.9986950509657245
+      },
+      "assessment": {
+        "synthetic_score": 0.9999986248815074,
+        "binary_model_decision": "synthetic",
+        "assessment": "Synthetic speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.9999986248815074,
+        "window_max": 0.9999986248815074,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/chroma/english/random/random_075.wav",
+      "label": "synthetic",
+      "group": "chroma",
+      "source": {
+        "format": "WAV",
+        "subtype": "PCM_16",
+        "original_rate": 24000,
+        "channels": 1,
+        "frames": 960000,
+        "duration_seconds": 40.0,
+        "bytes": 1920044,
+        "sha256": "dee14a5c0dfa54a9c8b98c832ad64d33407bd5c6af043927e27e06d93dba9a8b"
+      },
+      "crop_start_sample_16k": 288000,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "99807d7d6bf30a3818a4727cc018a37ce8858f8ddbbf7f8fa8a5078e0c42c118",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.6659269489630318,
+      "components": {
+        "pellav2": 0.9981313347816467,
+        "antideepfake": 0.028972485787925852
+      },
+      "assessment": {
+        "synthetic_score": 0.6659269489630318,
+        "binary_model_decision": "synthetic",
+        "assessment": "Inconclusive",
+        "abstention_reasons": [
+          "Too little active signal."
+        ],
+        "window_min": 0.6659269489630318,
+        "window_max": 0.6659269489630318,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": [
+        "Insufficient active signal; origin inference is inconclusive."
+      ]
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/chroma/english/random/random_099.wav",
+      "label": "synthetic",
+      "group": "chroma",
+      "source": {
+        "format": "WAV",
+        "subtype": "PCM_16",
+        "original_rate": 24000,
+        "channels": 1,
+        "frames": 115200,
+        "duration_seconds": 4.8,
+        "bytes": 230444,
+        "sha256": "768b1767213225542024da580ef906fea54c10fa69172061a9705bfd259035a1"
+      },
+      "crop_start_sample_16k": 6400,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "1bfd459fd98eb65667e3ce429e3216a2dba54272e5f8ef62476825cafc8c43a2",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.9999967726152087,
+      "components": {
+        "pellav2": 0.9999995231628418,
+        "antideepfake": 0.9986199371273534
+      },
+      "assessment": {
+        "synthetic_score": 0.9999967726152087,
+        "binary_model_decision": "synthetic",
+        "assessment": "Synthetic speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.9999967726152087,
+        "window_max": 0.9999967726152087,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/chroma/english/random/random_038.wav",
+      "label": "synthetic",
+      "group": "chroma",
+      "source": {
+        "format": "WAV",
+        "subtype": "PCM_16",
+        "original_rate": 24000,
+        "channels": 1,
+        "frames": 134400,
+        "duration_seconds": 5.6,
+        "bytes": 268844,
+        "sha256": "f53d3b07f2468ddaa0bc462535873a1c3e1b4b18923e1c5544432c8036257fa7"
+      },
+      "crop_start_sample_16k": 12800,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "714027db3900fa9ed20b867dedae91fdab497a5e24b4b15ca628111803fb2d5b",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.9999974794374428,
+      "components": {
+        "pellav2": 0.9999995231628418,
+        "antideepfake": 0.9988848895633378
+      },
+      "assessment": {
+        "synthetic_score": 0.9999974794374428,
+        "binary_model_decision": "synthetic",
+        "assessment": "Synthetic speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.9999974794374428,
+        "window_max": 0.9999974794374428,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/chroma/english/random/random_055.wav",
+      "label": "synthetic",
+      "group": "chroma",
+      "source": {
+        "format": "WAV",
+        "subtype": "PCM_16",
+        "original_rate": 24000,
+        "channels": 1,
+        "frames": 103680,
+        "duration_seconds": 4.32,
+        "bytes": 207404,
+        "sha256": "ce13d6825cc2a4150d480d04b2d55b1de905362ee5be6bc947191f3ae721e447"
+      },
+      "crop_start_sample_16k": 2560,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "9b31a303183ffc8f52f95e68c757e60a22ad090590a18583fc0bc7dba14a49d9",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.9999994259130259,
+      "components": {
+        "pellav2": 1.0,
+        "antideepfake": 0.9988670603613351
+      },
+      "assessment": {
+        "synthetic_score": 0.9999994259130259,
+        "binary_model_decision": "synthetic",
+        "assessment": "Synthetic speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.9999994259130259,
+        "window_max": 0.9999994259130259,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/glm_tts/english/random/random_036.wav",
+      "label": "synthetic",
+      "group": "glm_tts",
+      "source": {
+        "format": "WAV",
+        "subtype": "FLOAT",
+        "original_rate": 24000,
+        "channels": 1,
+        "frames": 114240,
+        "duration_seconds": 4.76,
+        "bytes": 457040,
+        "sha256": "38a06ab3c51d5fc4166638740330d7866d34a6a53a42f381cbab7444fe48afb5"
+      },
+      "crop_start_sample_16k": 6080,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "6d04ed8ef7986f2c1cf8993be71a2d4e23804be874d49c13c5ca97bce588f390",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.9999871464381053,
+      "components": {
+        "pellav2": 0.9999769926071167,
+        "antideepfake": 0.9982782468866322
+      },
+      "assessment": {
+        "synthetic_score": 0.9999871464381053,
+        "binary_model_decision": "synthetic",
+        "assessment": "Synthetic speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.9999871464381053,
+        "window_max": 0.9999871464381053,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/glm_tts/english/random/random_099.wav",
+      "label": "synthetic",
+      "group": "glm_tts",
+      "source": {
+        "format": "WAV",
+        "subtype": "FLOAT",
+        "original_rate": 24000,
+        "channels": 1,
+        "frames": 149760,
+        "duration_seconds": 6.24,
+        "bytes": 599120,
+        "sha256": "b56c6d49f4490c7eb4ed163b87fa23219c478b7441ebcc2924a30957bca2fea8"
+      },
+      "crop_start_sample_16k": 17920,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "705366042d6f3bb075e58ca33d853c5bf390f4bfbdf63fa517ea4a67e79d0512",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.9998856189858767,
+      "components": {
+        "pellav2": 0.9997263550758362,
+        "antideepfake": 0.9921158930872014
+      },
+      "assessment": {
+        "synthetic_score": 0.9998856189858767,
+        "binary_model_decision": "synthetic",
+        "assessment": "Synthetic speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.9998856189858767,
+        "window_max": 0.9998856189858767,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/glm_tts/english/random/random_016.wav",
+      "label": "synthetic",
+      "group": "glm_tts",
+      "source": {
+        "format": "WAV",
+        "subtype": "FLOAT",
+        "original_rate": 24000,
+        "channels": 1,
+        "frames": 156000,
+        "duration_seconds": 6.5,
+        "bytes": 624080,
+        "sha256": "44e1cf2f29a8332eb6e476cbe97294564ff5aee45100228b04ee507e92e390db"
+      },
+      "crop_start_sample_16k": 20000,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "3fb3b6dd3700f830cd7c5fa2bee6d789e91599a2f738160c347d0fc786883fa4",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.9953043771214085,
+      "components": {
+        "pellav2": 0.9980746507644653,
+        "antideepfake": 0.8167240701379999
+      },
+      "assessment": {
+        "synthetic_score": 0.9953043771214085,
+        "binary_model_decision": "synthetic",
+        "assessment": "Synthetic speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.9953043771214085,
+        "window_max": 0.9953043771214085,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/glm_tts/english/random/random_066.wav",
+      "label": "synthetic",
+      "group": "glm_tts",
+      "source": {
+        "format": "WAV",
+        "subtype": "FLOAT",
+        "original_rate": 24000,
+        "channels": 1,
+        "frames": 170880,
+        "duration_seconds": 7.12,
+        "bytes": 683600,
+        "sha256": "682a96ed947b2dd54399eb648f8adf802b602fb1502700725bd17b282ccb987c"
+      },
+      "crop_start_sample_16k": 24960,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "6dcb54b3a202658a730e4741d2c3c50454cbcf61643ff6b87dc736763ccb0c9f",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.9997902930536784,
+      "components": {
+        "pellav2": 0.998219907283783,
+        "antideepfake": 0.9918513509547819
+      },
+      "assessment": {
+        "synthetic_score": 0.9997902930536784,
+        "binary_model_decision": "synthetic",
+        "assessment": "Synthetic speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.9997902930536784,
+        "window_max": 0.9997902930536784,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/glm_tts/english/random/random_023.wav",
+      "label": "synthetic",
+      "group": "glm_tts",
+      "source": {
+        "format": "WAV",
+        "subtype": "FLOAT",
+        "original_rate": 24000,
+        "channels": 1,
+        "frames": 94080,
+        "duration_seconds": 3.92,
+        "bytes": 376400,
+        "sha256": "b8812dc641c29c7943da17bba512dd0e53bf576ce824db5c3d2b827414cd52d2"
+      },
+      "crop_start_sample_16k": 0,
+      "crop_samples": 62720,
+      "analysis_samples_sha256": "dbe8557799693962fc1d8dfa2bfcfce1524552cde9bcba432e7c638d3e951efb",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.9990611408811856,
+      "components": {
+        "pellav2": 0.9946392178535461,
+        "antideepfake": 0.9723329114495853
+      },
+      "assessment": {
+        "synthetic_score": 0.9990611408811856,
+        "binary_model_decision": "synthetic",
+        "assessment": "Synthetic speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.9990611408811856,
+        "window_max": 0.9990611408811856,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/qwen3_tts/english/random/random_026.wav",
+      "label": "synthetic",
+      "group": "qwen3_tts",
+      "source": {
+        "format": "WAV",
+        "subtype": "PCM_16",
+        "original_rate": 24000,
+        "channels": 1,
+        "frames": 114645,
+        "duration_seconds": 4.776875,
+        "bytes": 229334,
+        "sha256": "450beef226cfbb628e0e4b2fd372ca33338e00305c675d312ff9f3c055197d01"
+      },
+      "crop_start_sample_16k": 6215,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "0ec673431cd6f6aebf0b2fff3684e715b13f927160ffab9a800f974b52a9d6d2",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.3042402184724638,
+      "components": {
+        "pellav2": 0.989547610282898,
+        "antideepfake": 0.01027496713115474
+      },
+      "assessment": {
+        "synthetic_score": 0.3042402184724638,
+        "binary_model_decision": "synthetic",
+        "assessment": "Inconclusive",
+        "abstention_reasons": [
+          "Aggregate score falls in the abstention interval."
+        ],
+        "window_min": 0.3042402184724638,
+        "window_max": 0.3042402184724638,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/qwen3_tts/english/random/random_022.wav",
+      "label": "synthetic",
+      "group": "qwen3_tts",
+      "source": {
+        "format": "WAV",
+        "subtype": "PCM_16",
+        "original_rate": 24000,
+        "channels": 1,
+        "frames": 116565,
+        "duration_seconds": 4.856875,
+        "bytes": 233174,
+        "sha256": "97bda7f23164502e39886f18737ada57faa6167214977c891136771332280274"
+      },
+      "crop_start_sample_16k": 6855,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "e5ef6867c0cbc9dde1484dc9637f783ad4c96edf749222a461ff2fc97b3dafd7",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.8245144151300178,
+      "components": {
+        "pellav2": 0.9999961853027344,
+        "antideepfake": 0.009645205666300987
+      },
+      "assessment": {
+        "synthetic_score": 0.8245144151300178,
+        "binary_model_decision": "synthetic",
+        "assessment": "Synthetic speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.8245144151300178,
+        "window_max": 0.8245144151300178,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/qwen3_tts/english/fixed/fixed_034.wav",
+      "label": "synthetic",
+      "group": "qwen3_tts",
+      "source": {
+        "format": "WAV",
+        "subtype": "PCM_16",
+        "original_rate": 24000,
+        "channels": 1,
+        "frames": 122325,
+        "duration_seconds": 5.096875,
+        "bytes": 244694,
+        "sha256": "3a916bb3b95319f5e2792d17e3ff23aae3311e182dc232b648db32e95b9474e5"
+      },
+      "crop_start_sample_16k": 8775,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "2233bf1329be2b235b4b7707586d22c0a17e7f613dabc23a0a50b31d8c6f084d",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.9998860805688377,
+      "components": {
+        "pellav2": 1.0,
+        "antideepfake": 0.8872095563287
+      },
+      "assessment": {
+        "synthetic_score": 0.9998860805688377,
+        "binary_model_decision": "synthetic",
+        "assessment": "Synthetic speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.9998860805688377,
+        "window_max": 0.9998860805688377,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/qwen3_tts/english/random/random_016.wav",
+      "label": "synthetic",
+      "group": "qwen3_tts",
+      "source": {
+        "format": "WAV",
+        "subtype": "PCM_16",
+        "original_rate": 24000,
+        "channels": 1,
+        "frames": 122325,
+        "duration_seconds": 5.096875,
+        "bytes": 244694,
+        "sha256": "394a26ac30750f1f9495689b3f54f51c5ae6a5b05f175df3a18b04e572953e57"
+      },
+      "crop_start_sample_16k": 8775,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "927d36e3d35a7d58268c51222ee450cd071b7a390aa65e22e76dc6becf4eaed7",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.9910049981724539,
+      "components": {
+        "pellav2": 0.9999980926513672,
+        "antideepfake": 0.18576843717840094
+      },
+      "assessment": {
+        "synthetic_score": 0.9910049981724539,
+        "binary_model_decision": "synthetic",
+        "assessment": "Synthetic speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.9910049981724539,
+        "window_max": 0.9910049981724539,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/qwen3_tts/english/fixed/fixed_005.wav",
+      "label": "synthetic",
+      "group": "qwen3_tts",
+      "source": {
+        "format": "WAV",
+        "subtype": "PCM_16",
+        "original_rate": 24000,
+        "channels": 1,
+        "frames": 126165,
+        "duration_seconds": 5.256875,
+        "bytes": 252374,
+        "sha256": "e3a530a8afdf14418255b8711dbacd193644bf6bdec52a3794da4fd51a2a8876"
+      },
+      "crop_start_sample_16k": 10055,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "55fda1077650a1f70bb28dca244846eda46d3033005481193f7bbadfecdd4185",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.9534785415375363,
+      "components": {
+        "pellav2": 0.9999998807907104,
+        "antideepfake": 0.016599621779732444
+      },
+      "assessment": {
+        "synthetic_score": 0.9534785415375363,
+        "binary_model_decision": "synthetic",
+        "assessment": "Synthetic speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.9534785415375363,
+        "window_max": 0.9534785415375363,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/vibevoice/english/random/random_085.wav",
+      "label": "synthetic",
+      "group": "vibevoice",
+      "source": {
+        "format": "WAV",
+        "subtype": "PCM_16",
+        "original_rate": 24000,
+        "channels": 1,
+        "frames": 121600,
+        "duration_seconds": 5.066666666666666,
+        "bytes": 243244,
+        "sha256": "135b9091c21d38b4c7d5641a3143ab43bc25fa04c4d7b3d056e3e3f792760522"
+      },
+      "crop_start_sample_16k": 8533,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "5b324d85aff69fdcfb58d3f693b0202e97ce357da5fe82c1c66772047188402a",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.8654746708046657,
+      "components": {
+        "pellav2": 1.0,
+        "antideepfake": 0.002974913732802908
+      },
+      "assessment": {
+        "synthetic_score": 0.8654746708046657,
+        "binary_model_decision": "synthetic",
+        "assessment": "Synthetic speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.8654746708046657,
+        "window_max": 0.8654746708046657,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/vibevoice/english/random/random_043.wav",
+      "label": "synthetic",
+      "group": "vibevoice",
+      "source": {
+        "format": "WAV",
+        "subtype": "PCM_16",
+        "original_rate": 24000,
+        "channels": 1,
+        "frames": 96000,
+        "duration_seconds": 4.0,
+        "bytes": 192044,
+        "sha256": "5f81468baf3fc0f9152a4dc32019c9a842114f7cd3da0a6d53524e7c185582ca"
+      },
+      "crop_start_sample_16k": 0,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "f971409755562c77876417ae1bf7f4e20e65fe6fc1b8766b74ec04f1079bb1b1",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.9925324261601188,
+      "components": {
+        "pellav2": 1.0,
+        "antideepfake": 0.05261810950393615
+      },
+      "assessment": {
+        "synthetic_score": 0.9925324261601188,
+        "binary_model_decision": "synthetic",
+        "assessment": "Synthetic speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.9925324261601188,
+        "window_max": 0.9925324261601188,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/vibevoice/english/random/random_077.wav",
+      "label": "synthetic",
+      "group": "vibevoice",
+      "source": {
+        "format": "WAV",
+        "subtype": "PCM_16",
+        "original_rate": 24000,
+        "channels": 1,
+        "frames": 140800,
+        "duration_seconds": 5.866666666666666,
+        "bytes": 281644,
+        "sha256": "6a36472e5cedb464cae553973158e8721fc2f7118752bda765106d4408bb9951"
+      },
+      "crop_start_sample_16k": 14933,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "18f1a254473c4a90ef2304a74dcfa9de3d23139d5c99e6d3de98e861010c8d37",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.991058220420028,
+      "components": {
+        "pellav2": 1.0,
+        "antideepfake": 0.055833986850028765
+      },
+      "assessment": {
+        "synthetic_score": 0.991058220420028,
+        "binary_model_decision": "synthetic",
+        "assessment": "Synthetic speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.991058220420028,
+        "window_max": 0.991058220420028,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/vibevoice/english/random/random_084.wav",
+      "label": "synthetic",
+      "group": "vibevoice",
+      "source": {
+        "format": "WAV",
+        "subtype": "PCM_16",
+        "original_rate": 24000,
+        "channels": 1,
+        "frames": 108800,
+        "duration_seconds": 4.533333333333333,
+        "bytes": 217644,
+        "sha256": "689dceb332bde2f227283845f97d4827232a20d3fe850c92f8997031cdcebf65"
+      },
+      "crop_start_sample_16k": 4267,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "68f38d5333c8d1306aaaa69986f2138b50251701fafefd361780b7343e84a459",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.9971187431241549,
+      "components": {
+        "pellav2": 0.9999990463256836,
+        "antideepfake": 0.379262358411496
+      },
+      "assessment": {
+        "synthetic_score": 0.9971187431241549,
+        "binary_model_decision": "synthetic",
+        "assessment": "Synthetic speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.9971187431241549,
+        "window_max": 0.9971187431241549,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/vibevoice/english/fixed/fixed_031.wav",
+      "label": "synthetic",
+      "group": "vibevoice",
+      "source": {
+        "format": "WAV",
+        "subtype": "PCM_16",
+        "original_rate": 24000,
+        "channels": 1,
+        "frames": 131200,
+        "duration_seconds": 5.466666666666667,
+        "bytes": 262444,
+        "sha256": "b61b078bcbfbddcc229ecc2357307bd43ac2599cb617cec305a6f3b99f2768ef"
+      },
+      "crop_start_sample_16k": 11733,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "af77b9c317de41676ba67aa259b16524184426fc49b25f9bab8859956a4af88b",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.8336322585964356,
+      "components": {
+        "pellav2": 0.9999998807907104,
+        "antideepfake": 0.003257562683048845
+      },
+      "assessment": {
+        "synthetic_score": 0.8336322585964356,
+        "binary_model_decision": "synthetic",
+        "assessment": "Synthetic speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.8336322585964356,
+        "window_max": 0.8336322585964356,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/voxcpm/english/random/random_034.wav",
+      "label": "synthetic",
+      "group": "voxcpm",
+      "source": {
+        "format": "WAV",
+        "subtype": "PCM_16",
+        "original_rate": 44100,
+        "channels": 1,
+        "frames": 204624,
+        "duration_seconds": 4.64,
+        "bytes": 409292,
+        "sha256": "3b8dd84d59520177145b49a23935bcf099b3baca8ddffea4d36a61888299fcae"
+      },
+      "crop_start_sample_16k": 5120,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "7b3e0533fc983863a55f74091c97cf6a0d96347e8d58a1ce7c422f90f5f82a48",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.9999975285669216,
+      "components": {
+        "pellav2": 1.0,
+        "antideepfake": 0.9875130465476774
+      },
+      "assessment": {
+        "synthetic_score": 0.9999975285669216,
+        "binary_model_decision": "synthetic",
+        "assessment": "Synthetic speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.9999975285669216,
+        "window_max": 0.9999975285669216,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/voxcpm/english/random/random_100.wav",
+      "label": "synthetic",
+      "group": "voxcpm",
+      "source": {
+        "format": "WAV",
+        "subtype": "PCM_16",
+        "original_rate": 44100,
+        "channels": 1,
+        "frames": 176400,
+        "duration_seconds": 4.0,
+        "bytes": 352844,
+        "sha256": "a743566ef086edaca9ebbd7de9c4d15b05fb39e14c45cb9d0b48dce18ffad40c"
+      },
+      "crop_start_sample_16k": 0,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "8f2584b4a1b565ca5373618df1bf3cdef27eb8a55e4f2a53fff662013c9c92d7",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.993687901638878,
+      "components": {
+        "pellav2": 0.9999997615814209,
+        "antideepfake": 0.14149616254941796
+      },
+      "assessment": {
+        "synthetic_score": 0.993687901638878,
+        "binary_model_decision": "synthetic",
+        "assessment": "Synthetic speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.993687901638878,
+        "window_max": 0.993687901638878,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/voxcpm/english/fixed/fixed_031.wav",
+      "label": "synthetic",
+      "group": "voxcpm",
+      "source": {
+        "format": "WAV",
+        "subtype": "PCM_16",
+        "original_rate": 44100,
+        "channels": 1,
+        "frames": 183456,
+        "duration_seconds": 4.16,
+        "bytes": 366956,
+        "sha256": "b978b481e0a739c92bcf08414d95295cd575355a7f46f5446f1f0f9379713738"
+      },
+      "crop_start_sample_16k": 1280,
+      "crop_samples": 64000,
+      "analysis_samples_sha256": "d24775422827b34d02ff5c52a27510572ae7ba424dca1fb1b570c28fd77acd2d",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.9999180218360083,
+      "components": {
+        "pellav2": 0.9999955892562866,
+        "antideepfake": 0.9789216536358213
+      },
+      "assessment": {
+        "synthetic_score": 0.9999180218360083,
+        "binary_model_decision": "synthetic",
+        "assessment": "Synthetic speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.9999180218360083,
+        "window_max": 0.9999180218360083,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/voxcpm/english/fixed/fixed_081.wav",
+      "label": "synthetic",
+      "group": "voxcpm",
+      "source": {
+        "format": "WAV",
+        "subtype": "PCM_16",
+        "original_rate": 44100,
+        "channels": 1,
+        "frames": 162288,
+        "duration_seconds": 3.68,
+        "bytes": 324620,
+        "sha256": "9eafa7276ff30a65d8856bbd80fb0f2d9bd437341f4fad895bb1f7f50ec51382"
+      },
+      "crop_start_sample_16k": 0,
+      "crop_samples": 58880,
+      "analysis_samples_sha256": "adff6c4afa2031c6d58d8c0547fa35b2db2ecbc0c7ccf56a665776c71f8dd9c3",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.9999997392456579,
+      "components": {
+        "pellav2": 1.0,
+        "antideepfake": 0.9988291370818406
+      },
+      "assessment": {
+        "synthetic_score": 0.9999997392456579,
+        "binary_model_decision": "synthetic",
+        "assessment": "Synthetic speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.9999997392456579,
+        "window_max": 0.9999997392456579,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    },
+    {
+      "id": "voxenes-2026:voxenes-2026/tts/original/voxcpm/english/fixed/fixed_008.wav",
+      "label": "synthetic",
+      "group": "voxcpm",
+      "source": {
+        "format": "WAV",
+        "subtype": "PCM_16",
+        "original_rate": 44100,
+        "channels": 1,
+        "frames": 134064,
+        "duration_seconds": 3.04,
+        "bytes": 268172,
+        "sha256": "b56f0a06e5dd46e71085df5009b2c953bcd29a623cf1251b4ab7ec8655e399c7"
+      },
+      "crop_start_sample_16k": 0,
+      "crop_samples": 48640,
+      "analysis_samples_sha256": "4b280636a73122f5ec9efe51b4199ef886804e26a6f0a0e04f53a223ac0ce1c8",
+      "policy": "Center at most 4 seconds after mono16 conversion; no added padding by screening runner; model-specific padding retained",
+      "synthetic_score": 0.9999994654253725,
+      "components": {
+        "pellav2": 1.0,
+        "antideepfake": 0.998034457609405
+      },
+      "assessment": {
+        "synthetic_score": 0.9999994654253725,
+        "binary_model_decision": "synthetic",
+        "assessment": "Synthetic speech indicated",
+        "abstention_reasons": [],
+        "window_min": 0.9999994654253725,
+        "window_max": 0.9999994654253725,
+        "aggregation": "duration-weighted mean of non-overlapping window softmax scores",
+        "interpretation": "Uncalibrated model score, not a probability that the recording is AI. Applies to speech; speech presence and language are not independently verified."
+      },
+      "warnings": []
+    }
+  ],
+  "by_group": {
+    "human": {
+      "clips": 20,
+      "human": 20,
+      "synthetic": 0,
+      "raw_false_positive": 0,
+      "raw_synthetic_detected": 0,
+      "inconclusive": 4,
+      "human_indicated": 16,
+      "synthetic_indicated": 0,
+      "wrong_definitive": 0
+    },
+    "chroma": {
+      "clips": 5,
+      "human": 0,
+      "synthetic": 5,
+      "raw_false_positive": 0,
+      "raw_synthetic_detected": 5,
+      "inconclusive": 1,
+      "human_indicated": 0,
+      "synthetic_indicated": 4,
+      "wrong_definitive": 0
+    },
+    "glm_tts": {
+      "clips": 5,
+      "human": 0,
+      "synthetic": 5,
+      "raw_false_positive": 0,
+      "raw_synthetic_detected": 5,
+      "inconclusive": 0,
+      "human_indicated": 0,
+      "synthetic_indicated": 5,
+      "wrong_definitive": 0
+    },
+    "qwen3_tts": {
+      "clips": 5,
+      "human": 0,
+      "synthetic": 5,
+      "raw_false_positive": 0,
+      "raw_synthetic_detected": 5,
+      "inconclusive": 1,
+      "human_indicated": 0,
+      "synthetic_indicated": 4,
+      "wrong_definitive": 0
+    },
+    "vibevoice": {
+      "clips": 5,
+      "human": 0,
+      "synthetic": 5,
+      "raw_false_positive": 0,
+      "raw_synthetic_detected": 5,
+      "inconclusive": 0,
+      "human_indicated": 0,
+      "synthetic_indicated": 5,
+      "wrong_definitive": 0
+    },
+    "voxcpm": {
+      "clips": 5,
+      "human": 0,
+      "synthetic": 5,
+      "raw_false_positive": 0,
+      "raw_synthetic_detected": 5,
+      "inconclusive": 0,
+      "human_indicated": 0,
+      "synthetic_indicated": 5,
+      "wrong_definitive": 0
+    }
+  },
+  "selection": "SHA256(core-screen-20261023:+publisher path), ascending; 20 human and 5 per five English TTS systems; chosen before scores",
+  "scope": "Small publisher-labeled modern-generator development screen. Frozen existing detector, no fitting or threshold tuning. No speaker/source/training independence established; all clips conservatively one connected group. Center crops only; score/quality-band checks applied, perturbation stability not run. Not a complete dataset benchmark, product end-to-end accuracy estimate or world-class claim.",
+  "acquisition_sha256": "fe0449e1a81f8c31902ddbb1ea36686caa20cd764a76951e41b82803066a60e8",
+  "environment": {
+    "python": "3.13.7",
+    "torch": "2.14.1",
+    "threads": 1,
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O"
+  },
+  "runtime_including_model_load_seconds": 52.13684216560796,
+  "code_sha256": {
+    "lab/core_screen.py": "c075cfba02c6a2568522065566aff17c60d68b83395febd3d5a65b28a9e9c643",
+    "scripts/screen_core_detector.py": "13bf0c1117359c5da03c4976dd5c010efb0abe2c804c435f64979288391bfabd",
+    "lab/fusion.py": "a9a3a182d7a3cee478729d7061bf4a9508556be5cf0d0b6a947cac3d76f0bef2",
+    "lab/pella.py": "f0c4b895207ac309c21c27162b833de634a3bd897b64ace59b5fb1edfdbc7a26",
+    "lab/antideepfake.py": "ca783bac3c9baef49315aeedeb804825ef422c4cf9cc35134a501302c4e35ec2",
+    "lab/forensics.py": "8072358d03c95e6fb904aa6111525bd6b491b9ca1a29a25c78db5dcbab1b3b74"
+  }
+}

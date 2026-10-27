@@ -1,0 +1,719 @@
+{
+  "schema_version": "annotation-example-1.1",
+  "sample": "annotation-demo.wav",
+  "sample_sha256": "299c3e4a38abd3e74c61b39ec52824f406f75c62673b0220db5167b3aaabb640",
+  "duration_seconds": 30,
+  "sample_rate_hz": 16000,
+  "scope": "Reference-informed automated signal annotation demonstration. Not a blind listening submission.",
+  "guideline": "Speech annotation guide 1.1; perceptual fields require listening.",
+  "review_status": "Measurements and local transcription complete; targeted review items identified",
+  "transcription": {
+    "model": "openai/whisper-base.en",
+    "revision": "911407f4214e0e1d82085af863093ec0b66f9cd6",
+    "weights_sha256": "d4dd5542fd6a1d35639e21384238f3bfe6c557c849d392b5905d33ee29e71db5",
+    "sample_sha256": "299c3e4a38abd3e74c61b39ec52824f406f75c62673b0220db5167b3aaabb640",
+    "configuration_sha256": {
+      "added_tokens.json": "560be47bea388757f8d4cc185c5d82067426cbb6361e38016dd90ddc01ab203a",
+      "tokenizer_config.json": "14f84bdf4b9ecdbd4738ddc81c17a1baedfc02bb93c6e049c951e15a1b40b70d",
+      "special_tokens_map.json": "014f8f802366ed818919550be0ad9e35907327cb9e142e8aaa102420f460bda8",
+      "config.json": "160c1df40a60d4ef5a6014d536fd845c33aabfd1f318458ac7f87cfe91ebbe76",
+      "tokenizer.json": "5eb60cec1e77aeeb6869a2bb5a8e01a84c3fe5d072d75369343021fe6f5310d0",
+      "generation_config.json": "c5750f05d94777579e00ce26ef65e5d87c108439f90e3ac519df2587b9d5d41f",
+      "normalizer.json": "bf1c507dc8724ca9cf9903640dacfb69dae2f00edee4f21ceba106a7392f26dd",
+      "merges.txt": "1ce1664773c50f3e0cc8842619a93edc4624525b728b188a9e0be33b7726adc5",
+      "vocab.json": "3ba3c3109ff33976c4bd966589c11ee14fcaa1f4c9e5e154c2ed7f99d80709e7",
+      "preprocessor_config.json": "9b5cd03a36fbb8a627c64d98a5b5b126ead95a77720723944487311f0110b666"
+    },
+    "method": "Local deterministic CPU transcription with model-estimated word timestamps; no human verification or authenticity inference.",
+    "text": " Heddy surl often took the opportunity, when her aunt's back was turned, of looking at the pleasing reflection of herself in those polished services. For the oak table was usually turned up like a screen, and was more for ornament than for use. And she could see herself sometimes in the great round pewter dishes that were arranged on the shelves above the long-deal dinner table, or in the Hobbes of the Great, which always shown like Jasper.",
+    "words": [
+      {
+        "text": "Heddy",
+        "start": 0.0,
+        "end": 0.66
+      },
+      {
+        "text": "surl",
+        "start": 0.66,
+        "end": 1.16
+      },
+      {
+        "text": "often",
+        "start": 1.16,
+        "end": 1.88
+      },
+      {
+        "text": "took",
+        "start": 1.88,
+        "end": 2.12
+      },
+      {
+        "text": "the",
+        "start": 2.12,
+        "end": 2.28
+      },
+      {
+        "text": "opportunity,",
+        "start": 2.28,
+        "end": 3.32
+      },
+      {
+        "text": "when",
+        "start": 3.32,
+        "end": 3.56
+      },
+      {
+        "text": "her",
+        "start": 3.56,
+        "end": 3.64
+      },
+      {
+        "text": "aunt's",
+        "start": 3.64,
+        "end": 4.04
+      },
+      {
+        "text": "back",
+        "start": 4.04,
+        "end": 4.3
+      },
+      {
+        "text": "was",
+        "start": 4.3,
+        "end": 4.52
+      },
+      {
+        "text": "turned,",
+        "start": 4.52,
+        "end": 5.32
+      },
+      {
+        "text": "of",
+        "start": 5.32,
+        "end": 5.6
+      },
+      {
+        "text": "looking",
+        "start": 5.6,
+        "end": 5.86
+      },
+      {
+        "text": "at",
+        "start": 5.86,
+        "end": 6.2
+      },
+      {
+        "text": "the",
+        "start": 6.32,
+        "end": 6.32
+      },
+      {
+        "text": "pleasing",
+        "start": 6.32,
+        "end": 6.62
+      },
+      {
+        "text": "reflection",
+        "start": 6.62,
+        "end": 6.9
+      },
+      {
+        "text": "of",
+        "start": 6.9,
+        "end": 7.46
+      },
+      {
+        "text": "herself",
+        "start": 7.46,
+        "end": 7.72
+      },
+      {
+        "text": "in",
+        "start": 7.72,
+        "end": 8.36
+      },
+      {
+        "text": "those",
+        "start": 8.36,
+        "end": 8.52
+      },
+      {
+        "text": "polished",
+        "start": 8.52,
+        "end": 8.94
+      },
+      {
+        "text": "services.",
+        "start": 8.94,
+        "end": 10.9
+      },
+      {
+        "text": "For",
+        "start": 10.94,
+        "end": 11.04
+      },
+      {
+        "text": "the",
+        "start": 11.04,
+        "end": 11.14
+      },
+      {
+        "text": "oak",
+        "start": 11.14,
+        "end": 11.28
+      },
+      {
+        "text": "table",
+        "start": 11.28,
+        "end": 11.6
+      },
+      {
+        "text": "was",
+        "start": 11.6,
+        "end": 12.1
+      },
+      {
+        "text": "usually",
+        "start": 12.1,
+        "end": 12.28
+      },
+      {
+        "text": "turned",
+        "start": 12.28,
+        "end": 12.92
+      },
+      {
+        "text": "up",
+        "start": 12.92,
+        "end": 13.22
+      },
+      {
+        "text": "like",
+        "start": 13.22,
+        "end": 13.5
+      },
+      {
+        "text": "a",
+        "start": 13.5,
+        "end": 13.62
+      },
+      {
+        "text": "screen,",
+        "start": 13.62,
+        "end": 14.58
+      },
+      {
+        "text": "and",
+        "start": 14.58,
+        "end": 14.7
+      },
+      {
+        "text": "was",
+        "start": 14.7,
+        "end": 14.82
+      },
+      {
+        "text": "more",
+        "start": 14.82,
+        "end": 15.04
+      },
+      {
+        "text": "for",
+        "start": 15.04,
+        "end": 15.22
+      },
+      {
+        "text": "ornament",
+        "start": 15.22,
+        "end": 15.52
+      },
+      {
+        "text": "than",
+        "start": 15.52,
+        "end": 16.18
+      },
+      {
+        "text": "for",
+        "start": 16.18,
+        "end": 16.34
+      },
+      {
+        "text": "use.",
+        "start": 16.7,
+        "end": 17.6
+      },
+      {
+        "text": "And",
+        "start": 17.64,
+        "end": 17.76
+      },
+      {
+        "text": "she",
+        "start": 17.76,
+        "end": 17.9
+      },
+      {
+        "text": "could",
+        "start": 17.9,
+        "end": 18.04
+      },
+      {
+        "text": "see",
+        "start": 18.04,
+        "end": 18.26
+      },
+      {
+        "text": "herself",
+        "start": 18.26,
+        "end": 18.44
+      },
+      {
+        "text": "sometimes",
+        "start": 18.44,
+        "end": 19.16
+      },
+      {
+        "text": "in",
+        "start": 19.16,
+        "end": 19.92
+      },
+      {
+        "text": "the",
+        "start": 19.92,
+        "end": 20.02
+      },
+      {
+        "text": "great",
+        "start": 20.02,
+        "end": 20.22
+      },
+      {
+        "text": "round",
+        "start": 20.22,
+        "end": 20.78
+      },
+      {
+        "text": "pewter",
+        "start": 20.78,
+        "end": 21.36
+      },
+      {
+        "text": "dishes",
+        "start": 21.36,
+        "end": 21.58
+      },
+      {
+        "text": "that",
+        "start": 21.58,
+        "end": 22.36
+      },
+      {
+        "text": "were",
+        "start": 22.36,
+        "end": 22.5
+      },
+      {
+        "text": "arranged",
+        "start": 22.5,
+        "end": 22.86
+      },
+      {
+        "text": "on",
+        "start": 23.12,
+        "end": 23.2
+      },
+      {
+        "text": "the",
+        "start": 23.2,
+        "end": 23.3
+      },
+      {
+        "text": "shelves",
+        "start": 23.3,
+        "end": 23.62
+      },
+      {
+        "text": "above",
+        "start": 23.62,
+        "end": 24.18
+      },
+      {
+        "text": "the",
+        "start": 24.18,
+        "end": 24.42
+      },
+      {
+        "text": "long",
+        "start": 24.42,
+        "end": 24.7
+      },
+      {
+        "text": "-deal",
+        "start": 24.7,
+        "end": 25.2
+      },
+      {
+        "text": "dinner",
+        "start": 25.2,
+        "end": 25.62
+      },
+      {
+        "text": "table,",
+        "start": 25.62,
+        "end": 26.5
+      },
+      {
+        "text": "or",
+        "start": 26.5,
+        "end": 26.94
+      },
+      {
+        "text": "in",
+        "start": 26.94,
+        "end": 27.04
+      },
+      {
+        "text": "the",
+        "start": 27.04,
+        "end": 27.14
+      },
+      {
+        "text": "Hobbes",
+        "start": 27.14,
+        "end": 27.46
+      },
+      {
+        "text": "of",
+        "start": 27.46,
+        "end": 27.56
+      },
+      {
+        "text": "the",
+        "start": 27.56,
+        "end": 27.66
+      },
+      {
+        "text": "Great,",
+        "start": 27.66,
+        "end": 28.24
+      },
+      {
+        "text": "which",
+        "start": 28.24,
+        "end": 28.34
+      },
+      {
+        "text": "always",
+        "start": 28.44,
+        "end": 28.7
+      },
+      {
+        "text": "shown",
+        "start": 28.7,
+        "end": 28.98
+      },
+      {
+        "text": "like",
+        "start": 28.98,
+        "end": 29.38
+      },
+      {
+        "text": "Jasper.",
+        "start": 29.38,
+        "end": 29.98
+      }
+    ]
+  },
+  "transcript_review": [
+    {
+      "start": 0.0,
+      "end": 1.16,
+      "kind": "transcript_difference",
+      "status": "review_required",
+      "model_text": "heddy surl",
+      "reference_text": "hetty sorrel",
+      "basis": "Word-sequence comparison against full-source corpus text. Timing is model-estimated; confirm the cropped audio by listening."
+    },
+    {
+      "start": 8.94,
+      "end": 10.9,
+      "kind": "transcript_difference",
+      "status": "review_required",
+      "model_text": "services",
+      "reference_text": "surfaces",
+      "basis": "Word-sequence comparison against full-source corpus text. Timing is model-estimated; confirm the cropped audio by listening."
+    },
+    {
+      "start": 22.5,
+      "end": 22.86,
+      "kind": "transcript_difference",
+      "status": "review_required",
+      "model_text": "arranged",
+      "reference_text": "ranged",
+      "basis": "Word-sequence comparison against full-source corpus text. Timing is model-estimated; confirm the cropped audio by listening."
+    },
+    {
+      "start": 27.14,
+      "end": 27.46,
+      "kind": "transcript_difference",
+      "status": "review_required",
+      "model_text": "hobbes",
+      "reference_text": "hobs",
+      "basis": "Word-sequence comparison against full-source corpus text. Timing is model-estimated; confirm the cropped audio by listening."
+    },
+    {
+      "start": 27.66,
+      "end": 28.24,
+      "kind": "transcript_difference",
+      "status": "review_required",
+      "model_text": "great",
+      "reference_text": "grate",
+      "basis": "Word-sequence comparison against full-source corpus text. Timing is model-estimated; confirm the cropped audio by listening."
+    },
+    {
+      "start": 28.7,
+      "end": 28.98,
+      "kind": "transcript_difference",
+      "status": "review_required",
+      "model_text": "shown",
+      "reference_text": "shone",
+      "basis": "Word-sequence comparison against full-source corpus text. Timing is model-estimated; confirm the cropped audio by listening."
+    }
+  ],
+  "review_summary": {
+    "transcript_differences": 6,
+    "quiet_spans": 7,
+    "perceptual_review": "not_run"
+  },
+  "listening_review_completed": false,
+  "detector_inference_run": false,
+  "perceptual_annotation": {
+    "intelligibility": "not_assessed",
+    "interference": {
+      "background_noise": "not_assessed",
+      "compression_artifacts": "not_assessed",
+      "reverb_echo": "not_assessed",
+      "music_hold_audio": "not_assessed",
+      "audible_clipping": "not_assessed",
+      "dropouts": "not_assessed",
+      "distortion": "not_assessed",
+      "overlap": "not_assessed"
+    },
+    "synthetic_cues": "not_assessed",
+    "human_cues": "not_assessed",
+    "perceived_origin": "uncertain",
+    "confidence": null,
+    "reason": "No listening review performed. Reference provenance is separate from perceived origin.",
+    "escalation": "Listen at original speed; confirm intelligibility and channel interference, review quiet intervals, and check whether the 30-second crop truncates a word. Record only cues actually heard."
+  },
+  "reference": {
+    "corpus": "LibriSpeech test-clean",
+    "source_id": "2094-142345-0010",
+    "reference_origin": "human",
+    "reference_origin_basis": "Corpus provenance, not a listening or detector verdict",
+    "crop_seconds": [
+      0,
+      30
+    ],
+    "original_duration_seconds": 30.615,
+    "processing": "First 30 seconds, unmodified PCM samples; no normalization, denoising, or splicing.",
+    "license": "CC BY 4.0",
+    "source_url": "https://www.openslr.org/12/",
+    "attribution": "LibriSpeech corpus, Vassil Panayotov, Guoguo Chen, Daniel Povey and Sanjeev Khudanpur. Excerpt cropped to 30 seconds.",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "privacy": "Public audiobook excerpt; no personal workstation paths or reviewer identifiers included. Not a guarantee that spoken fiction contains no names."
+  },
+  "source_measurements": {
+    "version": "source-measurements-1.0",
+    "representation": "decoded source channels; no mixing, resampling or normalization",
+    "sample_rate_hz": 16000,
+    "frames": 480000,
+    "duration_seconds": 30.0,
+    "amplitude_reference": 1.0,
+    "near_full_scale_threshold": 0.999,
+    "units": {
+      "rms_dbfs": "dBFS",
+      "sample_peak_dbfs": "dBFS",
+      "crest_factor_db": "dB",
+      "dc_offset": "normalized amplitude",
+      "near_full_scale_fraction": "fraction of channel samples",
+      "over_full_scale_fraction": "fraction of channel samples",
+      "attenuation_db": "dB"
+    },
+    "channels": [
+      {
+        "channel": 1,
+        "rms_amplitude": 0.07934786564940359,
+        "rms_dbfs": -22.009295013759985,
+        "minimum_sample": -0.5753173828125,
+        "maximum_sample": 0.65325927734375,
+        "sample_peak_amplitude": 0.65325927734375,
+        "sample_peak_dbfs": -3.6982882773831953,
+        "crest_factor_db": 18.311006736376786,
+        "dc_offset": 0.00048306789398193357,
+        "near_full_scale_samples": 0,
+        "near_full_scale_fraction": 0.0,
+        "over_full_scale_samples": 0,
+        "over_full_scale_fraction": 0.0
+      }
+    ],
+    "arithmetic_mixdown": {
+      "reference": "mean original-channel power before resampling",
+      "energy_ratio": 1.0,
+      "attenuation_db": -0.0,
+      "complete_cancellation": false
+    },
+    "limitations": [
+      "Measures decoded samples; decoder precision and lossy-codec history remain relevant.",
+      "Sample peak is not oversampled true peak; near-full-scale samples do not prove clipping.",
+      "Null dB values indicate zero energy or an undefined ratio, not missing samples.",
+      "Mixdown attenuation describes channel interaction, not tampering or synthetic speech."
+    ]
+  },
+  "annotations": [
+    {
+      "start": 0.0,
+      "end": 5.0,
+      "kind": "interval_review",
+      "observation": "RMS -21.66 dBFS; sample peak -4.76 dBFS; 0 near-full-scale samples.",
+      "rms_dbfs": -21.65687374332886,
+      "peak_dbfs": -4.75818959684574,
+      "near_full_scale_samples": 0,
+      "interpretation": "Amplitude measurements only; no listening or authenticity judgment.",
+      "review_status": "measured"
+    },
+    {
+      "start": 0.0,
+      "end": 0.42,
+      "kind": "low_energy",
+      "observation": "Consecutive 20 ms frames below -40 dBFS RMS for at least 200 ms.",
+      "rms_dbfs": null,
+      "peak_dbfs": null,
+      "near_full_scale_samples": null,
+      "interpretation": "Possible pause or quiet passage. Not classified as a dropout, breath, or absence of speech.",
+      "review_status": "context_review"
+    },
+    {
+      "start": 1.28,
+      "end": 1.66,
+      "kind": "low_energy",
+      "observation": "Consecutive 20 ms frames below -40 dBFS RMS for at least 200 ms.",
+      "rms_dbfs": null,
+      "peak_dbfs": null,
+      "near_full_scale_samples": null,
+      "interpretation": "Possible pause or quiet passage. Not classified as a dropout, breath, or absence of speech.",
+      "review_status": "context_review"
+    },
+    {
+      "start": 5.0,
+      "end": 10.0,
+      "kind": "interval_review",
+      "observation": "RMS -21.80 dBFS; sample peak -3.70 dBFS; 0 near-full-scale samples.",
+      "rms_dbfs": -21.796529827874544,
+      "peak_dbfs": -3.6982882773831953,
+      "near_full_scale_samples": 0,
+      "interpretation": "Amplitude measurements only; no listening or authenticity judgment.",
+      "review_status": "measured"
+    },
+    {
+      "start": 7.98,
+      "end": 8.28,
+      "kind": "low_energy",
+      "observation": "Consecutive 20 ms frames below -40 dBFS RMS for at least 200 ms.",
+      "rms_dbfs": null,
+      "peak_dbfs": null,
+      "near_full_scale_samples": null,
+      "interpretation": "Possible pause or quiet passage. Not classified as a dropout, breath, or absence of speech.",
+      "review_status": "context_review"
+    },
+    {
+      "start": 10.0,
+      "end": 15.0,
+      "kind": "interval_review",
+      "observation": "RMS -22.90 dBFS; sample peak -4.42 dBFS; 0 near-full-scale samples.",
+      "rms_dbfs": -22.901443096427656,
+      "peak_dbfs": -4.424525519662647,
+      "near_full_scale_samples": 0,
+      "interpretation": "Amplitude measurements only; no listening or authenticity judgment.",
+      "review_status": "measured"
+    },
+    {
+      "start": 10.04,
+      "end": 10.58,
+      "kind": "low_energy",
+      "observation": "Consecutive 20 ms frames below -40 dBFS RMS for at least 200 ms.",
+      "rms_dbfs": null,
+      "peak_dbfs": null,
+      "near_full_scale_samples": null,
+      "interpretation": "Possible pause or quiet passage. Not classified as a dropout, breath, or absence of speech.",
+      "review_status": "context_review"
+    },
+    {
+      "start": 10.6,
+      "end": 10.9,
+      "kind": "low_energy",
+      "observation": "Consecutive 20 ms frames below -40 dBFS RMS for at least 200 ms.",
+      "rms_dbfs": null,
+      "peak_dbfs": null,
+      "near_full_scale_samples": null,
+      "interpretation": "Possible pause or quiet passage. Not classified as a dropout, breath, or absence of speech.",
+      "review_status": "context_review"
+    },
+    {
+      "start": 14.2,
+      "end": 14.54,
+      "kind": "low_energy",
+      "observation": "Consecutive 20 ms frames below -40 dBFS RMS for at least 200 ms.",
+      "rms_dbfs": null,
+      "peak_dbfs": null,
+      "near_full_scale_samples": null,
+      "interpretation": "Possible pause or quiet passage. Not classified as a dropout, breath, or absence of speech.",
+      "review_status": "context_review"
+    },
+    {
+      "start": 15.0,
+      "end": 20.0,
+      "kind": "interval_review",
+      "observation": "RMS -23.04 dBFS; sample peak -4.05 dBFS; 0 near-full-scale samples.",
+      "rms_dbfs": -23.042800343684174,
+      "peak_dbfs": -4.047691602924147,
+      "near_full_scale_samples": 0,
+      "interpretation": "Amplitude measurements only; no listening or authenticity judgment.",
+      "review_status": "measured"
+    },
+    {
+      "start": 17.02,
+      "end": 17.54,
+      "kind": "low_energy",
+      "observation": "Consecutive 20 ms frames below -40 dBFS RMS for at least 200 ms.",
+      "rms_dbfs": null,
+      "peak_dbfs": null,
+      "near_full_scale_samples": null,
+      "interpretation": "Possible pause or quiet passage. Not classified as a dropout, breath, or absence of speech.",
+      "review_status": "context_review"
+    },
+    {
+      "start": 20.0,
+      "end": 25.0,
+      "kind": "interval_review",
+      "observation": "RMS -20.33 dBFS; sample peak -4.22 dBFS; 0 near-full-scale samples.",
+      "rms_dbfs": -20.333463897988338,
+      "peak_dbfs": -4.219619002110965,
+      "near_full_scale_samples": 0,
+      "interpretation": "Amplitude measurements only; no listening or authenticity judgment.",
+      "review_status": "measured"
+    },
+    {
+      "start": 25.0,
+      "end": 30.0,
+      "kind": "interval_review",
+      "observation": "RMS -23.02 dBFS; sample peak -5.75 dBFS; 0 near-full-scale samples.",
+      "rms_dbfs": -23.022960361824577,
+      "peak_dbfs": -5.7502367518060185,
+      "near_full_scale_samples": 0,
+      "interpretation": "Amplitude measurements only; no listening or authenticity judgment.",
+      "review_status": "measured"
+    }
+  ],
+  "exclusions": "Demonstration only; excluded from blind review, personal annotation results, reserved evaluation, and agreement metrics."
+}

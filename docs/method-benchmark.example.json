@@ -1,0 +1,17 @@
+{
+  "schema_version": "method-benchmark-1.0",
+  "partition": "development",
+  "description": "An unannotated historical example, not a new independent benchmark. Null annotations are unknown, not negative labels.",
+  "cases": [
+    {
+      "id": "unannotated-historical-example",
+      "source_group": "librispeech:speaker:7850",
+      "path": "data/librispeech/LibriSpeech/dev-clean/7850/281318/7850-281318-0013.flac",
+      "sha256": "c66c5de7fc246870ab9cecd54d893f7e30025c177da326206a043ee2ebd6a0c7",
+      "annotation_provenance": "Unannotated published regression sample; all annotations deliberately unknown.",
+      "speech_intervals": null,
+      "level_events": null,
+      "noise_reference_dbfs": null
+    }
+  ]
+}

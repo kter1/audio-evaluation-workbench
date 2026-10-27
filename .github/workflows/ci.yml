@@ -1,0 +1,96 @@
+name: CI
+on:
+  push:
+    branches: [main, feature/signaltrace-studio]
+  pull_request:
+    paths:
+      - "signaltrace_server.py"
+      - "lab/**"
+      - "studio/**"
+      - "tests/**"
+      - "scripts/audit_baseline.py"
+      - "scripts/inventory_corpora.py"
+      - "scripts/qualify_corpus.py"
+      - "scripts/benchmark_methods.py"
+      - "scripts/validate_source_measurements.py"
+      - "scripts/acquire_research_data.py"
+      - "scripts/audit_asvspoof5_metadata.py"
+      - "scripts/acquire_asvspoof5_pilot.py"
+      - "scripts/audit_asvspoof5_pilot.py"
+      - "scripts/expand_asvspoof5_corpus.py"
+      - "scripts/audit_asvspoof5_expansion.py"
+      - "scripts/build_annotation_example.py"
+      - "scripts/transcribe_annotation_example.py"
+      - "scripts/templates/**"
+      - "scripts/setup_research_vad.py"
+      - "scripts/prepare_speech_review.py"
+      - "scripts/compare_speech_reviews.py"
+      - "scripts/adjudicate_speech_reviews.py"
+      - "scripts/benchmark_vad_runtime.py"
+      - "scripts/prepare_vad_stress.py"
+      - "scripts/audit_vad_transport.py"
+      - "scripts/acquire_core_screen.py"
+      - "scripts/screen_core_detector.py"
+      - "scripts/evaluate_bounded_fusion.py"
+      - "scripts/replay_component_guard.py"
+      - "scripts/evaluate_noise_candidates.py"
+      - "scripts/setup_research_metricgan.py"
+      - "scripts/validate_metricgan_port.py"
+      - "scripts/setup_research_rawnetlite.py"
+      - "scripts/setup_research_pella_current.py"
+      - "scripts/setup_research_wavlm.py"
+      - "scripts/screen_candidate_regression.py"
+      - "scripts/screen_partial_synthesis.py"
+      - "scripts/screen_wavlm_mps.py"
+      - "scripts/analyze_three_model_candidate.py"
+      - "docs/pella-current-acquisition-v1.json"
+      - "docs/wavlm-aasist-acquisition-v1.json"
+      - "docs/rawnetlite-acquisition-v1.json"
+      - "docs/metricgan-acquisition-v1.json"
+      - "docs/evaluation-contract-v1.json"
+      - "docs/research-acquisition-v1.json"
+      - "requirements-signaltrace.txt"
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install local studio dependencies
+        run: python -m pip install -r requirements-signaltrace.txt pytest httpx
+      - name: Compile Python
+        run: python -m compileall -q lab signaltrace_server.py scripts/qualify_corpus.py scripts/benchmark_methods.py
+      - name: Validate APIs and acoustic markers
+        run: >-
+          python -m pytest -q tests/test_signaltrace.py tests/test_source_measurements.py
+          tests/test_baseline_audit.py tests/test_corpus_inventory.py
+          tests/test_corpus_qualification.py tests/test_research_methods.py
+          tests/test_research_acquisition.py tests/test_research_vad.py
+          tests/test_annotation_review.py tests/test_review_agreement.py tests/test_runtime_metrics.py tests/test_vad_stress.py tests/test_vad_channel_stress.py tests/test_core_screen.py tests/test_noise_candidates.py tests/test_research_rawnetlite.py
+          tests/test_model_acquisition.py tests/test_research_pella_current.py tests/test_research_wavlm_aasist.py tests/test_candidate_regression.py
+          tests/test_partial_synthesis.py
+          tests/test_research_wavlm_mps.py
+          tests/test_three_model_candidate.py
+          tests/test_complementary_calibration.py tests/test_asvspoof5_pilot.py
+          tests/test_asvspoof5_expansion.py
+          tests/test_annotation_example.py
+      - name: Validate AI-voice decision safeguards
+        run: >-
+          python -m pytest -q
+          tests/test_forensics.py::test_conflicting_component_models_cannot_certify_human
+          tests/test_forensics.py::test_component_consensus_and_invalid_component_scores
+          tests/test_forensics.py::test_component_consensus_uses_same_window_weights_as_file_score
+          tests/test_forensics.py::test_human_corroboration_guard_does_not_suppress_clear_fusion_ai_indication
+      - name: Validate measurement arithmetic and experimental benchmark machinery
+        run: |
+          python scripts/validate_source_measurements.py
+          python scripts/benchmark_methods.py --fixtures
+      - name: Validate static JavaScript syntax
+        run: |
+          node --check studio/dist/app.js
+          node --check studio/dist/samples/annotation-example.js
+      - name: Validate evidence rendering and exports
+        run: node --test tests/frontend-evidence.test.cjs

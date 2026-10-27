@@ -1,0 +1,900 @@
+{
+  "schema_version": "corpus-inventory-1.0",
+  "mode": "local metadata, transitive grouping and file existence; no inference or downloads",
+  "manifests": [
+    {
+      "path": "data/evaluation/manifest-v1.json",
+      "file_sha256": "0e0571ac2ce197443437ccb03f4bc3abd37bb762d06ceb63747da774ac8d5a01",
+      "case_rows": 80,
+      "labels": {
+        "human": 40,
+        "synthetic": 40
+      },
+      "historical_splits": {
+        "selection": 40,
+        "test": 40
+      },
+      "eligible_as_locked_test": false,
+      "reason": "Historical selected/published corpus; not newly reserved",
+      "referenced_local_files": 80,
+      "missing_files": [],
+      "referenced_bytes_present": 3985214,
+      "missing_speaker_identity": 0
+    },
+    {
+      "path": "data/evaluation/manifest.json",
+      "file_sha256": "c2e3d75a8354039f35126caaf73dbdc337a6d9de67eb22d546755953892f7e50",
+      "case_rows": 80,
+      "labels": {
+        "human": 40,
+        "synthetic": 40
+      },
+      "historical_splits": {
+        "selection": 40,
+        "test": 40
+      },
+      "eligible_as_locked_test": false,
+      "reason": "Historical selected/published corpus; not newly reserved",
+      "referenced_local_files": 80,
+      "missing_files": [],
+      "referenced_bytes_present": 3813158,
+      "missing_speaker_identity": 0
+    },
+    {
+      "path": "data/evaluation/modern-manifest.json",
+      "file_sha256": "43cf084394d17e39465fca7eae037304f979ba044f9c3116c0b1b8666f38b80a",
+      "case_rows": 360,
+      "labels": {
+        "synthetic": 180,
+        "human": 180
+      },
+      "historical_splits": {
+        "calibration": 120,
+        "test": 240
+      },
+      "eligible_as_locked_test": false,
+      "reason": "Historical selected/published corpus; not newly reserved",
+      "referenced_local_files": 840,
+      "missing_files": [],
+      "referenced_bytes_present": 97952368,
+      "missing_speaker_identity": 0
+    },
+    {
+      "path": "data/evaluation/v4-manifest.json",
+      "file_sha256": "67db09102eb4a7376a0bdb9d1f90823f835aeacc08e14f77ed75e5e5841b2375",
+      "case_rows": 320,
+      "labels": {
+        "synthetic": 120,
+        "human": 200
+      },
+      "historical_splits": {
+        "test": 320
+      },
+      "eligible_as_locked_test": false,
+      "reason": "Historical selected/published corpus; not newly reserved",
+      "referenced_local_files": 1280,
+      "missing_files": [],
+      "referenced_bytes_present": 175987926,
+      "missing_speaker_identity": 0
+    }
+  ],
+  "historical_case_rows": 840,
+  "unique_original_byte_hashes": 800,
+  "connected_identity_groups": 187,
+  "groups_spanning_manifests": [
+    {
+      "group_id": "c7c66483b7c1c0df",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 2
+    },
+    {
+      "group_id": "3ce744557dd8fa33",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 4
+    },
+    {
+      "group_id": "58bebb5b3f116d77",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 17
+    },
+    {
+      "group_id": "691988c2ef468612",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 8
+    },
+    {
+      "group_id": "7c33e06783b0c7a6",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 5
+    },
+    {
+      "group_id": "5f53fb543cb4bb69",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 5
+    },
+    {
+      "group_id": "848d4e9b5dd90c3d",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 5
+    },
+    {
+      "group_id": "1417b6b1838925dd",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 2
+    },
+    {
+      "group_id": "59563e6dfb95a399",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 4
+    },
+    {
+      "group_id": "e943b86ecf4757f0",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 8
+    },
+    {
+      "group_id": "505e324f4edbf1f9",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 2
+    },
+    {
+      "group_id": "0391f5603a5e2410",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 5
+    },
+    {
+      "group_id": "3de5427175404d80",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 8
+    },
+    {
+      "group_id": "4e7e890299cd064c",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 3
+    },
+    {
+      "group_id": "cb644d0b72e37f0c",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 5
+    },
+    {
+      "group_id": "8c329afb95bfc202",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 3
+    },
+    {
+      "group_id": "6bef53f324605349",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 6
+    },
+    {
+      "group_id": "6931deda3cb6d758",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 6
+    },
+    {
+      "group_id": "9abc46a2e824627f",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 5
+    },
+    {
+      "group_id": "a42a4b640afbd2db",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 3
+    },
+    {
+      "group_id": "ac752b0f0ebc6f7f",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 4
+    },
+    {
+      "group_id": "7c2e84ef7ec4c090",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 3
+    },
+    {
+      "group_id": "c886827a7cbdc54a",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 4
+    },
+    {
+      "group_id": "6af9b83d51d297e2",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 3
+    },
+    {
+      "group_id": "2ecd2a40f5c53224",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 4
+    },
+    {
+      "group_id": "185df8b91d2ded24",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 2
+    },
+    {
+      "group_id": "205f8be53bb82da1",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 3
+    },
+    {
+      "group_id": "fbed3faed1328ad0",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 4
+    },
+    {
+      "group_id": "50b9693eceb9e11d",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 5
+    },
+    {
+      "group_id": "6b60914dafd6aa10",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 3
+    },
+    {
+      "group_id": "f43472cea4dad5b2",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 2
+    },
+    {
+      "group_id": "ea0c98dd4a2e4b6a",
+      "manifests": [
+        "manifest-v1.json",
+        "manifest.json"
+      ],
+      "case_rows": 3
+    }
+  ],
+  "groups_spanning_splits_within_a_manifest": [
+    {
+      "group_id": "3ce744557dd8fa33",
+      "manifest": "manifest-v1.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 3,
+      "record_ids": [
+        "manifest-v1.json:0f8b036d2fcd4545a719b903812e1c13",
+        "manifest-v1.json:22d8ac65e8d24f65931f7419812aa38c",
+        "manifest-v1.json:9ea1ae26954a41ecba29c6126bd6bdc5"
+      ]
+    },
+    {
+      "group_id": "58bebb5b3f116d77",
+      "manifest": "manifest-v1.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 7,
+      "record_ids": [
+        "manifest-v1.json:144dd2d5e8fc4945ae8feac8af494a80",
+        "manifest-v1.json:31760cd6748b48939f47081ef76a9e33",
+        "manifest-v1.json:7fc7ed01a5fb44aa81873c0a72eb5cb4",
+        "manifest-v1.json:d5789528446d496a9f0b822cfcab2907",
+        "manifest-v1.json:e1474260938a4de098b2a53c95808eff",
+        "manifest-v1.json:e690c06f6102407aa845f0132df61a7e",
+        "manifest-v1.json:fa59539acc2e47378ff785d933edf0ee"
+      ]
+    },
+    {
+      "group_id": "58bebb5b3f116d77",
+      "manifest": "manifest.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 10,
+      "record_ids": [
+        "manifest.json:31760cd6748b48939f47081ef76a9e33",
+        "manifest.json:7e8759ef73fc410db98a6a73205603b6",
+        "manifest.json:7fc7ed01a5fb44aa81873c0a72eb5cb4",
+        "manifest.json:924a82950cdc4e3d8ce46b416a29d351",
+        "manifest.json:c4f1e261326246d39c8c072af1356adf",
+        "manifest.json:d42f0b7ac3f24bedb7e45a6fb810b9bc",
+        "manifest.json:d776416c1b7e4998bb6ce02bbba40519",
+        "manifest.json:e1474260938a4de098b2a53c95808eff",
+        "manifest.json:e83c728eabc84cd0a7f4423cd74bc818",
+        "manifest.json:fa59539acc2e47378ff785d933edf0ee"
+      ]
+    },
+    {
+      "group_id": "691988c2ef468612",
+      "manifest": "manifest-v1.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 4,
+      "record_ids": [
+        "manifest-v1.json:193b656209724a81a18d3ec815b150d5",
+        "manifest-v1.json:1fc236a9e4c74ace94a97ee25e59c5a2",
+        "manifest-v1.json:3cca026aba2d4750b405a78a79103369",
+        "manifest-v1.json:c67d517a4f764e4db99f9dce7f154ce1"
+      ]
+    },
+    {
+      "group_id": "691988c2ef468612",
+      "manifest": "manifest.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 4,
+      "record_ids": [
+        "manifest.json:1fc236a9e4c74ace94a97ee25e59c5a2",
+        "manifest.json:2f4ea4607dd44e158ba8b60714435e47",
+        "manifest.json:3cca026aba2d4750b405a78a79103369",
+        "manifest.json:c67d517a4f764e4db99f9dce7f154ce1"
+      ]
+    },
+    {
+      "group_id": "7c33e06783b0c7a6",
+      "manifest": "manifest-v1.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 2,
+      "record_ids": [
+        "manifest-v1.json:1b8289bb07ac46aeb895a8cb8fa4955d",
+        "manifest-v1.json:8a629fef034b4acbb1231aada61273a5"
+      ]
+    },
+    {
+      "group_id": "7c33e06783b0c7a6",
+      "manifest": "manifest.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 3,
+      "record_ids": [
+        "manifest.json:1b8289bb07ac46aeb895a8cb8fa4955d",
+        "manifest.json:5c74e58a97e84de09d5b961f6a52d9b8",
+        "manifest.json:d05c05b18b5f404e9973f6616676e702"
+      ]
+    },
+    {
+      "group_id": "5f53fb543cb4bb69",
+      "manifest": "manifest.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 3,
+      "record_ids": [
+        "manifest.json:1b89803aefe14f27926ee378564f2c99",
+        "manifest.json:712091ba7a474ac88b502a18f66ee39c",
+        "manifest.json:a8e76a2d718846479cb12291fc646eb1"
+      ]
+    },
+    {
+      "group_id": "848d4e9b5dd90c3d",
+      "manifest": "manifest-v1.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 3,
+      "record_ids": [
+        "manifest-v1.json:21e25de4175f436cb90f2b8301c53153",
+        "manifest-v1.json:88f7b4a186294a90bdacfa28f9c731a2",
+        "manifest-v1.json:ac31e435ab0b498c9c97c47d2de7b64d"
+      ]
+    },
+    {
+      "group_id": "848d4e9b5dd90c3d",
+      "manifest": "manifest.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 2,
+      "record_ids": [
+        "manifest.json:21e25de4175f436cb90f2b8301c53153",
+        "manifest.json:47a7faaef0ef4337afeb6ffef2015664"
+      ]
+    },
+    {
+      "group_id": "59563e6dfb95a399",
+      "manifest": "manifest-v1.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 3,
+      "record_ids": [
+        "manifest-v1.json:31718751261b4fb2b518abf0f5a30ea0",
+        "manifest-v1.json:5627e923a681441082ea40fa0cf59045",
+        "manifest-v1.json:f4bbaf940eba47a78aa64819da82fb96"
+      ]
+    },
+    {
+      "group_id": "e943b86ecf4757f0",
+      "manifest": "manifest-v1.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 3,
+      "record_ids": [
+        "manifest-v1.json:3d125f40f40e41a7aac6c743b7c03934",
+        "manifest-v1.json:bfee08fe79784ae0accf35710b624880",
+        "manifest-v1.json:dd5884fd6be6448a80dfaecdde2dd321"
+      ]
+    },
+    {
+      "group_id": "e943b86ecf4757f0",
+      "manifest": "manifest.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 5,
+      "record_ids": [
+        "manifest.json:371928909c944e75bda152ef03fc9f91",
+        "manifest.json:77a8630746b6442383596191057182a0",
+        "manifest.json:bfee08fe79784ae0accf35710b624880",
+        "manifest.json:dd5884fd6be6448a80dfaecdde2dd321",
+        "manifest.json:e0410f536199477c8a6572687512c305"
+      ]
+    },
+    {
+      "group_id": "0391f5603a5e2410",
+      "manifest": "manifest-v1.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 2,
+      "record_ids": [
+        "manifest-v1.json:425143dc37194017ad0df55588181b82",
+        "manifest-v1.json:e523fb5c3c054b5ab695cd1bec03d787"
+      ]
+    },
+    {
+      "group_id": "0391f5603a5e2410",
+      "manifest": "manifest.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 3,
+      "record_ids": [
+        "manifest.json:400bee5b11834c74a72b50a171a1fe2d",
+        "manifest.json:425143dc37194017ad0df55588181b82",
+        "manifest.json:80849ab9cfd84dc98ac60df317229dcd"
+      ]
+    },
+    {
+      "group_id": "3de5427175404d80",
+      "manifest": "manifest-v1.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 4,
+      "record_ids": [
+        "manifest-v1.json:427c28ef97bd4171938e16cd61fa5084",
+        "manifest-v1.json:60c4211d78834e3f94d264ab2c47bc61",
+        "manifest-v1.json:902e3de59c9540b5a76e2b2b457a4fce",
+        "manifest-v1.json:aaf3742968104381809d3a0265071fe3"
+      ]
+    },
+    {
+      "group_id": "3de5427175404d80",
+      "manifest": "manifest.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 4,
+      "record_ids": [
+        "manifest.json:427c28ef97bd4171938e16cd61fa5084",
+        "manifest.json:7c8ebe6db20d430bb7fdad5780497c1d",
+        "manifest.json:902e3de59c9540b5a76e2b2b457a4fce",
+        "manifest.json:aaf3742968104381809d3a0265071fe3"
+      ]
+    },
+    {
+      "group_id": "8c329afb95bfc202",
+      "manifest": "manifest.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 2,
+      "record_ids": [
+        "manifest.json:5073758de48b483da578f3fc29d4f796",
+        "manifest.json:d0f3f82400e74ac4a5430bce71bce7f4"
+      ]
+    },
+    {
+      "group_id": "6bef53f324605349",
+      "manifest": "manifest-v1.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 3,
+      "record_ids": [
+        "manifest-v1.json:5667182c48a34c038d93399d0f603aca",
+        "manifest-v1.json:b2717d23a97341e998ad0be82d371c7d",
+        "manifest-v1.json:d3ce428b10ee476dbcceb91031f63d63"
+      ]
+    },
+    {
+      "group_id": "6bef53f324605349",
+      "manifest": "manifest.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 3,
+      "record_ids": [
+        "manifest.json:2190d14e552e48d4a9affbf5e0c9c25e",
+        "manifest.json:5667182c48a34c038d93399d0f603aca",
+        "manifest.json:d3ce428b10ee476dbcceb91031f63d63"
+      ]
+    },
+    {
+      "group_id": "6931deda3cb6d758",
+      "manifest": "manifest-v1.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 3,
+      "record_ids": [
+        "manifest-v1.json:57aef134153b4a308d1a52d4a6302106",
+        "manifest-v1.json:5c4c7ab2cf434f188630bd80a758a6aa",
+        "manifest-v1.json:dc84f430f5824ae78731f51d34794605"
+      ]
+    },
+    {
+      "group_id": "6931deda3cb6d758",
+      "manifest": "manifest.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 3,
+      "record_ids": [
+        "manifest.json:25baf3da58964eadbd59002673c2c85c",
+        "manifest.json:5c4c7ab2cf434f188630bd80a758a6aa",
+        "manifest.json:dc84f430f5824ae78731f51d34794605"
+      ]
+    },
+    {
+      "group_id": "9abc46a2e824627f",
+      "manifest": "manifest-v1.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 3,
+      "record_ids": [
+        "manifest-v1.json:59e668e322104d0ba21607f9cbb7372e",
+        "manifest-v1.json:5ef7d8bde0ae4529bde67710bb417f9d",
+        "manifest-v1.json:61a4538b85a3478ab96d2f6efdc8f0f0"
+      ]
+    },
+    {
+      "group_id": "a42a4b640afbd2db",
+      "manifest": "manifest-v1.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 2,
+      "record_ids": [
+        "manifest-v1.json:6c3d1ef1790e43d4b990b64a86e0d248",
+        "manifest-v1.json:b6359d95328a4732800e8f24bcc33ef3"
+      ]
+    },
+    {
+      "group_id": "ac752b0f0ebc6f7f",
+      "manifest": "manifest-v1.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 2,
+      "record_ids": [
+        "manifest-v1.json:6cab5e0426dd4113862619e1f0b93786",
+        "manifest-v1.json:9b46259d9a3047198133e806b7e0cf43"
+      ]
+    },
+    {
+      "group_id": "ac752b0f0ebc6f7f",
+      "manifest": "manifest.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 2,
+      "record_ids": [
+        "manifest.json:46bb78e6bf3c425bb6e7ee7a298047b8",
+        "manifest.json:6cab5e0426dd4113862619e1f0b93786"
+      ]
+    },
+    {
+      "group_id": "7c2e84ef7ec4c090",
+      "manifest": "manifest.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 2,
+      "record_ids": [
+        "manifest.json:6ec77f7081974ec58e8bf22aeaf3b6cb",
+        "manifest.json:9404d4be3ce94a45a890ea69a8e7c455"
+      ]
+    },
+    {
+      "group_id": "c886827a7cbdc54a",
+      "manifest": "manifest-v1.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 2,
+      "record_ids": [
+        "manifest-v1.json:75ecf6bf1c8d47bc9a0641c7838433bb",
+        "manifest-v1.json:ce7aa6b83f824bf6969550431d452ab5"
+      ]
+    },
+    {
+      "group_id": "c886827a7cbdc54a",
+      "manifest": "manifest.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 2,
+      "record_ids": [
+        "manifest.json:4900f51d4a334a94a1732b8744a656d4",
+        "manifest.json:75ecf6bf1c8d47bc9a0641c7838433bb"
+      ]
+    },
+    {
+      "group_id": "6af9b83d51d297e2",
+      "manifest": "manifest.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 2,
+      "record_ids": [
+        "manifest.json:1f33e3824e8c4200bcbd9cb0b8ce5f35",
+        "manifest.json:77f3c8023b0c403aa7d19f7b855eea81"
+      ]
+    },
+    {
+      "group_id": "2ecd2a40f5c53224",
+      "manifest": "manifest-v1.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 2,
+      "record_ids": [
+        "manifest-v1.json:7b450a0b9dc449e883d7c8d3ab6195a4",
+        "manifest-v1.json:7dc14964faae44dcae0119930c0ee354"
+      ]
+    },
+    {
+      "group_id": "2ecd2a40f5c53224",
+      "manifest": "manifest.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 2,
+      "record_ids": [
+        "manifest.json:147c5aee9387409d8d02f08448490a20",
+        "manifest.json:7dc14964faae44dcae0119930c0ee354"
+      ]
+    },
+    {
+      "group_id": "205f8be53bb82da1",
+      "manifest": "manifest.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 2,
+      "record_ids": [
+        "manifest.json:879700082a6045f4b3f9a378e18b4b7f",
+        "manifest.json:8c5fe2f3dc7d414bbb5972b592ccf23c"
+      ]
+    },
+    {
+      "group_id": "fbed3faed1328ad0",
+      "manifest": "manifest-v1.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 2,
+      "record_ids": [
+        "manifest-v1.json:a30eadf5ba834e61835453b17d7c0212",
+        "manifest-v1.json:b4ef8df585484170af42f0df908f9d00"
+      ]
+    },
+    {
+      "group_id": "fbed3faed1328ad0",
+      "manifest": "manifest.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 2,
+      "record_ids": [
+        "manifest.json:a30eadf5ba834e61835453b17d7c0212",
+        "manifest.json:bb84ce550db84064a7094c3bd86d9a65"
+      ]
+    },
+    {
+      "group_id": "50b9693eceb9e11d",
+      "manifest": "manifest-v1.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 3,
+      "record_ids": [
+        "manifest-v1.json:a9a70467f55443ddacd50730273959d1",
+        "manifest-v1.json:c48439cda8d04c35b3cf0b7cfe5c8702",
+        "manifest-v1.json:f8cac42b19364f1faef36794ab55685c"
+      ]
+    },
+    {
+      "group_id": "6b60914dafd6aa10",
+      "manifest": "manifest.json",
+      "splits": [
+        "selection",
+        "test"
+      ],
+      "case_rows": 2,
+      "record_ids": [
+        "manifest.json:9b87d7cf29e644e599b5a9ead81cb6c1",
+        "manifest.json:b44fce6464c34ae2b9f89698acf59556"
+      ]
+    }
+  ],
+  "conflicting_byte_labels": 0,
+  "local_material": [
+    {
+      "path": "data/asvspoof/audio",
+      "audio_files": 464,
+      "bytes": 21649277,
+      "new_locked_test_eligibility": "unassessed; file presence does not establish provenance or independence"
+    },
+    {
+      "path": "data/librispeech/LibriSpeech",
+      "audio_files": 11126,
+      "bytes": 1414825145,
+      "new_locked_test_eligibility": "unassessed; file presence does not establish provenance or independence"
+    },
+    {
+      "path": "data/modern/audio",
+      "audio_files": 208,
+      "bytes": 57077952,
+      "new_locked_test_eligibility": "unassessed; file presence does not establish provenance or independence"
+    },
+    {
+      "path": "data/modern-v4/audio",
+      "audio_files": 148,
+      "bytes": 45185136,
+      "new_locked_test_eligibility": "unassessed; file presence does not establish provenance or independence"
+    }
+  ],
+  "eligible_new_locked_groups": 0,
+  "errors": [],
+  "inventory_complete": true,
+  "mapping_sha256": "dc05e0abc2edb9650edd4ca39578292d0e0ded2395039b228e9bc2b3dd57d400",
+  "limitations": [
+    "Group counts depend on supplied identities; missing speakers and perceptual duplicates remain unresolved.",
+    "Historical split overlap is reported, not silently repaired or used to reassign data.",
+    "Byte identities are taken from manifests; this inventory does not verify audio content hashes.",
+    "No unmanifested local recording is automatically designated an independent or provenance-backed test.",
+    "No claim is made about absence from upstream model training."
+  ]
+}
